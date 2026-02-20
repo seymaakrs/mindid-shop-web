@@ -2,13 +2,17 @@
 
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
+import { useAvatarSamples } from "@/lib/hooks/use-firestore";
 import { ArrowLeft, Play, Bot, Camera, RefreshCw, Globe2, Zap, Send } from "lucide-react";
 import Link from "next/link";
+import { VideoPlayerModal } from "./video-player-modal";
 
 export const AvatarPage = () => {
   const { t, formatPrice } = useI18n();
+  const { data: samples } = useAvatarSamples();
   const [showForm, setShowForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<{ url: string; title: string } | null>(null);
 
   const whoItems = [
     { icon: <Camera size={18} />, text: t("avatar.who_1") },
@@ -21,6 +25,8 @@ export const AvatarPage = () => {
     e.preventDefault();
     setSubmitted(true);
   };
+
+  const hasSamples = samples.length > 0;
 
   if (submitted) {
     return (
@@ -67,19 +73,47 @@ export const AvatarPage = () => {
               {t("avatar.examples")}
             </h3>
             <div className="grid grid-cols-2 gap-4">
-              {[1, 2, 3, 4].map((i) => (
-                <div
-                  key={i}
-                  className="aspect-[9/16] rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 flex flex-col items-center justify-center gap-3 hover:border-[var(--lime)]/50 hover:shadow-[4px_4px_0px_var(--lime)] transition-all cursor-pointer group"
-                >
-                  <div className="w-12 h-12 rounded-full bg-[var(--lime)]/10 border-2 border-[var(--lime)]/30 flex items-center justify-center group-hover:bg-[var(--lime)]/20 transition-colors">
-                    <Play size={20} className="text-[var(--lime)] ml-0.5" />
-                  </div>
-                  <span className="text-[10px] font-bold text-[var(--gray)] uppercase tracking-wider">
-                    Ornek #{String(i).padStart(2, "0")}
-                  </span>
-                </div>
-              ))}
+              {hasSamples
+                ? samples.map((sample) => (
+                    <div
+                      key={sample.id}
+                      onClick={() => sample.videoUrl && setSelectedVideo({ url: sample.videoUrl, title: sample.title })}
+                      className="aspect-[9/16] rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 flex flex-col items-center justify-center gap-3 hover:border-[var(--lime)]/50 hover:shadow-[4px_4px_0px_var(--lime)] transition-all cursor-pointer group overflow-hidden relative"
+                    >
+                      {sample.thumbnailUrl ? (
+                        <>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={sample.thumbnailUrl} alt={sample.title} className="absolute inset-0 w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex flex-col items-center justify-center gap-3">
+                            <div className="w-12 h-12 rounded-full bg-[var(--lime)]/20 border-2 border-[var(--lime)]/30 flex items-center justify-center group-hover:bg-[var(--lime)]/30 transition-colors">
+                              <Play size={20} className="text-[var(--lime)] ml-0.5" />
+                            </div>
+                            <span className="text-[10px] font-bold text-white uppercase tracking-wider">{sample.title}</span>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="w-12 h-12 rounded-full bg-[var(--lime)]/10 border-2 border-[var(--lime)]/30 flex items-center justify-center group-hover:bg-[var(--lime)]/20 transition-colors">
+                            <Play size={20} className="text-[var(--lime)] ml-0.5" />
+                          </div>
+                          <span className="text-[10px] font-bold text-[var(--gray)] uppercase tracking-wider">{sample.title}</span>
+                        </>
+                      )}
+                    </div>
+                  ))
+                : [1, 2, 3, 4].map((i) => (
+                    <div
+                      key={i}
+                      className="aspect-[9/16] rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 flex flex-col items-center justify-center gap-3 hover:border-[var(--lime)]/50 hover:shadow-[4px_4px_0px_var(--lime)] transition-all cursor-pointer group"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-[var(--lime)]/10 border-2 border-[var(--lime)]/30 flex items-center justify-center group-hover:bg-[var(--lime)]/20 transition-colors">
+                        <Play size={20} className="text-[var(--lime)] ml-0.5" />
+                      </div>
+                      <span className="text-[10px] font-bold text-[var(--gray)] uppercase tracking-wider">
+                        Ornek #{String(i).padStart(2, "0")}
+                      </span>
+                    </div>
+                  ))}
             </div>
           </div>
 
@@ -128,6 +162,13 @@ export const AvatarPage = () => {
           </div>
         </div>
       </div>
+
+      <VideoPlayerModal
+        open={!!selectedVideo}
+        videoUrl={selectedVideo?.url ?? ""}
+        title={selectedVideo?.title}
+        onClose={() => setSelectedVideo(null)}
+      />
     </div>
   );
 };

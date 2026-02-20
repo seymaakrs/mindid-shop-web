@@ -1,23 +1,27 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
+import { usePricing } from "@/lib/hooks/use-firestore";
 import { SERVICE_TYPES } from "@/lib/pricing-data";
 import { FolderOpen, Images, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 
-// Sort services by price ascending (excluding avatar, adding it at the end)
-const sortedServices = [...SERVICE_TYPES]
-  .filter((s) => s.id !== "avatar")
-  .sort((a, b) => a.basePrice - b.basePrice);
-
-const avatarService = SERVICE_TYPES.find((s) => s.id === "avatar");
-
 export const ServiceCards = () => {
   const { t, formatPrice } = useI18n();
+  const { data: pricingConfig } = usePricing();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+
+  // Use Firestore services if available, otherwise fallback
+  const services = pricingConfig?.services ?? SERVICE_TYPES.map((s) => ({ ...s }));
+
+  // Sort services by price ascending (excluding avatar, adding it at the end)
+  const sortedServices = [...services]
+    .filter((s) => s.id !== "avatar")
+    .sort((a, b) => a.basePrice - b.basePrice);
+  const avatarService = services.find((s) => s.id === "avatar");
 
   const checkScroll = () => {
     const el = scrollRef.current;

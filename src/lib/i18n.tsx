@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
+import { doc, getDoc } from "firebase/firestore";
 
 export type Lang = "tr" | "en";
 
@@ -11,7 +12,7 @@ type I18nContextType = {
   formatPrice: (priceTRY: number) => string;
 };
 
-const USD_RATE = 0.028;
+const DEFAULT_USD_RATE = 0.028;
 
 const translations: Record<string, Record<Lang, string>> = {
   // Nav
@@ -208,6 +209,22 @@ const I18nContext = createContext<I18nContextType | null>(null);
 
 export const I18nProvider = ({ children }: { children: ReactNode }) => {
   const [lang, setLang] = useState<Lang>("tr");
+  const [usdRate, setUsdRate] = useState(DEFAULT_USD_RATE);
+
+  useEffect(() => {
+    const fetchRate = async () => {
+      try {
+        const { db } = await import("./firebase");
+        const snap = await getDoc(doc(db, "mindid_settings", "general"));
+        if (snap.exists() && snap.data().usdRate) {
+          setUsdRate(snap.data().usdRate);
+        }
+      } catch {
+        // Keep default rate
+      }
+    };
+    fetchRate();
+  }, []);
 
   const toggleLang = useCallback(() => {
     setLang((prev) => (prev === "tr" ? "en" : "tr"));
@@ -223,7 +240,7 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
   const formatPrice = useCallback(
     (priceTRY: number): string => {
       if (lang === "en") {
-        const usd = Math.round(priceTRY * USD_RATE);
+        const usd = Math.round(priceTRY * usdRate);
         return new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
@@ -236,7 +253,7 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
         minimumFractionDigits: 0,
       }).format(priceTRY);
     },
-    [lang]
+    [lang, usdRate]
   );
 
   return (

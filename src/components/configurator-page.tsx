@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import type { ConfigState, PostProductionOption } from "@/lib/types";
 import {
   SCENARIO_OPTIONS,
@@ -12,6 +12,7 @@ import {
   SERVICE_TYPES,
 } from "@/lib/pricing-data";
 import type { ServiceType } from "@/lib/pricing-data";
+import { usePricing } from "@/lib/hooks/use-firestore";
 import { DurationSelector } from "./duration-selector";
 import { OptionCardGroup } from "./option-card-group";
 import { DirectorDesk } from "./director-desk";
@@ -48,10 +49,20 @@ const initialConfig: ConfigState = {
 
 export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
   const { t, formatPrice } = useI18n();
+  const { data: pricingConfig } = usePricing();
   const [config, setConfig] = useState<ConfigState>(initialConfig);
   const [step, setStep] = useState<Step>("configure");
 
-  const service = SERVICE_TYPES.find((s) => s.id === serviceId) as ServiceType | undefined;
+  // Use Firestore pricing if available, otherwise fallback to hardcoded
+  const services = pricingConfig?.services ?? SERVICE_TYPES.map((s) => ({ ...s }));
+  const scenarioOptions = pricingConfig?.scenarios ?? SCENARIO_OPTIONS;
+  const voiceOptions = pricingConfig?.voices ?? VOICE_OPTIONS;
+  const musicOptions = pricingConfig?.music ?? MUSIC_OPTIONS;
+  const visualStyleOptions = pricingConfig?.visualStyles ?? VISUAL_STYLE_OPTIONS;
+  const postProductionOptions = pricingConfig?.postProduction ?? POST_PRODUCTION_OPTIONS;
+  const revisionPackages = pricingConfig?.revisions ?? REVISION_PACKAGES;
+
+  const service = services.find((s) => s.id === serviceId) as ServiceType | undefined;
   if (!service) return null;
 
   const togglePostProd = (option: PostProductionOption) => {
@@ -148,7 +159,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                 <OptionCardGroup
                   title={t("config.scenario")}
                   icon={<FileText size={16} />}
-                  options={SCENARIO_OPTIONS}
+                  options={scenarioOptions}
                   selected={config.scenario}
                   onSelect={(s) => setConfig((prev) => ({ ...prev, scenario: s }))}
                 />
@@ -157,7 +168,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                 <OptionCardGroup
                   title={t("config.voice")}
                   icon={<Mic size={16} />}
-                  options={VOICE_OPTIONS}
+                  options={voiceOptions}
                   selected={config.voice}
                   onSelect={(v) => setConfig((prev) => ({ ...prev, voice: v }))}
                 />
@@ -166,7 +177,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                 <OptionCardGroup
                   title={t("config.music")}
                   icon={<Music size={16} />}
-                  options={MUSIC_OPTIONS}
+                  options={musicOptions}
                   selected={config.music}
                   onSelect={(m) => setConfig((prev) => ({ ...prev, music: m }))}
                 />
@@ -175,7 +186,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                 <OptionCardGroup
                   title={t("config.visual")}
                   icon={<Eye size={16} />}
-                  options={VISUAL_STYLE_OPTIONS}
+                  options={visualStyleOptions}
                   selected={config.visualStyle}
                   onSelect={(vs) => setConfig((prev) => ({ ...prev, visualStyle: vs }))}
                 />
@@ -184,7 +195,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                 <OptionCardGroup
                   title={t("config.postprod")}
                   icon={<Wand2 size={16} />}
-                  options={POST_PRODUCTION_OPTIONS}
+                  options={postProductionOptions}
                   selected={null}
                   onSelect={() => {}}
                   multiSelect
@@ -196,7 +207,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                 <OptionCardGroup
                   title={t("config.revision")}
                   icon={<RotateCcw size={16} />}
-                  options={REVISION_PACKAGES.map((r) => ({
+                  options={revisionPackages.map((r) => ({
                     ...r,
                     description: `${r.count} revizyon hakki`,
                   }))}
@@ -207,7 +218,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                   }
                   onSelect={(r) => setConfig((prev) => ({
                     ...prev,
-                    revision: REVISION_PACKAGES.find((rp) => rp.id === r.id)!,
+                    revision: revisionPackages.find((rp) => rp.id === r.id)!,
                   }))}
                 />
               </>

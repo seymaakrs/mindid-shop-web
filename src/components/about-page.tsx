@@ -1,10 +1,25 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
-import { ArrowLeft, Clapperboard, Brain, Palette, Volume2, BarChart3, Users } from "lucide-react";
+import { useTeam } from "@/lib/hooks/use-firestore";
+import { ArrowLeft, Clapperboard, Brain, Palette, Volume2, BarChart3, Users, Camera, Code, Megaphone, Lightbulb } from "lucide-react";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
-const teamMembers = [
+// Icon mapping for Firestore data
+const iconMap: Record<string, ReactNode> = {
+  Brain: <Brain size={20} />,
+  Palette: <Palette size={20} />,
+  Volume2: <Volume2 size={20} />,
+  BarChart3: <BarChart3 size={20} />,
+  Camera: <Camera size={20} />,
+  Code: <Code size={20} />,
+  Megaphone: <Megaphone size={20} />,
+  Lightbulb: <Lightbulb size={20} />,
+};
+
+// Hardcoded fallback
+const fallbackTeam = [
   { role: "AI & Teknoloji", icon: <Brain size={20} />, desc: "Yapay zeka modelleri ve teknik altyapi" },
   { role: "Yaratici Yonetim", icon: <Palette size={20} />, desc: "Gorsel dil, hikaye ve marka stratejisi" },
   { role: "Ses & Muzik", icon: <Volume2 size={20} />, desc: "Ses tasarimi, muzik produksiyon ve mix" },
@@ -12,7 +27,18 @@ const teamMembers = [
 ];
 
 export const AboutPage = () => {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const { data: firestoreTeam } = useTeam();
+
+  const useFirestore = firestoreTeam.length > 0;
+
+  const teamMembers = useFirestore
+    ? firestoreTeam.map((m) => ({
+        role: lang === "en" ? m.roleEn || m.role : m.role,
+        icon: iconMap[m.iconName] ?? <Brain size={20} />,
+        desc: lang === "en" ? m.descriptionEn || m.description : m.description,
+      }))
+    : fallbackTeam;
 
   return (
     <div className="min-h-screen relative z-10">
