@@ -10,13 +10,10 @@ import type {
 
 export const SERVICE_TYPES = [
   { id: "reels", nameKey: "service.reels", descKey: "service.reels.desc", basePrice: 999, icon: "📱", traditionalMultiplier: 3.5 },
-  { id: "product", nameKey: "service.product", descKey: "service.product.desc", basePrice: 2999, icon: "🎯", traditionalMultiplier: 3.2 },
-  { id: "creative", nameKey: "service.creative", descKey: "service.creative.desc", basePrice: 19999, icon: "🎨", traditionalMultiplier: 2.8 },
-  { id: "brand", nameKey: "service.brand", descKey: "service.brand.desc", basePrice: 29999, icon: "✨", traditionalMultiplier: 3.0 },
-  { id: "corporate", nameKey: "service.corporate", descKey: "service.corporate.desc", basePrice: 39999, icon: "🏢", traditionalMultiplier: 2.5 },
-  { id: "ad", nameKey: "service.ad", descKey: "service.ad.desc", basePrice: 49999, icon: "🎬", traditionalMultiplier: 2.5 },
-  { id: "portfolio", nameKey: "service.portfolio", descKey: "service.portfolio.desc", basePrice: 0, icon: "📂", traditionalMultiplier: 0 },
-  { id: "avatar", nameKey: "service.avatar", descKey: "service.avatar.desc", basePrice: 0, icon: "🤖", traditionalMultiplier: 0 },
+  { id: "product", nameKey: "service.product", descKey: "service.product.desc", basePrice: 9999, icon: "🎯", traditionalMultiplier: 3.2 },
+  { id: "campaign", nameKey: "service.campaign", descKey: "service.campaign.desc", basePrice: 19999, icon: "🚀", traditionalMultiplier: 3.0 },
+  { id: "corporate", nameKey: "service.corporate", descKey: "service.corporate.desc", basePrice: 29999, icon: "🏢", traditionalMultiplier: 2.8 },
+  { id: "avatar", nameKey: "service.avatar", descKey: "service.avatar.desc", basePrice: 5999, icon: "🤖", traditionalMultiplier: 0 },
 ] as const;
 
 export type ServiceType = (typeof SERVICE_TYPES)[number];
@@ -58,25 +55,22 @@ export const MUSIC_OPTIONS: MusicOption[] = [
 
 export const VISUAL_STYLE_OPTIONS: VisualStyle[] = [
   { id: "basic", label: "Temel Gorsel", description: "Dahil - standart AI gorsel", price: 0 },
-  { id: "realistic", label: "Fotorealistik", description: "Gercekci yuksek kalite", price: 3000 },
-  { id: "cinematic", label: "Sinematik", description: "Film kalitesinde isik ve renk", price: 5000 },
-  { id: "animated", label: "Animasyon", description: "2D/3D animasyon tarzi", price: 4000 },
-  { id: "mixed", label: "Hibrit Teknik", description: "Gercekci + animasyon karisimi", price: 6000 },
+  { id: "ultra-real", label: "Ultra Gercekci", description: "Birebir gerceklik - fotograf kalitesi", price: 4000 },
+  { id: "cinematic-anim", label: "Animasyon / Sinematik", description: "Sinematik veya animasyon tarzi", price: 1200 },
+  { id: "hybrid", label: "Hibrit Teknik", description: "Gercekci + animasyon karisimi", price: 600 },
 ];
 
 export const POST_PRODUCTION_OPTIONS: PostProductionOption[] = [
-  { id: "color-grade", label: "Renk Duzenleme", description: "Profesyonel color grading", price: 1500 },
-  { id: "vfx", label: "Gorsel Efektler", description: "VFX ve ozel gecisler", price: 3000 },
-  { id: "subtitle", label: "Altyazi & Metin", description: "Animasyonlu altyazilar", price: 800 },
-  { id: "lip-sync", label: "Dudak Senkronu", description: "AI lip-sync teknolojisi", price: 2500 },
-  { id: "sound-design", label: "Ses Tasarimi", description: "Profesyonel ses miksi", price: 2000 },
+  { id: "edit-basic", label: "Temel Edit", description: "Dahil - standart kurgu", price: 0 },
+  { id: "vfx", label: "Gorsel Efektler (VFX)", description: "Ozel VFX ve gecis efektleri", price: 6000 },
+  { id: "subtitle-voice", label: "Altyazi + Metin + Seslendirme", description: "Animasyonlu altyazi ve seslendirme paketi", price: 3000 },
+  { id: "lip-sync", label: "Dudak Senkronu", description: "AI lip-sync teknolojisi", price: 5000 },
+  { id: "sound-design", label: "Ses Tasarimi", description: "Profesyonel ses miksi ve efektler", price: 4000 },
 ];
 
 export const REVISION_PACKAGES: RevisionPackage[] = [
-  { id: "base", label: "Temel (1 Revizyon)", count: 1, price: 0 },
-  { id: "standard", label: "Standart (3 Revizyon)", count: 3, price: 1500 },
-  { id: "premium", label: "Premium (5 Revizyon)", count: 5, price: 3000 },
-  { id: "unlimited", label: "Pro (10 Revizyon)", count: 10, price: 5000 },
+  { id: "base", label: "Temel (2 Revizyon)", count: 2, price: 0 },
+  { id: "extra", label: "Ekstra (+1 Revizyon)", count: 3, price: 6000 },
 ];
 
 export const formatPrice = (price: number): string => {

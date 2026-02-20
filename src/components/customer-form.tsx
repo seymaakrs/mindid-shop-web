@@ -21,7 +21,7 @@ export const CustomerForm = ({ onSubmit }: CustomerFormProps) => {
   return (
     <form onSubmit={handleSubmit} className="rounded-lg bg-[var(--dark-blue)] border-3 border-[var(--lime)] shadow-[6px_6px_0px_var(--lime)] overflow-hidden">
       <div className="p-4 bg-[var(--lime)] text-[var(--dark-blue)]">
-        <h3 className="font-extrabold text-lg" style={{ fontFamily: "Syne, sans-serif" }}>
+        <h3 className="font-black text-lg">
           {t("form.title")}
         </h3>
       </div>
@@ -100,9 +100,8 @@ export const CustomerForm = ({ onSubmit }: CustomerFormProps) => {
         {/* Submit */}
         <button
           type="submit"
-          className="w-full py-4 rounded-md bg-[var(--lime)] text-[var(--dark-blue)] border-3 border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] font-extrabold text-base hover:shadow-[2px_2px_0px_var(--dark-blue)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all cursor-pointer"
-          style={{ fontFamily: "Syne, sans-serif" }}
-        >
+          className="w-full py-4 rounded-md bg-[var(--lime)] text-[var(--dark-blue)] border-3 border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] font-black text-base hover:shadow-[2px_2px_0px_var(--dark-blue)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all cursor-pointer"
+                 >
           {t("checkout.send")} →
         </button>
       </div>

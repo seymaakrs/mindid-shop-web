@@ -40,7 +40,7 @@ export const OptionCardGroup = <T extends OptionItem>({
         <div className="w-8 h-8 rounded-md bg-[var(--electric-blue)] flex items-center justify-center text-[var(--lime)]">
           {icon}
         </div>
-        <h3 className="text-lg font-bold text-[var(--cream)]" style={{ fontFamily: "Syne, sans-serif" }}>
+        <h3 className="text-lg font-bold text-[var(--cream)]">
           {title}
         </h3>
       </div>

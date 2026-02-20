@@ -11,6 +11,7 @@ const FAQ_KEYS = [
   { q: "faq.q4", a: "faq.a4" },
   { q: "faq.q5", a: "faq.a5" },
   { q: "faq.q6", a: "faq.a6" },
+  { q: "faq.q7", a: "faq.a7" },
 ];
 
 export const FAQSection = () => {
@@ -19,7 +20,7 @@ export const FAQSection = () => {
   return (
     <section id="faq" className="relative py-16 z-10">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--lime)] text-center mb-10" style={{ fontFamily: "Syne, sans-serif" }}>
+        <h2 className="text-3xl md:text-4xl font-black text-[var(--lime)] text-center mb-10">
           {t("faq.title")}
         </h2>
 
@@ -28,7 +29,7 @@ export const FAQSection = () => {
             <Accordion.Item
               key={i}
               value={`faq-${i}`}
-              className="rounded-md bg-[var(--card)] border-3 border-[var(--electric-blue)]/30 overflow-hidden data-[state=open]:border-[var(--lime)] data-[state=open]:shadow-[4px_4px_0px_var(--lime)] transition-all"
+              className="rounded-md bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 overflow-hidden data-[state=open]:border-[var(--lime)] data-[state=open]:shadow-[4px_4px_0px_var(--lime)] transition-all"
             >
               <Accordion.Header>
                 <Accordion.Trigger className="flex items-center justify-between w-full p-4 text-left cursor-pointer group">
@@ -39,7 +40,7 @@ export const FAQSection = () => {
                 </Accordion.Trigger>
               </Accordion.Header>
               <Accordion.Content className="px-4 pb-4 data-[state=open]:animate-kinetic-slide">
-                <p className="text-sm text-[var(--gray)] leading-relaxed">
+                <p className="text-sm text-[var(--cream)]/70 leading-relaxed">
                   {t(faq.a)}
                 </p>
               </Accordion.Content>

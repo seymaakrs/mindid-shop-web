@@ -20,7 +20,7 @@ export const DurationSelector = ({ selected, onSelect }: DurationSelectorProps) 
           <Clock size={20} className="text-[var(--dark-blue)]" />
         </div>
         <div>
-          <h2 className="text-xl font-bold text-[var(--cream)]" style={{ fontFamily: "Syne, sans-serif" }}>
+          <h2 className="text-xl font-bold text-[var(--cream)]">
             {t("duration.title")}
           </h2>
           <p className="text-xs text-[var(--gray)]">{t("duration.subtitle")}</p>
@@ -43,7 +43,7 @@ export const DurationSelector = ({ selected, onSelect }: DurationSelectorProps) 
                   : "border-[var(--electric-blue)]/30 bg-[var(--card)] hover:border-[var(--lime)]/50"
               }`}
             >
-              <div className={`text-2xl font-extrabold ${isSelected ? "text-[var(--lime)]" : "text-[var(--cream)]"}`} style={{ fontFamily: "Syne, sans-serif" }}>
+              <div className={`text-2xl font-black ${isSelected ? "text-[var(--lime)]" : "text-[var(--cream)]"}`}>
                 {opt.label}
               </div>
               <div className="text-[10px] uppercase tracking-wider text-[var(--gray)] mt-0.5">

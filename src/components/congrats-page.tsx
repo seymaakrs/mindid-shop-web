@@ -24,44 +24,59 @@ export const CongratsPage = ({ totalAI, totalTraditional, savings, serviceName }
         </div>
 
         {/* Title */}
-        <h1 className="text-4xl md:text-5xl font-extrabold text-[var(--lime)] mb-4" style={{ fontFamily: "Syne, sans-serif" }}>
+        <h1 className="text-4xl md:text-5xl font-black text-[var(--lime)] mb-4" >
           {t("congrats.title")}
         </h1>
 
         <p className="text-[var(--cream)] mb-8">
-          <strong>{serviceName}</strong> talepleriniz basariyla alindi.
+          <strong>{serviceName}</strong> {t("congrats.subtitle")}
         </p>
+
+        {/* Savings hero badge */}
+        {savings > 0 && (
+          <div className="savings-badge inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[var(--lime)]/20 border-2 border-[var(--lime)]/40 mb-6 animate-glow-pulse">
+            <TrendingDown size={18} className="text-[var(--lime)]" />
+            <span className="text-lg font-black text-[var(--lime)]">
+              %{savingsPercent} TASARRUF
+            </span>
+          </div>
+        )}
 
         {/* Price comparison cards */}
         <div className="space-y-4 mb-8">
-          <div className="p-4 rounded-md bg-[var(--card)] border-3 border-[var(--gray)]/30">
+          <div className="p-4 rounded-md bg-[var(--card)] border-3 border-[var(--gray)]/30 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-[var(--gray)]/50 to-transparent" />
             <div className="text-xs text-[var(--gray)] uppercase tracking-wider font-bold">{t("congrats.traditional_cost")}</div>
-            <div className="text-2xl font-extrabold text-[var(--gray)] line-through mt-1" style={{ fontFamily: "Syne, sans-serif" }}>
+            <div className="text-2xl font-black text-[var(--gray)] line-through mt-1">
               {formatPrice(totalTraditional)}
             </div>
+            <p className="text-[10px] text-[var(--gray)]/60 mt-1">{t("checkout.comparison_note")}</p>
           </div>
 
-          <div className="p-4 rounded-md bg-[var(--lime)] border-3 border-[var(--dark-blue)] shadow-[6px_6px_0px_var(--dark-blue)]">
+          <div className="p-4 rounded-md bg-[var(--lime)] border-3 border-[var(--dark-blue)] shadow-[6px_6px_0px_var(--dark-blue)] relative overflow-hidden animate-shimmer">
+            <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-[var(--dark-blue)] to-transparent" />
             <div className="text-xs text-[var(--dark-blue)] uppercase tracking-wider font-bold">{t("congrats.ai_cost")}</div>
-            <div className="text-3xl font-extrabold text-[var(--dark-blue)] mt-1" style={{ fontFamily: "Syne, sans-serif" }}>
+            <div className="text-3xl font-black text-[var(--dark-blue)] mt-1">
               {formatPrice(totalAI)}
             </div>
+            <p className="text-[10px] text-[var(--dark-blue)]/60 mt-1 font-medium">{t("checkout.smart_move")}</p>
           </div>
 
-          <div className="p-4 rounded-md bg-[var(--electric-blue)] border-3 border-[var(--lime)]">
+          <div className="p-5 rounded-md bg-[var(--electric-blue)] border-3 border-[var(--lime)] relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-[var(--lime)] to-transparent" />
             <div className="flex items-center justify-center gap-2">
               <TrendingDown size={20} className="text-[var(--lime)]" />
               <span className="text-xs text-[var(--lime)] uppercase tracking-wider font-bold">{t("congrats.profit")}</span>
             </div>
-            <div className="text-3xl font-extrabold text-[var(--lime)] mt-1" style={{ fontFamily: "Syne, sans-serif" }}>
-              {formatPrice(savings)} ({savingsPercent}%)
+            <div className="text-3xl font-black text-[var(--lime)] mt-1 animate-glow-pulse">
+              {formatPrice(savings)}
             </div>
           </div>
         </div>
 
         {/* Next steps */}
         <div className="p-5 rounded-md bg-[var(--card)] border-3 border-[var(--electric-blue)]/30 mb-8 text-left">
-          <h3 className="font-bold text-[var(--cream)] mb-3" style={{ fontFamily: "Syne, sans-serif" }}>
+          <h3 className="font-bold text-[var(--cream)] mb-3" >
             Siradaki Adimlar
           </h3>
           <div className="space-y-3">

@@ -55,7 +55,7 @@ export const DirectorDesk = ({
             <Clapperboard size={24} className="text-[var(--dark-blue)]" />
           </div>
           <div>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-[var(--cream)]" style={{ fontFamily: "Syne, sans-serif" }}>
+            <h1 className="text-2xl md:text-3xl font-black text-[var(--cream)]">
               {t("checkout.title")}
             </h1>
             <p className="text-sm text-[var(--gray)]">{t("checkout.subtitle")}</p>
@@ -85,25 +85,42 @@ export const DirectorDesk = ({
         </div>
 
         {/* Price summary bar */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-3 gap-4 mb-6">
           <div className="p-4 rounded-md bg-[var(--card)] border-3 border-[var(--gray)]/30 text-center">
             <div className="text-xs text-[var(--gray)] uppercase tracking-wider font-bold">{t("checkout.traditional")}</div>
-            <div className="text-xl font-extrabold text-[var(--gray)] line-through mt-1" style={{ fontFamily: "Syne, sans-serif" }}>
+            <div className="text-xl font-black text-[var(--gray)] line-through mt-1">
               {formatPrice(totalTraditional)}
             </div>
           </div>
-          <div className="p-4 rounded-md bg-[var(--lime)] border-3 border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] text-center">
+          <div className="p-4 rounded-md bg-[var(--lime)] border-3 border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] text-center animate-glow-pulse">
             <div className="text-xs text-[var(--dark-blue)] uppercase tracking-wider font-bold">{t("checkout.ai")}</div>
-            <div className="text-xl font-extrabold text-[var(--dark-blue)] mt-1" style={{ fontFamily: "Syne, sans-serif" }}>
+            <div className="text-xl font-black text-[var(--dark-blue)] mt-1">
               {formatPrice(totalAI)}
             </div>
           </div>
           <div className="p-4 rounded-md bg-[var(--electric-blue)] border-3 border-[var(--lime)] text-center">
             <div className="text-xs text-[var(--lime)] uppercase tracking-wider font-bold">{t("checkout.saved")}</div>
-            <div className="text-xl font-extrabold text-[var(--lime)] mt-1" style={{ fontFamily: "Syne, sans-serif" }}>
+            <div className="text-xl font-black text-[var(--lime)] mt-1">
               {formatPrice(savings)}
             </div>
+            {savings > 0 && (
+              <div className="mt-1">
+                <span className="inline-block px-2 py-0.5 rounded-full bg-[var(--lime)]/20 text-[var(--lime)] text-[10px] font-bold">
+                  %{Math.round((savings / totalTraditional) * 100)} TASARRUF
+                </span>
+              </div>
+            )}
           </div>
+        </div>
+
+        {/* Strategic comparison note */}
+        <div className="p-4 rounded-md bg-[var(--card)] border-2 border-[var(--lime)]/20 mb-8">
+          <p className="text-xs text-[var(--cream)]/80 leading-relaxed mb-2">
+            {t("checkout.smart_move")}
+          </p>
+          <p className="text-[10px] text-[var(--gray)]/60 leading-relaxed">
+            {t("checkout.comparison_note")}
+          </p>
         </div>
 
         {/* Customer form */}

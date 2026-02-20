@@ -14,7 +14,7 @@ export const Footer = () => {
             <div className="flex items-center justify-center w-8 h-8 rounded-md bg-[var(--lime)]">
               <Clapperboard size={16} className="text-[var(--dark-blue)]" />
             </div>
-            <span className="font-bold text-[var(--cream)]" style={{ fontFamily: "Syne, sans-serif" }}>
+            <span className="font-bold text-[var(--cream)]">
               Mind<span className="text-[var(--lime)]">ID</span>
             </span>
           </div>

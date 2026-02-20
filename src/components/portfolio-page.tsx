@@ -15,7 +15,7 @@ export const PortfolioPage = () => {
           Ana Sayfa
         </Link>
 
-        <h1 className="text-3xl md:text-4xl font-extrabold text-[var(--lime)] mb-2" style={{ fontFamily: "Syne, sans-serif" }}>
+        <h1 className="text-3xl md:text-4xl font-black text-[var(--lime)] mb-2">
           {t("portfolio.title")}
         </h1>
         <p className="text-[var(--gray)] mb-10">{t("portfolio.subtitle")}</p>

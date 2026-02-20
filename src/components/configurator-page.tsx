@@ -117,7 +117,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
         <div className="flex items-center gap-3 mb-8">
           <span className="text-3xl">{service.icon}</span>
           <div>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-[var(--cream)]" style={{ fontFamily: "Syne, sans-serif" }}>
+            <h1 className="text-2xl md:text-3xl font-black text-[var(--cream)]">
               {t(service.nameKey)}
             </h1>
             <p className="text-sm text-[var(--gray)]">{t("config.title")}</p>
@@ -219,7 +219,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
             <div className="sticky top-20">
               <div className="rounded-lg bg-[var(--dark-blue)] border-3 border-[var(--lime)] shadow-[6px_6px_0px_var(--lime)] overflow-hidden">
                 <div className="p-4 bg-[var(--lime)] text-[var(--dark-blue)]">
-                  <h3 className="font-extrabold text-lg" style={{ fontFamily: "Syne, sans-serif" }}>
+                  <h3 className="font-black text-lg">
                     {t("config.total")}
                   </h3>
                 </div>
@@ -280,14 +280,14 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                   {/* Total */}
                   <div className="flex justify-between items-center">
                     <span className="text-[var(--cream)] font-bold">{t("config.total")}</span>
-                    <span className="text-2xl font-extrabold text-[var(--lime)]" style={{ fontFamily: "Syne, sans-serif" }}>
+                    <span className="text-2xl font-black text-[var(--lime)] animate-glow-pulse">
                       {formatPrice(totalAI)}
                     </span>
                   </div>
 
-                  {/* Traditional comparison */}
+                  {/* Traditional comparison - psychological pricing */}
                   {totalTraditional > 0 && (
-                    <div className="p-3 rounded-md bg-[var(--electric-blue)]/20 mt-3">
+                    <div className="p-3 rounded-md bg-[var(--electric-blue)]/20 mt-3 animate-shimmer">
                       <div className="flex justify-between text-xs">
                         <span className="text-[var(--gray)]">{t("checkout.traditional")}</span>
                         <span className="text-[var(--gray)] line-through">{formatPrice(totalTraditional)}</span>
@@ -296,22 +296,40 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                         <span className="text-[var(--lime)] font-bold">{t("checkout.saved")}</span>
                         <span className="text-[var(--lime)] font-bold">{formatPrice(savings)}</span>
                       </div>
+                      {savings > 0 && (
+                        <div className="mt-2 text-center">
+                          <span className="inline-block px-2 py-0.5 rounded-full bg-[var(--lime)]/20 text-[var(--lime)] text-[10px] font-bold animate-glow-pulse">
+                            %{Math.round((savings / totalTraditional) * 100)} TASARRUF
+                          </span>
+                        </div>
+                      )}
                     </div>
+                  )}
+
+                  {/* Smart move text */}
+                  {totalAI > 0 && (
+                    <p className="text-[10px] text-[var(--gray)]/70 mt-2 leading-relaxed italic">
+                      {t("checkout.smart_move")}
+                    </p>
                   )}
 
                   {/* CTA */}
                   <button
                     onClick={() => config.duration && setStep("checkout")}
                     disabled={!config.duration}
-                    className={`mt-4 w-full py-3 rounded-md border-3 text-sm font-extrabold transition-all cursor-pointer ${
+                    className={`mt-4 w-full py-3 rounded-md border-3 text-sm font-black transition-all cursor-pointer ${
                       config.duration
                         ? "bg-[var(--lime)] text-[var(--dark-blue)] border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] hover:shadow-[2px_2px_0px_var(--dark-blue)] hover:translate-x-[2px] hover:translate-y-[2px]"
                         : "bg-[var(--gray)]/20 text-[var(--gray)] border-[var(--gray)]/30 cursor-not-allowed"
                     }`}
-                    style={{ fontFamily: "Syne, sans-serif" }}
                   >
                     {t("checkout.send")} →
                   </button>
+
+                  {/* Price note */}
+                  <p className="text-[9px] text-[var(--gray)]/50 mt-3 leading-relaxed text-center">
+                    {t("config.price_note")}
+                  </p>
                 </div>
               </div>
             </div>
