@@ -1,26 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --card: #18181b;
-  --card-hover: #27272a;
-  --border: #27272a;
-  --primary: #a855f7;
-  --primary-hover: #9333ea;
-  --primary-light: #c084fc;
-  --muted: #71717a;
-  --accent: #06b6d4;
-  --success: #22c55e;
+  --lime: #c1ff72;
+  --cream: #eeede9;
+  --gray: #c0bfbf;
+  --dark-blue: #111121;
+  --deep-blue: #221f5f;
+  --electric-blue: #322fae;
+  --background: #111121;
+  --foreground: #eeede9;
+  --card: #1a1a3e;
+  --card-hover: #221f5f;
+  --border: #322fae;
+  --primary: #c1ff72;
+  --primary-hover: #a8e65c;
+  --muted: #c0bfbf;
+  --accent: #322fae;
+  --success: #c1ff72;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--electric-blue) var(--dark-blue);
 }
 
 body {
-  background: var(--background);
+  background: var(--dark-blue);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
-/* Radix UI Select overrides */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syne', sans-serif;
+}
+
+::selection {
+  background: var(--lime);
+  color: var(--dark-blue);
+}
+
+/* Neo-brutalist borders */
+.neo-border {
+  border: 3px solid var(--dark-blue);
+  box-shadow: 6px 6px 0px var(--dark-blue);
+}
+
+.neo-border-lime {
+  border: 3px solid var(--lime);
+  box-shadow: 6px 6px 0px var(--lime);
+}
+
+.neo-border-blue {
+  border: 3px solid var(--electric-blue);
+  box-shadow: 6px 6px 0px var(--electric-blue);
+}
+
+/* Kinetic text animation */
+@keyframes kinetic-slide {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes kinetic-expand {
+  from { letter-spacing: -0.05em; opacity: 0; }
+  to { letter-spacing: 0.02em; opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-lime {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(193, 255, 114, 0.4); }
+  50% { box-shadow: 0 0 20px 10px rgba(193, 255, 114, 0.1); }
+}
+
+@keyframes stagger-fade-up {
+  from { transform: translateY(60px) rotate(-2deg); opacity: 0; }
+  to { transform: translateY(0) rotate(0deg); opacity: 1; }
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-kinetic-slide {
+  animation: kinetic-slide 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-kinetic-expand {
+  animation: kinetic-expand 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-lime {
+  animation: pulse-lime 2s ease-in-out infinite;
+}
+
+.animate-ticker {
+  animation: ticker 30s linear infinite;
+}
+
+/* Stagger children */
+.stagger-children > * {
+  opacity: 0;
+  animation: stagger-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.7s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.8s; }
+
+/* Parallax grid background */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(50, 47, 174, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(50, 47, 174, 0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Radix UI overrides */
 [data-radix-popper-content-wrapper] {
   z-index: 50 !important;
+}
+
+/* Trading card hover */
+.trading-card {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.trading-card:hover {
+  transform: translateY(-8px) rotate(-1deg);
+  box-shadow: 8px 8px 0px var(--lime);
 }

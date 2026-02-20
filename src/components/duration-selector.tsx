@@ -1,64 +1,56 @@
 "use client";
 
-import { Clock } from "lucide-react";
 import { DURATION_OPTIONS } from "@/lib/pricing-data";
-import { formatPrice } from "@/lib/pricing-data";
+import { useI18n } from "@/lib/i18n";
 import type { DurationOption } from "@/lib/types";
-import { cn } from "@/lib/cn";
+import { Clock } from "lucide-react";
 
 type DurationSelectorProps = {
   selected: DurationOption | null;
   onSelect: (option: DurationOption) => void;
 };
 
-export const DurationSelector = ({
-  selected,
-  onSelect,
-}: DurationSelectorProps) => {
+export const DurationSelector = ({ selected, onSelect }: DurationSelectorProps) => {
+  const { t, formatPrice } = useI18n();
+
   return (
     <section>
-      <div className="mb-6">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-[var(--primary)]/10 text-[var(--primary)]">
-            <Clock size={20} />
-          </div>
-          <div>
-            <h2 className="text-xl font-semibold text-[var(--foreground)]">
-              Video Suresi
-            </h2>
-            <p className="text-sm text-[var(--muted)]">
-              Reklam videonuzun suresini secin
-            </p>
-          </div>
+      <div className="flex items-center gap-3 mb-5">
+        <div className="w-10 h-10 rounded-md bg-[var(--lime)] border-2 border-[var(--dark-blue)] flex items-center justify-center">
+          <Clock size={20} className="text-[var(--dark-blue)]" />
+        </div>
+        <div>
+          <h2 className="text-xl font-bold text-[var(--cream)]" style={{ fontFamily: "Syne, sans-serif" }}>
+            {t("duration.title")}
+          </h2>
+          <p className="text-xs text-[var(--gray)]">{t("duration.subtitle")}</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        {DURATION_OPTIONS.map((option) => {
-          const isSelected = selected?.id === option.id;
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+        {DURATION_OPTIONS.map((opt) => {
+          const isSelected = selected?.id === opt.id;
+          const secs = opt.seconds;
+          const label = secs >= 60 ? `${secs / 60} ${t("duration.min")}` : `${secs} ${t("duration.sec")}`;
+
           return (
             <button
-              key={option.id}
-              onClick={() => onSelect(option)}
-              className={cn(
-                "relative p-4 rounded-xl border-2 text-left transition-all duration-200 cursor-pointer",
-                "hover:border-[var(--primary)]/50 hover:bg-[var(--card-hover)]",
+              key={opt.id}
+              onClick={() => onSelect(opt)}
+              className={`relative p-3 rounded-md border-3 text-center transition-all cursor-pointer ${
                 isSelected
-                  ? "border-[var(--primary)] bg-[var(--primary)]/5 shadow-[0_0_20px_rgba(168,85,247,0.15)]"
-                  : "border-[var(--border)] bg-[var(--card)]"
-              )}
+                  ? "border-[var(--lime)] bg-[var(--lime)]/10 shadow-[4px_4px_0px_var(--lime)]"
+                  : "border-[var(--electric-blue)]/30 bg-[var(--card)] hover:border-[var(--lime)]/50"
+              }`}
             >
-              {isSelected && (
-                <div className="absolute top-2 right-2 w-3 h-3 rounded-full bg-[var(--primary)]" />
-              )}
-              <div className="text-2xl font-bold text-[var(--foreground)] mb-1">
-                {option.label}
+              <div className={`text-2xl font-extrabold ${isSelected ? "text-[var(--lime)]" : "text-[var(--cream)]"}`} style={{ fontFamily: "Syne, sans-serif" }}>
+                {opt.label}
               </div>
-              <div className="text-xs text-[var(--muted)] mb-3">
-                {option.description}
+              <div className="text-[10px] uppercase tracking-wider text-[var(--gray)] mt-0.5">
+                {label}
               </div>
-              <div className="text-sm font-semibold text-[var(--primary)]">
-                {formatPrice(option.basePrice)}
+              <div className={`text-xs font-bold mt-2 ${isSelected ? "text-[var(--lime)]" : "text-[var(--electric-blue)]"}`}>
+                {opt.basePrice === 0 ? "Dahil" : `+${formatPrice(opt.basePrice)}`}
               </div>
             </button>
           );

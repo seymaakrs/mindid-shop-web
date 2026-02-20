@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@/lib/cn";
-import { formatPrice } from "@/lib/pricing-data";
+import { useI18n } from "@/lib/i18n";
+import { Check } from "lucide-react";
 import type { ReactNode } from "react";
 
 type OptionItem = {
@@ -13,72 +13,73 @@ type OptionItem = {
 
 type OptionCardGroupProps<T extends OptionItem> = {
   title: string;
-  subtitle: string;
   icon: ReactNode;
   options: T[];
   selected: T | null;
   onSelect: (option: T) => void;
-  columns?: 2 | 4;
+  multiSelect?: boolean;
+  selectedMulti?: T[];
+  onToggle?: (option: T) => void;
 };
 
 export const OptionCardGroup = <T extends OptionItem>({
   title,
-  subtitle,
   icon,
   options,
   selected,
   onSelect,
-  columns = 2,
+  multiSelect = false,
+  selectedMulti = [],
+  onToggle,
 }: OptionCardGroupProps<T>) => {
+  const { formatPrice } = useI18n();
+
   return (
     <section>
-      <div className="mb-4">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-[var(--primary)]/10 text-[var(--primary)]">
-            {icon}
-          </div>
-          <div>
-            <h2 className="text-xl font-semibold text-[var(--foreground)]">
-              {title}
-            </h2>
-            <p className="text-sm text-[var(--muted)]">{subtitle}</p>
-          </div>
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-8 h-8 rounded-md bg-[var(--electric-blue)] flex items-center justify-center text-[var(--lime)]">
+          {icon}
         </div>
+        <h3 className="text-lg font-bold text-[var(--cream)]" style={{ fontFamily: "Syne, sans-serif" }}>
+          {title}
+        </h3>
       </div>
 
-      <div
-        className={cn(
-          "grid gap-3",
-          columns === 4
-            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
-            : "grid-cols-1 sm:grid-cols-2"
-        )}
-      >
-        {options.map((option) => {
-          const isSelected = selected?.id === option.id;
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {options.map((opt) => {
+          const isActive = multiSelect
+            ? selectedMulti.some((s) => s.id === opt.id)
+            : selected?.id === opt.id;
+
+          const handleClick = () => {
+            if (multiSelect && onToggle) {
+              onToggle(opt);
+            } else {
+              onSelect(opt);
+            }
+          };
+
           return (
             <button
-              key={option.id}
-              onClick={() => onSelect(option)}
-              className={cn(
-                "relative p-4 rounded-xl border-2 text-left transition-all duration-200 cursor-pointer",
-                "hover:border-[var(--primary)]/50 hover:bg-[var(--card-hover)]",
-                isSelected
-                  ? "border-[var(--primary)] bg-[var(--primary)]/5 shadow-[0_0_20px_rgba(168,85,247,0.15)]"
-                  : "border-[var(--border)] bg-[var(--card)]"
-              )}
+              key={opt.id}
+              onClick={handleClick}
+              className={`relative p-4 rounded-md border-3 text-left transition-all cursor-pointer ${
+                isActive
+                  ? "border-[var(--lime)] bg-[var(--lime)]/5 shadow-[4px_4px_0px_var(--lime)]"
+                  : "border-[var(--electric-blue)]/20 bg-[var(--card)] hover:border-[var(--lime)]/40"
+              }`}
             >
-              {isSelected && (
-                <div className="absolute top-2 right-2 w-3 h-3 rounded-full bg-[var(--primary)]" />
+              {isActive && (
+                <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-[var(--lime)] flex items-center justify-center">
+                  <Check size={14} className="text-[var(--dark-blue)]" />
+                </div>
               )}
-              <div className="font-semibold text-[var(--foreground)] mb-1">
-                {option.label}
+              <div className={`font-bold text-sm ${isActive ? "text-[var(--lime)]" : "text-[var(--cream)]"}`}>
+                {opt.label}
               </div>
-              <div className="text-xs text-[var(--muted)] mb-3">
-                {option.description}
-              </div>
-              <div className="text-sm font-semibold text-[var(--primary)]">
-                {option.price === 0 ? "Ucretsiz" : `+${formatPrice(option.price)}`}
+              <div className="text-xs text-[var(--gray)] mt-1">{opt.description}</div>
+              <div className={`text-xs font-bold mt-2 ${opt.price === 0 ? "text-[var(--lime)]" : "text-[var(--electric-blue)]"}`}>
+                {opt.price === 0 ? "✓ Dahil" : `+${formatPrice(opt.price)}`}
               </div>
             </button>
           );

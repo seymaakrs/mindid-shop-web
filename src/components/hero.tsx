@@ -1,55 +1,44 @@
-import { Play, Zap, Shield } from "lucide-react";
+"use client";
+
+import { useI18n } from "@/lib/i18n";
+import { TrendingDown, Zap } from "lucide-react";
 
 export const Hero = () => {
-  return (
-    <section className="relative py-20 md:py-32 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[var(--primary)]/5 via-transparent to-transparent" />
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[var(--primary)]/10 rounded-full blur-[120px]" />
+  const { t } = useI18n();
 
-      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--primary)]/10 border border-[var(--primary)]/20 mb-8">
-          <Zap size={14} className="text-[var(--primary)]" />
-          <span className="text-sm text-[var(--primary-light)]">
-            AI Destekli Video Produksiyon
+  return (
+    <section className="relative py-16 md:py-24 z-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[var(--lime)] border-3 border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] mb-8 animate-kinetic-slide">
+          <Zap size={16} className="text-[var(--dark-blue)]" />
+          <span className="text-sm font-bold text-[var(--dark-blue)]">
+            {t("hero.badge")}
           </span>
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-          Yapay Zeka ile{" "}
-          <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] bg-clip-text text-transparent">
-            Reklam Filmi
-          </span>{" "}
-          Uretimi
+        {/* Title with kinetic animation */}
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-4" style={{ fontFamily: "Syne, sans-serif" }}>
+          <span className="block text-[var(--lime)] animate-kinetic-expand" style={{ animationDelay: "0.2s" }}>
+            {t("hero.title1")}
+          </span>
+          <span className="block text-[var(--cream)] animate-kinetic-expand" style={{ animationDelay: "0.5s" }}>
+            {t("hero.title2")}
+          </span>
         </h1>
 
-        <p className="text-lg md:text-xl text-[var(--muted)] max-w-2xl mx-auto mb-10">
-          8 saniyeden 5 dakikaya kadar, profesyonel AI reklam videolari.
-          Suresini secin, parametreleri belirleyin, aninda fiyat alin.
-        </p>
-
-        <div className="flex flex-wrap items-center justify-center gap-6 mb-10">
-          <div className="flex items-center gap-2 text-sm text-[var(--muted)]">
-            <Play size={16} className="text-[var(--primary)]" />
-            8sn - 5dk video sureleri
-          </div>
-          <div className="flex items-center gap-2 text-sm text-[var(--muted)]">
-            <Zap size={16} className="text-[var(--accent)]" />
-            AI gorsel & ses uretimi
-          </div>
-          <div className="flex items-center gap-2 text-sm text-[var(--muted)]">
-            <Shield size={16} className="text-[var(--success)]" />
-            Profesyonel post-produksiyon
+        {/* Cost comparison box */}
+        <div className="max-w-2xl mx-auto mt-10 p-6 rounded-lg bg-[var(--dark-blue)] border-3 border-[var(--lime)] shadow-[6px_6px_0px_var(--lime)] animate-kinetic-slide" style={{ animationDelay: "0.8s" }}>
+          <p className="text-[var(--cream)] text-sm md:text-base leading-relaxed">
+            {t("hero.desc")}
+          </p>
+          <div className="flex items-center justify-center gap-2 mt-4">
+            <TrendingDown size={20} className="text-[var(--lime)]" />
+            <span className="text-lg font-bold text-[var(--lime)]">
+              {t("hero.savings")}
+            </span>
           </div>
         </div>
-
-        <a
-          href="#configurator"
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[var(--primary)] to-[var(--primary-hover)] text-white font-semibold hover:opacity-90 transition-opacity"
-        >
-          <Play size={18} />
-          Videonuzu Yapilandirin
-        </a>
       </div>
     </section>
   );
