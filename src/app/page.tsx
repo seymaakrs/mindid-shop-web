@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <>
       <Header />
-      <main>
+      <main className="pb-20 lg:pb-0">
         <Hero />
         <Configurator />
         <WorkflowSection />
