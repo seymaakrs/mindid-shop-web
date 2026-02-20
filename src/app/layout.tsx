@@ -3,9 +3,9 @@ import "./globals.css";
 import { Providers } from "@/components/providers";
 
 export const metadata: Metadata = {
-  title: "MindID | AI Reklam Produksiyon Ajansi",
+  title: "MindID -Lab Technology | AI Reklam Prodüksiyon Ajansı",
   description:
-    "Yapay zeka destekli reklam video uretim platformu. 8 saniyeden 6 dakikaya kadar profesyonel AI reklam videolari. %60 maliyet tasarrufu.",
+    "Yapay zeka destekli reklam video üretim platformu. Bütçenize göre AI reklam filminizi oluşturun. 8 saniyeden 6 dakikaya kadar profesyonel AI reklam videoları. %60 maliyet tasarrufu.",
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
@@ -22,7 +22,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&subset=latin,latin-ext&display=swap"
           rel="stylesheet"
         />
       </head>

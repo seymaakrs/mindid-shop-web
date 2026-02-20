@@ -1,8 +1,9 @@
 "use client";
 
-import { Clapperboard, Globe, Menu, X, ShoppingCart } from "lucide-react";
+import { Globe, Menu, X, ShoppingCart } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { useState } from "react";
+import Image from "next/image";
 
 export const Header = () => {
   const { lang, toggleLang, t } = useI18n();
@@ -11,18 +12,23 @@ export const Header = () => {
   return (
     <header className="sticky top-0 z-50 border-b-3 border-[var(--dark-blue)] bg-[var(--lime)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2">
-          <div className="flex items-center justify-center w-9 h-9 rounded-md bg-[var(--dark-blue)]">
-            <Clapperboard size={18} className="text-[var(--lime)]" />
-          </div>
-          <span className="text-xl font-black tracking-tight text-[var(--dark-blue)]">
-            Mind<span className="text-[var(--electric-blue)]">ID</span>
-          </span>
+        <a href="/" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="MindID -Lab Technology"
+            width={140}
+            height={48}
+            className="h-11 w-auto object-contain"
+            priority
+          />
         </a>
 
         <nav className="hidden lg:flex items-center gap-6">
           <a href="#services" className="text-sm font-bold text-[var(--dark-blue)] hover:text-[var(--electric-blue)] transition-colors">
             {t("nav.services")}
+          </a>
+          <a href="/portfolio" className="text-sm font-bold text-[var(--dark-blue)] hover:text-[var(--electric-blue)] transition-colors">
+            {t("nav.portfolio")}
           </a>
           <a href="/about" className="text-sm font-bold text-[var(--dark-blue)] hover:text-[var(--electric-blue)] transition-colors">
             {t("nav.about")}
@@ -60,6 +66,7 @@ export const Header = () => {
       {mobileOpen && (
         <div className="lg:hidden border-t-2 border-[var(--dark-blue)] bg-[var(--lime)] px-4 py-4 space-y-3">
           <a href="#services" onClick={() => setMobileOpen(false)} className="block text-sm font-bold text-[var(--dark-blue)]">{t("nav.services")}</a>
+          <a href="/portfolio" onClick={() => setMobileOpen(false)} className="block text-sm font-bold text-[var(--dark-blue)]">{t("nav.portfolio")}</a>
           <a href="/about" onClick={() => setMobileOpen(false)} className="block text-sm font-bold text-[var(--dark-blue)]">{t("nav.about")}</a>
           <a href="#faq" onClick={() => setMobileOpen(false)} className="block text-sm font-bold text-[var(--dark-blue)]">{t("nav.faq")}</a>
         </div>

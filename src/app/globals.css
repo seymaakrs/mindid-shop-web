@@ -223,3 +223,12 @@ html {
   animation: shimmer 2s ease-in-out infinite;
   background-size: 200% 100%;
 }
+
+/* Hide scrollbar for horizontal scroll containers */
+.overflow-x-auto::-webkit-scrollbar {
+  display: none;
+}
+.overflow-x-auto {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

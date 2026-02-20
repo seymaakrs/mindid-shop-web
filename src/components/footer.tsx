@@ -1,7 +1,7 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
-import { Clapperboard } from "lucide-react";
+import Image from "next/image";
 
 export const Footer = () => {
   const { t } = useI18n();
@@ -11,15 +11,16 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="flex items-center justify-center w-8 h-8 rounded-md bg-[var(--lime)]">
-              <Clapperboard size={16} className="text-[var(--dark-blue)]" />
-            </div>
-            <span className="font-bold text-[var(--cream)]">
-              Mind<span className="text-[var(--lime)]">ID</span>
-            </span>
+            <Image
+              src="/logo.png"
+              alt="MindID -Lab Technology"
+              width={120}
+              height={40}
+              className="h-9 w-auto object-contain brightness-0 invert"
+            />
           </div>
           <p className="text-sm text-[var(--gray)]">
-            &copy; {new Date().getFullYear()} MindID. {t("footer.rights")}
+            &copy; {new Date().getFullYear()} MindID -Lab Technology. {t("footer.rights")}
           </p>
         </div>
       </div>
