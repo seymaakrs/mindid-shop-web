@@ -13,6 +13,10 @@ import {
   VISUAL_STYLE_OPTIONS,
   POST_PRODUCTION_OPTIONS,
   REVISION_PACKAGES,
+  PRODUCT_COUNT_OPTIONS,
+  COLOR_COUNT_UNIT_PRICE,
+  PHOTO_VISUAL_STYLE_OPTIONS,
+  BACKGROUND_OPTIONS,
 } from "@/lib/pricing-data";
 import { Save, Check, ChevronDown, ChevronUp } from "lucide-react";
 
@@ -26,11 +30,15 @@ const defaultConfig: PricingConfig = JSON.parse(JSON.stringify({
   visualStyles: VISUAL_STYLE_OPTIONS,
   postProduction: POST_PRODUCTION_OPTIONS,
   revisions: REVISION_PACKAGES,
+  productCounts: PRODUCT_COUNT_OPTIONS,
+  colorCountUnitPrice: COLOR_COUNT_UNIT_PRICE,
+  photoVisualStyles: PHOTO_VISUAL_STYLE_OPTIONS,
+  backgrounds: BACKGROUND_OPTIONS,
 }));
 
 type SectionKey = keyof PricingConfig;
 
-const sectionLabels: Record<SectionKey, string> = {
+const arraySectionLabels: Record<string, string> = {
   services: "Hizmetler",
   durations: "Süre Seçenekleri",
   scenarios: "Senaryo",
@@ -39,7 +47,12 @@ const sectionLabels: Record<SectionKey, string> = {
   visualStyles: "Görsel Stil",
   postProduction: "Post-Prodüksiyon",
   revisions: "Revizyon",
+  productCounts: "Ürün Sayısı (AI Ürün Görseli)",
+  photoVisualStyles: "Görsel Stili (AI Ürün Görseli)",
+  backgrounds: "Arka Plan (AI Ürün Görseli)",
 };
+
+const sectionLabels = arraySectionLabels as Record<SectionKey, string>;
 
 export const PricingEditor = () => {
   const [config, setConfig] = useState<PricingConfig>(defaultConfig);
@@ -189,9 +202,34 @@ export const PricingEditor = () => {
           )}
         </div>
 
+        {/* Color count unit price */}
+        <div className="rounded-md border-3 border-[var(--electric-blue)]/20 overflow-hidden">
+          <button
+            onClick={() => toggleSection("colorCountUnitPrice" as SectionKey)}
+            className="w-full flex items-center justify-between p-4 bg-[var(--electric-blue)]/10 cursor-pointer"
+          >
+            <span className="font-bold text-[var(--cream)] text-sm">Renk Birim Fiyatı (AI Ürün Görseli)</span>
+            {openSections.has("colorCountUnitPrice" as SectionKey) ? <ChevronUp size={16} className="text-[var(--gray)]" /> : <ChevronDown size={16} className="text-[var(--gray)]" />}
+          </button>
+          {openSections.has("colorCountUnitPrice" as SectionKey) && (
+            <div className="p-4">
+              <div className="flex items-center gap-3 p-2 rounded bg-[var(--dark-blue)]/50">
+                <span className="text-xs text-[var(--cream)] font-bold">Birim Fiyat:</span>
+                <input
+                  type="number"
+                  value={config.colorCountUnitPrice ?? COLOR_COUNT_UNIT_PRICE}
+                  onChange={(e) => setConfig((prev) => ({ ...prev, colorCountUnitPrice: Number(e.target.value) }))}
+                  className="w-32 p-1.5 rounded bg-[var(--dark-blue)] border border-[var(--electric-blue)]/30 text-[var(--cream)] text-xs focus:border-[var(--lime)] focus:outline-none"
+                />
+                <span className="text-[10px] text-[var(--gray)]">TL / renk</span>
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Other sections */}
         {(Object.keys(sectionLabels) as SectionKey[])
-          .filter((k) => k !== "services")
+          .filter((k) => k !== "services" && k !== "colorCountUnitPrice")
           .map((sectionKey) => {
             const items = config[sectionKey] as Record<string, unknown>[];
             return (

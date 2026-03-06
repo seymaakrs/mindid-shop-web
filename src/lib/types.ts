@@ -48,7 +48,30 @@ export type RevisionPackage = {
   price: number;
 };
 
+// Product photo types
+export type ProductCountOption = {
+  id: string;
+  label: string;
+  description: string;
+  price: number;
+};
+
+export type PhotoVisualStyle = {
+  id: string;
+  label: string;
+  description: string;
+  price: number;
+};
+
+export type BackgroundOption = {
+  id: string;
+  label: string;
+  description: string;
+  price: number;
+};
+
 export type ConfigState = {
+  // Video fields
   duration: DurationOption | null;
   scenario: ScenarioType | null;
   voice: VoiceOption | null;
@@ -56,4 +79,9 @@ export type ConfigState = {
   visualStyle: VisualStyle | null;
   postProduction: PostProductionOption[];
   revision: RevisionPackage | null;
+  // Product photo fields
+  productCount: ProductCountOption | null;
+  colorCount: number | null;
+  photoVisualStyle: PhotoVisualStyle | null;
+  background: BackgroundOption | null;
 };

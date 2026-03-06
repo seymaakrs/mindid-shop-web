@@ -20,6 +20,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "nav.portfolio": { tr: "Portfolyo", en: "Portfolio" },
   "nav.about": { tr: "MindID Ne Yapar?", en: "What Does MindID Do?" },
   "nav.faq": { tr: "SSS", en: "FAQ" },
+  "nav.testimonials": { tr: "Yorumlar", en: "Testimonials" },
   "nav.contact": { tr: "İletişim", en: "Contact" },
   "nav.start": { tr: "Hemen Başla", en: "Get Started" },
 
@@ -54,6 +55,11 @@ const translations: Record<string, Record<Lang, string>> = {
   "service.corporate.desc": { tr: "Kurumsal tanıtım ve reklam filmi - tek paket çözüm", en: "Corporate introduction and ad film - all-in-one solution" },
   "service.avatar": { tr: "AI Avatar Oluştur", en: "Create AI Avatar" },
   "service.avatar.desc": { tr: "AI ile kendi dijital avatarını oluştur - video çekimine son", en: "Create your digital avatar with AI - no more video shoots" },
+  "service.product-photo": { tr: "AI Ürün Görseli", en: "AI Product Photography" },
+  "service.product-photo.desc": {
+    tr: "E-ticaret ve katalog için AI destekli profesyonel ürün fotoğrafçılığı",
+    en: "AI-powered professional product photography for e-commerce and catalogs",
+  },
   "service.portfolio": { tr: "Portfolyo", en: "Portfolio" },
   "service.portfolio.desc": { tr: "Yapay zeka ile ürettiğimiz çalışmalarımızı inceleyin", en: "Explore our AI-produced works" },
   "service.from": { tr: "Başlayan", en: "Starting" },
@@ -83,6 +89,18 @@ const translations: Record<string, Record<Lang, string>> = {
   "config.visual": { tr: "Görsel Stil", en: "Visual Style" },
   "config.postprod": { tr: "Post-Prodüksiyon", en: "Post-Production" },
   "config.revision": { tr: "Revizyon Hakkı", en: "Revision Rights" },
+  // Product photo configurator
+  "config.product-photo.title": { tr: "Ürün Görselinizi Yapılandırın", en: "Configure Your Product Photography" },
+  "config.product-photo.base.desc": {
+    tr: "Temel stüdyo çekimi, beyaz arka plan ve 2 adet revizyon hakkı dahildir.",
+    en: "Basic studio shoot, white background, and 2 revisions included.",
+  },
+  "config.productCount": { tr: "Ürün Sayısı", en: "Product Count" },
+  "config.colorCount": { tr: "Renk Sayısı (ürün başına)", en: "Color Count (per product)" },
+  "config.colorCount.desc": { tr: "Her ürün için kaç farklı renk varyasyonu çekilecek?", en: "How many color variations per product?" },
+  "config.colorCount.unit": { tr: "renk başına", en: "per color" },
+  "config.photoVisualStyle": { tr: "Görsel Stili", en: "Visual Style" },
+  "config.background": { tr: "Arka Plan", en: "Background" },
   "config.total": { tr: "Toplam", en: "Total" },
   "config.price_note": {
     tr: "Fiyatlar KDV hariç olup, nihai tutar proje detaylarına göre brief sonrası netleşir. Ödeme planı için bize ulaşın.",
@@ -200,6 +218,66 @@ const translations: Record<string, Record<Lang, string>> = {
   "ai.select_service": { tr: "Bir hizmet seçin başlayalım!", en: "Select a service and let's begin!" },
   "ai.great_choice": { tr: "Harika seçim!", en: "Great choice!" },
   "ai.almost_done": { tr: "Neredeyse bitti! Son adım.", en: "Almost done! Final step." },
+
+  // Testimonials
+  "testimonials.title": { tr: "Müşteri Yorumları", en: "Customer Testimonials" },
+  "testimonials.subtitle": { tr: "Müşterilerimizin deneyimleri", en: "What our clients say" },
+  "testimonial.1.name": { tr: "Mehmet Yılmaz", en: "Mehmet Yilmaz" },
+  "testimonial.1.role": { tr: "Pazarlama Müdürü, Tekno Elektronik", en: "Marketing Director, Tekno Electronics" },
+  "testimonial.1.text": {
+    tr: "AI video prodüksiyon ile kampanya filmimizi geleneksel yöntemin yarı maliyetine çıkardık. Kalite beklentimizin çok üzerindeydi.",
+    en: "We produced our campaign film at half the cost of traditional methods with AI video production. Quality far exceeded our expectations.",
+  },
+  "testimonial.1.service": { tr: "AI Video", en: "AI Video" },
+  "testimonial.2.name": { tr: "Ayşe Kaya", en: "Ayse Kaya" },
+  "testimonial.2.role": { tr: "E-Ticaret Direktörü, Moda Atölyesi", en: "E-Commerce Director, Fashion Atelier" },
+  "testimonial.2.text": {
+    tr: "350 ürünlük katalog çekimimizi AI ile 1 haftada tamamladık. Stüdyo çekimine göre %70 tasarruf ettik.",
+    en: "We completed our 350-product catalog shoot with AI in 1 week. We saved 70% compared to studio photography.",
+  },
+  "testimonial.2.service": { tr: "AI Ürün Görseli", en: "AI Product Photo" },
+  "testimonial.3.name": { tr: "Burak Demir", en: "Burak Demir" },
+  "testimonial.3.role": { tr: "Kurucu, Demir Mobilya", en: "Founder, Demir Furniture" },
+  "testimonial.3.text": {
+    tr: "Kurumsal tanıtım filmimizi 3 günde aldık. Eskiden bunun için haftalarca bekliyorduk. MindID ile çalışmak büyük avantaj.",
+    en: "We received our corporate intro film in 3 days. We used to wait weeks for this. Working with MindID is a huge advantage.",
+  },
+  "testimonial.3.service": { tr: "AI Video", en: "AI Video" },
+  "testimonial.4.name": { tr: "Elif Çelik", en: "Elif Celik" },
+  "testimonial.4.role": { tr: "Marka Yöneticisi, Çelik Kozmetik", en: "Brand Manager, Celik Cosmetics" },
+  "testimonial.4.text": {
+    tr: "Ürün görsellerimizi farklı arka planlarda ve renklerde AI ile oluşturduk. E-ticaret dönüşüm oranımız %40 arttı.",
+    en: "We created our product visuals in different backgrounds and colors with AI. Our e-commerce conversion rate increased by 40%.",
+  },
+  "testimonial.4.service": { tr: "AI Ürün Görseli", en: "AI Product Photo" },
+  "testimonial.5.name": { tr: "Ahmet Özkan", en: "Ahmet Ozkan" },
+  "testimonial.5.role": { tr: "Genel Müdür, Özkan İnşaat", en: "CEO, Ozkan Construction" },
+  "testimonial.5.text": {
+    tr: "Instagram Reels içeriklerimizi AI ile üretmeye başladık. Takipçi etkileşimimiz 3 katına çıktı, bütçemiz ise aynı kaldı.",
+    en: "We started producing our Instagram Reels content with AI. Our follower engagement tripled while our budget stayed the same.",
+  },
+  "testimonial.5.service": { tr: "AI Video", en: "AI Video" },
+  "testimonial.6.name": { tr: "Zeynep Aras", en: "Zeynep Aras" },
+  "testimonial.6.role": { tr: "Satış Direktörü, Aras Gıda", en: "Sales Director, Aras Foods" },
+  "testimonial.6.text": {
+    tr: "Yeni ürün serimizin 120 çeşit görseli 5 farklı arka planla hazırlandı. Geleneksel çekimle aylar sürecek iş günler içinde bitti.",
+    en: "120 product photos for our new line were created with 5 different backgrounds. Work that would take months with traditional shoots was done in days.",
+  },
+  "testimonial.6.service": { tr: "AI Ürün Görseli", en: "AI Product Photo" },
+  "testimonial.7.name": { tr: "Emre Şahin", en: "Emre Sahin" },
+  "testimonial.7.role": { tr: "Dijital Pazarlama Uzmanı, Şahin Otomotiv", en: "Digital Marketing Specialist, Sahin Automotive" },
+  "testimonial.7.text": {
+    tr: "Kampanya reklam filmimiz için 5 farklı versiyon ürettik. A/B test yapıp en iyi performans gösteren videoyu belirledik.",
+    en: "We produced 5 different versions for our campaign ad. We A/B tested and identified the best performing video.",
+  },
+  "testimonial.7.service": { tr: "AI Video", en: "AI Video" },
+  "testimonial.8.name": { tr: "Selin Toprak", en: "Selin Toprak" },
+  "testimonial.8.role": { tr: "Kurucu, Toprak Aksesuar", en: "Founder, Toprak Accessories" },
+  "testimonial.8.text": {
+    tr: "Takı koleksiyonumuzun 360° görsellerini AI ile oluşturduk. Müşterilerimiz ürünleri döndürerek inceleyebiliyor, satışlarımız arttı.",
+    en: "We created 360° visuals of our jewelry collection with AI. Customers can rotate and examine products, boosting our sales.",
+  },
+  "testimonial.8.service": { tr: "AI Ürün Görseli", en: "AI Product Photo" },
 
   // Footer
   "footer.rights": { tr: "Tüm hakları saklıdır.", en: "All rights reserved." },

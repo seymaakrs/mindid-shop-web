@@ -6,10 +6,14 @@ import type {
   VisualStyle,
   PostProductionOption,
   RevisionPackage,
+  ProductCountOption,
+  PhotoVisualStyle,
+  BackgroundOption,
 } from "./types";
 
 export const SERVICE_TYPES = [
   { id: "reels", nameKey: "service.reels", descKey: "service.reels.desc", basePrice: 999, icon: "📱", traditionalMultiplier: 3.5 },
+  { id: "product-photo", nameKey: "service.product-photo", descKey: "service.product-photo.desc", basePrice: 399, icon: "📸", traditionalMultiplier: 3.5 },
   { id: "product", nameKey: "service.product", descKey: "service.product.desc", basePrice: 9999, icon: "🎯", traditionalMultiplier: 3.2 },
   { id: "campaign", nameKey: "service.campaign", descKey: "service.campaign.desc", basePrice: 19999, icon: "🚀", traditionalMultiplier: 3.0 },
   { id: "corporate", nameKey: "service.corporate", descKey: "service.corporate.desc", basePrice: 29999, icon: "🏢", traditionalMultiplier: 2.8 },
@@ -71,6 +75,31 @@ export const POST_PRODUCTION_OPTIONS: PostProductionOption[] = [
 export const REVISION_PACKAGES: RevisionPackage[] = [
   { id: "base", label: "Temel (2 Revizyon)", count: 2, price: 0 },
   { id: "extra", label: "Ekstra (+1 Revizyon)", count: 3, price: 6000 },
+];
+
+// Product photo options
+export const PRODUCT_COUNT_OPTIONS: ProductCountOption[] = [
+  { id: "1-5", label: "1-5 Ürün", description: "Küçük koleksiyon", price: 0 },
+  { id: "5-15", label: "5-15 Ürün", description: "Orta koleksiyon", price: 500 },
+  { id: "15-25", label: "15-25 Ürün", description: "Geniş koleksiyon", price: 1200 },
+  { id: "25-35", label: "25-35 Ürün", description: "Büyük koleksiyon", price: 2000 },
+  { id: "35-45", label: "35-45 Ürün", description: "Mega koleksiyon", price: 3000 },
+];
+
+export const COLOR_COUNT_UNIT_PRICE = 150;
+
+export const PHOTO_VISUAL_STYLE_OPTIONS: PhotoVisualStyle[] = [
+  { id: "studio", label: "Stüdyo", description: "Klasik stüdyo çekimi", price: 0 },
+  { id: "lifestyle", label: "Lifestyle", description: "Yaşam tarzı ortamında", price: 500 },
+  { id: "flat-lay", label: "Flat Lay", description: "Düz yüzey kompozisyon", price: 500 },
+  { id: "360", label: "360°", description: "360 derece görüntüleme", price: 1500 },
+];
+
+export const BACKGROUND_OPTIONS: BackgroundOption[] = [
+  { id: "white", label: "Beyaz", description: "Temiz beyaz arka plan", price: 0 },
+  { id: "gradient", label: "Gradient", description: "Yumuşak renk geçişi", price: 300 },
+  { id: "custom-scene", label: "Özel Sahne", description: "Tasarlanmış sahne ortamı", price: 800 },
+  { id: "natural", label: "Doğal Ortam", description: "Doğal çevre arka planı", price: 1200 },
 ];
 
 export const formatPrice = (price: number): string => {

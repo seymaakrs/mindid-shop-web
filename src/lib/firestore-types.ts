@@ -88,6 +88,11 @@ export type PricingConfig = {
   visualStyles: PricingOptionItem[];
   postProduction: PricingOptionItem[];
   revisions: PricingRevisionItem[];
+  // Product photo fields
+  productCounts?: PricingOptionItem[];
+  colorCountUnitPrice?: number;
+  photoVisualStyles?: PricingOptionItem[];
+  backgrounds?: PricingOptionItem[];
 };
 
 export type AvatarSample = {

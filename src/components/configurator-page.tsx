@@ -10,11 +10,16 @@ import {
   POST_PRODUCTION_OPTIONS,
   REVISION_PACKAGES,
   SERVICE_TYPES,
+  PRODUCT_COUNT_OPTIONS,
+  COLOR_COUNT_UNIT_PRICE,
+  PHOTO_VISUAL_STYLE_OPTIONS,
+  BACKGROUND_OPTIONS,
 } from "@/lib/pricing-data";
 import type { ServiceType } from "@/lib/pricing-data";
 import { usePricing } from "@/lib/hooks/use-firestore";
 import { DurationSelector } from "./duration-selector";
 import { OptionCardGroup } from "./option-card-group";
+import { NumberInput } from "./number-input";
 import { DirectorDesk } from "./director-desk";
 import { CustomerForm } from "./customer-form";
 import { CongratsPage } from "./congrats-page";
@@ -28,6 +33,10 @@ import {
   RotateCcw,
   ArrowLeft,
   Package,
+  ShoppingBag,
+  Palette,
+  Camera,
+  ImageIcon,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -38,6 +47,7 @@ type ConfiguratorPageProps = {
 type Step = "configure" | "checkout" | "congrats";
 
 const initialConfig: ConfigState = {
+  // Video fields
   duration: null,
   scenario: null,
   voice: null,
@@ -45,6 +55,11 @@ const initialConfig: ConfigState = {
   visualStyle: null,
   postProduction: [],
   revision: null,
+  // Product photo fields
+  productCount: null,
+  colorCount: null,
+  photoVisualStyle: null,
+  background: null,
 };
 
 export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
@@ -53,14 +68,24 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
   const [config, setConfig] = useState<ConfigState>(initialConfig);
   const [step, setStep] = useState<Step>("configure");
 
+  const isProductPhoto = serviceId === "product-photo";
+
   // Use Firestore pricing if available, otherwise fallback to hardcoded
   const services = pricingConfig?.services ?? SERVICE_TYPES.map((s) => ({ ...s }));
+
+  // Video options
   const scenarioOptions = pricingConfig?.scenarios ?? SCENARIO_OPTIONS;
   const voiceOptions = pricingConfig?.voices ?? VOICE_OPTIONS;
   const musicOptions = pricingConfig?.music ?? MUSIC_OPTIONS;
   const visualStyleOptions = pricingConfig?.visualStyles ?? VISUAL_STYLE_OPTIONS;
   const postProductionOptions = pricingConfig?.postProduction ?? POST_PRODUCTION_OPTIONS;
   const revisionPackages = pricingConfig?.revisions ?? REVISION_PACKAGES;
+
+  // Product photo options
+  const productCountOptions = pricingConfig?.productCounts ?? PRODUCT_COUNT_OPTIONS;
+  const colorUnitPrice = pricingConfig?.colorCountUnitPrice ?? COLOR_COUNT_UNIT_PRICE;
+  const photoVisualStyleOptions = pricingConfig?.photoVisualStyles ?? PHOTO_VISUAL_STYLE_OPTIONS;
+  const backgroundOptions = pricingConfig?.backgrounds ?? BACKGROUND_OPTIONS;
 
   const service = services.find((s) => s.id === serviceId) as ServiceType | undefined;
   if (!service) return null;
@@ -79,16 +104,29 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
 
   // Calculate totals
   const basePrice = service.basePrice;
-  const durationPrice = config.duration?.basePrice ?? 0;
-  const scenarioPrice = config.scenario?.price ?? 0;
-  const voicePrice = config.voice?.price ?? 0;
-  const musicPrice = config.music?.price ?? 0;
-  const visualPrice = config.visualStyle?.price ?? 0;
-  const postProdPrice = config.postProduction.reduce((sum, p) => sum + p.price, 0);
   const revisionPrice = config.revision?.price ?? 0;
-  const totalAI = basePrice + durationPrice + scenarioPrice + voicePrice + musicPrice + visualPrice + postProdPrice + revisionPrice;
+
+  let totalAI: number;
+  if (isProductPhoto) {
+    const productCountPrice = config.productCount?.price ?? 0;
+    const colorPrice = (config.colorCount ?? 0) * colorUnitPrice;
+    const photoVisualPrice = config.photoVisualStyle?.price ?? 0;
+    const bgPrice = config.background?.price ?? 0;
+    totalAI = basePrice + productCountPrice + colorPrice + photoVisualPrice + bgPrice + revisionPrice;
+  } else {
+    const durationPrice = config.duration?.basePrice ?? 0;
+    const scenarioPrice = config.scenario?.price ?? 0;
+    const voicePrice = config.voice?.price ?? 0;
+    const musicPrice = config.music?.price ?? 0;
+    const visualPrice = config.visualStyle?.price ?? 0;
+    const postProdPrice = config.postProduction.reduce((sum, p) => sum + p.price, 0);
+    totalAI = basePrice + durationPrice + scenarioPrice + voicePrice + musicPrice + visualPrice + postProdPrice + revisionPrice;
+  }
+
   const totalTraditional = Math.round(totalAI * service.traditionalMultiplier);
   const savings = totalTraditional - totalAI;
+
+  const canProceed = isProductPhoto ? !!config.productCount : !!config.duration;
 
   if (step === "congrats") {
     return (
@@ -131,7 +169,9 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
             <h1 className="text-2xl md:text-3xl font-black text-[var(--cream)]">
               {t(service.nameKey)}
             </h1>
-            <p className="text-sm text-[var(--gray)]">{t("config.title")}</p>
+            <p className="text-sm text-[var(--gray)]">
+              {isProductPhoto ? t("config.product-photo.title") : t("config.title")}
+            </p>
           </div>
         </div>
 
@@ -144,83 +184,152 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                 <Package size={16} className="text-[var(--lime)]" />
                 <span className="font-bold text-[var(--lime)] text-sm">{t("config.base")}</span>
               </div>
-              <p className="text-xs text-[var(--gray)]">{t("config.base.desc")}</p>
+              <p className="text-xs text-[var(--gray)]">
+                {isProductPhoto ? t("config.product-photo.base.desc") : t("config.base.desc")}
+              </p>
             </div>
 
-            {/* Duration */}
-            <DurationSelector
-              selected={config.duration}
-              onSelect={(d) => setConfig((prev) => ({ ...prev, duration: d }))}
-            />
-
-            {config.duration && (
+            {isProductPhoto ? (
               <>
-                {/* Scenario */}
+                {/* Product Count */}
                 <OptionCardGroup
-                  title={t("config.scenario")}
-                  icon={<FileText size={16} />}
-                  options={scenarioOptions}
-                  selected={config.scenario}
-                  onSelect={(s) => setConfig((prev) => ({ ...prev, scenario: s }))}
+                  title={t("config.productCount")}
+                  icon={<ShoppingBag size={16} />}
+                  options={productCountOptions}
+                  selected={config.productCount}
+                  onSelect={(pc) => setConfig((prev) => ({ ...prev, productCount: pc }))}
                 />
 
-                {/* Voice */}
-                <OptionCardGroup
-                  title={t("config.voice")}
-                  icon={<Mic size={16} />}
-                  options={voiceOptions}
-                  selected={config.voice}
-                  onSelect={(v) => setConfig((prev) => ({ ...prev, voice: v }))}
+                {config.productCount && (
+                  <>
+                    {/* Color Count - free number input */}
+                    <NumberInput
+                      title={t("config.colorCount")}
+                      subtitle={t("config.colorCount.desc")}
+                      icon={<Palette size={16} />}
+                      value={config.colorCount}
+                      onChange={(n) => setConfig((prev) => ({ ...prev, colorCount: n }))}
+                      unitPrice={colorUnitPrice}
+                      unitLabel={t("config.colorCount.unit")}
+                    />
+
+                    {/* Photo Visual Style */}
+                    <OptionCardGroup
+                      title={t("config.photoVisualStyle")}
+                      icon={<Camera size={16} />}
+                      options={photoVisualStyleOptions}
+                      selected={config.photoVisualStyle}
+                      onSelect={(s) => setConfig((prev) => ({ ...prev, photoVisualStyle: s }))}
+                    />
+
+                    {/* Background */}
+                    <OptionCardGroup
+                      title={t("config.background")}
+                      icon={<ImageIcon size={16} />}
+                      options={backgroundOptions}
+                      selected={config.background}
+                      onSelect={(bg) => setConfig((prev) => ({ ...prev, background: bg }))}
+                    />
+
+                    {/* Revision (reused) */}
+                    <OptionCardGroup
+                      title={t("config.revision")}
+                      icon={<RotateCcw size={16} />}
+                      options={revisionPackages.map((r) => ({
+                        ...r,
+                        description: `${r.count} revizyon hakki`,
+                      }))}
+                      selected={
+                        config.revision
+                          ? { ...config.revision, description: `${config.revision.count} revizyon hakki` }
+                          : null
+                      }
+                      onSelect={(r) => setConfig((prev) => ({
+                        ...prev,
+                        revision: revisionPackages.find((rp) => rp.id === r.id)!,
+                      }))}
+                    />
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                {/* Duration */}
+                <DurationSelector
+                  selected={config.duration}
+                  onSelect={(d) => setConfig((prev) => ({ ...prev, duration: d }))}
                 />
 
-                {/* Music */}
-                <OptionCardGroup
-                  title={t("config.music")}
-                  icon={<Music size={16} />}
-                  options={musicOptions}
-                  selected={config.music}
-                  onSelect={(m) => setConfig((prev) => ({ ...prev, music: m }))}
-                />
+                {config.duration && (
+                  <>
+                    {/* Scenario */}
+                    <OptionCardGroup
+                      title={t("config.scenario")}
+                      icon={<FileText size={16} />}
+                      options={scenarioOptions}
+                      selected={config.scenario}
+                      onSelect={(s) => setConfig((prev) => ({ ...prev, scenario: s }))}
+                    />
 
-                {/* Visual */}
-                <OptionCardGroup
-                  title={t("config.visual")}
-                  icon={<Eye size={16} />}
-                  options={visualStyleOptions}
-                  selected={config.visualStyle}
-                  onSelect={(vs) => setConfig((prev) => ({ ...prev, visualStyle: vs }))}
-                />
+                    {/* Voice */}
+                    <OptionCardGroup
+                      title={t("config.voice")}
+                      icon={<Mic size={16} />}
+                      options={voiceOptions}
+                      selected={config.voice}
+                      onSelect={(v) => setConfig((prev) => ({ ...prev, voice: v }))}
+                    />
 
-                {/* Post production (multi) */}
-                <OptionCardGroup
-                  title={t("config.postprod")}
-                  icon={<Wand2 size={16} />}
-                  options={postProductionOptions}
-                  selected={null}
-                  onSelect={() => {}}
-                  multiSelect
-                  selectedMulti={config.postProduction}
-                  onToggle={togglePostProd}
-                />
+                    {/* Music */}
+                    <OptionCardGroup
+                      title={t("config.music")}
+                      icon={<Music size={16} />}
+                      options={musicOptions}
+                      selected={config.music}
+                      onSelect={(m) => setConfig((prev) => ({ ...prev, music: m }))}
+                    />
 
-                {/* Revision */}
-                <OptionCardGroup
-                  title={t("config.revision")}
-                  icon={<RotateCcw size={16} />}
-                  options={revisionPackages.map((r) => ({
-                    ...r,
-                    description: `${r.count} revizyon hakki`,
-                  }))}
-                  selected={
-                    config.revision
-                      ? { ...config.revision, description: `${config.revision.count} revizyon hakki` }
-                      : null
-                  }
-                  onSelect={(r) => setConfig((prev) => ({
-                    ...prev,
-                    revision: revisionPackages.find((rp) => rp.id === r.id)!,
-                  }))}
-                />
+                    {/* Visual */}
+                    <OptionCardGroup
+                      title={t("config.visual")}
+                      icon={<Eye size={16} />}
+                      options={visualStyleOptions}
+                      selected={config.visualStyle}
+                      onSelect={(vs) => setConfig((prev) => ({ ...prev, visualStyle: vs }))}
+                    />
+
+                    {/* Post production (multi) */}
+                    <OptionCardGroup
+                      title={t("config.postprod")}
+                      icon={<Wand2 size={16} />}
+                      options={postProductionOptions}
+                      selected={null}
+                      onSelect={() => {}}
+                      multiSelect
+                      selectedMulti={config.postProduction}
+                      onToggle={togglePostProd}
+                    />
+
+                    {/* Revision */}
+                    <OptionCardGroup
+                      title={t("config.revision")}
+                      icon={<RotateCcw size={16} />}
+                      options={revisionPackages.map((r) => ({
+                        ...r,
+                        description: `${r.count} revizyon hakki`,
+                      }))}
+                      selected={
+                        config.revision
+                          ? { ...config.revision, description: `${config.revision.count} revizyon hakki` }
+                          : null
+                      }
+                      onSelect={(r) => setConfig((prev) => ({
+                        ...prev,
+                        revision: revisionPackages.find((rp) => rp.id === r.id)!,
+                      }))}
+                    />
+                  </>
+                )}
               </>
             )}
           </div>
@@ -240,44 +349,80 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                     <span className="text-[var(--gray)]">{t(service.nameKey)}</span>
                     <span className="text-[var(--cream)] font-bold">{formatPrice(basePrice)}</span>
                   </div>
-                  {config.duration && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-[var(--gray)]">{config.duration.seconds}sn</span>
-                      <span className="text-[var(--cream)] font-bold">
-                        {config.duration.basePrice === 0 ? "Dahil" : `+${formatPrice(config.duration.basePrice)}`}
-                      </span>
-                    </div>
+
+                  {isProductPhoto ? (
+                    <>
+                      {config.productCount && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--gray)]">{config.productCount.label}</span>
+                          <span className="text-[var(--cream)] font-bold">
+                            {config.productCount.price === 0 ? "Dahil" : `+${formatPrice(config.productCount.price)}`}
+                          </span>
+                        </div>
+                      )}
+                      {(config.colorCount ?? 0) > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--gray)]">{config.colorCount} renk</span>
+                          <span className="text-[var(--cream)] font-bold">+{formatPrice((config.colorCount ?? 0) * colorUnitPrice)}</span>
+                        </div>
+                      )}
+                      {config.photoVisualStyle && config.photoVisualStyle.price > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--gray)]">{config.photoVisualStyle.label}</span>
+                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.photoVisualStyle.price)}</span>
+                        </div>
+                      )}
+                      {config.background && config.background.price > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--gray)]">{config.background.label}</span>
+                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.background.price)}</span>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {config.duration && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--gray)]">{config.duration.seconds}sn</span>
+                          <span className="text-[var(--cream)] font-bold">
+                            {config.duration.basePrice === 0 ? "Dahil" : `+${formatPrice(config.duration.basePrice)}`}
+                          </span>
+                        </div>
+                      )}
+                      {config.scenario && config.scenario.price > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--gray)]">{config.scenario.label}</span>
+                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.scenario.price)}</span>
+                        </div>
+                      )}
+                      {config.voice && config.voice.price > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--gray)]">{config.voice.label}</span>
+                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.voice.price)}</span>
+                        </div>
+                      )}
+                      {config.music && config.music.price > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--gray)]">{config.music.label}</span>
+                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.music.price)}</span>
+                        </div>
+                      )}
+                      {config.visualStyle && config.visualStyle.price > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--gray)]">{config.visualStyle.label}</span>
+                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.visualStyle.price)}</span>
+                        </div>
+                      )}
+                      {config.postProduction.map((pp) => (
+                        <div key={pp.id} className="flex justify-between text-sm">
+                          <span className="text-[var(--gray)]">{pp.label}</span>
+                          <span className="text-[var(--cream)] font-bold">+{formatPrice(pp.price)}</span>
+                        </div>
+                      ))}
+                    </>
                   )}
-                  {config.scenario && config.scenario.price > 0 && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-[var(--gray)]">{config.scenario.label}</span>
-                      <span className="text-[var(--cream)] font-bold">+{formatPrice(config.scenario.price)}</span>
-                    </div>
-                  )}
-                  {config.voice && config.voice.price > 0 && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-[var(--gray)]">{config.voice.label}</span>
-                      <span className="text-[var(--cream)] font-bold">+{formatPrice(config.voice.price)}</span>
-                    </div>
-                  )}
-                  {config.music && config.music.price > 0 && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-[var(--gray)]">{config.music.label}</span>
-                      <span className="text-[var(--cream)] font-bold">+{formatPrice(config.music.price)}</span>
-                    </div>
-                  )}
-                  {config.visualStyle && config.visualStyle.price > 0 && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-[var(--gray)]">{config.visualStyle.label}</span>
-                      <span className="text-[var(--cream)] font-bold">+{formatPrice(config.visualStyle.price)}</span>
-                    </div>
-                  )}
-                  {config.postProduction.map((pp) => (
-                    <div key={pp.id} className="flex justify-between text-sm">
-                      <span className="text-[var(--gray)]">{pp.label}</span>
-                      <span className="text-[var(--cream)] font-bold">+{formatPrice(pp.price)}</span>
-                    </div>
-                  ))}
+
+                  {/* Revision (shared) */}
                   {config.revision && config.revision.price > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-[var(--gray)]">{config.revision.label}</span>
@@ -326,10 +471,10 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
 
                   {/* CTA */}
                   <button
-                    onClick={() => config.duration && setStep("checkout")}
-                    disabled={!config.duration}
+                    onClick={() => canProceed && setStep("checkout")}
+                    disabled={!canProceed}
                     className={`mt-4 w-full py-3 rounded-md border-3 text-sm font-black transition-all cursor-pointer ${
-                      config.duration
+                      canProceed
                         ? "bg-[var(--lime)] text-[var(--dark-blue)] border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] hover:shadow-[2px_2px_0px_var(--dark-blue)] hover:translate-x-[2px] hover:translate-y-[2px]"
                         : "bg-[var(--gray)]/20 text-[var(--gray)] border-[var(--gray)]/30 cursor-not-allowed"
                     }`}
