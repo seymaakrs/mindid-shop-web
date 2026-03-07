@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { collection, getDocs, doc, getDoc, orderBy, query, where, type QueryConstraint } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, orderBy, query } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import type {
   PortfolioItem,
@@ -23,15 +23,12 @@ function useFirestoreCollection<T>(
   useEffect(() => {
     const fetch = async () => {
       try {
-        const constraints: QueryConstraint[] = [orderBy(orderField, "asc")];
-        if (filterVisible) {
-          constraints.unshift(where("visible", "==", true));
-        }
-        const q = query(collection(db, `mindid_${collectionName}`), ...constraints);
+        const q = query(collection(db, `mindid_${collectionName}`), orderBy(orderField, "asc"));
         const snap = await getDocs(q);
-        setData(snap.docs.map((d) => ({ id: d.id, ...d.data() } as T)));
-      } catch {
-        // Firestore unavailable — keep empty array, fallback will be used
+        const all = snap.docs.map((d) => ({ id: d.id, ...d.data() } as T));
+        setData(filterVisible ? all.filter((item) => (item as Record<string, unknown>).visible === true) : all);
+      } catch (err) {
+        console.error(`Firestore read error (${collectionName}):`, err);
       }
       setLoading(false);
     };

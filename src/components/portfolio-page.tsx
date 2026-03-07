@@ -9,7 +9,7 @@ import { VideoPlayerModal } from "./video-player-modal";
 
 export const PortfolioPage = () => {
   const { t, lang } = useI18n();
-  const { data: portfolio } = usePortfolio();
+  const { data: portfolio, loading } = usePortfolio();
   const [selectedVideo, setSelectedVideo] = useState<{ url: string; title: string } | null>(null);
 
   const hasItems = portfolio.length > 0;
@@ -27,7 +27,24 @@ export const PortfolioPage = () => {
         </h1>
         <p className="text-[var(--gray)] mb-10">{t("portfolio.subtitle")}</p>
 
-        {hasItems ? (
+        {loading ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {Array.from({ length: 12 }, (_, i) => (
+              <div
+                key={i}
+                className="aspect-[9/16] rounded-md bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 overflow-hidden"
+              >
+                <div className="w-full h-full animate-pulse flex flex-col">
+                  <div className="flex-1 bg-[var(--electric-blue)]/10" />
+                  <div className="p-2 space-y-2">
+                    <div className="h-2 bg-[var(--electric-blue)]/15 rounded-full w-3/4 mx-auto" />
+                    <div className="h-2 bg-[var(--electric-blue)]/10 rounded-full w-1/2 mx-auto" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : hasItems ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {portfolio.map((item) => (
               <div
