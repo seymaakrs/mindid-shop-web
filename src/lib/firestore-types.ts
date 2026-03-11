@@ -103,3 +103,61 @@ export type AvatarSample = {
   order: number;
   visible: boolean;
 };
+
+// Order management types
+export type OrderStatus = "new" | "seen" | "in-progress" | "completed" | "cancelled";
+
+export type OrderCustomer = {
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+  sector: string;
+  targetAudience: string;
+  message: string;
+};
+
+export type OrderConfigOption = {
+  id: string;
+  label: string;
+  price: number;
+};
+
+export type OrderConfig = {
+  // Video fields
+  duration?: { id: string; label: string; seconds: number; basePrice: number };
+  scenario?: OrderConfigOption;
+  voice?: OrderConfigOption;
+  music?: OrderConfigOption;
+  visualStyle?: OrderConfigOption;
+  postProduction?: OrderConfigOption[];
+  revision?: { id: string; label: string; count: number; price: number };
+  // Product photo fields
+  productCount?: OrderConfigOption;
+  colorCount?: number;
+  photoVisualStyle?: OrderConfigOption;
+  background?: OrderConfigOption;
+};
+
+export type OrderPricing = {
+  basePrice: number;
+  totalAI: number;
+  totalTraditional: number;
+  savings: number;
+  currency: string;
+};
+
+export type OrderSubmission = {
+  id?: string;
+  customer: OrderCustomer;
+  serviceId: string;
+  serviceName: string;
+  config: OrderConfig;
+  pricing: OrderPricing;
+  fileUrls: string[];
+  status: OrderStatus;
+  adminNotes: string;
+  createdAt: Timestamp;
+  seenAt?: Timestamp;
+  updatedAt: Timestamp;
+};
