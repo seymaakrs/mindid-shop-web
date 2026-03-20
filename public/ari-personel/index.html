@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arı Personel Giyim | Premium İş ve Günlük Giyim - Bodrum</title>
+  <meta name="description" content="Arı Personel Giyim - Premium kumaş kalitesiyle iş giyim, personel kıyafetleri, polar, sweatshirt, tişört ve aksesuar. Bodrum, Muğla.">
+  <meta property="og:title" content="Arı Personel Giyim | Premium İş ve Günlük Giyim">
+  <meta property="og:description" content="Premium kumaş kalitesiyle iş giyim ve personel kıyafetleri. Geniş renk ve model seçenekleri.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aripersonelgiyim.com">
+  <meta property="og:image" content="https://aripersonelgiyim.com/logo.png">
+  <link rel="icon" type="image/png" href="https://aripersonelgiyim.com/wp-content/uploads/2024/04/cropped-logo-32x32.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bee: { 50:'#fffbeb', 100:'#fff3c4', 200:'#fce588', 300:'#FECC00', 400:'#febf06', 500:'#e5a800', 600:'#b88600', 700:'#8a6500', 800:'#5c4300', 900:'#2e2200' },
+            teal: { 400:'#2ecdc0', 500:'#02cd9d' },
+            brand: { dark:'#1a1a1a', gray:'#575757', light:'#f7f8f9', blue:'#0191ff' }
+          },
+          fontFamily: { display:['Inter','sans-serif'], body:['Inter','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;color:#1a1a1a;background:#f7f8f9;overflow-x:hidden}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-thumb{background:#FECC00;border-radius:3px}
+    .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
+    .hero-slide.active{opacity:1}
+    .product-card{transition:transform .3s ease,box-shadow .3s ease}
+    .product-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.1)}
+    .fav-btn.active svg{fill:#FECC00;stroke:#FECC00}
+    .filter-tag.active{background:#FECC00;color:#1a1a1a;border-color:#FECC00}
+    .cart-badge{animation:popIn .3s ease}
+    @keyframes popIn{0%{transform:scale(0)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    .fade-up{animation:fadeUp .6s ease forwards}
+    .modal-overlay{transition:opacity .3s ease}
+    .modal-content{transition:transform .3s ease,opacity .3s ease}
+    .announcement-bar{animation:slideDown .5s ease}
+    @keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+    .hamburger span{transition:all .3s ease}
+    .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(7px,-6px)}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:#FECC00;cursor:pointer;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+    input[type=range]{-webkit-appearance:none;height:4px;background:#e5e7eb;border-radius:2px;outline:none}
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar bg-brand-dark text-white text-center py-2 px-4 text-xs sm:text-sm font-medium tracking-wide relative z-50">
+    <span>🐝 <strong>3 AL 2 ÖDE</strong> Tişört &amp; Polo Yaka &nbsp;|&nbsp; 500 TL üzeri <strong>ücretsiz kargo</strong></span>
+    <button onclick="this.parentElement.remove()" class="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white" aria-label="Duyuruyu kapat">&times;</button>
+  </div>
+
+  <!-- Header -->
+  <header id="siteHeader" class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+
+        <!-- Mobile Menu Toggle -->
+        <button id="menuToggle" class="hamburger lg:hidden flex flex-col gap-1.5 p-2" aria-label="Menüyü aç/kapat">
+          <span class="block w-6 h-0.5 bg-brand-dark"></span>
+          <span class="block w-6 h-0.5 bg-brand-dark"></span>
+          <span class="block w-6 h-0.5 bg-brand-dark"></span>
+        </button>
+
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2 shrink-0">
+          <div class="w-10 h-10 bg-bee-300 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><circle cx="9" cy="10" r="1" fill="#1a1a1a"/><circle cx="15" cy="10" r="1" fill="#1a1a1a"/></svg>
+          </div>
+          <div class="hidden sm:block">
+            <span class="text-lg font-bold tracking-tight text-brand-dark">Arı Personel</span>
+            <span class="block text-[10px] text-brand-gray tracking-widest uppercase">Giyim &amp; Tekstil</span>
+          </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex items-center gap-8" aria-label="Ana menü">
+          <a href="#anasayfa" class="text-sm font-medium text-brand-dark hover:text-bee-400 transition">Ana Sayfa</a>
+          <div class="relative group">
+            <button class="text-sm font-medium text-brand-dark hover:text-bee-400 transition flex items-center gap-1">
+              Ürünler
+              <svg class="w-3 h-3 transition group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
+              <a href="#urunler" data-cat="tisort" class="block px-4 py-2.5 text-sm hover:bg-bee-50 hover:text-bee-600 transition">Tişörtler</a>
+              <a href="#urunler" data-cat="polo" class="block px-4 py-2.5 text-sm hover:bg-bee-50 hover:text-bee-600 transition">Polo Yaka</a>
+              <a href="#urunler" data-cat="sweatshirt" class="block px-4 py-2.5 text-sm hover:bg-bee-50 hover:text-bee-600 transition">Sweatshirt & Hoodie</a>
+              <a href="#urunler" data-cat="ceket" class="block px-4 py-2.5 text-sm hover:bg-bee-50 hover:text-bee-600 transition">Polar & Ceket</a>
+              <a href="#urunler" data-cat="pantolon" class="block px-4 py-2.5 text-sm hover:bg-bee-50 hover:text-bee-600 transition">Pantolon</a>
+              <a href="#urunler" data-cat="aksesuar" class="block px-4 py-2.5 text-sm hover:bg-bee-50 hover:text-bee-600 transition">Aksesuar</a>
+              <a href="#urunler" data-cat="onluk" class="block px-4 py-2.5 text-sm hover:bg-bee-50 hover:text-bee-600 transition">Önlük</a>
+            </div>
+          </div>
+          <a href="#hakkimizda" class="text-sm font-medium text-brand-dark hover:text-bee-400 transition">Hakkımızda</a>
+          <a href="#iletisim" class="text-sm font-medium text-brand-dark hover:text-bee-400 transition">İletişim</a>
+        </nav>
+
+        <!-- Right Actions -->
+        <div class="flex items-center gap-3 sm:gap-4">
+          <!-- Search -->
+          <button id="searchToggle" class="p-2 hover:bg-gray-100 rounded-full transition" aria-label="Ara">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </button>
+          <!-- Favorites -->
+          <button id="favToggle" class="p-2 hover:bg-gray-100 rounded-full transition relative" aria-label="Favoriler">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <span id="favBadge" class="hidden absolute -top-1 -right-1 w-5 h-5 bg-bee-300 text-brand-dark text-[10px] font-bold rounded-full flex items-center justify-center cart-badge">0</span>
+          </button>
+          <!-- Cart -->
+          <button id="cartToggle" class="p-2 hover:bg-gray-100 rounded-full transition relative" aria-label="Sepet">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            <span id="cartBadge" class="hidden absolute -top-1 -right-1 w-5 h-5 bg-bee-300 text-brand-dark text-[10px] font-bold rounded-full flex items-center justify-center cart-badge">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Bar (hidden by default) -->
+    <div id="searchBar" class="hidden border-t border-gray-100 bg-white py-3 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto relative">
+        <input id="searchInput" type="text" placeholder="Ürün ara... (ör: polo, hoodie, ceket)" class="w-full pl-10 pr-4 py-3 rounded-full border border-gray-200 focus:border-bee-300 focus:ring-2 focus:ring-bee-100 outline-none text-sm" aria-label="Ürün arama">
+        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-t border-gray-100 py-4 px-6">
+      <nav class="flex flex-col gap-3" aria-label="Mobil menü">
+        <a href="#anasayfa" class="text-base font-medium py-2 border-b border-gray-50">Ana Sayfa</a>
+        <a href="#urunler" class="text-base font-medium py-2 border-b border-gray-50">Tüm Ürünler</a>
+        <a href="#urunler" data-cat="tisort" class="text-sm pl-4 py-1.5 text-brand-gray">Tişörtler</a>
+        <a href="#urunler" data-cat="polo" class="text-sm pl-4 py-1.5 text-brand-gray">Polo Yaka</a>
+        <a href="#urunler" data-cat="sweatshirt" class="text-sm pl-4 py-1.5 text-brand-gray">Sweatshirt & Hoodie</a>
+        <a href="#urunler" data-cat="ceket" class="text-sm pl-4 py-1.5 text-brand-gray">Polar & Ceket</a>
+        <a href="#urunler" data-cat="pantolon" class="text-sm pl-4 py-1.5 text-brand-gray">Pantolon</a>
+        <a href="#urunler" data-cat="aksesuar" class="text-sm pl-4 py-1.5 text-brand-gray">Aksesuar</a>
+        <a href="#urunler" data-cat="onluk" class="text-sm pl-4 py-1.5 text-brand-gray">Önlük</a>
+        <a href="#hakkimizda" class="text-base font-medium py-2 border-b border-gray-50">Hakkımızda</a>
+        <a href="#iletisim" class="text-base font-medium py-2">İletişim</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Slider -->
+    <section id="anasayfa" class="relative w-full h-[70vh] sm:h-[80vh] lg:h-screen overflow-hidden bg-brand-dark">
+      <div id="heroSlider" class="relative w-full h-full">
+        <div class="hero-slide active" style="background:linear-gradient(135deg,#1a1a1a 0%,#2a2a2a 50%,#FECC00 100%)">
+          <div class="absolute inset-0 flex items-center">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+              <div class="max-w-xl fade-up">
+                <span class="inline-block px-3 py-1 bg-bee-300/20 text-bee-300 text-xs font-semibold tracking-widest uppercase rounded-full mb-4">Yeni Sezon 2026</span>
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black text-white leading-tight mb-4">Premium<br>Kumaş<br><span class="text-bee-300">Kalitesi</span></h1>
+                <p class="text-white/70 text-base sm:text-lg mb-8 max-w-md">Konfor ve şıklığı bir arada sunan, her mevsime uygun iş giyim koleksiyonu.</p>
+                <a href="#urunler" class="inline-flex items-center gap-2 bg-bee-300 text-brand-dark px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-bee-400 transition shadow-lg shadow-bee-300/30">
+                  Koleksiyonu Keşfet
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-slide" style="background:linear-gradient(135deg,#02cd9d 0%,#1a1a1a 60%,#1a1a1a 100%)">
+          <div class="absolute inset-0 flex items-center justify-end">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+              <div class="max-w-xl ml-auto text-right fade-up">
+                <span class="inline-block px-3 py-1 bg-teal-400/20 text-teal-400 text-xs font-semibold tracking-widest uppercase rounded-full mb-4">Kampanya</span>
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-4">3 Al<br><span class="text-teal-400">2 Öde</span></h2>
+                <p class="text-white/70 text-base sm:text-lg mb-8">Tişört ve polo yaka ürünlerinde geçerli kampanya.</p>
+                <a href="#urunler" class="inline-flex items-center gap-2 bg-teal-400 text-brand-dark px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-teal-500 transition">
+                  Fırsatları Gör
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-slide" style="background:linear-gradient(135deg,#0191ff 0%,#1a1a1a 60%)">
+          <div class="absolute inset-0 flex items-center">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+              <div class="max-w-xl fade-up">
+                <span class="inline-block px-3 py-1 bg-brand-blue/20 text-brand-blue text-xs font-semibold tracking-widest uppercase rounded-full mb-4">Kurumsal</span>
+                <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-4">Toplu<br>Sipariş<br><span class="text-brand-blue">Avantajı</span></h2>
+                <p class="text-white/70 text-base sm:text-lg mb-8">Firmanıza özel logo baskı ve nakış hizmeti.</p>
+                <a href="#iletisim" class="inline-flex items-center gap-2 bg-brand-blue text-white px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-blue-600 transition">
+                  Teklif Al
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Slider Dots -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+        <button class="slider-dot w-3 h-3 rounded-full bg-white/40 transition hover:bg-white" data-slide="0" aria-label="Slayt 1"></button>
+        <button class="slider-dot w-3 h-3 rounded-full bg-white/40 transition hover:bg-white" data-slide="1" aria-label="Slayt 2"></button>
+        <button class="slider-dot w-3 h-3 rounded-full bg-white/40 transition hover:bg-white" data-slide="2" aria-label="Slayt 3"></button>
+      </div>
+      <!-- Slider Arrows -->
+      <button id="prevSlide" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur rounded-full flex items-center justify-center text-white transition z-10" aria-label="Önceki slayt">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button id="nextSlide" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur rounded-full flex items-center justify-center text-white transition z-10" aria-label="Sonraki slayt">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="bg-white border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div class="flex flex-col items-center gap-2">
+          <svg class="w-7 h-7 text-bee-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/><rect x="1" y="1" width="22" height="22" rx="4"/></svg>
+          <span class="text-xs font-semibold text-brand-dark">Güvenli Ödeme</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <svg class="w-7 h-7 text-bee-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M16 16v1a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h1"/><rect x="9" y="3" width="13" height="13" rx="2"/><path d="M15 9l-4 4-2-2"/></svg>
+          <span class="text-xs font-semibold text-brand-dark">Güvenli Kargo</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <svg class="w-7 h-7 text-bee-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <span class="text-xs font-semibold text-brand-dark">Online Destek</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <svg class="w-7 h-7 text-bee-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span class="text-xs font-semibold text-brand-dark">Havale / EFT</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Banners (Kaft style) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a href="#urunler" data-cat="tisort" class="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-gradient-to-br from-bee-300 to-bee-500 cursor-pointer">
+          <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition"></div>
+          <div class="absolute bottom-6 left-6 text-white">
+            <h3 class="text-2xl font-bold">Tişörtler</h3>
+            <p class="text-sm text-white/80 mt-1">Sıfır yaka, V yaka, Bee Dry</p>
+          </div>
+          <svg class="absolute top-6 right-6 w-8 h-8 text-white/40 group-hover:text-white/70 transition" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+        </a>
+        <a href="#urunler" data-cat="sweatshirt" class="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-gradient-to-br from-teal-400 to-teal-500 cursor-pointer">
+          <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition"></div>
+          <div class="absolute bottom-6 left-6 text-white">
+            <h3 class="text-2xl font-bold">Sweatshirt & Hoodie</h3>
+            <p class="text-sm text-white/80 mt-1">3 İplik, 2 İplik penye</p>
+          </div>
+          <svg class="absolute top-6 right-6 w-8 h-8 text-white/40 group-hover:text-white/70 transition" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+        </a>
+        <a href="#urunler" data-cat="ceket" class="group relative overflow-hidden rounded-2xl aspect-[4/3] bg-gradient-to-br from-brand-blue to-blue-600 cursor-pointer sm:col-span-2 lg:col-span-1">
+          <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition"></div>
+          <div class="absolute bottom-6 left-6 text-white">
+            <h3 class="text-2xl font-bold">Polar & Ceket</h3>
+            <p class="text-sm text-white/80 mt-1">Softshell, polar, reflektif</p>
+          </div>
+          <svg class="absolute top-6 right-6 w-8 h-8 text-white/40 group-hover:text-white/70 transition" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="urunler" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <!-- Section Header -->
+      <div class="text-center mb-10">
+        <h2 class="text-3xl sm:text-4xl font-bold text-brand-dark">Ürünlerimiz</h2>
+        <p class="text-brand-gray mt-2">Geniş renk ve model seçenekleri</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="mb-8 space-y-4">
+        <!-- Category Filters -->
+        <div class="flex flex-wrap gap-2 justify-center" id="categoryFilters">
+          <button class="filter-tag active px-4 py-2 rounded-full border border-gray-200 text-sm font-medium transition hover:border-bee-300" data-cat="all">Tümü</button>
+          <button class="filter-tag px-4 py-2 rounded-full border border-gray-200 text-sm font-medium transition hover:border-bee-300" data-cat="tisort">Tişört</button>
+          <button class="filter-tag px-4 py-2 rounded-full border border-gray-200 text-sm font-medium transition hover:border-bee-300" data-cat="polo">Polo Yaka</button>
+          <button class="filter-tag px-4 py-2 rounded-full border border-gray-200 text-sm font-medium transition hover:border-bee-300" data-cat="sweatshirt">Sweatshirt</button>
+          <button class="filter-tag px-4 py-2 rounded-full border border-gray-200 text-sm font-medium transition hover:border-bee-300" data-cat="ceket">Polar/Ceket</button>
+          <button class="filter-tag px-4 py-2 rounded-full border border-gray-200 text-sm font-medium transition hover:border-bee-300" data-cat="pantolon">Pantolon</button>
+          <button class="filter-tag px-4 py-2 rounded-full border border-gray-200 text-sm font-medium transition hover:border-bee-300" data-cat="aksesuar">Aksesuar</button>
+          <button class="filter-tag px-4 py-2 rounded-full border border-gray-200 text-sm font-medium transition hover:border-bee-300" data-cat="onluk">Önlük</button>
+        </div>
+        <!-- Price Range -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div class="flex items-center gap-3 bg-white rounded-full px-5 py-2.5 border border-gray-200 shadow-sm">
+            <label class="text-xs font-medium text-brand-gray whitespace-nowrap">Fiyat:</label>
+            <input id="priceMin" type="number" placeholder="Min" min="0" class="w-20 text-sm outline-none bg-transparent" aria-label="Minimum fiyat">
+            <span class="text-gray-300">—</span>
+            <input id="priceMax" type="number" placeholder="Max" min="0" class="w-20 text-sm outline-none bg-transparent" aria-label="Maksimum fiyat">
+            <span class="text-xs text-brand-gray">₺</span>
+            <button id="priceFilterBtn" class="bg-bee-300 text-brand-dark px-3 py-1 rounded-full text-xs font-semibold hover:bg-bee-400 transition" aria-label="Fiyat filtrele">Filtrele</button>
+          </div>
+          <button id="clearFilters" class="text-xs text-brand-gray hover:text-bee-500 underline transition">Filtreleri Temizle</button>
+        </div>
+      </div>
+
+      <!-- Product Grid -->
+      <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        <!-- Products injected by JS -->
+      </div>
+
+      <!-- No Results -->
+      <div id="noResults" class="hidden text-center py-16">
+        <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M8 11h6"/></svg>
+        <p class="text-brand-gray text-lg">Aramanıza uygun ürün bulunamadı.</p>
+        <button onclick="clearAllFilters()" class="mt-3 text-bee-500 font-medium text-sm hover:underline">Filtreleri temizle</button>
+      </div>
+
+      <!-- Load More -->
+      <div id="loadMoreWrap" class="text-center mt-10">
+        <button id="loadMoreBtn" class="px-8 py-3 border-2 border-brand-dark text-brand-dark rounded-full font-semibold text-sm hover:bg-brand-dark hover:text-white transition">
+          Daha Fazla Göster
+        </button>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="hakkimizda" class="bg-brand-dark text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span class="inline-block px-3 py-1 bg-bee-300/20 text-bee-300 text-xs font-semibold tracking-widest uppercase rounded-full mb-4">Hakkımızda</span>
+            <h2 class="text-3xl sm:text-4xl font-bold mb-6">Arı Personel Giyim<br><span class="text-bee-300">Bee Tekstil</span></h2>
+            <p class="text-white/70 leading-relaxed mb-6">Arı Personel Giyim, yüksek kaliteli kumaşları modern tasarımla buluşturarak her sezon vazgeçilmez ürünler sunar. Konfor ve şıklığı bir arada tutarak günlük yaşam, spor ve iş ortamları için fonksiyonel, şık kıyafetler üretmektedir.</p>
+            <p class="text-white/70 leading-relaxed mb-8">Bodrum merkezli firmamız, geniş renk ve model seçenekleriyle kurumsal ve bireysel müşterilerine toplu sipariş avantajı, logo baskı ve nakış hizmeti sunmaktadır.</p>
+            <div class="flex flex-wrap gap-6">
+              <div>
+                <div class="text-3xl font-bold text-bee-300">500+</div>
+                <div class="text-xs text-white/50 mt-1">Mutlu Müşteri</div>
+              </div>
+              <div>
+                <div class="text-3xl font-bold text-bee-300">40+</div>
+                <div class="text-xs text-white/50 mt-1">Ürün Çeşidi</div>
+              </div>
+              <div>
+                <div class="text-3xl font-bold text-bee-300">20+</div>
+                <div class="text-xs text-white/50 mt-1">Renk Seçeneği</div>
+              </div>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="aspect-square rounded-3xl bg-gradient-to-br from-bee-300/20 to-teal-400/20 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-32 h-32 bg-bee-300 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg class="w-16 h-16 text-brand-dark" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+                </div>
+                <p class="text-2xl font-bold text-white">Bee Tekstil</p>
+                <p class="text-white/50 text-sm mt-1">Bodrum, Muğla</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="bg-bee-300 py-16">
+      <div class="max-w-2xl mx-auto px-4 text-center">
+        <h2 class="text-2xl sm:text-3xl font-bold text-brand-dark mb-3">Kampanyalardan Haberdar Ol</h2>
+        <p class="text-brand-dark/70 mb-8">Yeni ürünler ve özel indirimler için bültenimize abone olun.</p>
+        <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="event.preventDefault();alert('Bülten kaydınız alınmıştır!')">
+          <input type="email" placeholder="E-posta adresiniz" required class="flex-1 px-5 py-3 rounded-full border-2 border-brand-dark/10 bg-white text-sm outline-none focus:border-brand-dark transition" aria-label="E-posta">
+          <button type="submit" class="px-8 py-3 bg-brand-dark text-white rounded-full font-semibold text-sm hover:bg-gray-800 transition">Abone Ol</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="iletisim" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="grid lg:grid-cols-2 gap-12">
+        <div>
+          <span class="inline-block px-3 py-1 bg-bee-50 text-bee-600 text-xs font-semibold tracking-widest uppercase rounded-full mb-4">İletişim</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-brand-dark mb-8">Bize Ulaşın</h2>
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-bee-50 rounded-xl flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-bee-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-brand-dark">Adres</h3>
+                <p class="text-brand-gray text-sm mt-1">Çırkan Mh. Kurtuluş Sk. No:11<br>Muğla - Bodrum, Türkiye</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-bee-50 rounded-xl flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-bee-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-brand-dark">Telefon</h3>
+                <a href="tel:+905356137959" class="text-brand-gray text-sm mt-1 hover:text-bee-500 transition">+90 535 613 79 59</a>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-bee-50 rounded-xl flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-bee-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-brand-dark">E-posta</h3>
+                <a href="mailto:info@aripersonelgiyim.com" class="text-brand-gray text-sm mt-1 hover:text-bee-500 transition">info@aripersonelgiyim.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <form class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-100" onsubmit="event.preventDefault();alert('Mesajınız gönderildi!')">
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label class="block text-xs font-medium text-brand-gray mb-1.5">Ad Soyad</label>
+                <input type="text" required class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm outline-none focus:border-bee-300 focus:ring-2 focus:ring-bee-100 transition" aria-label="Ad Soyad">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-brand-gray mb-1.5">Telefon</label>
+                <input type="tel" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm outline-none focus:border-bee-300 focus:ring-2 focus:ring-bee-100 transition" aria-label="Telefon">
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="block text-xs font-medium text-brand-gray mb-1.5">E-posta</label>
+              <input type="email" required class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm outline-none focus:border-bee-300 focus:ring-2 focus:ring-bee-100 transition" aria-label="E-posta">
+            </div>
+            <div class="mb-4">
+              <label class="block text-xs font-medium text-brand-gray mb-1.5">Konu</label>
+              <select class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm outline-none focus:border-bee-300 focus:ring-2 focus:ring-bee-100 transition bg-white" aria-label="Konu">
+                <option>Toplu Sipariş</option>
+                <option>Baskı / Nakış</option>
+                <option>Ürün Bilgisi</option>
+                <option>İade / Değişim</option>
+                <option>Diğer</option>
+              </select>
+            </div>
+            <div class="mb-6">
+              <label class="block text-xs font-medium text-brand-gray mb-1.5">Mesajınız</label>
+              <textarea rows="4" required class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm outline-none focus:border-bee-300 focus:ring-2 focus:ring-bee-100 transition resize-none" aria-label="Mesaj"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-bee-300 text-brand-dark py-3 rounded-full font-semibold text-sm hover:bg-bee-400 transition">Mesaj Gönder</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-brand-dark text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-10 h-10 bg-bee-300 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><circle cx="9" cy="10" r="1" fill="#1a1a1a"/><circle cx="15" cy="10" r="1" fill="#1a1a1a"/></svg>
+            </div>
+            <div>
+              <span class="font-bold">Arı Personel</span>
+              <span class="block text-[10px] text-white/50 tracking-widest uppercase">Giyim &amp; Tekstil</span>
+            </div>
+          </div>
+          <p class="text-white/50 text-sm leading-relaxed">Premium kumaş kalitesiyle iş giyim ve personel kıyafetleri.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-sm mb-4 text-white/80 uppercase tracking-wider">Kategoriler</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#urunler" class="text-sm text-white/50 hover:text-bee-300 transition">Tişörtler</a></li>
+            <li><a href="#urunler" class="text-sm text-white/50 hover:text-bee-300 transition">Polo Yaka</a></li>
+            <li><a href="#urunler" class="text-sm text-white/50 hover:text-bee-300 transition">Sweatshirt</a></li>
+            <li><a href="#urunler" class="text-sm text-white/50 hover:text-bee-300 transition">Polar & Ceket</a></li>
+            <li><a href="#urunler" class="text-sm text-white/50 hover:text-bee-300 transition">Pantolon</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-sm mb-4 text-white/80 uppercase tracking-wider">Bilgi</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#hakkimizda" class="text-sm text-white/50 hover:text-bee-300 transition">Hakkımızda</a></li>
+            <li><a href="#iletisim" class="text-sm text-white/50 hover:text-bee-300 transition">İletişim</a></li>
+            <li><a href="#" class="text-sm text-white/50 hover:text-bee-300 transition">Beden Tablosu</a></li>
+            <li><a href="#" class="text-sm text-white/50 hover:text-bee-300 transition">Kargo Bilgisi</a></li>
+            <li><a href="#" class="text-sm text-white/50 hover:text-bee-300 transition">İade & Değişim</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-sm mb-4 text-white/80 uppercase tracking-wider">İletişim</h4>
+          <ul class="space-y-2.5">
+            <li class="text-sm text-white/50">Çırkan Mh. Kurtuluş Sk. No:11</li>
+            <li class="text-sm text-white/50">Muğla - Bodrum</li>
+            <li><a href="tel:+905356137959" class="text-sm text-white/50 hover:text-bee-300 transition">+90 535 613 79 59</a></li>
+            <li><a href="mailto:info@aripersonelgiyim.com" class="text-sm text-white/50 hover:text-bee-300 transition">info@aripersonelgiyim.com</a></li>
+          </ul>
+          <!-- WhatsApp -->
+          <a href="https://wa.me/905356137959" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-4 bg-green-500 text-white px-4 py-2 rounded-full text-xs font-medium hover:bg-green-600 transition" aria-label="WhatsApp ile iletişim">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+      <!-- Payment & Copyright -->
+      <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-white/40">&copy; 2026 Arı Personel Giyim – Bee Tekstil. Tüm hakları saklıdır.</p>
+        <div class="flex items-center gap-3">
+          <span class="text-[10px] text-white/30 uppercase tracking-wider">Ödeme:</span>
+          <div class="flex gap-2">
+            <div class="w-10 h-6 bg-white/10 rounded flex items-center justify-center text-[8px] text-white/60 font-bold">VISA</div>
+            <div class="w-10 h-6 bg-white/10 rounded flex items-center justify-center text-[8px] text-white/60 font-bold">MC</div>
+            <div class="w-10 h-6 bg-white/10 rounded flex items-center justify-center text-[8px] text-white/60 font-bold">EFT</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div id="cartModal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-label="Sepet">
+    <div class="modal-overlay absolute inset-0 bg-black/50" id="cartOverlay"></div>
+    <div class="modal-content absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col">
+      <div class="flex items-center justify-between p-6 border-b border-gray-100">
+        <h2 class="text-lg font-bold">Sepetim</h2>
+        <button id="cartClose" class="p-2 hover:bg-gray-100 rounded-full transition" aria-label="Sepeti kapat">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div id="cartItems" class="flex-1 overflow-y-auto p-6">
+        <div id="cartEmpty" class="text-center py-16">
+          <svg class="w-16 h-16 mx-auto text-gray-200 mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <p class="text-brand-gray">Sepetiniz boş</p>
+        </div>
+      </div>
+      <div id="cartFooter" class="hidden border-t border-gray-100 p-6">
+        <div class="flex items-center justify-between mb-4">
+          <span class="font-semibold">Toplam</span>
+          <span id="cartTotal" class="text-xl font-bold text-brand-dark">₺0</span>
+        </div>
+        <button class="w-full bg-bee-300 text-brand-dark py-3.5 rounded-full font-semibold hover:bg-bee-400 transition" onclick="alert('Ödeme sayfasına yönlendiriliyorsunuz...')">
+          Siparişi Tamamla
+        </button>
+        <p class="text-center text-[10px] text-brand-gray mt-3">500 TL üzeri ücretsiz kargo</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Favorites Modal -->
+  <div id="favModal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-label="Favoriler">
+    <div class="modal-overlay absolute inset-0 bg-black/50" id="favOverlay"></div>
+    <div class="modal-content absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col">
+      <div class="flex items-center justify-between p-6 border-b border-gray-100">
+        <h2 class="text-lg font-bold">Favorilerim</h2>
+        <button id="favClose" class="p-2 hover:bg-gray-100 rounded-full transition" aria-label="Favorileri kapat">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div id="favItems" class="flex-1 overflow-y-auto p-6">
+        <div id="favEmpty" class="text-center py-16">
+          <svg class="w-16 h-16 mx-auto text-gray-200 mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <p class="text-brand-gray">Henüz favori ürün eklemediniz</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Quick View Modal -->
+  <div id="productModal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-label="Ürün detayı">
+    <div class="modal-overlay absolute inset-0 bg-black/50" id="productOverlay"></div>
+    <div class="modal-content absolute inset-4 sm:inset-8 lg:inset-16 bg-white rounded-2xl shadow-2xl overflow-y-auto">
+      <button id="productClose" class="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition z-10" aria-label="Kapat">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div id="productModalContent" class="grid md:grid-cols-2 gap-8 p-6 sm:p-8">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top -->
+  <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 bg-bee-300 text-brand-dark rounded-full shadow-lg hidden items-center justify-center hover:bg-bee-400 transition z-30" aria-label="Yukarı çık">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+<script>
+// ===== PRODUCT DATA =====
+const products = [
+  {id:1,name:"Bee Dry Sıfır Yaka Tişört",cat:"tisort",price:280,oldPrice:350,colors:["Siyah","Beyaz","Lacivert","Kırmızı","Mavi"],sizes:["S","M","L","XL","2XL"],img:"https://placehold.co/600x600/1a1a1a/FECC00?text=Bee+Dry+T-Shirt",badge:"Yeni"},
+  {id:2,name:"Penye Kalite Polo Yaka",cat:"polo",price:320,colors:["Kırmızı","Beyaz","Lacivert","Siyah","Yeşil"],sizes:["S","M","L","XL","2XL"],img:"https://placehold.co/600x600/cc0000/ffffff?text=Polo+Yaka",badge:"Çok Satan"},
+  {id:3,name:"3 İplik Penye Hoodie",cat:"sweatshirt",price:520,oldPrice:650,colors:["Kırmızı","Siyah","Gri","Lacivert"],sizes:["S","M","L","XL","2XL"],img:"https://placehold.co/600x600/333333/FECC00?text=Hoodie",badge:"Kampanya"},
+  {id:4,name:"2 İplik Penye Sweatshirt",cat:"sweatshirt",price:450,colors:["Gri","Siyah","Lacivert","Bordo"],sizes:["S","M","L","XL"],img:"https://placehold.co/600x600/555555/ffffff?text=Sweatshirt"},
+  {id:5,name:"Fleto Cep Polar Ceket",cat:"ceket",price:680,colors:["Siyah","Lacivert","Haki"],sizes:["S","M","L","XL","2XL"],img:"https://placehold.co/600x600/222222/02cd9d?text=Polar+Ceket",badge:"Yeni"},
+  {id:6,name:"Softshell Ceket",cat:"ceket",price:750,oldPrice:900,colors:["Siyah","Lacivert"],sizes:["M","L","XL","2XL"],img:"https://placehold.co/600x600/0191ff/ffffff?text=Softshell"},
+  {id:7,name:"Penye Polo Yaka Çizgili",cat:"polo",price:340,colors:["Gri","Lacivert","Beyaz"],sizes:["S","M","L","XL"],img:"https://placehold.co/600x600/888888/ffffff?text=Çizgili+Polo"},
+  {id:8,name:"Penye Kalite V Yaka",cat:"tisort",price:260,colors:["Beyaz","Siyah","Gri","Kırmızı"],sizes:["S","M","L","XL","2XL"],img:"https://placehold.co/600x600/f5f5f5/1a1a1a?text=V+Yaka"},
+  {id:9,name:"Pamuk Gabardin Pantolon",cat:"pantolon",price:480,colors:["Gri","Siyah","Lacivert","Bej"],sizes:["S","M","L","XL","2XL"],img:"https://placehold.co/600x600/666666/ffffff?text=Gabardin+Pantolon"},
+  {id:10,name:"Likralı Kot Pantolon",cat:"pantolon",price:520,colors:["Koyu Mavi","Siyah"],sizes:["28","30","32","34","36"],img:"https://placehold.co/600x600/1a3a5c/ffffff?text=Kot+Pantolon"},
+  {id:11,name:"Pamuklu Şapka",cat:"aksesuar",price:120,colors:["Beyaz","Siyah","Lacivert","Kırmızı","Sarı"],sizes:["Tek Beden"],img:"https://placehold.co/600x600/FECC00/1a1a1a?text=Şapka"},
+  {id:12,name:"Polar Bere – Boyunluk",cat:"aksesuar",price:150,colors:["Kırmızı","Siyah","Gri","Lacivert"],sizes:["Tek Beden"],img:"https://placehold.co/600x600/cc0000/ffffff?text=Bere+Boyunluk"},
+  {id:13,name:"Aşçı Önlüğü",cat:"onluk",price:220,colors:["Beyaz","Siyah"],sizes:["Tek Beden"],img:"https://placehold.co/600x600/f5f5f5/333333?text=Aşçı+Önlüğü"},
+  {id:14,name:"Belden Önlük",cat:"onluk",price:180,colors:["Beyaz","Siyah","Haki"],sizes:["Tek Beden"],img:"https://placehold.co/600x600/556b2f/ffffff?text=Belden+Önlük"},
+  {id:15,name:"Laboratuvar Önlüğü",cat:"onluk",price:350,colors:["Beyaz"],sizes:["S","M","L","XL"],img:"https://placehold.co/600x600/f0f0f0/333333?text=Lab+Önlüğü"},
+  {id:16,name:"Gabardin Yelek Çift Renk",cat:"ceket",price:420,colors:["Siyah-Gri","Lacivert-Kırmızı"],sizes:["S","M","L","XL","2XL"],img:"https://placehold.co/600x600/444444/FECC00?text=Yelek"},
+  {id:17,name:"Reflektif İş Yeleği",cat:"ceket",price:380,colors:["Sarı","Turuncu"],sizes:["M","L","XL","2XL"],img:"https://placehold.co/600x600/ff6b00/ffffff?text=Reflektif+Yelek",badge:"İş Güvenliği"},
+  {id:18,name:"Sıfır Yaka Tişört Open-End",cat:"tisort",price:195,colors:["Beyaz","Siyah","Gri","Lacivert","Kırmızı","Mavi","Sarı","Yeşil"],sizes:["S","M","L","XL","2XL"],img:"https://placehold.co/600x600/02cd9d/ffffff?text=Open+End+Tişört"},
+  {id:19,name:"Penye Polo Yaka Uzun Kol",cat:"polo",price:380,colors:["Siyah","Lacivert","Bordo"],sizes:["S","M","L","XL"],img:"https://placehold.co/600x600/800020/ffffff?text=Uzun+Kol+Polo",badge:"Yeni"},
+  {id:20,name:"Polar Fermuarlı Sweatshirt",cat:"sweatshirt",price:490,colors:["Gri","Siyah","Lacivert"],sizes:["S","M","L","XL","2XL"],img:"https://placehold.co/600x600/2a2a2a/02cd9d?text=Fermuarlı+Polar"}
+];
+
+// ===== STATE =====
+let cart = [];
+let favorites = [];
+let activeCategory = 'all';
+let visibleCount = 12;
+let priceMin = 0;
+let priceMax = Infinity;
+let searchQuery = '';
+
+// ===== DOM REFS =====
+const $=s=>document.querySelector(s);
+const $$=s=>document.querySelectorAll(s);
+const grid=$('#productGrid');
+const cartBadge=$('#cartBadge');
+const favBadge=$('#favBadge');
+
+// ===== RENDER PRODUCTS =====
+function getFilteredProducts(){
+  return products.filter(p=>{
+    const catMatch = activeCategory==='all' || p.cat===activeCategory;
+    const priceMatch = p.price>=priceMin && p.price<=priceMax;
+    const searchMatch = !searchQuery || p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.cat.toLowerCase().includes(searchQuery.toLowerCase());
+    return catMatch && priceMatch && searchMatch;
+  });
+}
+
+function renderProducts(){
+  const filtered = getFilteredProducts();
+  const visible = filtered.slice(0, visibleCount);
+  grid.innerHTML = visible.map(p=>`
+    <div class="product-card bg-white rounded-2xl overflow-hidden border border-gray-100 group" data-id="${p.id}" data-cat="${p.cat}">
+      <div class="relative aspect-square overflow-hidden bg-gray-50 cursor-pointer" onclick="openProductModal(${p.id})">
+        <img src="${p.img}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        ${p.badge?`<span class="absolute top-3 left-3 px-2.5 py-1 bg-bee-300 text-brand-dark text-[10px] font-bold rounded-full uppercase tracking-wide">${p.badge}</span>`:''}
+        <button class="fav-btn absolute top-3 right-3 w-9 h-9 bg-white/80 backdrop-blur rounded-full flex items-center justify-center hover:bg-white transition ${favorites.includes(p.id)?'active':''}" onclick="event.stopPropagation();toggleFav(${p.id})" aria-label="Favorilere ekle">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="p-4">
+        <h3 class="text-sm font-semibold text-brand-dark leading-snug mb-1 line-clamp-2">${p.name}</h3>
+        <div class="flex items-center gap-1.5 mb-1">
+          ${p.colors.slice(0,4).map(c=>`<span class="w-3 h-3 rounded-full border border-gray-200" style="background:${colorMap(c)}" title="${c}"></span>`).join('')}
+          ${p.colors.length>4?`<span class="text-[10px] text-brand-gray">+${p.colors.length-4}</span>`:''}
+        </div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-lg font-bold text-brand-dark">${p.price} ₺</span>
+          ${p.oldPrice?`<span class="text-sm text-brand-gray line-through">${p.oldPrice} ₺</span>`:''}
+        </div>
+        <button class="w-full py-2.5 rounded-full text-sm font-semibold transition border-2 border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-white" onclick="addToCart(${p.id})">
+          Sepete Ekle
+        </button>
+      </div>
+    </div>
+  `).join('');
+
+  $('#noResults').classList.toggle('hidden', visible.length>0);
+  $('#loadMoreWrap').classList.toggle('hidden', filtered.length<=visibleCount);
+}
+
+function colorMap(name){
+  const m={Siyah:'#1a1a1a',Beyaz:'#f5f5f5',Lacivert:'#1a3a6a',Kırmızı:'#cc0000',Mavi:'#2196f3',Gri:'#999',Yeşil:'#2e7d32',Bordo:'#800020',Haki:'#556b2f',Bej:'#d4b896',Sarı:'#FECC00',Turuncu:'#ff6b00','Koyu Mavi':'#1a3a5c','Siyah-Gri':'linear-gradient(135deg,#1a1a1a 50%,#999 50%)','Lacivert-Kırmızı':'linear-gradient(135deg,#1a3a6a 50%,#cc0000 50%)'};
+  return m[name]||'#ccc';
+}
+
+// ===== CART =====
+function addToCart(id){
+  const existing = cart.find(c=>c.id===id);
+  if(existing){existing.qty++}else{cart.push({id,qty:1,size:products.find(p=>p.id===id).sizes[0]})}
+  updateCartUI();
+  openCart();
+}
+function removeFromCart(id){
+  cart=cart.filter(c=>c.id!==id);
+  updateCartUI();
+  renderCartItems();
+}
+function changeQty(id,delta){
+  const item=cart.find(c=>c.id===id);
+  if(!item)return;
+  item.qty+=delta;
+  if(item.qty<1)return removeFromCart(id);
+  updateCartUI();
+  renderCartItems();
+}
+function updateCartUI(){
+  const count=cart.reduce((s,c)=>s+c.qty,0);
+  cartBadge.textContent=count;
+  cartBadge.classList.toggle('hidden',count===0);
+  const total=cart.reduce((s,c)=>{const p=products.find(pr=>pr.id===c.id);return s+(p?p.price*c.qty:0)},0);
+  $('#cartTotal').textContent=`₺${total.toLocaleString('tr-TR')}`;
+  $('#cartFooter').classList.toggle('hidden',cart.length===0);
+  $('#cartEmpty').classList.toggle('hidden',cart.length>0);
+}
+function renderCartItems(){
+  const container=$('#cartItems');
+  if(cart.length===0){container.innerHTML=`<div id="cartEmpty" class="text-center py-16"><svg class="w-16 h-16 mx-auto text-gray-200 mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p class="text-brand-gray">Sepetiniz boş</p></div>`;return;}
+  container.innerHTML=cart.map(c=>{
+    const p=products.find(pr=>pr.id===c.id);
+    if(!p)return'';
+    return`<div class="flex gap-4 py-4 border-b border-gray-50">
+      <img src="${p.img}" alt="${p.name}" class="w-20 h-20 rounded-xl object-cover" loading="lazy">
+      <div class="flex-1 min-w-0">
+        <h4 class="text-sm font-semibold text-brand-dark truncate">${p.name}</h4>
+        <p class="text-xs text-brand-gray mt-0.5">Beden: ${c.size}</p>
+        <div class="flex items-center gap-3 mt-2">
+          <div class="flex items-center border border-gray-200 rounded-full">
+            <button onclick="changeQty(${p.id},-1)" class="w-8 h-8 flex items-center justify-center text-sm hover:bg-gray-50 rounded-l-full" aria-label="Azalt">−</button>
+            <span class="w-8 text-center text-sm font-medium">${c.qty}</span>
+            <button onclick="changeQty(${p.id},1)" class="w-8 h-8 flex items-center justify-center text-sm hover:bg-gray-50 rounded-r-full" aria-label="Artır">+</button>
+          </div>
+          <span class="text-sm font-bold ml-auto">${(p.price*c.qty).toLocaleString('tr-TR')} ₺</span>
+        </div>
+      </div>
+      <button onclick="removeFromCart(${p.id})" class="self-start p-1 text-gray-300 hover:text-red-500 transition" aria-label="Kaldır">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>`;
+  }).join('');
+}
+
+// ===== FAVORITES =====
+function toggleFav(id){
+  const idx=favorites.indexOf(id);
+  if(idx>-1){favorites.splice(idx,1)}else{favorites.push(id)}
+  favBadge.textContent=favorites.length;
+  favBadge.classList.toggle('hidden',favorites.length===0);
+  renderProducts();
+  renderFavItems();
+}
+function renderFavItems(){
+  const container=$('#favItems');
+  if(favorites.length===0){container.innerHTML=`<div id="favEmpty" class="text-center py-16"><svg class="w-16 h-16 mx-auto text-gray-200 mb-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><p class="text-brand-gray">Henüz favori ürün eklemediniz</p></div>`;return;}
+  container.innerHTML=favorites.map(fid=>{
+    const p=products.find(pr=>pr.id===fid);
+    if(!p)return'';
+    return`<div class="flex gap-4 py-4 border-b border-gray-50">
+      <img src="${p.img}" alt="${p.name}" class="w-20 h-20 rounded-xl object-cover" loading="lazy">
+      <div class="flex-1">
+        <h4 class="text-sm font-semibold text-brand-dark">${p.name}</h4>
+        <p class="text-sm font-bold mt-1">${p.price} ₺</p>
+        <button onclick="addToCart(${p.id})" class="mt-2 text-xs bg-bee-300 text-brand-dark px-4 py-1.5 rounded-full font-semibold hover:bg-bee-400 transition">Sepete Ekle</button>
+      </div>
+      <button onclick="toggleFav(${p.id})" class="self-start p-1 text-gray-300 hover:text-red-500 transition" aria-label="Favoriden kaldır">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>`;
+  }).join('');
+}
+
+// ===== PRODUCT MODAL =====
+function openProductModal(id){
+  const p=products.find(pr=>pr.id===id);
+  if(!p)return;
+  const content=$('#productModalContent');
+  content.innerHTML=`
+    <div class="aspect-square rounded-2xl overflow-hidden bg-gray-50">
+      <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover" loading="lazy">
+    </div>
+    <div class="flex flex-col justify-center">
+      ${p.badge?`<span class="inline-block w-fit px-3 py-1 bg-bee-50 text-bee-600 text-xs font-semibold rounded-full mb-3">${p.badge}</span>`:''}
+      <h2 class="text-2xl sm:text-3xl font-bold text-brand-dark mb-2">${p.name}</h2>
+      <div class="flex items-center gap-3 mb-6">
+        <span class="text-2xl font-bold text-brand-dark">${p.price} ₺</span>
+        ${p.oldPrice?`<span class="text-lg text-brand-gray line-through">${p.oldPrice} ₺</span><span class="text-sm bg-red-50 text-red-600 px-2 py-0.5 rounded-full font-medium">%${Math.round((1-p.price/p.oldPrice)*100)} İndirim</span>`:''}
+      </div>
+      <div class="mb-4">
+        <span class="text-sm font-medium text-brand-dark block mb-2">Renk</span>
+        <div class="flex flex-wrap gap-2">${p.colors.map(c=>`<span class="w-8 h-8 rounded-full border-2 border-gray-200 hover:border-bee-300 cursor-pointer transition" style="background:${colorMap(c)}" title="${c}"></span>`).join('')}</div>
+      </div>
+      <div class="mb-6">
+        <span class="text-sm font-medium text-brand-dark block mb-2">Beden</span>
+        <div class="flex flex-wrap gap-2">${p.sizes.map(s=>`<button class="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium hover:border-bee-300 hover:bg-bee-50 transition">${s}</button>`).join('')}</div>
+      </div>
+      <div class="flex gap-3">
+        <button onclick="addToCart(${p.id})" class="flex-1 bg-bee-300 text-brand-dark py-3.5 rounded-full font-semibold hover:bg-bee-400 transition">Sepete Ekle</button>
+        <button onclick="toggleFav(${p.id})" class="w-14 h-14 border-2 border-gray-200 rounded-full flex items-center justify-center hover:border-bee-300 transition ${favorites.includes(p.id)?'bg-bee-50 border-bee-300':''}" aria-label="Favorilere ekle">
+          <svg class="w-5 h-5" fill="${favorites.includes(p.id)?'#FECC00':'none'}" stroke="${favorites.includes(p.id)?'#FECC00':'currentColor'}" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </button>
+      </div>
+    </div>`;
+  openModal('productModal');
+}
+
+// ===== MODALS =====
+function openModal(id){document.getElementById(id).classList.remove('hidden');document.body.style.overflow='hidden';}
+function closeModal(id){document.getElementById(id).classList.add('hidden');document.body.style.overflow='';}
+function openCart(){renderCartItems();openModal('cartModal');}
+
+// Modal close handlers
+document.addEventListener('click',e=>{
+  if(e.target.id==='cartOverlay')closeModal('cartModal');
+  if(e.target.id==='favOverlay')closeModal('favModal');
+  if(e.target.id==='productOverlay')closeModal('productModal');
+});
+$('#cartClose').onclick=()=>closeModal('cartModal');
+$('#favClose').onclick=()=>closeModal('favModal');
+$('#productClose').onclick=()=>closeModal('productModal');
+$('#cartToggle').onclick=()=>openCart();
+$('#favToggle').onclick=()=>{renderFavItems();openModal('favModal');};
+
+// ESC key to close modals
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    closeModal('cartModal');closeModal('favModal');closeModal('productModal');
+  }
+});
+
+// ===== HERO SLIDER =====
+let currentSlide=0;
+const slides=$$('.hero-slide');
+const dots=$$('.slider-dot');
+function goToSlide(n){
+  slides.forEach(s=>s.classList.remove('active'));
+  dots.forEach(d=>d.classList.remove('bg-white'));
+  currentSlide=((n%slides.length)+slides.length)%slides.length;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('bg-white');
+}
+$('#nextSlide').onclick=()=>goToSlide(currentSlide+1);
+$('#prevSlide').onclick=()=>goToSlide(currentSlide-1);
+dots.forEach(d=>d.addEventListener('click',()=>goToSlide(+d.dataset.slide)));
+goToSlide(0);
+setInterval(()=>goToSlide(currentSlide+1),5000);
+
+// ===== FILTERS =====
+// Category filter via event delegation
+$('#categoryFilters').addEventListener('click',e=>{
+  const btn=e.target.closest('.filter-tag');
+  if(!btn)return;
+  $$('.filter-tag').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  activeCategory=btn.dataset.cat;
+  visibleCount=12;
+  renderProducts();
+});
+
+// Category links from nav and banners
+document.addEventListener('click',e=>{
+  const link=e.target.closest('[data-cat]');
+  if(!link||link.closest('#categoryFilters'))return;
+  const cat=link.dataset.cat;
+  activeCategory=cat;
+  visibleCount=12;
+  $$('.filter-tag').forEach(b=>{b.classList.toggle('active',b.dataset.cat===cat)});
+  renderProducts();
+  document.getElementById('urunler').scrollIntoView({behavior:'smooth'});
+});
+
+// Price filter
+$('#priceFilterBtn').onclick=()=>{
+  priceMin=+$('#priceMin').value||0;
+  priceMax=+$('#priceMax').value||Infinity;
+  visibleCount=12;
+  renderProducts();
+};
+
+// Search
+$('#searchToggle').onclick=()=>{
+  const bar=$('#searchBar');
+  bar.classList.toggle('hidden');
+  if(!bar.classList.contains('hidden'))$('#searchInput').focus();
+};
+let searchTimer;
+$('#searchInput').addEventListener('input',e=>{
+  clearTimeout(searchTimer);
+  searchTimer=setTimeout(()=>{
+    searchQuery=e.target.value.trim();
+    visibleCount=12;
+    renderProducts();
+  },300);
+});
+
+// Clear filters
+function clearAllFilters(){
+  activeCategory='all';searchQuery='';priceMin=0;priceMax=Infinity;visibleCount=12;
+  $$('.filter-tag').forEach(b=>b.classList.toggle('active',b.dataset.cat==='all'));
+  $('#priceMin').value='';$('#priceMax').value='';$('#searchInput').value='';
+  renderProducts();
+}
+$('#clearFilters').onclick=clearAllFilters;
+
+// Load more
+$('#loadMoreBtn').onclick=()=>{visibleCount+=8;renderProducts();};
+
+// ===== MOBILE MENU =====
+$('#menuToggle').onclick=function(){
+  this.classList.toggle('open');
+  $('#mobileMenu').classList.toggle('hidden');
+};
+$$('#mobileMenu a').forEach(a=>a.addEventListener('click',()=>{
+  $('#menuToggle').classList.remove('open');
+  $('#mobileMenu').classList.add('hidden');
+}));
+
+// ===== BACK TO TOP =====
+const btt=$('#backToTop');
+window.addEventListener('scroll',()=>{
+  btt.classList.toggle('hidden',window.scrollY<600);
+  btt.classList.toggle('flex',window.scrollY>=600);
+},{passive:true});
+btt.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+
+// ===== HEADER SCROLL EFFECT =====
+let lastScroll=0;
+window.addEventListener('scroll',()=>{
+  const header=$('#siteHeader');
+  const scroll=window.scrollY;
+  if(scroll>100&&scroll>lastScroll){header.style.transform='translateY(-100%)'}
+  else{header.style.transform='translateY(0)'}
+  lastScroll=scroll;
+},{passive:true});
+
+// ===== INIT =====
+renderProducts();
+</script>
+
+</body>
+</html>
