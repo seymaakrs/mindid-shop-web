@@ -104,6 +104,24 @@ export type AvatarSample = {
   visible: boolean;
 };
 
+// Blog types
+export type BlogPost = {
+  id?: string;
+  title: string;
+  titleEn: string;
+  slug: string;
+  excerpt: string;
+  excerptEn: string;
+  content: string;
+  contentEn: string;
+  coverImage: string;
+  tags: string[];
+  category: "film" | "avatar" | "visual" | "general";
+  published: boolean;
+  publishedAt: Timestamp;
+  updatedAt: Timestamp;
+};
+
 // Order management types
 export type OrderStatus = "new" | "seen" | "in-progress" | "completed" | "cancelled";
 

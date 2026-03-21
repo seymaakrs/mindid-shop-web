@@ -47,6 +47,13 @@ service cloud.firestore {
         && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
 
+    // Blog: published posts public read, admin write
+    match /mindid_blog/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
     // Admin docs
     match /admins/{uid} {
       allow read: if request.auth != null && request.auth.uid == uid;

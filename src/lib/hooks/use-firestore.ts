@@ -10,6 +10,7 @@ import type {
   TeamMember,
   PricingConfig,
   AvatarSample,
+  BlogPost,
   OrderSubmission,
   OrderStatus,
 } from "@/lib/firestore-types";
@@ -101,6 +102,58 @@ export const usePricing = () => {
 
 export const useAvatarSamples = () => {
   return useFirestoreCollection<AvatarSample>("avatarSamples");
+};
+
+export const useBlogPosts = (publishedOnly: boolean = true) => {
+  const [data, setData] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const constraints: QueryConstraint[] = [orderBy("publishedAt", "desc")];
+        if (publishedOnly) {
+          constraints.unshift(where("published", "==", true));
+        }
+        const q = query(collection(db, "mindid_blog"), ...constraints);
+        const snap = await getDocs(q);
+        setData(snap.docs.map((d) => ({ id: d.id, ...d.data() } as BlogPost)));
+      } catch {
+        // Blog not configured yet
+      }
+      setLoading(false);
+    };
+    fetch();
+  }, [publishedOnly]);
+
+  return { data, loading };
+};
+
+export const useBlogPost = (slug: string) => {
+  const [data, setData] = useState<BlogPost | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const q = query(
+          collection(db, "mindid_blog"),
+          where("slug", "==", slug),
+          where("published", "==", true),
+        );
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          setData({ id: snap.docs[0].id, ...snap.docs[0].data() } as BlogPost);
+        }
+      } catch {
+        // Blog post not found
+      }
+      setLoading(false);
+    };
+    fetch();
+  }, [slug]);
+
+  return { data, loading };
 };
 
 export const useOrders = (statusFilter?: OrderStatus) => {

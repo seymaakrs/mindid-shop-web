@@ -290,9 +290,30 @@ const translations: Record<string, Record<Lang, string>> = {
 
 const I18nContext = createContext<I18nContextType | null>(null);
 
+// Cookie'den veya URL'den dili algıla
+function detectLang(): Lang {
+  if (typeof window === "undefined") return "tr";
+
+  // 1. URL'den algıla (/en/... → en)
+  if (window.location.pathname.startsWith("/en")) return "en";
+  if (window.location.pathname.startsWith("/tr")) return "tr";
+
+  // 2. Cookie'den algıla
+  const match = document.cookie.match(/(?:^|; )lang=(tr|en)/);
+  if (match) return match[1] as Lang;
+
+  // 3. Varsayılan
+  return "tr";
+}
+
 export const I18nProvider = ({ children }: { children: ReactNode }) => {
   const [lang, setLang] = useState<Lang>("tr");
   const [usdRate, setUsdRate] = useState(DEFAULT_USD_RATE);
+
+  // Sayfa yüklendiğinde dil algıla
+  useEffect(() => {
+    setLang(detectLang());
+  }, []);
 
   useEffect(() => {
     const fetchRate = async () => {
@@ -310,7 +331,16 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const toggleLang = useCallback(() => {
-    setLang((prev) => (prev === "tr" ? "en" : "tr"));
+    setLang((prev) => {
+      const newLang = prev === "tr" ? "en" : "tr";
+      // Cookie'yi güncelle
+      document.cookie = `lang=${newLang}; path=/; max-age=${365 * 24 * 60 * 60}`;
+      // URL'yi güncelle (SEO-friendly)
+      const currentPath = window.location.pathname.replace(/^\/(tr|en)/, "") || "/";
+      const newPath = newLang === "tr" ? currentPath : `/en${currentPath === "/" ? "" : currentPath}`;
+      window.history.replaceState(null, "", newPath);
+      return newLang;
+    });
   }, []);
 
   const t = useCallback(

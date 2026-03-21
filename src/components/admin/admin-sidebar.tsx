@@ -13,6 +13,7 @@ import {
   MonitorPlay,
   Users,
   Bot,
+  FileText,
   Settings,
   LogOut,
   Clapperboard,
@@ -27,6 +28,7 @@ const navItems = [
   { href: "/admin/hero", label: "Hero / Video", icon: MonitorPlay },
   { href: "/admin/about", label: "Hakkımızda", icon: Users },
   { href: "/admin/avatar", label: "Avatar Örnekleri", icon: Bot },
+  { href: "/admin/blog", label: "Blog", icon: FileText },
   { href: "/admin/settings", label: "Ayarlar", icon: Settings },
 ];
 
