@@ -67,6 +67,30 @@ const faqSchema = {
         text: "Simply use the configurator on mindid.shop to define your needs and fill out the form. Within 24 hours, we'll call you for a detailed brief meeting. After brief approval, the project officially starts with production beginning immediately.",
       },
     },
+    {
+      "@type": "Question",
+      name: "Do AI avatars look realistic?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. MindID's AI avatar technology produces highly realistic results. Facial expressions, lip-sync, eye contact, and natural body language are precisely generated. Your avatar can speak in multiple languages with automatic lip synchronization. Many viewers cannot distinguish between an AI avatar and a real person.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Which e-commerce platforms are AI product images compatible with?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "MindID prepares AI product images for all major platforms: Trendyol, Hepsiburada, Shopify, Amazon, N11, Etsy, eBay, AliExpress, and WooCommerce. Each platform's specific size, format, and background requirements are met. Starting from ₺399 per product.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is there a bulk order discount for AI product photography?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. Up to 15% discount for 50+ product images, up to 25% for 200+ products. Special catalog shooting packages available — even a 350-product catalog shoot can be completed in days. Color variations are produced at minimal additional cost.",
+      },
+    },
   ],
 };
 

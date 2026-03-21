@@ -14,6 +14,20 @@ const FAQ_KEYS = [
   { q: "faq.q5", a: "faq.a5" },
   { q: "faq.q6", a: "faq.a6" },
   { q: "faq.q7", a: "faq.a7" },
+  { q: "faq.q8", a: "faq.a8" },
+  { q: "faq.q9", a: "faq.a9" },
+  { q: "faq.q10", a: "faq.a10" },
+  { q: "faq.q11", a: "faq.a11" },
+  { q: "faq.q12", a: "faq.a12" },
+  { q: "faq.q13", a: "faq.a13" },
+  { q: "faq.q14", a: "faq.a14" },
+  { q: "faq.q15", a: "faq.a15" },
+  { q: "faq.q16", a: "faq.a16" },
+  { q: "faq.q17", a: "faq.a17" },
+  { q: "faq.q18", a: "faq.a18" },
+  { q: "faq.q19", a: "faq.a19" },
+  { q: "faq.q20", a: "faq.a20" },
+  { q: "faq.q21", a: "faq.a21" },
 ];
 
 export const FAQSection = () => {

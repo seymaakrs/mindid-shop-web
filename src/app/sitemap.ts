@@ -20,10 +20,10 @@ const sitemap = (): MetadataRoute.Sitemap => {
     // Blog
     { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
 
-    // Gelecekte eklenecek sayfalar
-    // { url: `${baseUrl}/ai-vs-traditional`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    // { url: `${baseUrl}/how-it-works`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    // { url: `${baseUrl}/e-commerce`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    // İçerik sayfaları — GEO ve SEO için yüksek değer
+    { url: `${baseUrl}/ai-vs-traditional`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/how-it-works`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/e-commerce`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
   ];
 };
 
