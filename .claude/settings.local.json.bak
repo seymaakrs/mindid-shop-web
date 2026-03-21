@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git stash:*)",
+      "Bash(copy \".claude\\\\settings.local.json\" \".claude\\\\settings.local.json.bak\")",
+      "Bash(del \".claude\\\\settings.local.json\")",
+      "Bash(git pull:*)"
+    ]
+  }
+}

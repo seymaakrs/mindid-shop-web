@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ari-personel-dev",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\asus\\OneDrive\\Desktop\\ari-personel && npm run dev"],
+      "port": 3000
+    }
+  ]
+}

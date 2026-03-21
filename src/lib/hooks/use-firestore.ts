@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { collection, getDocs, doc, getDoc, orderBy, query, where, type QueryConstraint } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, orderBy, query, onSnapshot, where, type QueryConstraint } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import type {
   PortfolioItem,
@@ -10,6 +10,8 @@ import type {
   TeamMember,
   PricingConfig,
   AvatarSample,
+  OrderSubmission,
+  OrderStatus,
 } from "@/lib/firestore-types";
 
 function useFirestoreCollection<T>(
@@ -99,4 +101,54 @@ export const usePricing = () => {
 
 export const useAvatarSamples = () => {
   return useFirestoreCollection<AvatarSample>("avatarSamples");
+};
+
+export const useOrders = (statusFilter?: OrderStatus) => {
+  const [data, setData] = useState<OrderSubmission[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const constraints: QueryConstraint[] = [orderBy("createdAt", "desc")];
+    if (statusFilter) {
+      constraints.unshift(where("status", "==", statusFilter));
+    }
+    const q = query(collection(db, "mindid_orders"), ...constraints);
+
+    const unsubscribe = onSnapshot(
+      q,
+      (snap) => {
+        setData(snap.docs.map((d) => ({ id: d.id, ...d.data() } as OrderSubmission)));
+        setLoading(false);
+      },
+      (err) => {
+        console.error("Orders listen error:", err);
+        setLoading(false);
+      },
+    );
+
+    return unsubscribe;
+  }, [statusFilter]);
+
+  return { data, loading };
+};
+
+export const useNewOrderCount = () => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const q = query(
+      collection(db, "mindid_orders"),
+      where("status", "==", "new"),
+    );
+
+    const unsubscribe = onSnapshot(
+      q,
+      (snap) => setCount(snap.size),
+      () => setCount(0),
+    );
+
+    return unsubscribe;
+  }, []);
+
+  return count;
 };

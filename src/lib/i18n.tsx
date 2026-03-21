@@ -68,6 +68,11 @@ const translations: Record<string, Record<Lang, string>> = {
   "portfolio.title": { tr: "Portfolyo", en: "Portfolio" },
   "portfolio.subtitle": { tr: "Yapay zeka ile ürettiğimiz çalışmalarımızı inceleyin", en: "Explore our AI-produced works" },
   "portfolio.coming": { tr: "Çok Yakında", en: "Coming Soon" },
+  "portfolio.all": { tr: "Tümü", en: "All" },
+  "portfolio.items": { tr: "proje", en: "projects" },
+  "portfolio.noResults": { tr: "Bu kategoride henüz içerik yok", en: "No content in this category yet" },
+  "portfolio.showAll": { tr: "Tümünü Göster", en: "Show All" },
+  "portfolio.watch": { tr: "İzle", en: "Watch" },
 
   // Duration selector
   "duration.title": { tr: "Video Süresi Seçin", en: "Select Video Duration" },

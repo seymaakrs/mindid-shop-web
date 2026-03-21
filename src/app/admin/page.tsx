@@ -10,6 +10,7 @@ import {
   HelpCircle,
   Users,
   Bot,
+  ClipboardList,
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
@@ -19,14 +20,17 @@ type CollectionCount = {
   faq: number;
   team: number;
   avatarSamples: number;
+  ordersTotal: number;
+  ordersNew: number;
 };
 
 const quickLinks = [
-  { href: "/admin/portfolio", label: "Portfolio Yönet", icon: Film, color: "var(--lime)" },
-  { href: "/admin/pricing", label: "Fiyatları Düzenle", icon: DollarSign, color: "var(--electric-blue)" },
-  { href: "/admin/faq", label: "SSS Düzenle", icon: HelpCircle, color: "var(--lime)" },
-  { href: "/admin/about", label: "Takım Düzenle", icon: Users, color: "var(--electric-blue)" },
-  { href: "/admin/avatar", label: "Avatar Örnekleri", icon: Bot, color: "var(--lime)" },
+  { href: "/admin/orders", label: "Siparişler", icon: ClipboardList, color: "var(--lime)" },
+  { href: "/admin/portfolio", label: "Portfolio Yönet", icon: Film, color: "var(--electric-blue)" },
+  { href: "/admin/pricing", label: "Fiyatları Düzenle", icon: DollarSign, color: "var(--lime)" },
+  { href: "/admin/faq", label: "SSS Düzenle", icon: HelpCircle, color: "var(--electric-blue)" },
+  { href: "/admin/about", label: "Takım Düzenle", icon: Users, color: "var(--lime)" },
+  { href: "/admin/avatar", label: "Avatar Örnekleri", icon: Bot, color: "var(--electric-blue)" },
 ];
 
 const AdminDashboard = () => {
@@ -36,22 +40,28 @@ const AdminDashboard = () => {
     faq: 0,
     team: 0,
     avatarSamples: 0,
+    ordersTotal: 0,
+    ordersNew: 0,
   });
 
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        const [portfolio, faq, team, avatarSamples] = await Promise.all([
+        const [portfolio, faq, team, avatarSamples, orders] = await Promise.all([
           getDocs(collection(db, "mindid_portfolio")),
           getDocs(collection(db, "mindid_faq")),
           getDocs(collection(db, "mindid_team")),
           getDocs(collection(db, "mindid_avatarSamples")),
+          getDocs(collection(db, "mindid_orders")),
         ]);
+        const ordersNew = orders.docs.filter((d) => d.data().status === "new").length;
         setCounts({
           portfolio: portfolio.size,
           faq: faq.size,
           team: team.size,
           avatarSamples: avatarSamples.size,
+          ordersTotal: orders.size,
+          ordersNew,
         });
       } catch {
         // Firestore not configured yet — counts stay 0
@@ -70,8 +80,10 @@ const AdminDashboard = () => {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
         {[
+          { label: "Yeni Siparişler", count: counts.ordersNew, icon: ClipboardList, highlight: true },
+          { label: "Toplam Siparişler", count: counts.ordersTotal, icon: ClipboardList },
           { label: "Portfolio", count: counts.portfolio, icon: Film },
           { label: "SSS", count: counts.faq, icon: HelpCircle },
           { label: "Takım", count: counts.team, icon: Users },
@@ -79,7 +91,7 @@ const AdminDashboard = () => {
         ].map((stat) => (
           <div
             key={stat.label}
-            className="p-4 rounded-md bg-[var(--card)] border-3 border-[var(--electric-blue)]/20"
+            className={`p-4 rounded-md border-3 ${"highlight" in stat && stat.highlight ? "bg-[var(--lime)]/10 border-[var(--lime)]/40" : "bg-[var(--card)] border-[var(--electric-blue)]/20"}`}
           >
             <div className="flex items-center gap-2 mb-2">
               <stat.icon size={16} className="text-[var(--lime)]" />

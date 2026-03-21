@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
+import { useNewOrderCount } from "@/lib/hooks/use-firestore";
 import {
   LayoutDashboard,
+  ClipboardList,
   Film,
   DollarSign,
   HelpCircle,
@@ -18,6 +20,7 @@ import {
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/orders", label: "Siparişler", icon: ClipboardList, badge: true },
   { href: "/admin/portfolio", label: "Portfolio", icon: Film },
   { href: "/admin/pricing", label: "Fiyatlandırma", icon: DollarSign },
   { href: "/admin/faq", label: "SSS", icon: HelpCircle },
@@ -30,6 +33,7 @@ const navItems = [
 export const AdminSidebar = () => {
   const pathname = usePathname();
   const { logout } = useAuth();
+  const newOrderCount = useNewOrderCount();
 
   return (
     <aside className="w-64 min-h-screen bg-[var(--dark-blue)] border-r-3 border-[var(--electric-blue)]/20 flex flex-col">
@@ -51,6 +55,7 @@ export const AdminSidebar = () => {
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           const Icon = item.icon;
+          const showBadge = "badge" in item && item.badge && newOrderCount > 0;
           return (
             <Link
               key={item.href}
@@ -63,6 +68,11 @@ export const AdminSidebar = () => {
             >
               <Icon size={18} />
               {item.label}
+              {showBadge && (
+                <span className="ml-auto px-1.5 py-0.5 rounded-full bg-red-500 text-white text-[10px] font-bold leading-none min-w-[18px] text-center">
+                  {newOrderCount}
+                </span>
+              )}
             </Link>
           );
         })}

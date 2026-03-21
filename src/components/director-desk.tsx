@@ -1,8 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import type { ConfigState } from "@/lib/types";
 import type { ServiceType } from "@/lib/pricing-data";
+import type { OrderCustomer } from "@/lib/firestore-types";
+import { submitOrder } from "@/lib/order-service";
 import { CustomerForm } from "./customer-form";
 import { ArrowLeft, Clapperboard } from "lucide-react";
 
@@ -12,6 +15,7 @@ type DirectorDeskProps = {
   totalAI: number;
   totalTraditional: number;
   savings: number;
+  basePrice: number;
   onBack: () => void;
   onSubmit: () => void;
 };
@@ -22,10 +26,34 @@ export const DirectorDesk = ({
   totalAI,
   totalTraditional,
   savings,
+  basePrice,
   onBack,
   onSubmit,
 }: DirectorDeskProps) => {
   const { t, formatPrice } = useI18n();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleFormSubmit = async (customer: OrderCustomer, files: File[]) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await submitOrder({
+        customer,
+        serviceId: service.id,
+        serviceName: t(service.nameKey),
+        config,
+        pricing: { basePrice, totalAI, totalTraditional, savings },
+        files,
+      });
+      onSubmit();
+    } catch (err) {
+      console.error("Order submission error:", err);
+      setError(err instanceof Error ? err.message : "Bir hata oluştu. Lütfen tekrar deneyin.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Build trading cards from selections
   const cards: { label: string; value: string; color: string }[] = [];
@@ -129,7 +157,7 @@ export const DirectorDesk = ({
         </div>
 
         {/* Customer form */}
-        <CustomerForm onSubmit={onSubmit} />
+        <CustomerForm onSubmit={handleFormSubmit} loading={loading} error={error} />
       </div>
     </div>
   );

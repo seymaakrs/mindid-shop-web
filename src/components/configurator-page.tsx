@@ -21,7 +21,6 @@ import { DurationSelector } from "./duration-selector";
 import { OptionCardGroup } from "./option-card-group";
 import { NumberInput } from "./number-input";
 import { DirectorDesk } from "./director-desk";
-import { CustomerForm } from "./customer-form";
 import { CongratsPage } from "./congrats-page";
 import { useI18n } from "@/lib/i18n";
 import {
@@ -147,6 +146,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
         totalAI={totalAI}
         totalTraditional={totalTraditional}
         savings={savings}
+        basePrice={basePrice}
         onBack={() => setStep("configure")}
         onSubmit={() => setStep("congrats")}
       />
