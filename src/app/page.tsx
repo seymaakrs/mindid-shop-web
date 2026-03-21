@@ -1,6 +1,8 @@
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { ServiceCards } from "@/components/service-cards";
+import { BudgetSlider } from "@/components/ui/budget-slider";
+import { SocialProof } from "@/components/social-proof";
 import { TestimonialsSection } from "@/components/testimonials-section";
 import { FAQSection } from "@/components/faq-section";
 import { Footer } from "@/components/footer";
@@ -105,7 +107,9 @@ const HomePage = () => {
       <Header />
       <main>
         <Hero />
+        <SocialProof />
         <ServiceCards />
+        <BudgetSlider />
         <TestimonialsSection />
         <FAQSection />
       </main>
