@@ -22,9 +22,19 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://mindid.shop/blog" },
+  ],
+};
+
 const BlogRoute = () => {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <ParallaxGrid />
       <Header />
       <main>

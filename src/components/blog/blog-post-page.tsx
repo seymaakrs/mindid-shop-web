@@ -52,8 +52,12 @@ export const BlogPostPage = ({ slug }: BlogPostPageProps) => {
 
   const title = lang === "en" ? post.titleEn || post.title : post.title;
   const content = lang === "en" ? post.contentEn || post.content : post.content;
-  const date = post.publishedAt?.toDate
-    ? new Date(post.publishedAt.toDate()).toLocaleDateString(
+  const excerpt = lang === "en" ? post.excerptEn || post.excerpt : post.excerpt;
+  const publishedDate = post.publishedAt?.toDate
+    ? new Date(post.publishedAt.toDate())
+    : null;
+  const date = publishedDate
+    ? publishedDate.toLocaleDateString(
         lang === "en" ? "en-US" : "tr-TR",
         { year: "numeric", month: "long", day: "numeric" },
       )
@@ -63,8 +67,36 @@ export const BlogPostPage = ({ slug }: BlogPostPageProps) => {
   const wordCount = content.split(/\s+/).length;
   const readTime = Math.max(1, Math.ceil(wordCount / 250));
 
+  const blogPostingSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.titleEn || post.title,
+    description: post.excerptEn || post.excerpt,
+    image: post.coverImage || undefined,
+    datePublished: publishedDate?.toISOString(),
+    dateModified: post.updatedAt?.toDate ? new Date(post.updatedAt.toDate()).toISOString() : publishedDate?.toISOString(),
+    author: { "@type": "Organization", name: "MindID", url: "https://mindid.shop" },
+    publisher: { "@type": "Organization", name: "MindID", url: "https://mindid.shop" },
+    mainEntityOfPage: `https://mindid.shop/blog/${slug}`,
+    wordCount,
+    articleSection: post.category,
+    keywords: post.tags?.join(", "),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://mindid.shop/blog" },
+      { "@type": "ListItem", position: 3, name: title, item: `https://mindid.shop/blog/${slug}` },
+    ],
+  };
+
   return (
     <div className="min-h-screen relative z-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link
           href="/blog"

@@ -25,40 +25,40 @@ const translations: Record<string, Record<Lang, string>> = {
   "nav.start": { tr: "Hemen Başla", en: "Get Started" },
 
   // Hero
-  "hero.badge": { tr: "AI Video Prodüksiyon Ajansı", en: "AI Video Production Agency" },
+  "hero.badge": { tr: "AI Reklam Filmi & Ürün Görseli Ajansı", en: "AI Ad Film & Product Visual Agency" },
   "hero.title1": { tr: "Yeni Nesil", en: "Next Gen" },
   "hero.title2": { tr: "Reklamcılık", en: "Advertising" },
   "hero.desc": {
-    tr: "Yapay zeka, reklam dünyasını kökten değiştiriyor. Geleneksel bir reklam filmi için ortalama 150.000₺ ile 500.000₺ arasında bütçe ayırmanız gerekirken, yapay zeka destekli prodüksiyonla aynı profesyonel kaliteyi %60'a varan tasarrufla elde ediyorsunuz. Stüdyo kirası yok, kalabalık ekip yok, haftalarca sürecek çekim planı yok. Sadece akıllı teknoloji ve sonuç odaklı üretim.",
-    en: "AI is fundamentally changing advertising. While traditional ad production requires budgets of $4,200 to $14,000, AI-powered production delivers the same professional quality with up to 60% savings. No studio rental, no large crews, no weeks of shooting. Just smart technology and result-driven production.",
+    tr: "Yapay zeka ile reklam filmi, dijital avatar ve e-ticaret ürün görseli üretimi artık çok daha kolay. Geleneksel prodüksiyon için 150.000₺+ bütçe ayırmanız gerekirken, MindID ile aynı profesyonel kaliteyi %70'e varan tasarrufla elde ediyorsunuz. Manken yok, stüdyo kirası yok, kalabalık ekip yok. Yapay zeka reklam filmleri, avatar oluşturma ve ürün fotoğrafçılığında yeni nesil çözümler.",
+    en: "AI ad film production, digital avatar creation, and e-commerce product photography are now easier than ever. While traditional production requires $4,200+ budgets, MindID delivers the same professional quality with up to 70% savings. No mannequins, no studio rental, no large crews. Next-generation solutions in AI advertising films, avatar creation, and product visuals.",
   },
   "hero.video_title": { tr: "Tanıtım Videosu", en: "Intro Video" },
 
   // Services section headline
   "services.headline": {
-    tr: "Bütçenize Göre AI Reklam Filminizi Oluşturun",
-    en: "Create Your AI Ad Film Based on Your Budget",
+    tr: "Yapay Zeka Reklam Filmi, Avatar & Ürün Görseli — Bütçenize Göre Seçin",
+    en: "AI Ad Films, Avatar Creation & Product Visuals — Choose Your Budget",
   },
   "services.subtitle": {
-    tr: "En uygun fiyattan başlayın, markanıza özel profesyonel video içerikler üretin.",
-    en: "Start from the most affordable option, produce professional video content tailored to your brand.",
+    tr: "AI reklam filmleri, dijital avatar oluşturma ve e-ticaret ürün fotoğrafçılığı — en uygun fiyattan başlayın.",
+    en: "AI advertising films, digital avatar creation, and e-commerce product photography — start from the most affordable option.",
   },
 
   // Service cards
-  "service.reels": { tr: "Instagram Reels İçerik (AI)", en: "Instagram Reels Content (AI)" },
-  "service.reels.desc": { tr: "Sosyal medya için kısa format AI video içerik üretimi", en: "Short-form AI video content for social media" },
-  "service.product": { tr: "Ürün & Hizmet Reklamı (AI)", en: "Product & Service Ads (AI)" },
-  "service.product.desc": { tr: "AI destekli ürün tanıtım, hizmet reklamı ve yaratıcı içerik tasarımı", en: "AI-powered product showcase, service ads and creative content design" },
-  "service.campaign": { tr: "Kampanya Reklam Filmi", en: "Campaign Ad Film" },
-  "service.campaign.desc": { tr: "Kampanya odaklı profesyonel reklam filmi prodüksiyonu", en: "Campaign-focused professional ad film production" },
-  "service.corporate": { tr: "Kurumsal Tanıtım & Reklam Filmi", en: "Corporate Intro & Ad Film" },
-  "service.corporate.desc": { tr: "Kurumsal tanıtım ve reklam filmi - tek paket çözüm", en: "Corporate introduction and ad film - all-in-one solution" },
-  "service.avatar": { tr: "AI Avatar Oluştur", en: "Create AI Avatar" },
-  "service.avatar.desc": { tr: "AI ile kendi dijital avatarını oluştur - video çekimine son", en: "Create your digital avatar with AI - no more video shoots" },
+  "service.reels": { tr: "AI Instagram Reels Yapımı", en: "AI Instagram Reels Production" },
+  "service.reels.desc": { tr: "Yapay zeka ile Instagram Reels ve TikTok videoları — profesyonel kısa video üretimi", en: "AI-powered Instagram Reels and TikTok videos — professional short-form video production" },
+  "service.product": { tr: "AI Ürün Reklam Filmi", en: "AI Product Ad Film" },
+  "service.product.desc": { tr: "Yapay zeka ile ürün reklam filmi — geleneksel prodüksiyonun %70 altında maliyetle sinema kalitesinde", en: "AI product ad film — cinema quality at 70% less than traditional production costs" },
+  "service.campaign": { tr: "AI Kampanya Reklam Filmi", en: "AI Campaign Ad Film" },
+  "service.campaign.desc": { tr: "Yapay zeka ile kampanya reklam filmi prodüksiyonu — düşük bütçe, yüksek kalite", en: "AI campaign ad film production — low budget, high quality" },
+  "service.corporate": { tr: "AI Kurumsal Tanıtım Filmi", en: "AI Corporate Film" },
+  "service.corporate.desc": { tr: "Yapay zeka kurumsal tanıtım filmi — marka hikayenizi profesyonelce anlatın", en: "AI corporate film — tell your brand story professionally" },
+  "service.avatar": { tr: "AI Avatar Oluşturma", en: "AI Avatar Creation" },
+  "service.avatar.desc": { tr: "Yapay zeka ile dijital avatar oluşturun — marka yüzü, dijital sunucu, influencer avatar", en: "Create digital avatars with AI — brand face, digital presenter, influencer avatar" },
   "service.product-photo": { tr: "AI Ürün Görseli", en: "AI Product Photography" },
   "service.product-photo.desc": {
-    tr: "E-ticaret ve katalog için AI destekli profesyonel ürün fotoğrafçılığı",
-    en: "AI-powered professional product photography for e-commerce and catalogs",
+    tr: "E-ticaret ürün fotoğrafı — manken ve stüdyo masrafı olmadan %70 daha ucuz, stüdyo kalitesinde görseller",
+    en: "E-commerce product photos — 70% cheaper without mannequin or studio costs, studio-quality visuals",
   },
   "service.portfolio": { tr: "Portfolyo", en: "Portfolio" },
   "service.portfolio.desc": { tr: "Yapay zeka ile ürettiğimiz çalışmalarımızı inceleyin", en: "Explore our AI-produced works" },
@@ -66,7 +66,7 @@ const translations: Record<string, Record<Lang, string>> = {
 
   // Portfolio
   "portfolio.title": { tr: "Portfolyo", en: "Portfolio" },
-  "portfolio.subtitle": { tr: "Yapay zeka ile ürettiğimiz çalışmalarımızı inceleyin", en: "Explore our AI-produced works" },
+  "portfolio.subtitle": { tr: "AI reklam filmleri, avatar örnekleri ve e-ticaret ürün görselleri — yapay zeka ile ürettiğimiz çalışmaları inceleyin", en: "AI ad films, avatar samples, and e-commerce product visuals — explore our AI-produced works" },
   "portfolio.coming": { tr: "Çok Yakında", en: "Coming Soon" },
   "portfolio.all": { tr: "Tümü", en: "All" },
   "portfolio.items": { tr: "proje", en: "projects" },
@@ -198,18 +198,18 @@ const translations: Record<string, Record<Lang, string>> = {
   // About
   "about.title": { tr: "MindID Ne Yapar?", en: "What Does MindID Do?" },
   "about.subtitle": {
-    tr: "Yapay zeka ve yaratıcı vizyonu birleştirerek markanızın hikâyesini anlatıyoruz.",
-    en: "We combine AI and creative vision to tell your brand's story.",
+    tr: "Yapay zeka reklam filmleri, avatar oluşturma ve e-ticaret ürün görselleri ile markanızı büyütüyoruz.",
+    en: "We grow your brand with AI ad films, avatar creation, and e-commerce product visuals.",
   },
   "about.desc": {
-    tr: "MindID, yapay zeka destekli video prodüksiyon alanında Türkiye'nin öncü ajanslarından biridir. Geleneksel prodüksiyon süreçlerinin yüksek maliyetlerini ve uzun sürelerini ortadan kaldırarak, markalara profesyonel kalitede video içerikler sunuyoruz. Ekibimiz; yapay zeka mühendisleri, yaratıcı yönetmenler, ses tasarımcıları ve dijital pazarlama uzmanlarından oluşur.",
-    en: "MindID is one of Turkey's pioneering agencies in AI-powered video production. By eliminating the high costs and long timelines of traditional production, we deliver professional quality video content to brands. Our team consists of AI engineers, creative directors, sound designers, and digital marketing experts.",
+    tr: "MindID, yapay zeka ile reklam filmi yapımı, dijital avatar oluşturma ve e-ticaret ürün fotoğrafçılığı alanlarında Türkiye'nin öncü ajanslarından biridir. Manken ve stüdyo masrafı olmadan, %70'e varan tasarrufla stüdyo kalitesinde ürün görselleri üretiyoruz. Ekibimiz; yapay zeka mühendisleri, yaratıcı yönetmenler, ses tasarımcıları ve dijital pazarlama uzmanlarından oluşur.",
+    en: "MindID is one of Turkey's pioneering agencies in AI ad film production, digital avatar creation, and e-commerce product photography. We produce studio-quality product visuals without mannequin or studio costs, with up to 70% savings. Our team consists of AI engineers, creative directors, sound designers, and digital marketing experts.",
   },
   "about.team": { tr: "Ekibimiz", en: "Our Team" },
 
   // Avatar
   "avatar.title": { tr: "AI Avatar Oluştur", en: "Create AI Avatar" },
-  "avatar.subtitle": { tr: "Kamera karşısına geçmeden, profesyonel video içerikleri oluşturun", en: "Create professional video content without being on camera" },
+  "avatar.subtitle": { tr: "Yapay zeka ile dijital avatar oluşturun — marka yüzü, dijital sunucu, influencer avatar. Kamera karşısına geçmeden profesyonel içerikler üretin.", en: "Create digital avatars with AI — brand face, digital presenter, influencer avatar. Produce professional content without being on camera." },
   "avatar.who_title": { tr: "AI Avatar Kimlere Göre?", en: "Who Is AI Avatar For?" },
   "avatar.who_1": { tr: "Kamera karşısında konuşmakta zorlananlar", en: "Those who struggle speaking on camera" },
   "avatar.who_2": { tr: "Sürekli video çekimiyle uğraşmak istemeyenler", en: "Those who don't want constant video shoots" },

@@ -16,9 +16,38 @@ export const metadata: Metadata = {
   },
 };
 
+const avatarServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "AI Avatar Creation",
+  description: "Create realistic AI digital avatars for brand spokespersons, digital presenters, and influencer avatars. Produce video content in multiple languages without being on camera.",
+  category: "AI Avatar Creation",
+  provider: { "@type": "Organization", name: "MindID", url: "https://mindid.shop" },
+  areaServed: "Worldwide",
+  offers: {
+    "@type": "AggregateOffer",
+    lowPrice: "5999",
+    highPrice: "14999",
+    priceCurrency: "TRY",
+    availability: "https://schema.org/InStock",
+  },
+  url: "https://mindid.shop/avatar",
+};
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
+    { "@type": "ListItem", position: 2, name: "AI Avatar Creation", item: "https://mindid.shop/avatar" },
+  ],
+};
+
 const AvatarRoute = () => {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(avatarServiceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <ParallaxGrid />
       <Header />
       <main>
