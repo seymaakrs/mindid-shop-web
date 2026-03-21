@@ -121,7 +121,7 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/905000000000" target="_blank" rel="noopener noreferrer" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
+                <a href="https://wa.me/905419315550" target="_blank" rel="noopener noreferrer" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
                   WhatsApp
                 </a>
               </li>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { MessageCircle, X } from "lucide-react";
 
-const WHATSAPP_NUMBER = "905000000000"; // Seyma'nın numarası güncellenmeli
+const WHATSAPP_NUMBER = "905419315550";
 
 const quickMessages = [
   {
