@@ -71,8 +71,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // Google Search Console doğrulaması eklenecek
-    // google: "YOUR_VERIFICATION_CODE",
+    google: "MLXSwSijfsaWlpYKCPsoqwo66ZVBY0HsJBxqhCI9b6k",
   },
 };
 
