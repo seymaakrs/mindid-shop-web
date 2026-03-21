@@ -36,6 +36,12 @@ export const Header = () => {
           <a href="#testimonials" className="text-sm font-bold text-[var(--dark-blue)] hover:text-[var(--electric-blue)] transition-colors">
             {t("nav.testimonials")}
           </a>
+          <a href="/e-commerce" className="text-sm font-bold text-[var(--dark-blue)] hover:text-[var(--electric-blue)] transition-colors">
+            {lang === "en" ? "E-commerce" : "E-ticaret"}
+          </a>
+          <a href="/blog" className="text-sm font-bold text-[var(--dark-blue)] hover:text-[var(--electric-blue)] transition-colors">
+            Blog
+          </a>
           <a href="#faq" className="text-sm font-bold text-[var(--dark-blue)] hover:text-[var(--electric-blue)] transition-colors">
             {t("nav.faq")}
           </a>
@@ -72,6 +78,8 @@ export const Header = () => {
           <a href="/portfolio" onClick={() => setMobileOpen(false)} className="block text-sm font-bold text-[var(--dark-blue)]">{t("nav.portfolio")}</a>
           <a href="/about" onClick={() => setMobileOpen(false)} className="block text-sm font-bold text-[var(--dark-blue)]">{t("nav.about")}</a>
           <a href="#testimonials" onClick={() => setMobileOpen(false)} className="block text-sm font-bold text-[var(--dark-blue)]">{t("nav.testimonials")}</a>
+          <a href="/e-commerce" onClick={() => setMobileOpen(false)} className="block text-sm font-bold text-[var(--dark-blue)]">{lang === "en" ? "E-commerce" : "E-ticaret"}</a>
+          <a href="/blog" onClick={() => setMobileOpen(false)} className="block text-sm font-bold text-[var(--dark-blue)]">Blog</a>
           <a href="#faq" onClick={() => setMobileOpen(false)} className="block text-sm font-bold text-[var(--dark-blue)]">{t("nav.faq")}</a>
         </div>
       )}

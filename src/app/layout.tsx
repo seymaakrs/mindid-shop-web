@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
+import { Analytics } from "@/components/analytics";
 
 export const metadata: Metadata = {
   title: {
@@ -187,6 +188,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         />
       </head>
       <body className="antialiased">
+        <Analytics />
         <Providers>
           {children}
           <WhatsAppButton />
