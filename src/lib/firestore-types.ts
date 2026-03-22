@@ -152,9 +152,12 @@ export type OrderConfig = {
   revision?: { id: string; label: string; count: number; price: number };
   // Product photo fields
   productCount?: OrderConfigOption;
-  colorCount?: number;
+  photoAngle?: OrderConfigOption & { angleCount: number };
+  photoModel?: OrderConfigOption;
+  colorPackage?: OrderConfigOption & { includedColors: number };
   photoVisualStyle?: OrderConfigOption;
   background?: OrderConfigOption;
+  photoRetouch?: OrderConfigOption;
 };
 
 export type OrderPricing = {

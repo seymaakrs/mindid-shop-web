@@ -56,6 +56,29 @@ export type ProductCountOption = {
   price: number;
 };
 
+export type PhotoAngleOption = {
+  id: string;
+  label: string;
+  description: string;
+  angleCount: number;
+  price: number;
+};
+
+export type PhotoModelOption = {
+  id: string;
+  label: string;
+  description: string;
+  price: number;
+};
+
+export type ColorPackageOption = {
+  id: string;
+  label: string;
+  description: string;
+  includedColors: number;
+  price: number;
+};
+
 export type PhotoVisualStyle = {
   id: string;
   label: string;
@@ -64,6 +87,13 @@ export type PhotoVisualStyle = {
 };
 
 export type BackgroundOption = {
+  id: string;
+  label: string;
+  description: string;
+  price: number;
+};
+
+export type PhotoRetouchOption = {
   id: string;
   label: string;
   description: string;
@@ -81,7 +111,10 @@ export type ConfigState = {
   revision: RevisionPackage | null;
   // Product photo fields
   productCount: ProductCountOption | null;
-  colorCount: number | null;
+  photoAngle: PhotoAngleOption | null;
+  photoModel: PhotoModelOption | null;
+  colorPackage: ColorPackageOption | null;
   photoVisualStyle: PhotoVisualStyle | null;
   background: BackgroundOption | null;
+  photoRetouch: PhotoRetouchOption | null;
 };

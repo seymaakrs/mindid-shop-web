@@ -11,9 +11,12 @@ import {
   REVISION_PACKAGES,
   SERVICE_TYPES,
   PRODUCT_COUNT_OPTIONS,
-  COLOR_COUNT_UNIT_PRICE,
+  PHOTO_ANGLE_OPTIONS,
+  PHOTO_MODEL_OPTIONS,
+  COLOR_PACKAGE_OPTIONS,
   PHOTO_VISUAL_STYLE_OPTIONS,
   BACKGROUND_OPTIONS,
+  PHOTO_RETOUCH_OPTIONS,
 } from "@/lib/pricing-data";
 import type { ServiceType } from "@/lib/pricing-data";
 import { usePricing } from "@/lib/hooks/use-firestore";
@@ -36,6 +39,9 @@ import {
   Palette,
   Camera,
   ImageIcon,
+  ScanEye,
+  User,
+  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -56,9 +62,12 @@ const initialConfig: ConfigState = {
   revision: null,
   // Product photo fields
   productCount: null,
-  colorCount: null,
+  photoAngle: null,
+  photoModel: null,
+  colorPackage: null,
   photoVisualStyle: null,
   background: null,
+  photoRetouch: null,
 };
 
 export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
@@ -82,9 +91,12 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
 
   // Product photo options
   const productCountOptions = pricingConfig?.productCounts ?? PRODUCT_COUNT_OPTIONS;
-  const colorUnitPrice = pricingConfig?.colorCountUnitPrice ?? COLOR_COUNT_UNIT_PRICE;
+  const photoAngleOptions = PHOTO_ANGLE_OPTIONS;
+  const photoModelOptions = PHOTO_MODEL_OPTIONS;
+  const colorPackageOptions = COLOR_PACKAGE_OPTIONS;
   const photoVisualStyleOptions = pricingConfig?.photoVisualStyles ?? PHOTO_VISUAL_STYLE_OPTIONS;
   const backgroundOptions = pricingConfig?.backgrounds ?? BACKGROUND_OPTIONS;
+  const photoRetouchOptions = PHOTO_RETOUCH_OPTIONS;
 
   const service = services.find((s) => s.id === serviceId) as ServiceType | undefined;
   if (!service) return null;
@@ -108,10 +120,13 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
   let totalAI: number;
   if (isProductPhoto) {
     const productCountPrice = config.productCount?.price ?? 0;
-    const colorPrice = (config.colorCount ?? 0) * colorUnitPrice;
+    const anglePrice = config.photoAngle?.price ?? 0;
+    const modelPrice = config.photoModel?.price ?? 0;
+    const colorPkgPrice = config.colorPackage?.price ?? 0;
     const photoVisualPrice = config.photoVisualStyle?.price ?? 0;
     const bgPrice = config.background?.price ?? 0;
-    totalAI = basePrice + productCountPrice + colorPrice + photoVisualPrice + bgPrice + revisionPrice;
+    const retouchPrice = config.photoRetouch?.price ?? 0;
+    totalAI = basePrice + productCountPrice + anglePrice + modelPrice + colorPkgPrice + photoVisualPrice + bgPrice + retouchPrice + revisionPrice;
   } else {
     const durationPrice = config.duration?.basePrice ?? 0;
     const scenarioPrice = config.scenario?.price ?? 0;
@@ -202,15 +217,31 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
 
                 {config.productCount && (
                   <>
-                    {/* Color Count - free number input */}
-                    <NumberInput
-                      title={t("config.colorCount")}
-                      subtitle={t("config.colorCount.desc")}
+                    {/* Angle Count — YENİ */}
+                    <OptionCardGroup
+                      title={t("config.photoAngle")}
+                      icon={<ScanEye size={16} />}
+                      options={photoAngleOptions}
+                      selected={config.photoAngle}
+                      onSelect={(a) => setConfig((prev) => ({ ...prev, photoAngle: a }))}
+                    />
+
+                    {/* Model Type — YENİ */}
+                    <OptionCardGroup
+                      title={t("config.photoModel")}
+                      icon={<User size={16} />}
+                      options={photoModelOptions}
+                      selected={config.photoModel}
+                      onSelect={(m) => setConfig((prev) => ({ ...prev, photoModel: m }))}
+                    />
+
+                    {/* Color Package — YENİ (birim fiyat yerine paket) */}
+                    <OptionCardGroup
+                      title={t("config.colorPackage")}
                       icon={<Palette size={16} />}
-                      value={config.colorCount}
-                      onChange={(n) => setConfig((prev) => ({ ...prev, colorCount: n }))}
-                      unitPrice={colorUnitPrice}
-                      unitLabel={t("config.colorCount.unit")}
+                      options={colorPackageOptions}
+                      selected={config.colorPackage}
+                      onSelect={(c) => setConfig((prev) => ({ ...prev, colorPackage: c }))}
                     />
 
                     {/* Photo Visual Style */}
@@ -231,17 +262,26 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                       onSelect={(bg) => setConfig((prev) => ({ ...prev, background: bg }))}
                     />
 
+                    {/* Retouch — YENİ */}
+                    <OptionCardGroup
+                      title={t("config.photoRetouch")}
+                      icon={<Sparkles size={16} />}
+                      options={photoRetouchOptions}
+                      selected={config.photoRetouch}
+                      onSelect={(r) => setConfig((prev) => ({ ...prev, photoRetouch: r }))}
+                    />
+
                     {/* Revision (reused) */}
                     <OptionCardGroup
                       title={t("config.revision")}
                       icon={<RotateCcw size={16} />}
                       options={revisionPackages.map((r) => ({
                         ...r,
-                        description: `${r.count} revizyon hakki`,
+                        description: `${r.count >= 99 ? "Sınırsız" : r.count} revizyon hakkı`,
                       }))}
                       selected={
                         config.revision
-                          ? { ...config.revision, description: `${config.revision.count} revizyon hakki` }
+                          ? { ...config.revision, description: `${config.revision.count >= 99 ? "Sınırsız" : config.revision.count} revizyon hakkı` }
                           : null
                       }
                       onSelect={(r) => setConfig((prev) => ({
@@ -316,7 +356,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                       icon={<RotateCcw size={16} />}
                       options={revisionPackages.map((r) => ({
                         ...r,
-                        description: `${r.count} revizyon hakki`,
+                        description: `${r.count >= 99 ? "Sınırsız" : r.count} revizyon hakkı`,
                       }))}
                       selected={
                         config.revision
@@ -360,10 +400,22 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                           </span>
                         </div>
                       )}
-                      {(config.colorCount ?? 0) > 0 && (
+                      {config.photoAngle && config.photoAngle.price > 0 && (
                         <div className="flex justify-between text-sm">
-                          <span className="text-[var(--gray)]">{config.colorCount} renk</span>
-                          <span className="text-[var(--cream)] font-bold">+{formatPrice((config.colorCount ?? 0) * colorUnitPrice)}</span>
+                          <span className="text-[var(--gray)]">{config.photoAngle.label}</span>
+                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.photoAngle.price)}</span>
+                        </div>
+                      )}
+                      {config.photoModel && config.photoModel.price > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--gray)]">{config.photoModel.label}</span>
+                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.photoModel.price)}</span>
+                        </div>
+                      )}
+                      {config.colorPackage && config.colorPackage.price > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--gray)]">{config.colorPackage.label}</span>
+                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.colorPackage.price)}</span>
                         </div>
                       )}
                       {config.photoVisualStyle && config.photoVisualStyle.price > 0 && (
@@ -376,6 +428,12 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                         <div className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{config.background.label}</span>
                           <span className="text-[var(--cream)] font-bold">+{formatPrice(config.background.price)}</span>
+                        </div>
+                      )}
+                      {config.photoRetouch && config.photoRetouch.price > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--gray)]">{config.photoRetouch.label}</span>
+                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.photoRetouch.price)}</span>
                         </div>
                       )}
                     </>

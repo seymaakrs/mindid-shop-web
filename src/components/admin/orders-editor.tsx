@@ -229,14 +229,23 @@ export const OrdersEditor = () => {
                   {selected.config.productCount && (
                     <div className="flex justify-between"><span className="text-[var(--gray)]">Ürün Sayısı</span><span className="text-[var(--cream)]">{selected.config.productCount.label}</span></div>
                   )}
-                  {selected.config.colorCount != null && selected.config.colorCount > 0 && (
-                    <div className="flex justify-between"><span className="text-[var(--gray)]">Renk</span><span className="text-[var(--cream)]">{selected.config.colorCount} renk</span></div>
+                  {selected.config.photoAngle && (
+                    <div className="flex justify-between"><span className="text-[var(--gray)]">Çekim Açısı</span><span className="text-[var(--cream)]">{selected.config.photoAngle.label}</span></div>
+                  )}
+                  {selected.config.photoModel && (
+                    <div className="flex justify-between"><span className="text-[var(--gray)]">Model</span><span className="text-[var(--cream)]">{selected.config.photoModel.label}</span></div>
+                  )}
+                  {selected.config.colorPackage && (
+                    <div className="flex justify-between"><span className="text-[var(--gray)]">Renk Paketi</span><span className="text-[var(--cream)]">{selected.config.colorPackage.label}</span></div>
                   )}
                   {selected.config.photoVisualStyle && (
                     <div className="flex justify-between"><span className="text-[var(--gray)]">Fotoğraf Stili</span><span className="text-[var(--cream)]">{selected.config.photoVisualStyle.label}</span></div>
                   )}
                   {selected.config.background && (
                     <div className="flex justify-between"><span className="text-[var(--gray)]">Arka Plan</span><span className="text-[var(--cream)]">{selected.config.background.label}</span></div>
+                  )}
+                  {selected.config.photoRetouch && (
+                    <div className="flex justify-between"><span className="text-[var(--gray)]">Rötuş</span><span className="text-[var(--cream)]">{selected.config.photoRetouch.label}</span></div>
                   )}
                   {selected.config.revision && (
                     <div className="flex justify-between"><span className="text-[var(--gray)]">Revizyon</span><span className="text-[var(--cream)]">{selected.config.revision.label}</span></div>

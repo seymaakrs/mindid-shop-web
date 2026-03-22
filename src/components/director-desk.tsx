@@ -67,10 +67,13 @@ export const DirectorDesk = ({
     cards.push({ label: "Post", value: pp.label, color: "var(--lime)" });
   });
   // Product photo fields
-  if (config.productCount) cards.push({ label: "Urun Sayisi", value: config.productCount.label, color: "var(--lime)" });
-  if (config.colorCount && config.colorCount > 0) cards.push({ label: "Renk", value: `${config.colorCount} renk`, color: "var(--electric-blue)" });
-  if (config.photoVisualStyle) cards.push({ label: "Gorsel Stili", value: config.photoVisualStyle.label, color: "var(--lime)" });
+  if (config.productCount) cards.push({ label: "Ürün Sayısı", value: config.productCount.label, color: "var(--lime)" });
+  if (config.photoAngle) cards.push({ label: "Çekim Açısı", value: config.photoAngle.label, color: "var(--electric-blue)" });
+  if (config.photoModel) cards.push({ label: "Model", value: config.photoModel.label, color: "var(--lime)" });
+  if (config.colorPackage) cards.push({ label: "Renk Paketi", value: config.colorPackage.label, color: "var(--electric-blue)" });
+  if (config.photoVisualStyle) cards.push({ label: "Görsel Stili", value: config.photoVisualStyle.label, color: "var(--lime)" });
   if (config.background) cards.push({ label: "Arka Plan", value: config.background.label, color: "var(--electric-blue)" });
+  if (config.photoRetouch) cards.push({ label: "Rötuş", value: config.photoRetouch.label, color: "var(--lime)" });
   if (config.revision) cards.push({ label: "Revizyon", value: config.revision.label, color: "var(--electric-blue)" });
 
   return (

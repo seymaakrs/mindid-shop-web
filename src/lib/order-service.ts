@@ -47,14 +47,23 @@ const serializeConfig = (config: ConfigState): OrderConfig => {
   if (config.productCount) {
     result.productCount = { id: config.productCount.id, label: config.productCount.label, price: config.productCount.price };
   }
-  if (config.colorCount != null && config.colorCount > 0) {
-    result.colorCount = config.colorCount;
+  if (config.photoAngle) {
+    result.photoAngle = { id: config.photoAngle.id, label: config.photoAngle.label, price: config.photoAngle.price, angleCount: config.photoAngle.angleCount };
+  }
+  if (config.photoModel) {
+    result.photoModel = { id: config.photoModel.id, label: config.photoModel.label, price: config.photoModel.price };
+  }
+  if (config.colorPackage) {
+    result.colorPackage = { id: config.colorPackage.id, label: config.colorPackage.label, price: config.colorPackage.price, includedColors: config.colorPackage.includedColors };
   }
   if (config.photoVisualStyle) {
     result.photoVisualStyle = { id: config.photoVisualStyle.id, label: config.photoVisualStyle.label, price: config.photoVisualStyle.price };
   }
   if (config.background) {
     result.background = { id: config.background.id, label: config.background.label, price: config.background.price };
+  }
+  if (config.photoRetouch) {
+    result.photoRetouch = { id: config.photoRetouch.id, label: config.photoRetouch.label, price: config.photoRetouch.price };
   }
 
   return result;
