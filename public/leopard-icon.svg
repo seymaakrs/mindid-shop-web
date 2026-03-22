@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="95" fill="none" stroke="#111121" stroke-width="6"/>
+  <g transform="translate(45, 25) scale(0.55)">
+    <!-- Leopard body -->
+    <path d="M120,40 C80,30 50,50 40,90 C30,130 45,180 70,210 C80,222 95,228 110,225 C130,220 135,200 130,180 C125,160 140,150 150,140 C165,125 175,100 170,75 C165,50 145,35 120,40Z" fill="#c1ff72"/>
+    <!-- Tail -->
+    <path d="M130,180 C140,195 155,200 165,190 C175,180 170,165 158,162" fill="#c1ff72" stroke="#c1ff72" stroke-width="2"/>
+    <!-- Head outline -->
+    <path d="M155,65 C165,55 175,55 178,62 C181,69 175,78 168,80" fill="#c1ff72"/>
+    <path d="M170,55 C175,48 182,48 185,55 C188,62 183,68 178,68" fill="#c1ff72"/>
+    <!-- Ear left -->
+    <path d="M150,42 C148,32 155,25 162,30 C168,35 165,45 158,48" fill="#c1ff72"/>
+    <!-- Ear right -->
+    <path d="M168,38 C170,28 178,24 182,32 C186,40 180,48 174,46" fill="#c1ff72"/>
+    <!-- Eye -->
+    <circle cx="168" cy="65" r="4" fill="#111121"/>
+    <!-- Nose -->
+    <ellipse cx="182" cy="72" rx="3" ry="2" fill="#111121"/>
+    <!-- Whiskers -->
+    <line x1="185" y1="70" x2="200" y2="67" stroke="#111121" stroke-width="1.5"/>
+    <line x1="185" y1="73" x2="200" y2="73" stroke="#111121" stroke-width="1.5"/>
+    <line x1="185" y1="76" x2="198" y2="80" stroke="#111121" stroke-width="1.5"/>
+    <!-- Leopard spots -->
+    <path d="M80,70 C85,65 92,67 90,74 C88,81 80,80 78,75Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
+    <path d="M60,100 C65,94 74,96 72,104 C70,112 61,110 59,104Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
+    <path d="M100,95 C106,90 113,93 110,100 C107,107 99,105 98,99Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
+    <path d="M55,140 C60,134 68,137 66,144 C64,151 56,149 54,143Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
+    <path d="M85,140 C90,135 97,138 95,145 C93,152 85,150 83,144Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
+    <path d="M120,110 C125,105 132,108 130,115 C128,122 121,120 119,114Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
+    <path d="M70,170 C75,165 82,168 80,175 C78,182 71,179 69,174Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
+    <path d="M100,165 C105,160 112,163 110,170 C108,177 101,174 99,169Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
+    <path d="M140,85 C144,80 150,83 148,89 C146,95 140,93 139,88Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
+    <path d="M110,55 C114,50 120,53 118,59 C116,65 110,63 109,58Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
+    <path d="M75,200 C79,196 85,198 83,203 C81,208 76,207 74,203Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
+    <path d="M105,195 C109,191 115,193 113,198 C111,203 106,202 104,198Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

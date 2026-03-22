@@ -47,7 +47,7 @@ export const FAQSection = () => {
       }));
 
   return (
-    <section id="faq" className="relative py-16 z-10">
+    <section id="faq" className="relative py-16 z-10 leopard-pattern">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl font-black text-[var(--lime)] text-center mb-10">
           {t("faq.title")}

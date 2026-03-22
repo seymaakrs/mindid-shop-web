@@ -57,7 +57,7 @@ export const ServiceCards = () => {
   ];
 
   return (
-    <section id="services" className="relative py-20 z-10">
+    <section id="services" className="relative py-20 z-10 leopard-pattern">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* SEO headline */}
         <div className="text-center mb-12">
