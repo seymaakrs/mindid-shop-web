@@ -81,7 +81,7 @@ const jsonLd = {
   "@type": "ProfessionalService",
   name: "MindID",
   url: "https://mindid.shop",
-  logo: "https://mindid.shop/logo.png",
+  logo: "https://mindid.shop/leopard-icon.svg",
   description:
     "AI-powered ad film production, avatar creation, and e-commerce product visual studio. 70% cheaper than traditional production.",
   priceRange: "$$",

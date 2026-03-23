@@ -37,3 +37,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Deploy artifacts
+deploy-*.zip
+
+# Temporary fuse files
+.fuse_hidden*
+
+# Report files (generated)
+proje-raporu-*.md
+
+# Worktrees
+.claude/worktrees/
+
+# Temp files
+ziy0HXX6

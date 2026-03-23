@@ -24,10 +24,73 @@ const breadcrumb = {
   ],
 };
 
+// Organization Schema — GEO: Author Authority
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "MindID",
+  alternateName: "MindID Lab Technology",
+  url: "https://mindid.shop",
+  logo: "https://mindid.shop/leopard-icon.svg",
+  description:
+    "Türkiye merkezli yapay zeka reklam prodüksiyon ajansı. AI ile reklam filmi, dijital avatar ve e-ticaret ürün görseli üretimi.",
+  foundingDate: "2024",
+  areaServed: {
+    "@type": "GeoCircle",
+    geoMidpoint: { "@type": "GeoCoordinates", latitude: 41.0082, longitude: 28.9784 },
+    geoRadius: "5000000",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "İstanbul",
+    addressCountry: "TR",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    email: "seymaakrs@gmail.com",
+    telephone: "+905419315550",
+    availableLanguage: ["Turkish", "English"],
+  },
+  sameAs: ["https://instagram.com/mindid.shop"],
+  knowsAbout: [
+    "AI Ad Film Production",
+    "AI Avatar Creation",
+    "AI Product Photography",
+    "Generative AI",
+    "E-commerce Visual Production",
+    "Yapay Zeka Reklam Prodüksiyonu",
+  ],
+};
+
+// Founder Schema — GEO: Person authority signals
+const founderSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Seyma Akırsöz",
+  jobTitle: "Founder & Creative Director",
+  worksFor: {
+    "@type": "Organization",
+    name: "MindID",
+    url: "https://mindid.shop",
+  },
+  knowsAbout: [
+    "AI Production",
+    "Digital Marketing",
+    "Creative Direction",
+    "Generative AI",
+  ],
+};
+
 const AboutRoute = () => {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([breadcrumb, organizationSchema, founderSchema]),
+        }}
+      />
       <ParallaxGrid />
       <Header />
       <main>

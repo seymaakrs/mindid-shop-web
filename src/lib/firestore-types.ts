@@ -17,6 +17,14 @@ export type PortfolioItem = {
   order: number;
   visible: boolean;
   createdAt: Timestamp;
+  // SEO & GEO fields
+  slug?: string;
+  seoDescription?: string;
+  seoDescriptionEn?: string;
+  techniques?: string[];
+  clientName?: string;
+  duration?: string; // ISO 8601 e.g. "PT30S"
+  completedAt?: Timestamp;
 };
 
 export type SiteSettings = {

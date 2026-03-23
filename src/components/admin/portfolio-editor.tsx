@@ -30,6 +30,13 @@ const emptyItem: Omit<PortfolioItem, "id" | "createdAt"> = {
   category: "",
   order: 0,
   visible: true,
+  // SEO fields
+  slug: "",
+  seoDescription: "",
+  seoDescriptionEn: "",
+  techniques: [],
+  clientName: "",
+  duration: "PT30S",
 };
 
 export const PortfolioEditor = () => {
@@ -73,6 +80,12 @@ export const PortfolioEditor = () => {
       category: item.category,
       order: item.order,
       visible: item.visible,
+      slug: item.slug || "",
+      seoDescription: item.seoDescription || "",
+      seoDescriptionEn: item.seoDescriptionEn || "",
+      techniques: item.techniques || [],
+      clientName: item.clientName || "",
+      duration: item.duration || "PT30S",
     });
     setShowForm(true);
   };
@@ -109,6 +122,16 @@ export const PortfolioEditor = () => {
     { key: "order", label: "Sıra" },
     { key: "title", label: "Başlık" },
     { key: "category", label: "Kategori" },
+    {
+      key: "slug",
+      label: "SEO",
+      render: (item) =>
+        item.slug ? (
+          <span className="text-[var(--lime)] text-xs font-bold">✓</span>
+        ) : (
+          <span className="text-red-400 text-xs">—</span>
+        ),
+    },
     {
       key: "thumbnailUrl",
       label: "Görsel",
@@ -217,6 +240,71 @@ export const PortfolioEditor = () => {
                     onChange={(e) => setForm({ ...form, order: Number(e.target.value) })}
                     className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm focus:border-[var(--lime)] focus:outline-none"
                   />
+                </div>
+              </div>
+
+              {/* SEO Fields */}
+              <div className="border-t border-[var(--electric-blue)]/20 pt-3 mt-2">
+                <p className="text-xs font-bold text-[var(--lime)] mb-2">SEO Alanları</p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-[var(--gray)] mb-1">Slug (URL)</label>
+                    <input
+                      value={form.slug || ""}
+                      onChange={(e) => setForm({ ...form, slug: e.target.value })}
+                      className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm focus:border-[var(--lime)] focus:outline-none"
+                      placeholder="ai-reklam-filmi-x-markasi"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-[var(--gray)] mb-1">Müşteri Adı</label>
+                    <input
+                      value={form.clientName || ""}
+                      onChange={(e) => setForm({ ...form, clientName: e.target.value })}
+                      className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm focus:border-[var(--lime)] focus:outline-none"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3 mt-2">
+                  <div>
+                    <label className="block text-xs font-bold text-[var(--gray)] mb-1">SEO Açıklama (TR)</label>
+                    <textarea
+                      value={form.seoDescription || ""}
+                      onChange={(e) => setForm({ ...form, seoDescription: e.target.value })}
+                      rows={2}
+                      className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm focus:border-[var(--lime)] focus:outline-none resize-none"
+                      placeholder="Google ve AI arama için optimize açıklama"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-[var(--gray)] mb-1">SEO Açıklama (EN)</label>
+                    <textarea
+                      value={form.seoDescriptionEn || ""}
+                      onChange={(e) => setForm({ ...form, seoDescriptionEn: e.target.value })}
+                      rows={2}
+                      className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm focus:border-[var(--lime)] focus:outline-none resize-none"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3 mt-2">
+                  <div>
+                    <label className="block text-xs font-bold text-[var(--gray)] mb-1">AI Teknikleri (virgülle ayır)</label>
+                    <input
+                      value={(form.techniques || []).join(", ")}
+                      onChange={(e) => setForm({ ...form, techniques: e.target.value.split(",").map((s) => s.trim()).filter(Boolean) })}
+                      className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm focus:border-[var(--lime)] focus:outline-none"
+                      placeholder="Stable Diffusion, RunwayML, ElevenLabs"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-[var(--gray)] mb-1">Video Süresi (ISO)</label>
+                    <input
+                      value={form.duration || ""}
+                      onChange={(e) => setForm({ ...form, duration: e.target.value })}
+                      className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm focus:border-[var(--lime)] focus:outline-none"
+                      placeholder="PT30S, PT1M, PT2M30S"
+                    />
+                  </div>
                 </div>
               </div>
 

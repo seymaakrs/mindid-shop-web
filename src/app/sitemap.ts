@@ -1,7 +1,26 @@
 import type { MetadataRoute } from "next";
+import { getPortfolioItems } from "@/lib/portfolio-server";
 
-const sitemap = (): MetadataRoute.Sitemap => {
+const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const baseUrl = "https://mindid.shop";
+
+  // Fetch portfolio items for dynamic URLs
+  let portfolioEntries: MetadataRoute.Sitemap = [];
+  try {
+    const items = await getPortfolioItems();
+    portfolioEntries = items
+      .filter((item) => item.slug)
+      .map((item) => ({
+        url: `${baseUrl}/portfolio/${item.slug}`,
+        lastModified: item.completedAt
+          ? new Date(item.completedAt as unknown as string)
+          : new Date(),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      }));
+  } catch {
+    // Portfolio fetch failed — continue with static entries
+  }
 
   return [
     // Ana sayfalar
@@ -24,6 +43,9 @@ const sitemap = (): MetadataRoute.Sitemap => {
     { url: `${baseUrl}/ai-vs-traditional`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/how-it-works`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/e-commerce`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+
+    // Dinamik portfolyo proje sayfaları
+    ...portfolioEntries,
   ];
 };
 
