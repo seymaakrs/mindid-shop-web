@@ -136,11 +136,11 @@ export const Footer = () => {
         <div className="border-t border-[var(--electric-blue)]/15 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <Image
-              src="/leopard-icon.png"
+              src="/favicon.png"
               alt="MindID"
               width={36}
               height={36}
-              className="h-9 w-9"
+              className="h-9 w-9 rounded-full"
             />
             <div className="flex flex-col">
               <span className="text-sm font-black text-[var(--lime)] leading-tight">

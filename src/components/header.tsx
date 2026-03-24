@@ -30,11 +30,11 @@ export const Header = () => {
         {/* Logo */}
         <a href="/" className="flex items-center gap-3">
           <Image
-            src="/leopard-icon.png"
+            src="/favicon.png"
             alt="MindID"
             width={44}
             height={44}
-            className={`transition-all duration-300 ${scrolled ? "h-9 w-9" : "h-11 w-11"}`}
+            className={`rounded-full transition-all duration-300 ${scrolled ? "h-9 w-9" : "h-11 w-11"}`}
             priority
           />
           <div className="flex flex-col">
