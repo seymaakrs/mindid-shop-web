@@ -104,7 +104,7 @@ const PortfolioDetailPage = async ({
         name: item.title,
         description:
           item.seoDescription || item.description || `${item.title} — MindID AI prodüksiyon`,
-        thumbnailUrl: item.thumbnailUrl || "https://mindid.shop/og-image.jpg",
+        thumbnailUrl: item.thumbnailUrl || "https://mindid.shop/og-image.png",
         uploadDate:
           (item.completedAt as unknown as string) ||
           (item.createdAt as unknown as string) ||
@@ -122,7 +122,7 @@ const PortfolioDetailPage = async ({
           name: "MindID",
           logo: {
             "@type": "ImageObject",
-            url: "https://mindid.shop/leopard-icon.svg",
+            url: "https://mindid.shop/leopard-icon.png",
           },
         },
       }

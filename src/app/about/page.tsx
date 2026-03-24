@@ -31,7 +31,7 @@ const organizationSchema = {
   name: "MindID",
   alternateName: "MindID Lab Technology",
   url: "https://mindid.shop",
-  logo: "https://mindid.shop/leopard-icon.svg",
+  logo: "https://mindid.shop/leopard-icon.png",
   description:
     "Türkiye merkezli yapay zeka reklam prodüksiyon ajansı. AI ile reklam filmi, dijital avatar ve e-ticaret ürün görseli üretimi.",
   foundingDate: "2024",
@@ -48,7 +48,7 @@ const organizationSchema = {
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
-    email: "seymaakrs@gmail.com",
+    email: "seyma@mindid.shop",
     telephone: "+905419315550",
     availableLanguage: ["Turkish", "English"],
   },

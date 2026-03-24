@@ -45,7 +45,7 @@ export const metadata: Metadata = {
       "Yapay zeka ile reklam filmi, avatar oluşturma ve ürün görseli üretimi. %70 maliyet tasarrufu. 399₺'den başlayan fiyatlar.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "MindID — AI Reklam Prodüksiyon Stüdyosu",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     title: "MindID — AI Reklam Filmleri & Ürün Görselleri",
     description:
       "AI ile reklam filmi ve ürün görseli üretimi. Stüdyo kalitesinde, %70 daha az maliyet.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -73,6 +73,10 @@ export const metadata: Metadata = {
   verification: {
     google: "MLXSwSijfsaWlpYKCPsoqwo66ZVBY0HsJBxqhCI9b6k",
   },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 // Schema.org Structured Data — GEO için kritik
@@ -81,7 +85,7 @@ const jsonLd = {
   "@type": "ProfessionalService",
   name: "MindID",
   url: "https://mindid.shop",
-  logo: "https://mindid.shop/leopard-icon.svg",
+  logo: "https://mindid.shop/leopard-icon.png",
   description:
     "AI-powered ad film production, avatar creation, and e-commerce product visual studio. 70% cheaper than traditional production.",
   priceRange: "$$",

@@ -1,37 +1,97 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <circle cx="100" cy="100" r="95" fill="none" stroke="#111121" stroke-width="6"/>
-  <g transform="translate(45, 25) scale(0.55)">
-    <!-- Leopard body -->
-    <path d="M120,40 C80,30 50,50 40,90 C30,130 45,180 70,210 C80,222 95,228 110,225 C130,220 135,200 130,180 C125,160 140,150 150,140 C165,125 175,100 170,75 C165,50 145,35 120,40Z" fill="#c1ff72"/>
-    <!-- Tail -->
-    <path d="M130,180 C140,195 155,200 165,190 C175,180 170,165 158,162" fill="#c1ff72" stroke="#c1ff72" stroke-width="2"/>
-    <!-- Head outline -->
-    <path d="M155,65 C165,55 175,55 178,62 C181,69 175,78 168,80" fill="#c1ff72"/>
-    <path d="M170,55 C175,48 182,48 185,55 C188,62 183,68 178,68" fill="#c1ff72"/>
-    <!-- Ear left -->
-    <path d="M150,42 C148,32 155,25 162,30 C168,35 165,45 158,48" fill="#c1ff72"/>
-    <!-- Ear right -->
-    <path d="M168,38 C170,28 178,24 182,32 C186,40 180,48 174,46" fill="#c1ff72"/>
-    <!-- Eye -->
-    <circle cx="168" cy="65" r="4" fill="#111121"/>
+  <!-- Clip to circle -->
+  <defs>
+    <clipPath id="circleClip">
+      <circle cx="100" cy="100" r="94"/>
+    </clipPath>
+  </defs>
+
+  <!-- White/light background circle -->
+  <circle cx="100" cy="100" r="94" fill="#f0f0ee"/>
+
+  <g clip-path="url(#circleClip)">
+    <!-- Leopard neck/body from bottom-left -->
+    <path d="M-10,60 C-5,45 15,35 35,38 C55,41 65,55 68,75 L72,95 L68,130 C65,155 55,175 40,185 C25,195 5,195 -10,185 L-10,60Z" fill="#6CCF20" stroke="#222" stroke-width="2"/>
+
+    <!-- Body leopard spots (rosettes) -->
+    <path d="M15,65 C20,60 28,62 26,70 C24,78 16,76 14,69Z" fill="none" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M5,90 C10,84 19,87 17,95 C15,103 6,100 4,93Z" fill="none" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M30,80 C35,75 42,78 40,85 C38,92 31,89 29,83Z" fill="none" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M20,110 C25,105 32,107 30,114 C28,121 21,119 19,113Z" fill="none" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M45,100 C49,96 55,98 53,104 C51,110 46,108 44,103Z" fill="none" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M8,130 C13,125 20,127 18,134 C16,141 9,139 7,133Z" fill="none" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M35,130 C39,126 45,128 43,134 C41,140 36,138 34,133Z" fill="none" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M15,150 C19,146 25,148 23,154 C21,160 16,158 14,153Z" fill="none" stroke="#222" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M50,120 C53,117 58,119 56,124 C54,129 51,127 49,123Z" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Head shape - profile facing right -->
+    <path d="M68,75 C72,60 82,48 98,42 C112,37 128,40 140,50 C152,60 156,78 150,92 C146,102 138,110 126,114 C114,118 100,116 88,110 C76,104 68,92 68,75Z" fill="#6CCF20" stroke="#222" stroke-width="2.2"/>
+
+    <!-- Left ear -->
+    <path d="M88,38 C86,25 92,16 102,20 C110,24 108,36 100,40Z" fill="#6CCF20" stroke="#222" stroke-width="2"/>
+    <path d="M92,33 C91,27 94,22 99,24 C103,27 102,34 98,36Z" fill="#4AA510"/>
+
+    <!-- Right ear -->
+    <path d="M118,30 C120,17 128,12 135,18 C140,24 136,36 128,38Z" fill="#6CCF20" stroke="#222" stroke-width="2"/>
+    <path d="M122,27 C123,21 127,17 132,21 C135,25 133,32 128,33Z" fill="#4AA510"/>
+
+    <!-- Brow/forehead detail -->
+    <path d="M95,52 C100,48 110,46 120,48 C130,50 138,55 142,62" fill="none" stroke="#222" stroke-width="1.5"/>
+
+    <!-- Eye area -->
+    <ellipse cx="120" cy="64" rx="8" ry="7" fill="white" stroke="#222" stroke-width="2"/>
+    <ellipse cx="122" cy="64" rx="4.5" ry="4.5" fill="#222"/>
+    <circle cx="124" cy="62" r="1.5" fill="white"/>
+
+    <!-- Nose bridge line -->
+    <path d="M136,58 C142,65 148,72 150,80" fill="none" stroke="#222" stroke-width="1.8"/>
+
+    <!-- Snout/muzzle -->
+    <path d="M140,82 C148,76 158,78 160,86 C162,94 155,100 147,98 C140,96 136,90 140,82Z" fill="#6CCF20" stroke="#222" stroke-width="2"/>
+
     <!-- Nose -->
-    <ellipse cx="182" cy="72" rx="3" ry="2" fill="#111121"/>
+    <path d="M155,84 C158,81 162,82 163,86 C164,90 160,92 157,91 C154,90 153,87 155,84Z" fill="#222"/>
+
+    <!-- Mouth -->
+    <path d="M157,92 C154,97 150,100 146,100" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round"/>
+    <path d="M150,96 C148,100 144,102 140,102" fill="none" stroke="#222" stroke-width="1.5" stroke-linecap="round"/>
+
+    <!-- Chin -->
+    <path d="M140,102 C134,108 126,112 118,114" fill="none" stroke="#222" stroke-width="1.5"/>
+
     <!-- Whiskers -->
-    <line x1="185" y1="70" x2="200" y2="67" stroke="#111121" stroke-width="1.5"/>
-    <line x1="185" y1="73" x2="200" y2="73" stroke="#111121" stroke-width="1.5"/>
-    <line x1="185" y1="76" x2="198" y2="80" stroke="#111121" stroke-width="1.5"/>
-    <!-- Leopard spots -->
-    <path d="M80,70 C85,65 92,67 90,74 C88,81 80,80 78,75Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
-    <path d="M60,100 C65,94 74,96 72,104 C70,112 61,110 59,104Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
-    <path d="M100,95 C106,90 113,93 110,100 C107,107 99,105 98,99Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
-    <path d="M55,140 C60,134 68,137 66,144 C64,151 56,149 54,143Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
-    <path d="M85,140 C90,135 97,138 95,145 C93,152 85,150 83,144Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
-    <path d="M120,110 C125,105 132,108 130,115 C128,122 121,120 119,114Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
-    <path d="M70,170 C75,165 82,168 80,175 C78,182 71,179 69,174Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
-    <path d="M100,165 C105,160 112,163 110,170 C108,177 101,174 99,169Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
-    <path d="M140,85 C144,80 150,83 148,89 C146,95 140,93 139,88Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
-    <path d="M110,55 C114,50 120,53 118,59 C116,65 110,63 109,58Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
-    <path d="M75,200 C79,196 85,198 83,203 C81,208 76,207 74,203Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
-    <path d="M105,195 C109,191 115,193 113,198 C111,203 106,202 104,198Z" fill="none" stroke="#111121" stroke-width="3" stroke-linecap="round"/>
+    <line x1="162" y1="86" x2="185" y2="80" stroke="#222" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="163" y1="90" x2="188" y2="88" stroke="#222" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="162" y1="94" x2="186" y2="96" stroke="#222" stroke-width="1.5" stroke-linecap="round"/>
+
+    <!-- Head spots -->
+    <circle cx="100" cy="55" r="3" fill="#222" opacity="0.65"/>
+    <circle cx="110" cy="50" r="2.5" fill="#222" opacity="0.65"/>
+    <circle cx="130" cy="52" r="2.5" fill="#222" opacity="0.65"/>
+    <circle cx="108" cy="68" r="3" fill="#222" opacity="0.6"/>
+    <circle cx="96" cy="72" r="2.5" fill="#222" opacity="0.6"/>
+    <circle cx="135" cy="70" r="2" fill="#222" opacity="0.6"/>
+    <circle cx="115" cy="80" r="2.5" fill="#222" opacity="0.6"/>
+    <circle cx="100" cy="85" r="2.5" fill="#222" opacity="0.55"/>
+    <circle cx="128" cy="84" r="2" fill="#222" opacity="0.55"/>
+    <circle cx="142" cy="72" r="2" fill="#222" opacity="0.6"/>
+    <circle cx="88" cy="62" r="2" fill="#222" opacity="0.55"/>
+    <circle cx="112" cy="95" r="2.5" fill="#222" opacity="0.55"/>
+    <circle cx="125" cy="98" r="2" fill="#222" opacity="0.5"/>
+    <circle cx="96" cy="98" r="2" fill="#222" opacity="0.5"/>
+    <circle cx="82" cy="80" r="2.5" fill="#222" opacity="0.5"/>
+    <circle cx="78" cy="95" r="2" fill="#222" opacity="0.45"/>
+    <circle cx="140" cy="60" r="1.8" fill="#222" opacity="0.6"/>
   </g>
+
+  <!-- Circle border (on top) -->
+  <circle cx="100" cy="100" r="94" fill="none" stroke="#222" stroke-width="2.5"/>
+
+  <!-- "REKLAM AJANSI" text curved at bottom -->
+  <defs>
+    <path id="bottomArc" d="M28,155 A82,82 0 0,0 172,155"/>
+  </defs>
+  <text font-family="'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="15.5" fill="#222" letter-spacing="2.5">
+    <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">REKLAM AJANSI</textPath>
+  </text>
 </svg>

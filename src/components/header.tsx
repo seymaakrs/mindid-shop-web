@@ -30,7 +30,7 @@ export const Header = () => {
         {/* Logo */}
         <a href="/" className="flex items-center gap-3">
           <Image
-            src="/leopard-icon.svg"
+            src="/leopard-icon.png"
             alt="MindID"
             width={44}
             height={44}
