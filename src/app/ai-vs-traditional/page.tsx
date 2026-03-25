@@ -49,7 +49,7 @@ const AiVsTraditionalRoute = () => {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <ParallaxGrid />
       <Header />
-      <main>
+      <main id="main-content">
         <AiVsTraditionalPage />
       </main>
       <Footer />

@@ -68,6 +68,7 @@ export const TestimonialsSection = () => {
             <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[var(--dark-blue)] to-transparent z-10 flex items-center">
               <button
                 onClick={() => scroll("left")}
+                aria-label="Önceki yorumlar"
                 className="w-10 h-10 rounded-full bg-[var(--lime)] border-2 border-[var(--dark-blue)] flex items-center justify-center ml-1 cursor-pointer hover:scale-110 transition-transform shadow-lg"
               >
                 <ArrowRight size={18} className="text-[var(--dark-blue)] rotate-180" />
@@ -80,6 +81,7 @@ export const TestimonialsSection = () => {
             <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[var(--dark-blue)] to-transparent z-10 flex items-center justify-end">
               <button
                 onClick={() => scroll("right")}
+                aria-label="Sonraki yorumlar"
                 className="w-10 h-10 rounded-full bg-[var(--lime)] border-2 border-[var(--dark-blue)] flex items-center justify-center mr-1 cursor-pointer hover:scale-110 transition-transform shadow-lg"
               >
                 <ArrowRight size={18} className="text-[var(--dark-blue)]" />

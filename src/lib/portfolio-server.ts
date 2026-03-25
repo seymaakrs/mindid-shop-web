@@ -1,60 +1,124 @@
-import { initializeApp, getApps, getApp, type FirebaseApp } from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  query,
-  where,
-  orderBy,
-  limit,
-  type Firestore,
-} from "firebase/firestore";
 import type { PortfolioItem } from "./firestore-types";
 
-// Server-side Firebase instance (no auth needed for public reads)
-const getServerFirestore = (): Firestore => {
-  const config = {
-    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  };
+const PROJECT_ID = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "mindid-75079";
 
-  let app: FirebaseApp;
-  const serverAppName = "server";
-  const existing = getApps().find((a) => a.name === serverAppName);
-  if (existing) {
-    app = existing;
-  } else {
-    app = initializeApp(config, serverAppName);
+/**
+ * Firestore REST API base URL
+ * More reliable than JS SDK in server/edge environments (Netlify, Vercel, etc.)
+ */
+const FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
+
+// Cache to avoid re-fetching within the same request cycle
+let cachedItems: PortfolioItem[] | null = null;
+let cacheTime = 0;
+const CACHE_TTL = 60_000; // 1 minute
+
+/**
+ * Parse a Firestore REST document into a plain object
+ */
+const parseFirestoreDoc = (
+  doc: Record<string, unknown>,
+): Record<string, unknown> => {
+  const fields = doc.fields as Record<string, Record<string, unknown>> | undefined;
+  if (!fields) return {};
+
+  const result: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(fields)) {
+    if ("stringValue" in value) result[key] = value.stringValue;
+    else if ("integerValue" in value) result[key] = Number(value.integerValue);
+    else if ("doubleValue" in value) result[key] = Number(value.doubleValue);
+    else if ("booleanValue" in value) result[key] = value.booleanValue;
+    else if ("timestampValue" in value) result[key] = value.timestampValue;
+    else if ("nullValue" in value) result[key] = null;
+    else if ("arrayValue" in value) {
+      const arr = value.arrayValue as { values?: Record<string, unknown>[] };
+      result[key] = (arr.values || []).map((v) => {
+        if ("stringValue" in v) return v.stringValue;
+        if ("integerValue" in v) return Number(v.integerValue);
+        if ("mapValue" in v) return parseFirestoreDoc(v.mapValue as Record<string, unknown>);
+        return null;
+      });
+    } else if ("mapValue" in value) {
+      result[key] = parseFirestoreDoc(value.mapValue as Record<string, unknown>);
+    }
   }
-  return getFirestore(app);
+  return result;
 };
 
 /**
- * Fetch all visible portfolio items (server-side, for SSG/SSR)
+ * Extract document ID from Firestore REST document name
+ */
+const getDocId = (doc: Record<string, unknown>): string => {
+  const name = doc.name as string;
+  return name.split("/").pop() || "";
+};
+
+/**
+ * Fetch all visible portfolio items (server-side, using REST API)
+ * Uses Firestore REST API for reliable server-side data fetching
  */
 export const getPortfolioItems = async (): Promise<PortfolioItem[]> => {
+  // Check cache
+  if (cachedItems && Date.now() - cacheTime < CACHE_TTL) {
+    return cachedItems;
+  }
+
   try {
-    const db = getServerFirestore();
-    const q = query(
-      collection(db, "mindid_portfolio"),
-      where("visible", "==", true),
-      orderBy("order", "asc"),
-    );
-    const snap = await getDocs(q);
-    return snap.docs.map((d) => {
-      const data = d.data();
-      return {
-        id: d.id,
-        ...data,
-        // Serialize Timestamps to plain objects for Next.js
-        createdAt: data.createdAt?.toDate?.()?.toISOString?.() ?? null,
-        completedAt: data.completedAt?.toDate?.()?.toISOString?.() ?? null,
-      } as unknown as PortfolioItem;
+    // Use Firestore REST API structured query
+    const url = `${FIRESTORE_BASE}:runQuery`;
+    const body = {
+      structuredQuery: {
+        from: [{ collectionId: "mindid_portfolio" }],
+        where: {
+          fieldFilter: {
+            field: { fieldPath: "visible" },
+            op: "EQUAL",
+            value: { booleanValue: true },
+          },
+        },
+        orderBy: [
+          {
+            field: { fieldPath: "order" },
+            direction: "ASCENDING",
+          },
+        ],
+      },
+    };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      next: { revalidate: 300 }, // Revalidate every 5 minutes
     });
+
+    if (!response.ok) {
+      console.error("Firestore REST API error:", response.status, await response.text());
+      return [];
+    }
+
+    const results = (await response.json()) as Array<{
+      document?: Record<string, unknown>;
+    }>;
+
+    const items = results
+      .filter((r) => r.document)
+      .map((r) => {
+        const doc = r.document!;
+        const data = parseFirestoreDoc(doc);
+        return {
+          id: getDocId(doc),
+          ...data,
+          createdAt: data.createdAt || null,
+          completedAt: data.completedAt || null,
+        } as unknown as PortfolioItem;
+      });
+
+    // Update cache
+    cachedItems = items;
+    cacheTime = Date.now();
+
+    return items;
   } catch (err) {
     console.error("Failed to fetch portfolio items:", err);
     return [];
@@ -68,22 +132,56 @@ export const getPortfolioItemBySlug = async (
   slug: string,
 ): Promise<PortfolioItem | null> => {
   try {
-    const db = getServerFirestore();
-    const q = query(
-      collection(db, "mindid_portfolio"),
-      where("slug", "==", slug),
-      where("visible", "==", true),
-      limit(1),
-    );
-    const snap = await getDocs(q);
-    if (snap.empty) return null;
-    const d = snap.docs[0];
-    const data = d.data();
+    const url = `${FIRESTORE_BASE}:runQuery`;
+    const body = {
+      structuredQuery: {
+        from: [{ collectionId: "mindid_portfolio" }],
+        where: {
+          compositeFilter: {
+            op: "AND",
+            filters: [
+              {
+                fieldFilter: {
+                  field: { fieldPath: "slug" },
+                  op: "EQUAL",
+                  value: { stringValue: slug },
+                },
+              },
+              {
+                fieldFilter: {
+                  field: { fieldPath: "visible" },
+                  op: "EQUAL",
+                  value: { booleanValue: true },
+                },
+              },
+            ],
+          },
+        },
+        limit: 1,
+      },
+    };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      next: { revalidate: 300 },
+    });
+
+    if (!response.ok) return null;
+
+    const results = (await response.json()) as Array<{
+      document?: Record<string, unknown>;
+    }>;
+    const found = results.find((r) => r.document);
+    if (!found?.document) return null;
+
+    const data = parseFirestoreDoc(found.document);
     return {
-      id: d.id,
+      id: getDocId(found.document),
       ...data,
-      createdAt: data.createdAt?.toDate?.()?.toISOString?.() ?? null,
-      completedAt: data.completedAt?.toDate?.()?.toISOString?.() ?? null,
+      createdAt: data.createdAt || null,
+      completedAt: data.completedAt || null,
     } as unknown as PortfolioItem;
   } catch (err) {
     console.error("Failed to fetch portfolio item by slug:", err);

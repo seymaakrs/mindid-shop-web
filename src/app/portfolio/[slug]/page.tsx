@@ -44,7 +44,7 @@ export const generateMetadata = async ({
       canonical: `https://mindid.shop/portfolio/${slug}`,
       languages: {
         "tr-TR": `https://mindid.shop/portfolio/${slug}`,
-        "en-US": `https://mindid.shop/portfolio/${slug}`,
+        "en-US": `https://mindid.shop/en/portfolio/${slug}`,
       },
     },
     openGraph: {
@@ -58,6 +58,8 @@ export const generateMetadata = async ({
     },
     twitter: {
       card: "summary_large_image",
+      site: "@mindidshop",
+      creator: "@mindidshop",
       title: item.titleEn || item.title,
       description: descriptionEn,
       images: item.thumbnailUrl ? [item.thumbnailUrl] : undefined,
@@ -156,6 +158,38 @@ const PortfolioDetailPage = async ({
       .join(", "),
   };
 
+  // --- JSON-LD: FAQPage (mini FAQ on detail page) ---
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: `Bu ${catLabel.tr.toLowerCase()} nasıl üretildi?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `MindID'in yapay zeka prodüksiyon hattı kullanılarak üretilmiştir. Geleneksel stüdyo, ekipman veya oyuncu gerekmeden, AI teknolojileri ile profesyonel kalitede sonuç elde edilmiştir.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Benzer bir proje ne kadar sürer?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "AI prodüksiyon ile benzer projeler genellikle 24-72 saat içinde teslim edilir. Geleneksel yöntemlerle aynı kalite 2-4 hafta sürecektir.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Fiyatlandırma nasıl çalışır?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "MindID'de konfigüratör üzerinden ihtiyacınıza göre seçim yapabilirsiniz. Fiyatlar proje türü, süre ve ek seçeneklere göre belirlenir. Geleneksel yöntemlere göre %70'e varan tasarruf sağlanır.",
+        },
+      },
+    ],
+  };
+
   // --- JSON-LD: Breadcrumb ---
   const breadcrumb = {
     "@context": "https://schema.org",
@@ -186,6 +220,7 @@ const PortfolioDetailPage = async ({
           __html: JSON.stringify([
             breadcrumb,
             creativeWorkSchema,
+            faqSchema,
             ...(videoSchema ? [videoSchema] : []),
           ]),
         }}
@@ -194,7 +229,7 @@ const PortfolioDetailPage = async ({
       <ParallaxGrid />
       <Header />
 
-      <main className="relative z-10 min-h-screen">
+      <main id="main-content" className="relative z-10 min-h-screen">
         <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Breadcrumb navigation */}
           <nav aria-label="Breadcrumb" className="mb-6">

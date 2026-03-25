@@ -37,7 +37,7 @@ const BlogRoute = () => {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <ParallaxGrid />
       <Header />
-      <main>
+      <main id="main-content">
         <BlogListPage />
       </main>
       <Footer />

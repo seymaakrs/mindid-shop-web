@@ -15,10 +15,22 @@ export const metadata: Metadata = {
     "ai ürün fotoğrafı nasıl çekilir",
     "how AI ad film production works",
   ],
+  alternates: {
+    canonical: "https://mindid.shop/how-it-works",
+    languages: { "tr-TR": "https://mindid.shop/how-it-works", "en-US": "https://mindid.shop/en/how-it-works" },
+  },
   openGraph: {
     title: "How It Works — AI Ad Film, Avatar & Product Visual Process",
     description:
       "Step-by-step guide: How MindID produces AI ad films, creates digital avatars, and generates e-commerce product visuals.",
+    url: "https://mindid.shop/how-it-works",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@mindidshop",
+    creator: "@mindidshop",
+    title: "AI Reklam Nasıl Yapılır? | MindID",
+    description: "MindID'de AI reklam filmi, avatar ve ürün görseli üretim süreci.",
   },
 };
 
@@ -53,7 +65,7 @@ const HowItWorksRoute = () => {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
       <ParallaxGrid />
       <Header />
-      <main>
+      <main id="main-content">
         <HowItWorksPage />
       </main>
       <Footer />

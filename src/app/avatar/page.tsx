@@ -9,10 +9,22 @@ export const metadata: Metadata = {
   description:
     "Yapay zeka ile dijital avatar oluşturun. Marka yüzü, sunucu, influencer avatar — gerçekçi ve profesyonel. 5.999₺'den başlayan fiyatlar.",
   keywords: ["ai avatar oluşturma", "yapay zeka avatar", "dijital sunucu", "AI avatar creator", "digital presenter"],
+  alternates: {
+    canonical: "https://mindid.shop/avatar",
+    languages: { "tr-TR": "https://mindid.shop/avatar", "en-US": "https://mindid.shop/en/avatar" },
+  },
   openGraph: {
     title: "AI Avatar Creation — Digital Presenter & Brand Face",
     description:
       "Create realistic AI avatars for your brand. Digital presenter, spokesperson, influencer avatar. From ₺5,999.",
+    url: "https://mindid.shop/avatar",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@mindidshop",
+    creator: "@mindidshop",
+    title: "AI Avatar Oluşturma | MindID",
+    description: "Yapay zeka ile dijital avatar — marka yüzü, sunucu, influencer avatar.",
   },
 };
 
@@ -50,7 +62,7 @@ const AvatarRoute = () => {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <ParallaxGrid />
       <Header />
-      <main>
+      <main id="main-content">
         <AvatarPage />
       </main>
       <Footer />

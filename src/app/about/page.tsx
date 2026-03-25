@@ -8,10 +8,22 @@ export const metadata: Metadata = {
   title: "MindID Hakkında — AI Reklam Filmi & Görsel Üretim Ajansı",
   description:
     "MindID, yapay zeka ile reklam filmi, dijital avatar ve e-ticaret ürün görseli üreten bir prodüksiyon ajansıdır. Geleneksel prodüksiyona göre %70 maliyet tasarrufu.",
+  alternates: {
+    canonical: "https://mindid.shop/about",
+    languages: { "tr-TR": "https://mindid.shop/about", "en-US": "https://mindid.shop/en/about" },
+  },
   openGraph: {
     title: "About MindID — AI Ad Film & Visual Production Agency",
     description:
       "AI-powered ad film production, avatar creation, and e-commerce product visuals. 70% cheaper than traditional production.",
+    url: "https://mindid.shop/about",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@mindidshop",
+    creator: "@mindidshop",
+    title: "MindID Hakkında — AI Reklam Ajansı",
+    description: "Yapay zeka ile reklam filmi ve ürün görseli üreten prodüksiyon ajansı.",
   },
 };
 
@@ -93,7 +105,7 @@ const AboutRoute = () => {
       />
       <ParallaxGrid />
       <Header />
-      <main>
+      <main id="main-content">
         <AboutPage />
       </main>
       <Footer />

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     canonical: "https://mindid.shop/portfolio",
     languages: {
       "tr-TR": "https://mindid.shop/portfolio",
-      "en-US": "https://mindid.shop/portfolio",
+      "en-US": "https://mindid.shop/en/portfolio",
     },
   },
   openGraph: {
@@ -25,6 +25,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@mindidshop",
+    creator: "@mindidshop",
     title: "AI Reklam Portföyü | MindID",
     description:
       "Yapay zeka ile üretilen reklam filmleri, dijital avatarlar ve ürün görselleri.",
@@ -105,7 +107,7 @@ const PortfolioRoute = async () => {
       />
       <ParallaxGrid />
       <Header />
-      <main>
+      <main id="main-content">
         <PortfolioPage />
       </main>
       <Footer />

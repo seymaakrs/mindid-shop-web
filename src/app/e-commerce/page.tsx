@@ -19,10 +19,22 @@ export const metadata: Metadata = {
     "stüdyo olmadan ürün görseli",
     "ucuz ürün fotoğrafçılığı",
   ],
+  alternates: {
+    canonical: "https://mindid.shop/e-commerce",
+    languages: { "tr-TR": "https://mindid.shop/e-commerce", "en-US": "https://mindid.shop/en/e-commerce" },
+  },
   openGraph: {
     title: "AI Product Photography for E-commerce — No Mannequin, No Studio",
     description:
       "Studio-quality product images for Shopify, Amazon, Trendyol, Hepsiburada. 70% cheaper without mannequins or studios. From ₺399.",
+    url: "https://mindid.shop/e-commerce",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@mindidshop",
+    creator: "@mindidshop",
+    title: "E-ticaret AI Ürün Görseli | MindID",
+    description: "AI ürün fotoğrafçılığı — manken ve stüdyo masrafı olmadan %70 tasarruf.",
   },
 };
 
@@ -61,7 +73,7 @@ const EcommerceRoute = () => {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <ParallaxGrid />
       <Header />
-      <main>
+      <main id="main-content">
         <EcommercePage />
       </main>
       <Footer />

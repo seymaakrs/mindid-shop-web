@@ -54,6 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@mindidshop",
+    creator: "@mindidshop",
     title: "MindID — AI Reklam Filmleri & Ürün Görselleri",
     description:
       "AI ile reklam filmi ve ürün görseli üretimi. Stüdyo kalitesinde, %70 daha az maliyet.",
@@ -176,6 +178,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="tr">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* Skip link for accessibility */}
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -191,6 +194,13 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         />
       </head>
       <body className="antialiased">
+        {/* Skip to main content — Accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[var(--lime)] focus:text-[var(--dark-blue)] focus:font-bold focus:rounded-md focus:text-sm"
+        >
+          İçeriğe Atla
+        </a>
         <Analytics />
         <Providers>
           {children}
