@@ -76,12 +76,8 @@ export const getPortfolioItems = async (): Promise<PortfolioItem[]> => {
             value: { booleanValue: true },
           },
         },
-        orderBy: [
-          {
-            field: { fieldPath: "order" },
-            direction: "ASCENDING",
-          },
-        ],
+        // NOTE: orderBy removed to avoid composite index requirement
+        // Sorting is done in-memory after fetch
       },
     };
 
@@ -112,7 +108,9 @@ export const getPortfolioItems = async (): Promise<PortfolioItem[]> => {
           createdAt: data.createdAt || null,
           completedAt: data.completedAt || null,
         } as unknown as PortfolioItem;
-      });
+      })
+      // Sort in-memory by 'order' field (avoids composite index requirement)
+      .sort((a, b) => ((a as Record<string, unknown>).order as number ?? 999) - ((b as Record<string, unknown>).order as number ?? 999));
 
     // Update cache
     cachedItems = items;
@@ -137,24 +135,10 @@ export const getPortfolioItemBySlug = async (
       structuredQuery: {
         from: [{ collectionId: "mindid_portfolio" }],
         where: {
-          compositeFilter: {
-            op: "AND",
-            filters: [
-              {
-                fieldFilter: {
-                  field: { fieldPath: "slug" },
-                  op: "EQUAL",
-                  value: { stringValue: slug },
-                },
-              },
-              {
-                fieldFilter: {
-                  field: { fieldPath: "visible" },
-                  op: "EQUAL",
-                  value: { booleanValue: true },
-                },
-              },
-            ],
+          fieldFilter: {
+            field: { fieldPath: "slug" },
+            op: "EQUAL",
+            value: { stringValue: slug },
           },
         },
         limit: 1,
@@ -177,6 +161,9 @@ export const getPortfolioItemBySlug = async (
     if (!found?.document) return null;
 
     const data = parseFirestoreDoc(found.document);
+    // Check visible in code (avoids composite index requirement)
+    if (data.visible === false) return null;
+
     return {
       id: getDocId(found.document),
       ...data,
