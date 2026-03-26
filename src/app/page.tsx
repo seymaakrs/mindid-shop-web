@@ -7,6 +7,9 @@ import { TestimonialsSection } from "@/components/testimonials-section";
 import { FAQSection } from "@/components/faq-section";
 import { Footer } from "@/components/footer";
 import { ParallaxGrid } from "@/components/parallax-grid";
+import { HowItWorks } from "@/components/how-it-works";
+import { FinalCTA } from "@/components/final-cta";
+import { LogoWall } from "@/components/logo-wall";
 import { AIManager } from "@/components/ai-manager";
 
 const faqSchema = {
@@ -190,9 +193,12 @@ const HomePage = () => {
         <Hero />
         <SocialProof />
         <ServiceCards />
+        <HowItWorks />
         <BudgetSlider />
         <TestimonialsSection />
         <FAQSection />
+        <FinalCTA />
+        <LogoWall />
       </main>
       <Footer />
       <AIManager />

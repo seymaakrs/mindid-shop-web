@@ -36,6 +36,53 @@ const translations: Record<string, Record<string, string>> = {
   "lang.en": { tr: "English", en: "English", es: "Inglés" },
   "lang.es": { tr: "Español", en: "Español", es: "Español" },
 
+  // How It Works
+  "hiw.title": { tr: "Nasıl Çalışır?", en: "How It Works", es: "¿Cómo Funciona?" },
+  "hiw.subtitle": {
+    tr: "4 adımda projeniz hayata geçiyor. Siz brief verin, gerisini biz halledelim.",
+    en: "Your project comes to life in 4 steps. You provide the brief, we handle the rest.",
+    es: "Su proyecto cobra vida en 4 pasos. Usted proporciona el brief, nosotros hacemos el resto.",
+  },
+  "hiw.step1.title": { tr: "Brief & Planlama", en: "Brief & Planning", es: "Brief y Planificación" },
+  "hiw.step1.desc": {
+    tr: "Formu doldurun, 24 saat içinde sizi arayalım. Markanızı, hedeflerinizi ve beklentilerinizi anlayalım.",
+    en: "Fill out the form, we'll call you within 24 hours. Let's understand your brand, goals, and expectations.",
+    es: "Complete el formulario, le llamaremos en 24 horas. Entendamos su marca, objetivos y expectativas.",
+  },
+  "hiw.step2.title": { tr: "AI Yapım Süreci", en: "AI Production", es: "Producción con IA" },
+  "hiw.step2.desc": {
+    tr: "Yapay zeka teknolojimiz ile profesyonel içeriğiniz üretilir. Geleneksel sürecin günler yerine saatlerle ölçülen hızı.",
+    en: "Your professional content is produced with our AI technology. Speed measured in hours instead of the days of traditional production.",
+    es: "Su contenido profesional se produce con nuestra tecnología IA. Velocidad medida en horas en lugar de días.",
+  },
+  "hiw.step3.title": { tr: "Revizyon", en: "Revision", es: "Revisión" },
+  "hiw.step3.desc": {
+    tr: "İlk taslağı inceleyin, 2 ücretsiz revizyon hakkınızla mükemmele ulaşana kadar düzenleyelim.",
+    en: "Review the first draft, and we'll refine it with your 2 free revisions until it's perfect.",
+    es: "Revise el primer borrador, lo perfeccionaremos con sus 2 revisiones gratuitas.",
+  },
+  "hiw.step4.title": { tr: "Teslim & Yayın", en: "Delivery & Launch", es: "Entrega y Lanzamiento" },
+  "hiw.step4.desc": {
+    tr: "Tüm platformlara uygun formatlarda teslim. Hemen yayına alın, sonuçları görün.",
+    en: "Delivery in formats suitable for all platforms. Go live immediately and see the results.",
+    es: "Entrega en formatos adecuados para todas las plataformas. Publique de inmediato y vea los resultados.",
+  },
+
+  // Final CTA
+  "cta.badge": { tr: "Projenize Hayat Verin", en: "Bring Your Project to Life", es: "Dé Vida a Su Proyecto" },
+  "cta.title": { tr: "Yapay Zeka ile Fark Yaratın", en: "Make a Difference with AI", es: "Marque la Diferencia con IA" },
+  "cta.desc": {
+    tr: "Geleneksel prodüksiyonun maliyetinin %60-70 altında, profesyonel kalitede içerik üretimi. İlk adımı atın, 24 saat içinde sizinle iletişime geçelim.",
+    en: "Professional quality content at 60-70% less than traditional production costs. Take the first step, we'll contact you within 24 hours.",
+    es: "Contenido de calidad profesional a un 60-70% menos que la producción tradicional. Dé el primer paso, le contactaremos en 24 horas.",
+  },
+  "cta.primary": { tr: "Hizmetleri İncele", en: "Explore Services", es: "Ver Servicios" },
+  "cta.secondary": { tr: "WhatsApp ile Yazın", en: "Message on WhatsApp", es: "Escríbanos por WhatsApp" },
+  "cta.trust": { tr: "Ücretsiz danışma · 2 revizyon dahil · 3-5 gün teslimat", en: "Free consultation · 2 revisions included · 3-5 day delivery", es: "Consulta gratuita · 2 revisiones incluidas · Entrega en 3-5 días" },
+
+  // Logo Wall
+  "logowall.title": { tr: "Güvenilir Markalar Bize Güveniyor", en: "Trusted by Leading Brands", es: "Marcas Líderes Confían en Nosotros" },
+
   // Hero
   "hero.badge": { tr: "AI Reklam Filmi & Ürün Görseli Ajansı", en: "AI Ad Film & Product Visual Agency" },
   "hero.title1": { tr: "Yeni Nesil", en: "Next Gen" },
@@ -385,7 +432,26 @@ const translations: Record<string, Record<string, string>> = {
   "testimonial.8.service": { tr: "AI Ürün Görseli", en: "AI Product Photo" },
 
   // Footer
-  "footer.rights": { tr: "Tüm hakları saklıdır.", en: "All rights reserved." },
+  "footer.rights": { tr: "Tüm hakları saklıdır.", en: "All rights reserved.", es: "Todos los derechos reservados." },
+  "footer.services": { tr: "Hizmetler", en: "Services", es: "Servicios" },
+  "footer.resources": { tr: "Kaynaklar", en: "Resources", es: "Recursos" },
+  "footer.company": { tr: "Şirket", en: "Company", es: "Empresa" },
+  "footer.contact": { tr: "İletişim", en: "Contact", es: "Contacto" },
+  "footer.aiReels": { tr: "AI Instagram Reels", en: "AI Instagram Reels", es: "AI Instagram Reels" },
+  "footer.aiProductPhoto": { tr: "AI Ürün Görseli", en: "AI Product Photography", es: "Fotografía de Producto IA" },
+  "footer.aiProductAd": { tr: "AI Ürün Reklam Filmi", en: "AI Product Ad Film", es: "Película Publicitaria IA" },
+  "footer.aiCampaign": { tr: "AI Kampanya Filmi", en: "AI Campaign Film", es: "Película de Campaña IA" },
+  "footer.aiCorporate": { tr: "AI Kurumsal Tanıtım", en: "AI Corporate Film", es: "Película Corporativa IA" },
+  "footer.aiAvatar": { tr: "AI Avatar Oluşturma", en: "AI Avatar Creation", es: "Creación de Avatar IA" },
+  "footer.aiVsTraditional": { tr: "AI vs Geleneksel", en: "AI vs Traditional", es: "IA vs Tradicional" },
+  "footer.howItWorks": { tr: "Nasıl Çalışır?", en: "How It Works", es: "¿Cómo Funciona?" },
+  "footer.ecommerce": { tr: "E-ticaret Çözümleri", en: "E-commerce Solutions", es: "Soluciones E-commerce" },
+  "footer.portfolio": { tr: "Portfolyo", en: "Portfolio", es: "Portafolio" },
+  "footer.aboutMindid": { tr: "MindID Hakkında", en: "About MindID", es: "Acerca de MindID" },
+  "footer.faq": { tr: "SSS", en: "FAQ", es: "Preguntas Frecuentes" },
+  "footer.testimonials": { tr: "Müşteri Yorumları", en: "Testimonials", es: "Testimonios" },
+  "footer.privacy": { tr: "Gizlilik", en: "Privacy", es: "Privacidad" },
+  "footer.terms": { tr: "Kullanım Koşulları", en: "Terms of Use", es: "Términos de Uso" },
 };
 
 const I18nContext = createContext<I18nContextType | null>(null);
