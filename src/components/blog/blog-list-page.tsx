@@ -5,7 +5,7 @@ import { useBlogPosts } from "@/lib/hooks/use-firestore";
 import { ArrowLeft, Calendar, Tag, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-const CATEGORY_LABELS: Record<string, Record<"tr" | "en", string>> = {
+const CATEGORY_LABELS: Record<string, Record<string, string>> = {
   film: { tr: "Reklam Filmi", en: "Ad Film" },
   avatar: { tr: "Avatar", en: "Avatar" },
   visual: { tr: "Ürün Görseli", en: "Product Visual" },

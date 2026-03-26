@@ -3,10 +3,11 @@
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
 import { doc, getDoc } from "firebase/firestore";
 
-export type Lang = "tr" | "en";
+export type Lang = "tr" | "en" | "es";
 
 type I18nContextType = {
   lang: Lang;
+  setLang: (lang: Lang) => void;
   toggleLang: () => void;
   t: (key: string) => string;
   formatPrice: (priceTRY: number) => string;
@@ -14,15 +15,26 @@ type I18nContextType = {
 
 const DEFAULT_USD_RATE = 0.028;
 
-const translations: Record<string, Record<Lang, string>> = {
+const translations: Record<string, Record<string, string>> = {
   // Nav
-  "nav.services": { tr: "Hizmetler", en: "Services" },
-  "nav.portfolio": { tr: "Portfolyo", en: "Portfolio" },
-  "nav.about": { tr: "MindID Ne Yapar?", en: "What Does MindID Do?" },
-  "nav.faq": { tr: "SSS", en: "FAQ" },
-  "nav.testimonials": { tr: "Yorumlar", en: "Testimonials" },
-  "nav.contact": { tr: "İletişim", en: "Contact" },
-  "nav.start": { tr: "Hemen Başla", en: "Get Started" },
+  "nav.services": { tr: "Hizmetler", en: "Services", es: "Servicios" },
+  "nav.videoProduction": { tr: "AI Video Prodüksiyon", en: "AI Video Production", es: "Producción de Video IA" },
+  "nav.visualStudio": { tr: "AI Görsel Stüdyo", en: "AI Visual Studio", es: "Estudio Visual IA" },
+  "nav.gallery": { tr: "Prodüksiyon Galerisi", en: "Production Gallery", es: "Galería de Producción" },
+  "nav.portfolio": { tr: "Portfolyo", en: "Portfolio", es: "Portafolio" },
+  "nav.about": { tr: "MindID Ne Yapar?", en: "What Does MindID Do?", es: "¿Qué hace MindID?" },
+  "nav.socialMediaExpert": { tr: "Sosyal Medya Uzmanı", en: "Social Media Expert", es: "Experto en Redes Sociales" },
+  "nav.howItWorks": { tr: "Nasıl Çalışır?", en: "How It Works", es: "¿Cómo Funciona?" },
+  "nav.faq": { tr: "SSS", en: "FAQ", es: "Preguntas Frecuentes" },
+  "nav.testimonials": { tr: "Yorumlar", en: "Testimonials", es: "Testimonios" },
+  "nav.contact": { tr: "İletişim", en: "Contact", es: "Contacto" },
+  "nav.start": { tr: "Hemen Başla", en: "Get Started", es: "Comenzar" },
+  "nav.viewAllGallery": { tr: "Tüm Prodüksiyon Galerisini Gör", en: "View Full Production Gallery", es: "Ver Galería Completa" },
+
+  // Language selector
+  "lang.tr": { tr: "Türkçe", en: "Türkçe", es: "Turco" },
+  "lang.en": { tr: "English", en: "English", es: "Inglés" },
+  "lang.es": { tr: "Español", en: "Español", es: "Español" },
 
   // Hero
   "hero.badge": { tr: "AI Reklam Filmi & Ürün Görseli Ajansı", en: "AI Ad Film & Product Visual Agency" },
@@ -382,12 +394,13 @@ const I18nContext = createContext<I18nContextType | null>(null);
 function detectLang(): Lang {
   if (typeof window === "undefined") return "tr";
 
-  // 1. URL'den algıla (/en/... → en)
+  // 1. URL'den algıla (/en/... → en, /es/... → es)
   if (window.location.pathname.startsWith("/en")) return "en";
+  if (window.location.pathname.startsWith("/es")) return "es";
   if (window.location.pathname.startsWith("/tr")) return "tr";
 
   // 2. Cookie'den algıla
-  const match = document.cookie.match(/(?:^|; )lang=(tr|en)/);
+  const match = document.cookie.match(/(?:^|; )lang=(tr|en|es)/);
   if (match) return match[1] as Lang;
 
   // 3. Varsayılan
@@ -418,14 +431,28 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
     fetchRate();
   }, []);
 
-  const toggleLang = useCallback(() => {
-    setLang((prev) => {
-      const newLang = prev === "tr" ? "en" : "tr";
+  const changeLang = useCallback((newLang: Lang) => {
+    setLang(() => {
       // Cookie'yi güncelle
       document.cookie = `lang=${newLang}; path=/; max-age=${365 * 24 * 60 * 60}`;
       // URL'yi güncelle (SEO-friendly)
-      const currentPath = window.location.pathname.replace(/^\/(tr|en)/, "") || "/";
-      const newPath = newLang === "tr" ? currentPath : `/en${currentPath === "/" ? "" : currentPath}`;
+      const currentPath = window.location.pathname.replace(/^\/(tr|en|es)/, "") || "/";
+      const newPath = newLang === "tr" ? currentPath : `/${newLang}${currentPath === "/" ? "" : currentPath}`;
+      window.history.replaceState(null, "", newPath);
+      return newLang;
+    });
+  }, []);
+
+  const toggleLang = useCallback(() => {
+    setLang((prev) => {
+      const langOrder: Lang[] = ["tr", "en", "es"];
+      const currentIndex = langOrder.indexOf(prev);
+      const newLang = langOrder[(currentIndex + 1) % langOrder.length];
+      // Cookie'yi güncelle
+      document.cookie = `lang=${newLang}; path=/; max-age=${365 * 24 * 60 * 60}`;
+      // URL'yi güncelle (SEO-friendly)
+      const currentPath = window.location.pathname.replace(/^\/(tr|en|es)/, "") || "/";
+      const newPath = newLang === "tr" ? currentPath : `/${newLang}${currentPath === "/" ? "" : currentPath}`;
       window.history.replaceState(null, "", newPath);
       return newLang;
     });
@@ -433,7 +460,8 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
 
   const t = useCallback(
     (key: string): string => {
-      return translations[key]?.[lang] ?? key;
+      // Seçili dilde varsa onu kullan, yoksa İngilizce'ye düş, o da yoksa key döndür
+      return translations[key]?.[lang] ?? translations[key]?.["en"] ?? key;
     },
     [lang]
   );
@@ -448,6 +476,14 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
           minimumFractionDigits: 0,
         }).format(usd);
       }
+      if (lang === "es") {
+        const eur = Math.round(priceTRY * usdRate * 0.92); // USD → EUR yaklaşık
+        return new Intl.NumberFormat("es-ES", {
+          style: "currency",
+          currency: "EUR",
+          minimumFractionDigits: 0,
+        }).format(eur);
+      }
       return new Intl.NumberFormat("tr-TR", {
         style: "currency",
         currency: "TRY",
@@ -458,7 +494,7 @@ export const I18nProvider = ({ children }: { children: ReactNode }) => {
   );
 
   return (
-    <I18nContext.Provider value={{ lang, toggleLang, t, formatPrice }}>
+    <I18nContext.Provider value={{ lang, setLang: changeLang, toggleLang, t, formatPrice }}>
       {children}
     </I18nContext.Provider>
   );

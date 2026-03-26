@@ -5,9 +5,9 @@ import Link from "next/link";
 import { ArrowRight, TrendingDown, Clock, Sparkles, CheckCircle2, XCircle } from "lucide-react";
 
 type ComparisonRow = {
-  label: { tr: string; en: string };
-  traditional: { tr: string; en: string };
-  ai: { tr: string; en: string };
+  label: Record<string, string>;
+  traditional: Record<string, string>;
+  ai: Record<string, string>;
   savings?: string;
 };
 
@@ -104,9 +104,9 @@ const ComparisonTable = ({
   rows,
   lang,
 }: {
-  title: { tr: string; en: string };
+  title: Record<string, string>;
   rows: ComparisonRow[];
-  lang: "tr" | "en";
+  lang: string;
 }) => (
   <div className="mb-12">
     <h3 className="text-xl md:text-2xl font-black text-[var(--electric-blue)] mb-6">
