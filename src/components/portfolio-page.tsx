@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useI18n } from "@/lib/i18n";
 import { usePortfolio } from "@/lib/hooks/use-firestore";
 import { ArrowLeft, Play, Filter } from "lucide-react";
@@ -18,6 +18,91 @@ const CATEGORIES = [
   { id: "avatar", tr: "Avatar", en: "Avatar" },
 ];
 
+/* ── Hover Video Card ── */
+const HoverVideoCard = ({
+  videoUrl,
+  thumbnailUrl,
+  title,
+  altText,
+  category,
+}: {
+  videoUrl?: string;
+  thumbnailUrl?: string;
+  title: string;
+  altText: string;
+  category: string;
+}) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [hovering, setHovering] = useState(false);
+
+  const handleMouseEnter = useCallback(() => {
+    setHovering(true);
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setHovering(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, []);
+
+  return (
+    <div
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="absolute inset-0"
+    >
+      {/* Thumbnail */}
+      {thumbnailUrl && (
+        <Image
+          src={thumbnailUrl}
+          alt={altText}
+          fill
+          className={`object-cover transition-opacity duration-300 ${hovering && videoUrl ? "opacity-0" : "opacity-100"}`}
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 16vw"
+        />
+      )}
+
+      {/* Video preview on hover */}
+      {videoUrl && (
+        <video
+          ref={videoRef}
+          src={videoUrl}
+          muted
+          loop
+          playsInline
+          preload="none"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${hovering ? "opacity-100" : "opacity-0"}`}
+        />
+      )}
+
+      {/* Overlay */}
+      <div className={`absolute inset-0 transition-colors duration-300 flex flex-col items-center justify-center gap-2 ${
+        hovering ? "bg-black/10" : "bg-black/40"
+      }`}>
+        <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+          hovering ? "bg-[var(--lime)]/30 scale-110" : "bg-[var(--lime)]/20"
+        }`}>
+          <Play size={16} className="text-[var(--lime)]" />
+        </div>
+        <span className="text-[10px] font-bold text-white uppercase tracking-wider text-center px-1">
+          {title}
+        </span>
+      </div>
+
+      {/* Category badge */}
+      <span className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-[var(--lime)]/90 text-[var(--dark-blue)] text-[8px] font-bold uppercase">
+        {category}
+      </span>
+    </div>
+  );
+};
+
+/* ── Portfolio Page ── */
 export const PortfolioPage = () => {
   const { t, lang } = useI18n();
   const { data: portfolio, loading } = usePortfolio();
@@ -124,55 +209,36 @@ export const PortfolioPage = () => {
                   const altText = `${title} — AI ${item.category} prodüksiyon | MindID`;
                   const hasSlug = !!item.slug;
 
-                  const cardContent = (
+                  const cardClass =
+                    "aspect-[9/16] rounded-md bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 flex flex-col items-center justify-center gap-2 hover:border-[var(--lime)]/50 hover:shadow-[4px_4px_0px_var(--lime)] transition-all cursor-pointer group overflow-hidden relative";
+
+                  // Card with hover video preview
+                  const cardInner = item.thumbnailUrl ? (
+                    <HoverVideoCard
+                      videoUrl={item.videoUrl}
+                      thumbnailUrl={item.thumbnailUrl}
+                      title={title}
+                      altText={altText}
+                      category={item.category}
+                    />
+                  ) : (
                     <>
-                      {item.thumbnailUrl ? (
-                        <>
-                          <Image
-                            src={item.thumbnailUrl}
-                            alt={altText}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 16vw"
-                          />
-                          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex flex-col items-center justify-center gap-2">
-                            <div className="w-10 h-10 rounded-full bg-[var(--lime)]/20 flex items-center justify-center group-hover:bg-[var(--lime)]/30 transition-colors">
-                              <Play size={16} className="text-[var(--lime)]" />
-                            </div>
-                            <span className="text-[10px] font-bold text-white uppercase tracking-wider text-center px-1">
-                              {title}
-                            </span>
-                          </div>
-                          {/* Category badge */}
-                          <span className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-[var(--lime)]/90 text-[var(--dark-blue)] text-[8px] font-bold uppercase">
-                            {item.category}
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          <div className="w-10 h-10 rounded-full bg-[var(--electric-blue)]/20 flex items-center justify-center group-hover:bg-[var(--lime)]/20 transition-colors">
-                            <Play
-                              size={16}
-                              className="text-[var(--gray)] group-hover:text-[var(--lime)]"
-                            />
-                          </div>
-                          <span className="text-[10px] font-bold text-[var(--cream)] uppercase tracking-wider text-center px-1">
-                            {title}
-                          </span>
-                        </>
-                      )}
+                      <div className="w-10 h-10 rounded-full bg-[var(--electric-blue)]/20 flex items-center justify-center group-hover:bg-[var(--lime)]/20 transition-colors">
+                        <Play
+                          size={16}
+                          className="text-[var(--gray)] group-hover:text-[var(--lime)]"
+                        />
+                      </div>
+                      <span className="text-[10px] font-bold text-[var(--cream)] uppercase tracking-wider text-center px-1">
+                        {title}
+                      </span>
                     </>
                   );
 
-                  // If item has slug, link to detail page; otherwise open video modal
                   if (hasSlug) {
                     return (
-                      <Link
-                        key={item.id}
-                        href={`/portfolio/${item.slug}`}
-                        className="aspect-[9/16] rounded-md bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 flex flex-col items-center justify-center gap-2 hover:border-[var(--lime)]/50 hover:shadow-[4px_4px_0px_var(--lime)] transition-all cursor-pointer group overflow-hidden relative"
-                      >
-                        {cardContent}
+                      <Link key={item.id} href={`/portfolio/${item.slug}`} className={cardClass}>
+                        {cardInner}
                       </Link>
                     );
                   }
@@ -184,9 +250,9 @@ export const PortfolioPage = () => {
                         item.videoUrl &&
                         setSelectedVideo({ url: item.videoUrl, title })
                       }
-                      className="aspect-[9/16] rounded-md bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 flex flex-col items-center justify-center gap-2 hover:border-[var(--lime)]/50 hover:shadow-[4px_4px_0px_var(--lime)] transition-all cursor-pointer group overflow-hidden relative"
+                      className={cardClass}
                     >
-                      {cardContent}
+                      {cardInner}
                     </div>
                   );
                 })}

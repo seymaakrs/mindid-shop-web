@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { ConfigState, PostProductionOption } from "@/lib/types";
 import {
   SCENARIO_OPTIONS,
@@ -77,6 +77,19 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
   const [step, setStep] = useState<Step>("configure");
 
   const isProductPhoto = serviceId === "product-photo";
+  const optionsRef = useRef<HTMLDivElement>(null);
+  const prevHasFirst = useRef(false);
+
+  // Scroll to revealed options when first selection is made
+  useEffect(() => {
+    const hasFirst = isProductPhoto ? !!config.productCount : !!config.duration;
+    if (hasFirst && !prevHasFirst.current && optionsRef.current) {
+      setTimeout(() => {
+        optionsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+    prevHasFirst.current = hasFirst;
+  }, [config.duration, config.productCount, isProductPhoto]);
 
   // Use Firestore pricing if available, otherwise fallback to hardcoded
   const services = pricingConfig?.services ?? SERVICE_TYPES.map((s) => ({ ...s }));
@@ -168,14 +181,43 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
     );
   }
 
+  const steps = [
+    { key: "configure" as Step, label: t("config.step.configure") || "Yapılandır", number: 1 },
+    { key: "checkout" as Step, label: t("config.step.checkout") || "Bilgiler", number: 2 },
+    { key: "congrats" as Step, label: t("config.step.done") || "Tamam", number: 3 },
+  ];
+
   return (
-    <div className="min-h-screen relative z-10">
+    <div className="min-h-screen relative z-10 pb-20 lg:pb-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back link */}
         <Link href="/#services" className="inline-flex items-center gap-2 text-[var(--lime)] hover:underline mb-6 text-sm font-bold">
           <ArrowLeft size={16} />
           {t("nav.services")}
         </Link>
+
+        {/* Step indicator */}
+        <div className="flex items-center justify-center gap-2 mb-8">
+          {steps.map((s, i) => (
+            <div key={s.key} className="flex items-center gap-2">
+              <div className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
+                step === s.key
+                  ? "bg-[var(--lime)] text-[var(--dark-blue)]"
+                  : steps.findIndex((x) => x.key === step) > i
+                    ? "bg-[var(--lime)]/20 text-[var(--lime)]"
+                    : "bg-[var(--cream)]/5 text-[var(--gray)]"
+              }`}>
+                <span className="w-5 h-5 rounded-full bg-current/20 flex items-center justify-center text-[10px]">
+                  {steps.findIndex((x) => x.key === step) > i ? "✓" : s.number}
+                </span>
+                <span className="hidden sm:inline">{s.label}</span>
+              </div>
+              {i < steps.length - 1 && (
+                <div className={`w-6 h-0.5 ${steps.findIndex((x) => x.key === step) > i ? "bg-[var(--lime)]" : "bg-[var(--gray)]/20"}`} />
+              )}
+            </div>
+          ))}
+        </div>
 
         {/* Service title */}
         <div className="flex items-center gap-3 mb-8">
@@ -216,7 +258,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                 />
 
                 {config.productCount && (
-                  <>
+                  <div ref={optionsRef}>
                     {/* Angle Count — YENİ */}
                     <OptionCardGroup
                       title={t("config.photoAngle")}
@@ -289,7 +331,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                         revision: revisionPackages.find((rp) => rp.id === r.id)!,
                       }))}
                     />
-                  </>
+                  </div>
                 )}
               </>
             ) : (
@@ -301,7 +343,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                 />
 
                 {config.duration && (
-                  <>
+                  <div ref={optionsRef}>
                     {/* Scenario */}
                     <OptionCardGroup
                       title={t("config.scenario")}
@@ -368,7 +410,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                         revision: revisionPackages.find((rp) => rp.id === r.id)!,
                       }))}
                     />
-                  </>
+                  </div>
                 )}
               </>
             )}
@@ -548,6 +590,32 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Mobile fixed bottom bar */}
+      <div className="fixed bottom-0 left-0 right-0 lg:hidden z-50 bg-[var(--dark-blue)] border-t-3 border-[var(--lime)] px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+        <div className="flex items-center justify-between gap-3 max-w-lg mx-auto">
+          <div>
+            <div className="text-[10px] text-[var(--gray)]">{t("config.total")}</div>
+            <div className="text-xl font-black text-[var(--lime)]">{formatPrice(totalAI)}</div>
+            {savings > 0 && (
+              <div className="text-[10px] text-[var(--lime)]/70">
+                %{Math.round((savings / totalTraditional) * 100)} {t("checkout.saved") || "tasarruf"}
+              </div>
+            )}
+          </div>
+          <button
+            onClick={() => canProceed && setStep("checkout")}
+            disabled={!canProceed}
+            className={`px-6 py-2.5 rounded-md border-3 text-sm font-black transition-all ${
+              canProceed
+                ? "bg-[var(--lime)] text-[var(--dark-blue)] border-[var(--dark-blue)] shadow-[3px_3px_0px_var(--dark-blue)]"
+                : "bg-[var(--gray)]/20 text-[var(--gray)] border-[var(--gray)]/30 cursor-not-allowed"
+            }`}
+          >
+            {t("checkout.send")} →
+          </button>
         </div>
       </div>
     </div>

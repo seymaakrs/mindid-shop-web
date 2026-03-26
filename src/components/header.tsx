@@ -2,8 +2,9 @@
 
 import { ChevronDown, Globe, Menu, X } from "lucide-react";
 import { useI18n, type Lang } from "@/lib/i18n";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const LANG_OPTIONS: { code: Lang; label: string; flag: string }[] = [
   { code: "tr", label: "Türkçe", flag: "🇹🇷" },
@@ -17,12 +18,30 @@ export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   // Dil dropdown dışına tıklayınca kapat
   useEffect(() => {
@@ -34,6 +53,8 @@ export const Header = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const closeMobile = useCallback(() => setMobileOpen(false), []);
 
   const currentLang = LANG_OPTIONS.find((l) => l.code === lang) ?? LANG_OPTIONS[0];
 
@@ -141,21 +162,26 @@ export const Header = () => {
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="xl:hidden p-2 text-[var(--dark-blue)] cursor-pointer"
+            aria-label={mobileOpen ? "Menüyü kapat" : "Menüyü aç"}
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="xl:hidden border-t-2 border-[var(--dark-blue)] bg-[var(--lime)] px-4 py-4 space-y-3">
+      {/* Mobile Menu — slide down animation */}
+      <div
+        className={`xl:hidden border-t-2 border-[var(--dark-blue)] bg-[var(--lime)] overflow-hidden transition-all duration-300 ease-in-out ${
+          mobileOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="px-4 py-4 space-y-3">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="block text-sm font-bold text-[var(--dark-blue)]"
+              onClick={closeMobile}
+              className="block text-sm font-bold text-[var(--dark-blue)] py-1 hover:text-[var(--electric-blue)] transition-colors"
             >
               {link.label}
             </a>
@@ -169,6 +195,7 @@ export const Header = () => {
                   key={option.code}
                   onClick={() => {
                     setLang(option.code);
+                    closeMobile();
                   }}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md border-2 text-xs font-bold transition-colors cursor-pointer ${
                     lang === option.code
@@ -184,14 +211,14 @@ export const Header = () => {
 
             <a
               href="/about"
-              onClick={() => setMobileOpen(false)}
+              onClick={closeMobile}
               className="block w-full text-center px-5 py-2.5 rounded-md bg-[var(--dark-blue)] text-[var(--lime)] text-sm font-bold"
             >
               {t("nav.socialMediaExpert")}
             </a>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };

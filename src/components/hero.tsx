@@ -72,6 +72,9 @@ export const Hero = () => {
               {/* Slider Container */}
               <div
                 ref={sliderRef}
+                role="region"
+                aria-label="Prodüksiyon galerisi slayt gösterisi"
+                aria-roledescription="carousel"
                 className="flex gap-3 overflow-x-hidden scroll-smooth snap-x snap-mandatory rounded-lg"
                 style={{ scrollbarWidth: "none" }}
               >
@@ -149,12 +152,14 @@ export const Hero = () => {
                 <>
                   <button
                     onClick={prevSlide}
+                    aria-label="Önceki slayt"
                     className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[var(--dark-blue)]/80 border-2 border-[var(--lime)] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer hover:bg-[var(--dark-blue)] z-10"
                   >
                     <ArrowLeft size={14} className="text-[var(--lime)]" />
                   </button>
                   <button
                     onClick={nextSlide}
+                    aria-label="Sonraki slayt"
                     className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[var(--dark-blue)]/80 border-2 border-[var(--lime)] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer hover:bg-[var(--dark-blue)] z-10"
                   >
                     <ArrowRight size={14} className="text-[var(--lime)]" />

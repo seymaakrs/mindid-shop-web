@@ -32,12 +32,13 @@ export const metadata: Metadata = {
     languages: {
       "tr-TR": "https://mindid.shop",
       "en-US": "https://mindid.shop/en",
+      "es-ES": "https://mindid.shop/es",
     },
   },
   openGraph: {
     type: "website",
     locale: "tr_TR",
-    alternateLocale: "en_US",
+    alternateLocale: ["en_US", "es_ES"],
     url: "https://mindid.shop",
     siteName: "MindID",
     title: "MindID — AI Reklam Filmleri, Avatar & Ürün Görselleri",
@@ -98,7 +99,7 @@ const jsonLd = {
     "AI Product Photography",
     "AI E-commerce Visuals",
   ],
-  knowsLanguage: ["Turkish", "English"],
+  knowsLanguage: ["Turkish", "English", "Spanish"],
   address: {
     "@type": "PostalAddress",
     addressCountry: "TR",
@@ -211,4 +212,4 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default RootLayout;
+export default RootLayout

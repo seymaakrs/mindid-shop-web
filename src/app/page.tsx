@@ -1,16 +1,19 @@
+import dynamic from "next/dynamic";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { ServiceCards } from "@/components/service-cards";
-import { BudgetSlider } from "@/components/ui/budget-slider";
 import { SocialProof } from "@/components/social-proof";
-import { TestimonialsSection } from "@/components/testimonials-section";
-import { FAQSection } from "@/components/faq-section";
-import { Footer } from "@/components/footer";
 import { ParallaxGrid } from "@/components/parallax-grid";
 import { HowItWorks } from "@/components/how-it-works";
-import { FinalCTA } from "@/components/final-cta";
-import { LogoWall } from "@/components/logo-wall";
-import { AIManager } from "@/components/ai-manager";
+import { Footer } from "@/components/footer";
+
+// Below-the-fold: lazy loaded for faster initial page load
+const BudgetSlider = dynamic(() => import("@/components/ui/budget-slider").then((m) => ({ default: m.BudgetSlider })));
+const TestimonialsSection = dynamic(() => import("@/components/testimonials-section").then((m) => ({ default: m.TestimonialsSection })));
+const FAQSection = dynamic(() => import("@/components/faq-section").then((m) => ({ default: m.FAQSection })));
+const FinalCTA = dynamic(() => import("@/components/final-cta").then((m) => ({ default: m.FinalCTA })));
+const LogoWall = dynamic(() => import("@/components/logo-wall").then((m) => ({ default: m.LogoWall })));
+const AIManager = dynamic(() => import("@/components/ai-manager").then((m) => ({ default: m.AIManager })));
 
 const faqSchema = {
   "@context": "https://schema.org",

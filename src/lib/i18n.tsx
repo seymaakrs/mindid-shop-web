@@ -141,6 +141,9 @@ const translations: Record<string, Record<string, string>> = {
 
   // Configurator
   "config.title": { tr: "Videonuzu Yapılandırın", en: "Configure Your Video" },
+  "config.step.configure": { tr: "Yapılandır", en: "Configure", es: "Configurar" },
+  "config.step.checkout": { tr: "Bilgiler", en: "Details", es: "Detalles" },
+  "config.step.done": { tr: "Tamam", en: "Done", es: "Listo" },
   "config.base": { tr: "Temel Paket Dahil", en: "Base Package Included" },
   "config.base.desc": {
     tr: "Temel senaryo, temel görsel üretim, temel müzik, temel edit ve 2 adet revizyon hakkı dahildir.",
