@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
+import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { Analytics } from "@/components/analytics";
 
 export const metadata: Metadata = {
@@ -206,6 +207,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Providers>
           {children}
           <WhatsAppButton />
+          <LanguageSwitcher />
         </Providers>
       </body>
     </html>
