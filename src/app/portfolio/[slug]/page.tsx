@@ -106,7 +106,7 @@ const PortfolioDetailPage = async ({
         name: item.title,
         description:
           item.seoDescription || item.description || `${item.title} — MindID AI prodüksiyon`,
-        thumbnailUrl: item.thumbnailUrl || "https://mindid.shop/og-image.png",
+        thumbnailUrl: item.thumbnailUrl || "https://mindid.shop/og-image.jpeg",
         uploadDate:
           (item.completedAt as unknown as string) ||
           (item.createdAt as unknown as string) ||

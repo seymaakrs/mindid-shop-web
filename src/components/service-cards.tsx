@@ -3,7 +3,7 @@
 import { useI18n } from "@/lib/i18n";
 import { usePricing } from "@/lib/hooks/use-firestore";
 import { SERVICE_TYPES } from "@/lib/pricing-data";
-import { FolderOpen, Images, ArrowRight } from "lucide-react";
+import { FolderOpen, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 
@@ -49,11 +49,10 @@ export const ServiceCards = () => {
     el.scrollBy({ left: direction === "right" ? cardWidth : -cardWidth, behavior: "smooth" });
   };
 
-  // All items: sorted services + avatar + portfolio
+  // All items: sorted services + avatar (portfolio artık hero'da slider olarak gösteriliyor)
   const allItems = [
     ...sortedServices.map((s) => ({ type: "service" as const, service: s })),
     ...(avatarService ? [{ type: "service" as const, service: avatarService }] : []),
-    { type: "portfolio" as const, service: null },
   ];
 
   return (
@@ -103,44 +102,6 @@ export const ServiceCards = () => {
             style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}
           >
             {allItems.map((item, i) => {
-              if (item.type === "portfolio") {
-                return (
-                  <Link
-                    key="portfolio"
-                    href="/portfolio"
-                    className="flex-shrink-0 w-[280px] md:w-[300px] snap-start group relative p-5 rounded-lg bg-[var(--electric-blue)]/20 border-3 border-[var(--electric-blue)] shadow-[5px_5px_0px_var(--electric-blue)] cursor-pointer block hover:shadow-[3px_3px_0px_var(--lime)] hover:border-[var(--lime)] transition-all duration-300 hover:-translate-y-2"
-                  >
-                    <div className="absolute -top-3 left-4 px-3 py-0.5 bg-[var(--electric-blue)] border-3 border-[var(--dark-blue)] border-b-0 rounded-t-md">
-                      <Images size={16} className="text-[var(--lime)]" />
-                    </div>
-
-                    <div className="flex items-center gap-2 mt-2 mb-3">
-                      <FolderOpen size={18} className="text-[var(--lime)]" />
-                      <span className="text-[10px] uppercase tracking-wider font-bold text-[var(--gray)]">
-                        MindID
-                      </span>
-                    </div>
-
-                    <h3 className="font-black text-[var(--cream)] text-sm leading-tight mb-2 group-hover:text-[var(--lime)] transition-colors">
-                      {t("service.portfolio")}
-                    </h3>
-
-                    <p className="text-xs text-[var(--gray)] mb-4 leading-relaxed">
-                      {t("service.portfolio.desc")}
-                    </p>
-
-                    <div className="flex items-center gap-2 text-[var(--lime)] text-xs font-bold">
-                      <span>48 Video</span>
-                      <ArrowRight size={14} />
-                    </div>
-
-                    <div className="absolute bottom-3 right-3 w-7 h-7 rounded-md bg-[var(--electric-blue)] text-[var(--lime)] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-sm font-bold">
-                      &rarr;
-                    </div>
-                  </Link>
-                );
-              }
-
               const service = item.service!;
               const isAvatar = service.id === "avatar";
               const href = isAvatar ? "/avatar" : `/configure/${service.id}`;

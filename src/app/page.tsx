@@ -102,7 +102,7 @@ const reviewSchema = {
   "@type": "LocalBusiness",
   name: "MindID",
   url: "https://mindid.shop",
-  image: "https://mindid.shop/og-image.png",
+  image: "https://mindid.shop/og-image.jpeg",
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",
