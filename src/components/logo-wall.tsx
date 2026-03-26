@@ -2,17 +2,18 @@
 
 import { useI18n } from "@/lib/i18n";
 
-// Müşteri logoları — Seyma buraya gerçek logo dosyalarını ekleyecek
-// Şimdilik placeholder metin logoları kullanıyoruz
+// Temsili marka isimleri — simülasyon amaçlı
 const CLIENT_LOGOS = [
-  { name: "Marka 1", src: "" },
-  { name: "Marka 2", src: "" },
-  { name: "Marka 3", src: "" },
-  { name: "Marka 4", src: "" },
-  { name: "Marka 5", src: "" },
-  { name: "Marka 6", src: "" },
-  { name: "Marka 7", src: "" },
-  { name: "Marka 8", src: "" },
+  { name: "Coca-Cola", style: "italic" as const },
+  { name: "H&M", style: "normal" as const },
+  { name: "ZARA", style: "normal" as const },
+  { name: "Samsung", style: "normal" as const },
+  { name: "L'Oréal", style: "italic" as const },
+  { name: "NIKE", style: "normal" as const },
+  { name: "adidas", style: "normal" as const },
+  { name: "PUMA", style: "normal" as const },
+  { name: "Unilever", style: "normal" as const },
+  { name: "Nestlé", style: "normal" as const },
 ];
 
 export const LogoWall = () => {
@@ -36,23 +37,18 @@ export const LogoWall = () => {
         <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[var(--dark-blue)] to-transparent z-10" />
 
         {/* Kayan container */}
-        <div className="flex animate-scroll-x gap-12 items-center">
+        <div className="flex animate-scroll-x gap-10 items-center">
           {allLogos.map((logo, i) => (
             <div
               key={`${logo.name}-${i}`}
-              className="flex-shrink-0 h-10 px-6 flex items-center justify-center rounded-md border-2 border-[var(--electric-blue)]/15 bg-[var(--dark-blue)] opacity-50 hover:opacity-100 transition-opacity"
+              className="flex-shrink-0 h-12 px-8 flex items-center justify-center rounded-md border-2 border-[var(--electric-blue)]/15 bg-[var(--dark-blue)] opacity-40 hover:opacity-90 transition-opacity"
             >
-              {logo.src ? (
-                <img
-                  src={logo.src}
-                  alt={logo.name}
-                  className="h-6 w-auto object-contain grayscale hover:grayscale-0 transition-all"
-                />
-              ) : (
-                <span className="text-xs font-bold text-[var(--gray)]/50 whitespace-nowrap tracking-wider uppercase">
-                  {logo.name}
-                </span>
-              )}
+              <span
+                className="text-sm font-black text-[var(--cream)] whitespace-nowrap tracking-wider"
+                style={{ fontStyle: logo.style }}
+              >
+                {logo.name}
+              </span>
             </div>
           ))}
         </div>
@@ -65,7 +61,7 @@ export const LogoWall = () => {
           100% { transform: translateX(-50%); }
         }
         .animate-scroll-x {
-          animation: scroll-x 30s linear infinite;
+          animation: scroll-x 35s linear infinite;
         }
         .animate-scroll-x:hover {
           animation-play-state: paused;

@@ -2,21 +2,16 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useI18n } from "@/lib/i18n";
-import { useSettings, usePortfolio } from "@/lib/hooks/use-firestore";
+import { usePortfolio } from "@/lib/hooks/use-firestore";
 import { Play, ArrowRight, ArrowLeft, ChevronRight } from "lucide-react";
-import { VideoPlayerModal } from "./video-player-modal";
 import Link from "next/link";
 
 export const Hero = () => {
   const { t } = useI18n();
-  const { data: settings } = useSettings();
   const { data: portfolioItems } = usePortfolio();
-  const [showVideo, setShowVideo] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
   const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const heroVideoUrl = settings?.heroVideoUrl ?? "";
 
   // İlk 5 portfolyo projesini al
   const showcaseItems = (portfolioItems ?? []).slice(0, 5);
@@ -55,9 +50,8 @@ export const Hero = () => {
   return (
     <section className="relative py-8 md:py-16 z-10 leopard-pattern">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-
-          {/* Sol: Prodüksiyon Galerisi Slider */}
+        <div className="max-w-2xl mx-auto">
+          {/* Prodüksiyon Galerisi Slider */}
           <div className="animate-kinetic-slide">
             {/* Başlık */}
             <div className="mb-5">
@@ -194,55 +188,8 @@ export const Hero = () => {
               <ChevronRight size={16} />
             </Link>
           </div>
-
-          {/* Sağ: Dikey Video (4:5 oranı) */}
-          <div className="animate-slide-in-right" style={{ animationDelay: "0.2s" }}>
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-br from-[var(--lime)]/20 via-[var(--electric-blue)]/10 to-transparent rounded-xl blur-xl animate-glow" />
-              <div
-                className="relative rounded-lg bg-[var(--dark-blue)] border-3 border-[var(--lime)] shadow-[8px_8px_0px_var(--electric-blue)] overflow-hidden cursor-pointer mx-auto"
-                style={{ aspectRatio: "4/5", maxWidth: "400px" }}
-                onClick={() => heroVideoUrl && setShowVideo(true)}
-              >
-                {heroVideoUrl ? (
-                  <>
-                    <video
-                      src={heroVideoUrl}
-                      muted
-                      loop
-                      playsInline
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/30 hover:bg-black/10 transition-colors">
-                      <div className="w-16 h-16 rounded-full bg-[var(--lime)]/20 border-3 border-[var(--lime)] flex items-center justify-center hover:bg-[var(--lime)]/30 transition-all hover:scale-110">
-                        <Play size={28} className="text-[var(--lime)] ml-1" />
-                      </div>
-                      <span className="text-xs font-bold text-white uppercase tracking-wider">{t("hero.video_title")}</span>
-                    </div>
-                  </>
-                ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                    <div className="w-16 h-16 rounded-full bg-[var(--lime)]/10 border-3 border-[var(--lime)] flex items-center justify-center cursor-pointer hover:bg-[var(--lime)]/20 transition-all hover:scale-110">
-                      <Play size={28} className="text-[var(--lime)] ml-1" />
-                    </div>
-                    <span className="text-xs font-bold text-[var(--gray)] uppercase tracking-wider">{t("hero.video_title")}</span>
-                  </div>
-                )}
-                <div className="absolute top-0 right-0 px-3 py-1 bg-[var(--lime)] text-[var(--dark-blue)] text-[10px] font-bold uppercase tracking-wider">
-                  MindID
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
-
-      <VideoPlayerModal
-        open={showVideo}
-        videoUrl={heroVideoUrl}
-        title={t("hero.video_title")}
-        onClose={() => setShowVideo(false)}
-      />
     </section>
   );
 };

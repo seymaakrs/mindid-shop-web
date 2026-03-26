@@ -194,13 +194,13 @@ const HomePage = () => {
       <Header />
       <main id="main-content">
         <Hero />
-        <SocialProof />
         <ServiceCards />
         <HowItWorks />
         <BudgetSlider />
         <TestimonialsSection />
         <FAQSection />
         <FinalCTA />
+        <SocialProof />
         <LogoWall />
       </main>
       <Footer />

@@ -62,7 +62,6 @@ export const Header = () => {
     { href: "#services", label: t("nav.videoProduction") },
     { href: "#services", label: t("nav.visualStudio") },
     { href: "/portfolio", label: t("nav.gallery") },
-    { href: "/how-it-works", label: t("nav.howItWorks") },
     { href: "/blog", label: "Blog" },
     { href: "/about", label: t("nav.about") },
   ];
