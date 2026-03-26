@@ -47,8 +47,18 @@ deploy-*.zip
 # Report files (generated)
 proje-raporu-*.md
 
+# Claude Code kisisel ayarlar (bilgisayara ozel, repo'ya girmemeli)
+.claude/settings.local.json
+.claude/settings.local.json.bak
+.claude/launch.json
+
 # Worktrees
 .claude/worktrees/
+
+# Is dosyalari (strateji raporlari, finansal planlar — gizli kalmali)
+*.docx
+*.xlsx
+*.skill
 
 # Temp files
 ziy0HXX6
