@@ -223,7 +223,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
         <div className="flex items-center gap-3 mb-8">
           <span className="text-3xl">{service.icon}</span>
           <div>
-            <h1 className="text-2xl md:text-3xl font-black text-[var(--cream)]">
+            <h1 className="text-2xl md:text-3xl font-black text-[var(--foreground)]">
               {t(service.nameKey)}
             </h1>
             <p className="text-sm text-[var(--gray)]">
@@ -419,7 +419,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
           {/* Right: Receipt panel (sticky) */}
           <div className="lg:block">
             <div className="sticky top-20">
-              <div className="rounded-lg bg-[var(--dark-blue)] border-3 border-[var(--lime)] shadow-[6px_6px_0px_var(--lime)] overflow-hidden">
+              <div className="rounded-lg bg-[var(--card)] border-3 border-[var(--lime)] shadow-[6px_6px_0px_var(--lime)] overflow-hidden">
                 <div className="p-4 bg-[var(--lime)] text-[var(--dark-blue)]">
                   <h3 className="font-black text-lg">
                     {t("config.total")}
@@ -429,7 +429,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                   {/* Base */}
                   <div className="flex justify-between text-sm">
                     <span className="text-[var(--gray)]">{t(service.nameKey)}</span>
-                    <span className="text-[var(--cream)] font-bold">{formatPrice(basePrice)}</span>
+                    <span className="text-[var(--foreground)] font-bold">{formatPrice(basePrice)}</span>
                   </div>
 
                   {isProductPhoto ? (
@@ -437,7 +437,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                       {config.productCount && (
                         <div className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{config.productCount.label}</span>
-                          <span className="text-[var(--cream)] font-bold">
+                          <span className="text-[var(--foreground)] font-bold">
                             {config.productCount.price === 0 ? "Dahil" : `+${formatPrice(config.productCount.price)}`}
                           </span>
                         </div>
@@ -445,37 +445,37 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                       {config.photoAngle && config.photoAngle.price > 0 && (
                         <div className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{config.photoAngle.label}</span>
-                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.photoAngle.price)}</span>
+                          <span className="text-[var(--foreground)] font-bold">+{formatPrice(config.photoAngle.price)}</span>
                         </div>
                       )}
                       {config.photoModel && config.photoModel.price > 0 && (
                         <div className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{config.photoModel.label}</span>
-                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.photoModel.price)}</span>
+                          <span className="text-[var(--foreground)] font-bold">+{formatPrice(config.photoModel.price)}</span>
                         </div>
                       )}
                       {config.colorPackage && config.colorPackage.price > 0 && (
                         <div className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{config.colorPackage.label}</span>
-                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.colorPackage.price)}</span>
+                          <span className="text-[var(--foreground)] font-bold">+{formatPrice(config.colorPackage.price)}</span>
                         </div>
                       )}
                       {config.photoVisualStyle && config.photoVisualStyle.price > 0 && (
                         <div className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{config.photoVisualStyle.label}</span>
-                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.photoVisualStyle.price)}</span>
+                          <span className="text-[var(--foreground)] font-bold">+{formatPrice(config.photoVisualStyle.price)}</span>
                         </div>
                       )}
                       {config.background && config.background.price > 0 && (
                         <div className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{config.background.label}</span>
-                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.background.price)}</span>
+                          <span className="text-[var(--foreground)] font-bold">+{formatPrice(config.background.price)}</span>
                         </div>
                       )}
                       {config.photoRetouch && config.photoRetouch.price > 0 && (
                         <div className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{config.photoRetouch.label}</span>
-                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.photoRetouch.price)}</span>
+                          <span className="text-[var(--foreground)] font-bold">+{formatPrice(config.photoRetouch.price)}</span>
                         </div>
                       )}
                     </>
@@ -484,7 +484,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                       {config.duration && (
                         <div className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{config.duration.seconds}sn</span>
-                          <span className="text-[var(--cream)] font-bold">
+                          <span className="text-[var(--foreground)] font-bold">
                             {config.duration.basePrice === 0 ? "Dahil" : `+${formatPrice(config.duration.basePrice)}`}
                           </span>
                         </div>
@@ -492,31 +492,31 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                       {config.scenario && config.scenario.price > 0 && (
                         <div className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{config.scenario.label}</span>
-                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.scenario.price)}</span>
+                          <span className="text-[var(--foreground)] font-bold">+{formatPrice(config.scenario.price)}</span>
                         </div>
                       )}
                       {config.voice && config.voice.price > 0 && (
                         <div className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{config.voice.label}</span>
-                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.voice.price)}</span>
+                          <span className="text-[var(--foreground)] font-bold">+{formatPrice(config.voice.price)}</span>
                         </div>
                       )}
                       {config.music && config.music.price > 0 && (
                         <div className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{config.music.label}</span>
-                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.music.price)}</span>
+                          <span className="text-[var(--foreground)] font-bold">+{formatPrice(config.music.price)}</span>
                         </div>
                       )}
                       {config.visualStyle && config.visualStyle.price > 0 && (
                         <div className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{config.visualStyle.label}</span>
-                          <span className="text-[var(--cream)] font-bold">+{formatPrice(config.visualStyle.price)}</span>
+                          <span className="text-[var(--foreground)] font-bold">+{formatPrice(config.visualStyle.price)}</span>
                         </div>
                       )}
                       {config.postProduction.map((pp) => (
                         <div key={pp.id} className="flex justify-between text-sm">
                           <span className="text-[var(--gray)]">{pp.label}</span>
-                          <span className="text-[var(--cream)] font-bold">+{formatPrice(pp.price)}</span>
+                          <span className="text-[var(--foreground)] font-bold">+{formatPrice(pp.price)}</span>
                         </div>
                       ))}
                     </>
@@ -526,7 +526,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                   {config.revision && config.revision.price > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-[var(--gray)]">{config.revision.label}</span>
-                      <span className="text-[var(--cream)] font-bold">+{formatPrice(config.revision.price)}</span>
+                      <span className="text-[var(--foreground)] font-bold">+{formatPrice(config.revision.price)}</span>
                     </div>
                   )}
 
@@ -535,7 +535,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
 
                   {/* Total */}
                   <div className="flex justify-between items-center">
-                    <span className="text-[var(--cream)] font-bold">{t("config.total")}</span>
+                    <span className="text-[var(--foreground)] font-bold">{t("config.total")}</span>
                     <span className="text-2xl font-black text-[var(--lime)] animate-glow-pulse">
                       {formatPrice(totalAI)}
                     </span>
@@ -594,7 +594,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
       </div>
 
       {/* Mobile fixed bottom bar */}
-      <div className="fixed bottom-0 left-0 right-0 lg:hidden z-50 bg-[var(--dark-blue)] border-t-3 border-[var(--lime)] px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+      <div className="fixed bottom-0 left-0 right-0 lg:hidden z-50 bg-[var(--card)] border-t-3 border-[var(--lime)] px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
         <div className="flex items-center justify-between gap-3 max-w-lg mx-auto">
           <div>
             <div className="text-[10px] text-[var(--gray)]">{t("config.total")}</div>

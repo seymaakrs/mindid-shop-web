@@ -115,8 +115,8 @@ const ComparisonTable = ({
     <div className="overflow-x-auto">
       <table className="w-full border-3 border-[var(--electric-blue)]/30 rounded-lg overflow-hidden">
         <thead>
-          <tr className="bg-[var(--dark-blue)] border-b-3 border-[var(--electric-blue)]/30">
-            <th className="text-left p-4 text-sm font-bold text-[var(--cream)]">
+          <tr className="bg-[var(--card)] border-b-3 border-[var(--electric-blue)]/30">
+            <th className="text-left p-4 text-sm font-bold text-[var(--foreground)]">
               {lang === "en" ? "Item" : "Kalem"}
             </th>
             <th className="text-left p-4 text-sm font-bold text-red-400">
@@ -125,7 +125,7 @@ const ComparisonTable = ({
             <th className="text-left p-4 text-sm font-bold text-[var(--lime)]">
               MindID AI
             </th>
-            <th className="text-center p-4 text-sm font-bold text-[var(--cream)]">
+            <th className="text-center p-4 text-sm font-bold text-[var(--foreground)]">
               {lang === "en" ? "Savings" : "Tasarruf"}
             </th>
           </tr>
@@ -136,7 +136,7 @@ const ComparisonTable = ({
               key={i}
               className="border-b border-[var(--electric-blue)]/10 hover:bg-[var(--electric-blue)]/5 transition-colors"
             >
-              <td className="p-4 text-sm font-bold text-[var(--cream)]">
+              <td className="p-4 text-sm font-bold text-[var(--foreground)]">
                 {lang === "en" ? row.label.en : row.label.tr}
               </td>
               <td className="p-4 text-sm text-red-400/80 line-through decoration-red-400/40">
@@ -176,12 +176,12 @@ export const AiVsTraditionalPage = () => {
               {lang === "en" ? "Up to 70% Cost Savings" : "%70'e Varan Maliyet Tasarrufu"}
             </span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-black text-[var(--cream)] mb-4">
+          <h1 className="text-3xl md:text-4xl font-black text-[var(--foreground)] mb-4">
             {lang === "en"
               ? "AI vs Traditional Production"
               : "AI vs Geleneksel Prodüksiyon"}
           </h1>
-          <p className="text-lg text-[var(--cream)]/70 max-w-2xl mx-auto">
+          <p className="text-lg text-[var(--foreground)]/70 max-w-2xl mx-auto">
             {lang === "en"
               ? "Real cost, speed, and quality comparison between AI-powered production and traditional methods. See exactly how much you save with MindID."
               : "AI destekli prodüksiyon ile geleneksel yöntemlerin gerçek maliyet, hız ve kalite karşılaştırması. MindID ile ne kadar tasarruf ettiğinizi görün."}
@@ -213,7 +213,7 @@ export const AiVsTraditionalPage = () => {
             >
               <stat.icon size={24} className="text-[var(--lime)] mx-auto mb-2" />
               <div className="text-3xl font-black text-[var(--lime)]">{stat.value}</div>
-              <div className="text-sm text-[var(--cream)]/70 font-bold">
+              <div className="text-sm text-[var(--foreground)]/70 font-bold">
                 {lang === "en" ? stat.label.en : stat.label.tr}
               </div>
             </div>
@@ -258,7 +258,7 @@ export const AiVsTraditionalPage = () => {
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-2 mb-2">
                 <CheckCircle2 size={16} className="text-[var(--lime)] mt-0.5 shrink-0" />
-                <span className="text-sm text-[var(--cream)]/80">
+                <span className="text-sm text-[var(--foreground)]/80">
                   {lang === "en" ? item.en : item.tr}
                 </span>
               </div>
@@ -279,7 +279,7 @@ export const AiVsTraditionalPage = () => {
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-2 mb-2">
                 <XCircle size={16} className="text-red-400 mt-0.5 shrink-0" />
-                <span className="text-sm text-[var(--cream)]/80">
+                <span className="text-sm text-[var(--foreground)]/80">
                   {lang === "en" ? item.en : item.tr}
                 </span>
               </div>
@@ -294,7 +294,7 @@ export const AiVsTraditionalPage = () => {
               ? "Ready to Save 70% on Production?"
               : "Prodüksiyonda %70 Tasarrufa Hazır mısınız?"}
           </h2>
-          <p className="text-[var(--cream)]/70 mb-6 max-w-lg mx-auto">
+          <p className="text-[var(--foreground)]/70 mb-6 max-w-lg mx-auto">
             {lang === "en"
               ? "Configure your project, see the price instantly, and submit your order. We'll contact you within 24 hours."
               : "Projenizi yapılandırın, fiyatı anında görün ve siparişinizi gönderin. 24 saat içinde sizinle iletişime geçeceğiz."}
@@ -309,7 +309,7 @@ export const AiVsTraditionalPage = () => {
             </Link>
             <Link
               href="/configure/product"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-[var(--electric-blue)] text-[var(--cream)] font-black text-sm hover:shadow-[4px_4px_0px_var(--lime)] transition-all"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-[var(--electric-blue)] text-[var(--foreground)] font-black text-sm hover:shadow-[4px_4px_0px_var(--lime)] transition-all"
             >
               {lang === "en" ? "AI Ad Film" : "AI Reklam Filmi"}
               <ArrowRight size={16} />

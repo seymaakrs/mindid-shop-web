@@ -59,7 +59,7 @@ export const Header = () => {
         {/* Logo */}
         <a href="/" className="flex items-center gap-3">
           <Image
-            src="/favicon.jpg"
+            src="/yuvarlak_-06.jpg"
             alt="MindID"
             width={44}
             height={44}

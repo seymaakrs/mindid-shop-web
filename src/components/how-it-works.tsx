@@ -38,7 +38,7 @@ export const HowItWorks = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Başlık */}
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-black text-[var(--cream)] mb-3">
+          <h2 className="text-3xl md:text-4xl font-black text-[var(--foreground)] mb-3">
             {t("hiw.title")}
           </h2>
           <p className="text-[var(--gray)] text-sm md:text-base max-w-2xl mx-auto">
@@ -61,7 +61,7 @@ export const HowItWorks = () => {
                   <div className="hidden lg:block absolute top-10 left-[calc(50%+40px)] w-[calc(100%-40px)] h-0.5 bg-gradient-to-r from-[var(--lime)]/40 to-[var(--electric-blue)]/40" />
                 )}
 
-                <div className="relative p-6 rounded-lg bg-[var(--dark-blue)] border-3 border-[var(--dark-blue)] hover:border-[var(--lime)] shadow-[5px_5px_0px_var(--dark-blue)] hover:shadow-[3px_3px_0px_var(--lime)] transition-all duration-300 hover:-translate-y-1 text-center">
+                <div className="relative p-6 rounded-lg bg-[var(--card)] border-3 border-[var(--border)] hover:border-[var(--lime)] shadow-[5px_5px_0px_var(--border)] hover:shadow-[3px_3px_0px_var(--lime)] transition-all duration-300 hover:-translate-y-1 text-center">
                   {/* Adım numarası */}
                   <div
                     className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center text-sm font-black border-3"
@@ -86,7 +86,7 @@ export const HowItWorks = () => {
                   </div>
 
                   {/* Başlık */}
-                  <h3 className="text-base font-black text-[var(--cream)] mb-2">
+                  <h3 className="text-base font-black text-[var(--foreground)] mb-2">
                     {t(step.titleKey)}
                   </h3>
 

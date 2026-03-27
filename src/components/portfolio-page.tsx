@@ -155,7 +155,7 @@ export const PortfolioPage = () => {
                   className={`shrink-0 px-3 py-1.5 rounded-md text-xs font-bold border-2 transition-all cursor-pointer ${
                     activeCategory === cat.id
                       ? "bg-[var(--lime)] text-[var(--dark-blue)] border-[var(--dark-blue)] shadow-[2px_2px_0px_var(--dark-blue)]"
-                      : "bg-transparent text-[var(--cream)]/60 border-[var(--electric-blue)]/20 hover:border-[var(--lime)]/40"
+                      : "bg-transparent text-[var(--foreground)]/60 border-[var(--electric-blue)]/20 hover:border-[var(--lime)]/40"
                   }`}
                 >
                   {lang === "en" ? cat.en : cat.tr}
@@ -229,7 +229,7 @@ export const PortfolioPage = () => {
                           className="text-[var(--gray)] group-hover:text-[var(--lime)]"
                         />
                       </div>
-                      <span className="text-[10px] font-bold text-[var(--cream)] uppercase tracking-wider text-center px-1">
+                      <span className="text-[10px] font-bold text-[var(--foreground)] uppercase tracking-wider text-center px-1">
                         {title}
                       </span>
                     </>

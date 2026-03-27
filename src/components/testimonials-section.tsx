@@ -52,7 +52,7 @@ export const TestimonialsSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-black text-[var(--cream)] mb-3">
+          <h2 className="text-3xl md:text-4xl font-black text-[var(--foreground)] mb-3">
             {t("testimonials.title")}
           </h2>
           <p className="text-[var(--gray)] text-sm md:text-base max-w-2xl mx-auto">
@@ -65,7 +65,7 @@ export const TestimonialsSection = () => {
         <div className="relative">
           {/* Left fade + arrow */}
           {canScrollLeft && (
-            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[var(--dark-blue)] to-transparent z-10 flex items-center">
+            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[var(--background)] to-transparent z-10 flex items-center">
               <button
                 onClick={() => scroll("left")}
                 aria-label="Önceki yorumlar"
@@ -78,7 +78,7 @@ export const TestimonialsSection = () => {
 
           {/* Right fade + arrow */}
           {canScrollRight && (
-            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[var(--dark-blue)] to-transparent z-10 flex items-center justify-end">
+            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[var(--background)] to-transparent z-10 flex items-center justify-end">
               <button
                 onClick={() => scroll("right")}
                 aria-label="Sonraki yorumlar"
@@ -116,14 +116,14 @@ export const TestimonialsSection = () => {
                   </div>
 
                   {/* Quote */}
-                  <p className="text-sm text-[var(--cream)]/90 leading-relaxed mb-5 italic min-h-[80px]">
+                  <p className="text-sm text-[var(--foreground)]/90 leading-relaxed mb-5 italic min-h-[80px]">
                     &ldquo;{t(item.textKey)}&rdquo;
                   </p>
 
                   {/* Author */}
                   <div className="flex items-center justify-between gap-3 pt-4 border-t-2 border-dashed border-[var(--electric-blue)]/20">
                     <div>
-                      <div className="font-bold text-sm text-[var(--cream)]">
+                      <div className="font-bold text-sm text-[var(--foreground)]">
                         {t(item.nameKey)}
                       </div>
                       <div className="text-[10px] text-[var(--gray)] leading-tight mt-0.5">

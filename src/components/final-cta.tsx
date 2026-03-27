@@ -21,7 +21,7 @@ export const FinalCTA = () => {
         </div>
 
         {/* Başlık */}
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[var(--cream)] mb-4 leading-tight">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[var(--foreground)] mb-4 leading-tight">
           {t("cta.title")}
         </h2>
 

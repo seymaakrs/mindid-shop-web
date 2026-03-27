@@ -131,10 +131,10 @@ export const HowItWorksPage = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-black text-[var(--cream)] mb-4">
+          <h1 className="text-3xl md:text-4xl font-black text-[var(--foreground)] mb-4">
             {lang === "en" ? "How It Works" : "Nasıl Çalışır?"}
           </h1>
-          <p className="text-lg text-[var(--cream)]/70 max-w-2xl mx-auto">
+          <p className="text-lg text-[var(--foreground)]/70 max-w-2xl mx-auto">
             {lang === "en"
               ? "From choosing your service to receiving your content — here's the complete MindID production process, step by step."
               : "Hizmet seçiminden içerik teslimatına — MindID üretim sürecinin tamamı, adım adım."}
@@ -149,10 +149,10 @@ export const HowItWorksPage = () => {
               className="rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 p-5 hover:border-[var(--lime)] hover:shadow-[4px_4px_0px_var(--lime)] transition-all"
             >
               <step.icon size={24} className="text-[var(--lime)] mb-3" />
-              <h3 className="text-sm font-black text-[var(--cream)] mb-2">
+              <h3 className="text-sm font-black text-[var(--foreground)] mb-2">
                 {lang === "en" ? step.title.en : step.title.tr}
               </h3>
-              <p className="text-xs text-[var(--cream)]/60 leading-relaxed">
+              <p className="text-xs text-[var(--foreground)]/60 leading-relaxed">
                 {lang === "en" ? step.desc.en : step.desc.tr}
               </p>
             </div>
@@ -165,7 +165,7 @@ export const HowItWorksPage = () => {
             <h2 className="text-xl md:text-2xl font-black text-[var(--electric-blue)] mb-2">
               {lang === "en" ? process.title.en : process.title.tr}
             </h2>
-            <p className="text-sm text-[var(--cream)]/60 mb-6">
+            <p className="text-sm text-[var(--foreground)]/60 mb-6">
               {lang === "en" ? process.subtitle.en : process.subtitle.tr}
             </p>
 
@@ -178,7 +178,7 @@ export const HowItWorksPage = () => {
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--lime)]/15 text-[var(--lime)] flex items-center justify-center text-xs font-black">
                     {si + 1}
                   </span>
-                  <span className="text-sm text-[var(--cream)]/80">
+                  <span className="text-sm text-[var(--foreground)]/80">
                     {lang === "en" ? step.en : step.tr}
                   </span>
                 </div>

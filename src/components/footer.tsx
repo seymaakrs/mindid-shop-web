@@ -136,7 +136,7 @@ export const Footer = () => {
         <div className="border-t border-[var(--electric-blue)]/15 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <Image
-              src="/favicon.jpg"
+              src="/yuvarlak_-07.jpg"
               alt="MindID"
               width={36}
               height={36}

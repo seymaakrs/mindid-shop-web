@@ -24,8 +24,8 @@ export const ParallaxGrid = () => {
           top: "-50%",
           height: "200%",
           backgroundImage: `
-            linear-gradient(rgba(50, 47, 174, 0.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(50, 47, 174, 0.08) 1px, transparent 1px)
+            linear-gradient(rgba(40, 1, 55, 0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(40, 1, 55, 0.06) 1px, transparent 1px)
           `,
           backgroundSize: "50px 50px",
         }}

@@ -90,7 +90,7 @@ export const BlogListPage = () => {
                 >
                   <div className="flex flex-col md:flex-row">
                     {post.coverImage && (
-                      <div className="md:w-48 md:h-auto h-48 bg-[var(--dark-blue)] shrink-0 overflow-hidden">
+                      <div className="md:w-48 md:h-auto h-48 bg-[var(--card)] shrink-0 overflow-hidden">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={post.coverImage}
@@ -113,7 +113,7 @@ export const BlogListPage = () => {
                           </span>
                         )}
                       </div>
-                      <h2 className="text-lg font-black text-[var(--cream)] mb-2 group-hover:text-[var(--lime)] transition-colors">
+                      <h2 className="text-lg font-black text-[var(--foreground)] mb-2 group-hover:text-[var(--lime)] transition-colors">
                         {title}
                       </h2>
                       <p className="text-sm text-[var(--gray)] line-clamp-2 mb-3">

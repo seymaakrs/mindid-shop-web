@@ -33,18 +33,18 @@ export const LogoWall = () => {
       {/* Kayan logo bandı */}
       <div className="relative">
         {/* Sol/sağ fade efekti */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[var(--dark-blue)] to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[var(--dark-blue)] to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[var(--background)] to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[var(--background)] to-transparent z-10" />
 
         {/* Kayan container */}
         <div className="flex animate-scroll-x gap-10 items-center">
           {allLogos.map((logo, i) => (
             <div
               key={`${logo.name}-${i}`}
-              className="flex-shrink-0 h-12 px-8 flex items-center justify-center rounded-md border-2 border-[var(--electric-blue)]/15 bg-[var(--dark-blue)] opacity-40 hover:opacity-90 transition-opacity"
+              className="flex-shrink-0 h-12 px-8 flex items-center justify-center rounded-md border-2 border-[var(--electric-blue)]/15 bg-[var(--card)] opacity-40 hover:opacity-90 transition-opacity"
             >
               <span
-                className="text-sm font-black text-[var(--cream)] whitespace-nowrap tracking-wider"
+                className="text-sm font-black text-[var(--foreground)] whitespace-nowrap tracking-wider"
                 style={{ fontStyle: logo.style }}
               >
                 {logo.name}

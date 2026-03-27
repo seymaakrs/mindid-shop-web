@@ -62,14 +62,14 @@ export const FAQSection = () => {
             >
               <Accordion.Header>
                 <Accordion.Trigger className="flex items-center justify-between w-full p-4 text-left cursor-pointer group">
-                  <span className="font-bold text-sm text-[var(--cream)] group-data-[state=open]:text-[var(--lime)]">
+                  <span className="font-bold text-sm text-[var(--foreground)] group-data-[state=open]:text-[var(--lime)]">
                     {faq.question}
                   </span>
                   <ChevronDown size={18} className="text-[var(--gray)] group-data-[state=open]:text-[var(--lime)] transition-transform group-data-[state=open]:rotate-180 shrink-0 ml-2" />
                 </Accordion.Trigger>
               </Accordion.Header>
               <Accordion.Content className="px-4 pb-4 data-[state=open]:animate-kinetic-slide">
-                <p className="text-sm text-[var(--cream)]/70 leading-relaxed">
+                <p className="text-sm text-[var(--foreground)]/70 leading-relaxed">
                   {faq.answer}
                 </p>
               </Accordion.Content>

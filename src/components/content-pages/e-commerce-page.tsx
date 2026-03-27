@@ -70,12 +70,12 @@ export const EcommercePage = () => {
               {lang === "en" ? "From ₺399 — 70% Cheaper" : "399₺'den — %70 Daha Ucuz"}
             </span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-black text-[var(--cream)] mb-4">
+          <h1 className="text-3xl md:text-4xl font-black text-[var(--foreground)] mb-4">
             {lang === "en"
               ? "AI Product Photography for E-commerce"
               : "E-ticaret İçin AI Ürün Görseli"}
           </h1>
-          <p className="text-lg text-[var(--cream)]/70 max-w-2xl mx-auto">
+          <p className="text-lg text-[var(--foreground)]/70 max-w-2xl mx-auto">
             {lang === "en"
               ? "Studio-quality product images without mannequins or studio costs. Perfect for Shopify, Amazon, Trendyol, Hepsiburada sellers."
               : "Manken ve stüdyo masrafı olmadan stüdyo kalitesinde ürün görselleri. Trendyol, Hepsiburada, Shopify, Amazon satıcıları için."}
@@ -115,10 +115,10 @@ export const EcommercePage = () => {
               className="rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 p-6 hover:border-[var(--lime)] transition-all"
             >
               <benefit.icon size={28} className="text-[var(--lime)] mb-3" />
-              <h3 className="text-sm font-black text-[var(--cream)] mb-2">
+              <h3 className="text-sm font-black text-[var(--foreground)] mb-2">
                 {lang === "en" ? benefit.title.en : benefit.title.tr}
               </h3>
-              <p className="text-xs text-[var(--cream)]/60 leading-relaxed">
+              <p className="text-xs text-[var(--foreground)]/60 leading-relaxed">
                 {lang === "en" ? benefit.desc.en : benefit.desc.tr}
               </p>
             </div>
@@ -145,7 +145,7 @@ export const EcommercePage = () => {
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--lime)]/15 text-[var(--lime)] flex items-center justify-center text-xs font-black">
                   {i + 1}
                 </span>
-                <span className="text-sm text-[var(--cream)]/80">{lang === "en" ? step.en : step.tr}</span>
+                <span className="text-sm text-[var(--foreground)]/80">{lang === "en" ? step.en : step.tr}</span>
               </div>
             ))}
           </div>
@@ -161,11 +161,11 @@ export const EcommercePage = () => {
               <div key={i} className="rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 p-5">
                 <div className="flex items-center gap-3 mb-2">
                   <sector.icon size={20} className="text-[var(--lime)]" />
-                  <h3 className="text-sm font-black text-[var(--cream)]">
+                  <h3 className="text-sm font-black text-[var(--foreground)]">
                     {lang === "en" ? sector.name.en : sector.name.tr}
                   </h3>
                 </div>
-                <p className="text-xs text-[var(--cream)]/60">
+                <p className="text-xs text-[var(--foreground)]/60">
                   {lang === "en" ? sector.examples.en : sector.examples.tr}
                 </p>
               </div>
@@ -181,9 +181,9 @@ export const EcommercePage = () => {
           <div className="overflow-x-auto">
             <table className="w-full border-3 border-[var(--electric-blue)]/30 rounded-lg overflow-hidden">
               <thead>
-                <tr className="bg-[var(--dark-blue)] border-b-3 border-[var(--electric-blue)]/30">
-                  <th className="text-left p-4 text-sm font-bold text-[var(--cream)]">Platform</th>
-                  <th className="text-left p-4 text-sm font-bold text-[var(--cream)]">
+                <tr className="bg-[var(--card)] border-b-3 border-[var(--electric-blue)]/30">
+                  <th className="text-left p-4 text-sm font-bold text-[var(--foreground)]">Platform</th>
+                  <th className="text-left p-4 text-sm font-bold text-[var(--foreground)]">
                     {lang === "en" ? "Specs" : "Özellikler"}
                   </th>
                   <th className="text-center p-4 text-sm font-bold text-[var(--lime)]">
@@ -194,8 +194,8 @@ export const EcommercePage = () => {
               <tbody>
                 {platforms.map((platform, i) => (
                   <tr key={i} className="border-b border-[var(--electric-blue)]/10">
-                    <td className="p-4 text-sm font-bold text-[var(--cream)]">{platform.name}</td>
-                    <td className="p-4 text-xs text-[var(--cream)]/60">{platform.specs}</td>
+                    <td className="p-4 text-sm font-bold text-[var(--foreground)]">{platform.name}</td>
+                    <td className="p-4 text-xs text-[var(--foreground)]/60">{platform.specs}</td>
                     <td className="p-4 text-center">
                       <CheckCircle2 size={16} className="text-[var(--lime)] mx-auto" />
                     </td>
@@ -216,7 +216,7 @@ export const EcommercePage = () => {
               <h3 className="text-sm font-black text-red-400 mb-3">
                 {lang === "en" ? "Traditional Studio Shoot" : "Geleneksel Stüdyo Çekimi"}
               </h3>
-              <ul className="space-y-2 text-xs text-[var(--cream)]/60">
+              <ul className="space-y-2 text-xs text-[var(--foreground)]/60">
                 <li>• {lang === "en" ? "Studio rental: $140 – $420/day" : "Stüdyo kirası: 5.000₺ – 15.000₺/gün"}</li>
                 <li>• {lang === "en" ? "Photographer: $280 – $700/day" : "Fotoğrafçı: 10.000₺ – 25.000₺/gün"}</li>
                 <li>• {lang === "en" ? "Model: $140 – $420/session" : "Manken: 5.000₺ – 15.000₺/seans"}</li>
@@ -233,7 +233,7 @@ export const EcommercePage = () => {
               <h3 className="text-sm font-black text-[var(--lime)] mb-3">
                 MindID AI
               </h3>
-              <ul className="space-y-2 text-xs text-[var(--cream)]/60">
+              <ul className="space-y-2 text-xs text-[var(--foreground)]/60">
                 <li>• {lang === "en" ? "No studio needed" : "Stüdyo gerekmez"} ✓</li>
                 <li>• {lang === "en" ? "No photographer needed" : "Fotoğrafçı gerekmez"} ✓</li>
                 <li>• {lang === "en" ? "No mannequin needed" : "Manken gerekmez"} ✓</li>
@@ -256,7 +256,7 @@ export const EcommercePage = () => {
               ? "Start Saving 70% on Product Photography"
               : "Ürün Fotoğrafçılığında %70 Tasarruf Etmeye Başlayın"}
           </h2>
-          <p className="text-[var(--cream)]/70 mb-6 max-w-lg mx-auto">
+          <p className="text-[var(--foreground)]/70 mb-6 max-w-lg mx-auto">
             {lang === "en"
               ? "Configure your product photography, see the price, and submit your order. We'll contact you within 24 hours."
               : "Ürün fotoğrafınızı yapılandırın, fiyatı görün ve siparişinizi gönderin. 24 saat içinde iletişime geçeceğiz."}

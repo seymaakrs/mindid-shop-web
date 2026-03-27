@@ -48,7 +48,7 @@ export const SocialProof = () => {
             >
               <stat.icon size={20} className="text-[var(--lime)] mx-auto mb-2" />
               <div className="text-2xl font-black text-[var(--lime)]">{stat.value}</div>
-              <div className="text-[10px] text-[var(--cream)]/60 font-bold uppercase tracking-wider">
+              <div className="text-[10px] text-[var(--foreground)]/60 font-bold uppercase tracking-wider">
                 {lang === "en" ? stat.label.en : stat.label.tr}
               </div>
             </div>
@@ -63,7 +63,7 @@ export const SocialProof = () => {
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--electric-blue)]/8 border border-[var(--electric-blue)]/15"
             >
               <Shield size={12} className="text-[var(--lime)]" />
-              <span className="text-[10px] font-bold text-[var(--cream)]/70">
+              <span className="text-[10px] font-bold text-[var(--foreground)]/70">
                 {lang === "en" ? badge.en : badge.tr}
               </span>
             </div>

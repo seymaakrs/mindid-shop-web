@@ -36,7 +36,7 @@ export const BlogPostPage = ({ slug }: BlogPostPageProps) => {
     return (
       <div className="min-h-screen relative z-10 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-black text-[var(--cream)] mb-4">
+          <h1 className="text-2xl font-black text-[var(--foreground)] mb-4">
             {lang === "en" ? "Post not found" : "Yazı bulunamadı"}
           </h1>
           <Link
@@ -119,7 +119,7 @@ export const BlogPostPage = ({ slug }: BlogPostPageProps) => {
                 <Clock size={12} /> {readTime} {lang === "en" ? "min read" : "dk okuma"}
               </span>
             </div>
-            <h1 className="text-3xl md:text-4xl font-black text-[var(--cream)] mb-4 leading-tight">
+            <h1 className="text-3xl md:text-4xl font-black text-[var(--foreground)] mb-4 leading-tight">
               {title}
             </h1>
             {post.tags?.length > 0 && (
@@ -150,16 +150,16 @@ export const BlogPostPage = ({ slug }: BlogPostPageProps) => {
 
           {/* Content — basit markdown rendering */}
           <div
-            className="prose prose-invert max-w-none text-[var(--cream)]/90 leading-relaxed
+            className="prose max-w-none text-[var(--foreground)]/90 leading-relaxed
               [&_h2]:text-[var(--lime)] [&_h2]:font-black [&_h2]:text-xl [&_h2]:mt-8 [&_h2]:mb-4
-              [&_h3]:text-[var(--cream)] [&_h3]:font-bold [&_h3]:text-lg [&_h3]:mt-6 [&_h3]:mb-3
+              [&_h3]:text-[var(--foreground)] [&_h3]:font-bold [&_h3]:text-lg [&_h3]:mt-6 [&_h3]:mb-3
               [&_p]:mb-4 [&_p]:text-sm
               [&_a]:text-[var(--electric-blue)] [&_a]:underline
               [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul]:text-sm
               [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol]:text-sm
               [&_li]:mb-1
               [&_blockquote]:border-l-4 [&_blockquote]:border-[var(--lime)] [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-[var(--gray)]
-              [&_strong]:text-[var(--cream)] [&_strong]:font-bold
+              [&_strong]:text-[var(--foreground)] [&_strong]:font-bold
               [&_code]:bg-[var(--electric-blue)]/10 [&_code]:px-1 [&_code]:rounded [&_code]:text-xs"
             dangerouslySetInnerHTML={{
               __html: content

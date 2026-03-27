@@ -86,7 +86,7 @@ export const AvatarPage = () => {
             <Bot size={28} className="text-[var(--dark-blue)]" />
           </div>
           <h2 className="text-2xl font-black text-[var(--lime)] mb-3">{t("congrats.title")}</h2>
-          <p className="text-sm text-[var(--cream)]/80 mb-6">
+          <p className="text-sm text-[var(--foreground)]/80 mb-6">
             AI Avatar talebiniz alindi. En kisa surede sizi arayacagiz.
           </p>
           <Link href="/" className="inline-flex px-6 py-3 rounded-md bg-[var(--lime)] text-[var(--dark-blue)] border-3 border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] font-bold">
@@ -170,7 +170,7 @@ export const AvatarPage = () => {
           {/* Right: Info + CTA */}
           <div className="space-y-6">
             {/* Who is it for */}
-            <div className="rounded-lg bg-[var(--dark-blue)] border-3 border-[var(--lime)] shadow-[6px_6px_0px_var(--lime)] overflow-hidden">
+            <div className="rounded-lg bg-[var(--card)] border-3 border-[var(--lime)] shadow-[6px_6px_0px_var(--lime)] overflow-hidden">
               <div className="p-4 bg-[var(--lime)] text-[var(--dark-blue)]">
                 <h3 className="font-black text-base">{t("avatar.who_title")}</h3>
               </div>
@@ -180,7 +180,7 @@ export const AvatarPage = () => {
                     <div className="w-8 h-8 rounded-md bg-[var(--lime)]/10 flex items-center justify-center shrink-0 text-[var(--lime)]">
                       {item.icon}
                     </div>
-                    <p className="text-sm text-[var(--cream)]/90 font-medium pt-1">{item.text}</p>
+                    <p className="text-sm text-[var(--foreground)]/90 font-medium pt-1">{item.text}</p>
                   </div>
                 ))}
               </div>
@@ -200,10 +200,10 @@ export const AvatarPage = () => {
             {showForm && (
               <form onSubmit={handleSubmit} className="rounded-lg bg-[var(--card)] border-3 border-[var(--lime)] p-5 space-y-3 animate-scale-in">
                 <h4 className="font-bold text-[var(--lime)] text-sm mb-2">{t("form.title")}</h4>
-                <input type="text" required placeholder={t("form.name")} value={name} onChange={(e) => setName(e.target.value)} disabled={loading} className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm placeholder:text-[var(--gray)] focus:border-[var(--lime)] focus:outline-none" />
-                <input type="email" required placeholder={t("form.email")} value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading} className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm placeholder:text-[var(--gray)] focus:border-[var(--lime)] focus:outline-none" />
-                <input type="tel" required placeholder={t("form.phone")} value={phone} onChange={(e) => setPhone(e.target.value)} disabled={loading} className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm placeholder:text-[var(--gray)] focus:border-[var(--lime)] focus:outline-none" />
-                <input type="text" placeholder={t("form.company")} value={company} onChange={(e) => setCompany(e.target.value)} disabled={loading} className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm placeholder:text-[var(--gray)] focus:border-[var(--lime)] focus:outline-none" />
+                <input type="text" required placeholder={t("form.name")} value={name} onChange={(e) => setName(e.target.value)} disabled={loading} className="w-full p-2.5 rounded-md bg-[var(--background)] border-2 border-[var(--electric-blue)]/30 text-[var(--foreground)] text-sm placeholder:text-[var(--gray)] focus:border-[var(--lime)] focus:outline-none" />
+                <input type="email" required placeholder={t("form.email")} value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading} className="w-full p-2.5 rounded-md bg-[var(--background)] border-2 border-[var(--electric-blue)]/30 text-[var(--foreground)] text-sm placeholder:text-[var(--gray)] focus:border-[var(--lime)] focus:outline-none" />
+                <input type="tel" required placeholder={t("form.phone")} value={phone} onChange={(e) => setPhone(e.target.value)} disabled={loading} className="w-full p-2.5 rounded-md bg-[var(--background)] border-2 border-[var(--electric-blue)]/30 text-[var(--foreground)] text-sm placeholder:text-[var(--gray)] focus:border-[var(--lime)] focus:outline-none" />
+                <input type="text" placeholder={t("form.company")} value={company} onChange={(e) => setCompany(e.target.value)} disabled={loading} className="w-full p-2.5 rounded-md bg-[var(--background)] border-2 border-[var(--electric-blue)]/30 text-[var(--foreground)] text-sm placeholder:text-[var(--gray)] focus:border-[var(--lime)] focus:outline-none" />
                 {error && (
                   <div className="p-2.5 rounded-md bg-red-500/10 border-2 border-red-500/30">
                     <p className="text-xs text-red-400">{error}</p>

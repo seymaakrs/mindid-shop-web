@@ -53,7 +53,7 @@ export const AboutPage = () => {
             <Clapperboard size={28} className="text-[var(--dark-blue)]" />
           </div>
           <div>
-            <h1 className="text-3xl font-black text-[var(--cream)]">
+            <h1 className="text-3xl font-black text-[var(--foreground)]">
               Mind<span className="text-[var(--lime)]">ID</span>{" "}
               <span className="text-[var(--lime)]">Ne Yapar?</span>
             </h1>
@@ -63,7 +63,7 @@ export const AboutPage = () => {
 
         {/* Description */}
         <div className="p-6 rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 mb-10 animate-kinetic-slide">
-          <p className="text-[var(--cream)]/90 leading-relaxed">
+          <p className="text-[var(--foreground)]/90 leading-relaxed">
             {t("about.desc")}
           </p>
         </div>
@@ -76,9 +76,9 @@ export const AboutPage = () => {
             { title: "Dijital Reklam", desc: "Tum platformlara optimize edilmis, donusum odakli reklam videolari." },
             { title: "AI Avatar", desc: "Dijital temsilcinizi olusturuyor, surekli icerik uretimini mumkun kiliyoruz." },
           ].map((item, i) => (
-            <div key={i} className="p-5 rounded-md bg-[var(--dark-blue)] border-3 border-[var(--lime)]/20 hover:border-[var(--lime)] transition-colors animate-shimmer">
+            <div key={i} className="p-5 rounded-md bg-[var(--card)] border-3 border-[var(--lime)]/20 hover:border-[var(--lime)] transition-colors animate-shimmer">
               <h3 className="font-black text-[var(--lime)] mb-2">{item.title}</h3>
-              <p className="text-sm text-[var(--cream)]/70">{item.desc}</p>
+              <p className="text-sm text-[var(--foreground)]/70">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -94,7 +94,7 @@ export const AboutPage = () => {
                 {member.icon}
               </div>
               <div>
-                <h4 className="font-bold text-[var(--cream)] text-sm">{member.role}</h4>
+                <h4 className="font-bold text-[var(--foreground)] text-sm">{member.role}</h4>
                 <p className="text-xs text-[var(--gray)] mt-0.5">{member.desc}</p>
               </div>
             </div>

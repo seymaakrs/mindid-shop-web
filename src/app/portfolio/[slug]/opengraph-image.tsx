@@ -34,7 +34,7 @@ const OGImage = async ({ params }: { params: Promise<{ slug: string }> }) => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          background: "linear-gradient(135deg, #111121 0%, #221f5f 50%, #322fae 100%)",
+          background: "linear-gradient(135deg, #280137 0%, #2E1A47 50%, #2E1A47 100%)",
           padding: "60px",
           fontFamily: "Inter, sans-serif",
         }}
@@ -45,8 +45,8 @@ const OGImage = async ({ params }: { params: Promise<{ slug: string }> }) => {
             display: "flex",
             padding: "8px 20px",
             borderRadius: "6px",
-            background: "rgba(193, 255, 114, 0.15)",
-            border: "2px solid rgba(193, 255, 114, 0.4)",
+            background: "rgba(97, 255, 0, 0.15)",
+            border: "2px solid rgba(97, 255, 0, 0.4)",
             marginBottom: "24px",
           }}
         >
@@ -54,7 +54,7 @@ const OGImage = async ({ params }: { params: Promise<{ slug: string }> }) => {
             style={{
               fontSize: "16px",
               fontWeight: 800,
-              color: "#c1ff72",
+              color: "#61ff00",
               letterSpacing: "3px",
               textTransform: "uppercase",
             }}
@@ -68,7 +68,7 @@ const OGImage = async ({ params }: { params: Promise<{ slug: string }> }) => {
           style={{
             fontSize: title.length > 30 ? "42px" : "52px",
             fontWeight: 900,
-            color: "#eeede9",
+            color: "#f1eee2",
             textAlign: "center",
             lineHeight: 1.2,
             marginBottom: "20px",
@@ -82,7 +82,7 @@ const OGImage = async ({ params }: { params: Promise<{ slug: string }> }) => {
         <p
           style={{
             fontSize: "20px",
-            color: "rgba(238, 237, 233, 0.6)",
+            color: "rgba(241, 238, 226, 0.6)",
             textAlign: "center",
           }}
         >
@@ -105,13 +105,13 @@ const OGImage = async ({ params }: { params: Promise<{ slug: string }> }) => {
               width: "36px",
               height: "36px",
               borderRadius: "50%",
-              background: "#c1ff72",
+              background: "#61ff00",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontSize: "18px",
               fontWeight: 900,
-              color: "#111121",
+              color: "#280137",
             }}
           >
             M
@@ -120,7 +120,7 @@ const OGImage = async ({ params }: { params: Promise<{ slug: string }> }) => {
             style={{
               fontSize: "18px",
               fontWeight: 800,
-              color: "#c1ff72",
+              color: "#61ff00",
             }}
           >
             mindid.shop
