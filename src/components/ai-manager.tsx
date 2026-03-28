@@ -5,10 +5,10 @@ import { useI18n } from "@/lib/i18n";
 import { Bot, X } from "lucide-react";
 
 const MESSAGES_TR = [
-  "Hosgeldiniz! Size nasil yardimci olabilirim? 👋",
-  "Bir hizmet secin baslayalim! 🚀",
-  "Harika bir secim! 🎯",
-  "Neredeyse bitti! Son adim. ✨",
+  "Hoş geldiniz! Size nasıl yardımcı olabilirim? 👋",
+  "Bir hizmet seçin başlayalım! 🚀",
+  "Harika bir seçim! 🎯",
+  "Neredeyse bitti! Son adım. ✨",
 ];
 
 const MESSAGES_EN = [

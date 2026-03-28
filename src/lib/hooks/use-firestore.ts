@@ -111,15 +111,16 @@ export const useBlogPosts = (publishedOnly: boolean = true) => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const constraints: QueryConstraint[] = [orderBy("publishedAt", "desc")];
-        if (publishedOnly) {
-          constraints.unshift(where("published", "==", true));
-        }
-        const q = query(collection(db, "mindid_blog"), ...constraints);
+        // Single-field orderBy avoids composite index requirement
+        const q = query(collection(db, "mindid_blog"), orderBy("publishedAt", "desc"));
         const snap = await getDocs(q);
-        setData(snap.docs.map((d) => ({ id: d.id, ...d.data() } as BlogPost)));
-      } catch {
-        // Blog not configured yet
+        let posts = snap.docs.map((d) => ({ id: d.id, ...d.data() } as BlogPost));
+        if (publishedOnly) {
+          posts = posts.filter((p) => p.published === true);
+        }
+        setData(posts);
+      } catch (err) {
+        console.error("[Blog] useBlogPosts query failed:", err);
       }
       setLoading(false);
     };
@@ -136,17 +137,15 @@ export const useBlogPost = (slug: string) => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const q = query(
-          collection(db, "mindid_blog"),
-          where("slug", "==", slug),
-          where("published", "==", true),
-        );
+        // Single-field where avoids composite index requirement; published check is client-side
+        const q = query(collection(db, "mindid_blog"), where("slug", "==", slug));
         const snap = await getDocs(q);
-        if (!snap.empty) {
-          setData({ id: snap.docs[0].id, ...snap.docs[0].data() } as BlogPost);
+        const doc = snap.docs.find((d) => d.data().published === true);
+        if (doc) {
+          setData({ id: doc.id, ...doc.data() } as BlogPost);
         }
-      } catch {
-        // Blog post not found
+      } catch (err) {
+        console.error("[Blog] useBlogPost query failed:", err);
       }
       setLoading(false);
     };
