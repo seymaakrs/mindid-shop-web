@@ -80,7 +80,7 @@ export const DirectorDesk = ({
     <div className="min-h-screen relative z-10">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back */}
-        <button onClick={onBack} className="inline-flex items-center gap-2 text-[var(--lime)] hover:underline mb-6 text-sm font-bold cursor-pointer">
+        <button onClick={onBack} className="inline-flex items-center gap-2 text-[var(--foreground)] hover:underline mb-6 text-sm font-bold cursor-pointer">
           <ArrowLeft size={16} />
           Geri Don
         </button>
@@ -91,7 +91,7 @@ export const DirectorDesk = ({
             <Clapperboard size={24} className="text-[var(--dark-blue)]" />
           </div>
           <div>
-            <h1 className="text-2xl md:text-3xl font-black text-[var(--cream)]">
+            <h1 className="text-2xl md:text-3xl font-black text-[var(--foreground)]">
               {t("checkout.title")}
             </h1>
             <p className="text-sm text-[var(--gray)]">{t("checkout.subtitle")}</p>
@@ -151,7 +151,7 @@ export const DirectorDesk = ({
 
         {/* Strategic comparison note */}
         <div className="p-4 rounded-md bg-[var(--card)] border-2 border-[var(--lime)]/20 mb-8">
-          <p className="text-xs text-[var(--cream)]/80 leading-relaxed mb-2">
+          <p className="text-xs text-[var(--foreground)]/80 leading-relaxed mb-2">
             {t("checkout.smart_move")}
           </p>
           <p className="text-[10px] text-[var(--gray)]/60 leading-relaxed">

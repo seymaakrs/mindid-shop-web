@@ -1,22 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --lime: #61ff00;
-  --cream: #f1eee2;
-  --gray: #6b6b6b;
-  --dark-blue: #280137;
-  --deep-blue: #2E1A47;
-  --electric-blue: #2E1A47;
-  --background: #E5E5E0;
-  --foreground: #280137;
-  --card: #f1eee2;
-  --card-hover: #E5E5E0;
-  --border: #280137;
-  --primary: #61ff00;
-  --primary-hover: #52d600;
-  --muted: #9a9a9a;
-  --accent: #2E1A47;
-  --success: #61ff00;
+  /* ── MindID Marka Renk Paleti ── */
+
+  /* 1. Ana Yeşil (Primary) — vurgu, CTA, hover */
+  --lime: #ade94f;
+  --primary: #ade94f;
+  --primary-hover: #96cc3e;
+  --success: #ade94f;
+
+  /* 2. Koyu Mor (Dark) — metin, kenarlık, koyu arka plan */
+  --dark-blue: #100a2c;
+  --deep-blue: #1c1242;
+  --electric-blue: #1c1242;
+  --foreground: #100a2c;
+  --border: #100a2c;
+  --accent: #1c1242;
+
+  /* 3. Krem (Light) — kart, açık yüzeyler */
+  --cream: #eeeadc;
+  --card: #eeeadc;
+  --card-hover: #e4e0d2;
+  --background: #e4e0d2;
+
+  /* 4. Nötr Griler (türetilmiş — WCAG AA onaylı) */
+  --gray: #5c5949;
+  --muted: #78756a;
+
+  /* 5. Durum Renkleri */
+  --error: #e05252;
+  --warning: #e0a830;
+  --info: #4a90d9;
 }
 
 * {
@@ -74,8 +88,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes pulse-lime {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(97, 255, 0, 0.4); }
-  50% { box-shadow: 0 0 30px 15px rgba(97, 255, 0, 0.08); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(173, 233, 79, 0.4); }
+  50% { box-shadow: 0 0 30px 15px rgba(173, 233, 79, 0.08); }
 }
 
 @keyframes stagger-fade-up {
@@ -155,7 +169,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent 0%, rgba(97, 255, 0, 0.08) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(173, 233, 79, 0.08) 50%, transparent 100%);
   background-size: 200% 100%;
   animation: shimmer 3s ease-in-out infinite;
 }
@@ -202,7 +216,7 @@ h1, h2, h3, h4, h5, h6 {
 .glass {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(40, 1, 55, 0.1);
+  border: 1px solid rgba(16, 10, 44, 0.1);
 }
 
 /* Smooth scroll */
@@ -219,7 +233,7 @@ html {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(97,255,0,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(173,233,79,0.2), transparent);
   animation: shimmer 2s ease-in-out infinite;
   background-size: 200% 100%;
 }

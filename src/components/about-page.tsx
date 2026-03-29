@@ -43,7 +43,7 @@ export const AboutPage = () => {
   return (
     <div className="min-h-screen relative z-10">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Link href="/" className="inline-flex items-center gap-2 text-[var(--lime)] hover:underline mb-6 text-sm font-bold">
+        <Link href="/" className="inline-flex items-center gap-2 text-[var(--foreground)] hover:underline mb-6 text-sm font-bold">
           <ArrowLeft size={16} /> Ana Sayfa
         </Link>
 
@@ -54,8 +54,8 @@ export const AboutPage = () => {
           </div>
           <div>
             <h1 className="text-3xl font-black text-[var(--foreground)]">
-              Mind<span className="text-[var(--lime)]">ID</span>{" "}
-              <span className="text-[var(--lime)]">Ne Yapar?</span>
+              Mind<span className="text-[var(--foreground)]">ID</span>{" "}
+              <span className="text-[var(--foreground)]">Ne Yapar?</span>
             </h1>
             <p className="text-sm text-[var(--gray)]">{t("about.subtitle")}</p>
           </div>
@@ -77,20 +77,20 @@ export const AboutPage = () => {
             { title: "AI Avatar", desc: "Dijital temsilcinizi olusturuyor, surekli icerik uretimini mumkun kiliyoruz." },
           ].map((item, i) => (
             <div key={i} className="p-5 rounded-md bg-[var(--card)] border-3 border-[var(--lime)]/20 hover:border-[var(--lime)] transition-colors animate-shimmer">
-              <h3 className="font-black text-[var(--lime)] mb-2">{item.title}</h3>
+              <h3 className="font-black text-[var(--foreground)] mb-2">{item.title}</h3>
               <p className="text-sm text-[var(--foreground)]/70">{item.desc}</p>
             </div>
           ))}
         </div>
 
         {/* Team */}
-        <h2 className="text-2xl font-black text-[var(--lime)] mb-6 flex items-center gap-2">
+        <h2 className="text-2xl font-black text-[var(--foreground)] mb-6 flex items-center gap-2">
           <Users size={24} /> {t("about.team")}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
           {teamMembers.map((member, i) => (
             <div key={i} className="p-4 rounded-md bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 flex items-start gap-3 hover:border-[var(--lime)]/40 transition-colors">
-              <div className="w-10 h-10 rounded-md bg-[var(--lime)]/10 flex items-center justify-center text-[var(--lime)] shrink-0">
+              <div className="w-10 h-10 rounded-md bg-[var(--lime)]/10 flex items-center justify-center text-[var(--foreground)] shrink-0">
                 {member.icon}
               </div>
               <div>

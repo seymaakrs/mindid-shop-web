@@ -82,12 +82,12 @@ export const BudgetSlider = () => {
     <section className="relative z-10 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-black text-[var(--lime)] mb-2">
+          <h2 className="text-2xl md:text-3xl font-black text-[var(--foreground)] mb-2">
             {lang === "en"
               ? "What Can You Get with Your Budget?"
               : "Bütçenizle Neler Yapabilirsiniz?"}
           </h2>
-          <p className="text-sm text-[var(--cream)]/60">
+          <p className="text-sm text-[var(--gray)]">
             {lang === "en"
               ? "Slide to set your budget — see which AI services are available."
               : "Bütçenizi belirleyin — hangi AI hizmetlerini alabileceğinizi görün."}
@@ -97,11 +97,11 @@ export const BudgetSlider = () => {
         {/* Slider */}
         <div className="bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 rounded-lg p-6 mb-8">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs text-[var(--cream)]/50 font-bold">399₺</span>
-            <span className="text-2xl font-black text-[var(--lime)]">
+            <span className="text-xs text-[var(--gray)] font-bold">399₺</span>
+            <span className="text-2xl font-black text-[var(--foreground)]">
               {formatPrice(budget)}
             </span>
-            <span className="text-xs text-[var(--cream)]/50 font-bold">50.000₺</span>
+            <span className="text-xs text-[var(--gray)] font-bold">50.000₺</span>
           </div>
           <input
             type="range"
@@ -112,7 +112,7 @@ export const BudgetSlider = () => {
             className="w-full h-2 rounded-full appearance-none cursor-pointer bg-[var(--electric-blue)]/20 accent-[var(--lime)]"
           />
           <div className="mt-3 text-center">
-            <span className="text-sm text-[var(--cream)]/70">
+            <span className="text-sm text-[var(--gray)]">
               {availableServices.length}{" "}
               {lang === "en"
                 ? `service${availableServices.length !== 1 ? "s" : ""} available`
@@ -139,27 +139,27 @@ export const BudgetSlider = () => {
                     {service.tag && (
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full mb-1 inline-block ${
                         isAvailable
-                          ? "bg-[var(--lime)]/15 text-[var(--lime)]"
+                          ? "bg-[var(--lime)]/15 text-[var(--foreground)]"
                           : "bg-[var(--electric-blue)]/10 text-[var(--gray)]"
                       }`}>
                         {lang === "en" ? service.tag.en : service.tag.tr}
                       </span>
                     )}
-                    <h3 className={`text-sm font-black ${isAvailable ? "text-[var(--cream)]" : "text-[var(--gray)]"}`}>
+                    <h3 className={`text-sm font-black ${isAvailable ? "text-[var(--foreground)]" : "text-[var(--gray)]"}`}>
                       {lang === "en" ? service.name.en : service.name.tr}
                     </h3>
                   </div>
-                  <span className={`text-xs font-bold ${isAvailable ? "text-[var(--lime)]" : "text-[var(--gray)]"}`}>
+                  <span className={`text-xs font-bold ${isAvailable ? "text-[var(--foreground)]" : "text-[var(--gray)]"}`}>
                     {formatPrice(service.minPrice)}+
                   </span>
                 </div>
-                <p className="text-xs text-[var(--cream)]/50 mb-3">
+                <p className="text-xs text-[var(--gray)] mb-3">
                   {lang === "en" ? service.desc.en : service.desc.tr}
                 </p>
                 {isAvailable ? (
                   <Link
                     href={service.href}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--lime)] hover:underline"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--foreground)] hover:underline"
                   >
                     {lang === "en" ? "Configure" : "Yapılandır"}
                     <ArrowRight size={12} />

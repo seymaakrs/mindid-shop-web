@@ -48,30 +48,32 @@ export const FAQSection = () => {
 
   return (
     <section id="faq" className="relative py-16 z-10 leopard-pattern">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl md:text-4xl font-black text-[var(--lime)] text-center mb-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl md:text-4xl font-black text-[var(--foreground)] text-center mb-10">
           {t("faq.title")}
         </h2>
 
-        <Accordion.Root type="single" collapsible className="space-y-3">
+        <Accordion.Root type="multiple" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {faqItems.map((faq, i) => (
             <Accordion.Item
               key={i}
               value={`faq-${i}`}
-              className="rounded-md bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 overflow-hidden data-[state=open]:border-[var(--lime)] data-[state=open]:shadow-[4px_4px_0px_var(--lime)] transition-all"
+              className="rounded-md bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 overflow-hidden data-[state=open]:border-[var(--lime)] data-[state=open]:shadow-[4px_4px_0px_var(--lime)] transition-all self-start"
             >
               <Accordion.Header>
-                <Accordion.Trigger className="flex items-center justify-between w-full p-4 text-left cursor-pointer group">
-                  <span className="font-bold text-sm text-[var(--foreground)] group-data-[state=open]:text-[var(--lime)]">
+                <Accordion.Trigger className="flex items-center justify-between w-full p-3 text-left cursor-pointer group">
+                  <span className="font-bold text-xs text-[var(--foreground)] leading-snug pr-2">
                     {faq.question}
                   </span>
-                  <ChevronDown size={18} className="text-[var(--gray)] group-data-[state=open]:text-[var(--lime)] transition-transform group-data-[state=open]:rotate-180 shrink-0 ml-2" />
+                  <ChevronDown size={14} className="text-[var(--gray)] group-data-[state=open]:text-[var(--foreground)] transition-transform group-data-[state=open]:rotate-180 shrink-0" />
                 </Accordion.Trigger>
               </Accordion.Header>
-              <Accordion.Content className="px-4 pb-4 data-[state=open]:animate-kinetic-slide">
-                <p className="text-sm text-[var(--foreground)]/70 leading-relaxed">
-                  {faq.answer}
-                </p>
+              <Accordion.Content className="px-3 pb-3 data-[state=open]:animate-kinetic-slide">
+                <div className="border-t border-[var(--electric-blue)]/10 pt-2">
+                  <p className="text-xs text-[var(--foreground)]/70 leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </div>
               </Accordion.Content>
             </Accordion.Item>
           ))}

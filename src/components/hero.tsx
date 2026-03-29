@@ -55,7 +55,7 @@ export const Hero = () => {
           <div className="animate-kinetic-slide">
             {/* Başlık */}
             <div className="mb-5">
-              <h2 className="text-xl md:text-2xl font-black text-[var(--cream)] mb-1">
+              <h2 className="text-xl md:text-2xl font-black text-[var(--foreground)] mb-1">
                 {t("nav.gallery")}
               </h2>
               <div className="w-12 h-1 bg-[var(--lime)] rounded-full" />

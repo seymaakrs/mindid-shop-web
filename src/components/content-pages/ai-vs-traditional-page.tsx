@@ -122,7 +122,7 @@ const ComparisonTable = ({
             <th className="text-left p-4 text-sm font-bold text-red-400">
               {lang === "en" ? "Traditional" : "Geleneksel"}
             </th>
-            <th className="text-left p-4 text-sm font-bold text-[var(--lime)]">
+            <th className="text-left p-4 text-sm font-bold text-[var(--foreground)]">
               MindID AI
             </th>
             <th className="text-center p-4 text-sm font-bold text-[var(--foreground)]">
@@ -142,12 +142,12 @@ const ComparisonTable = ({
               <td className="p-4 text-sm text-red-400/80 line-through decoration-red-400/40">
                 {lang === "en" ? row.traditional.en : row.traditional.tr}
               </td>
-              <td className="p-4 text-sm font-bold text-[var(--lime)]">
+              <td className="p-4 text-sm font-bold text-[var(--foreground)]">
                 {lang === "en" ? row.ai.en : row.ai.tr}
               </td>
               <td className="p-4 text-center">
                 {row.savings ? (
-                  <span className="inline-block px-2 py-1 rounded-full bg-[var(--lime)]/15 text-[var(--lime)] text-xs font-black">
+                  <span className="inline-block px-2 py-1 rounded-full bg-[var(--lime)]/15 text-[var(--foreground)] text-xs font-black">
                     {row.savings}
                   </span>
                 ) : (
@@ -171,8 +171,8 @@ export const AiVsTraditionalPage = () => {
         {/* Hero */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--lime)]/10 border border-[var(--lime)]/30 mb-4">
-            <TrendingDown size={14} className="text-[var(--lime)]" />
-            <span className="text-xs font-bold text-[var(--lime)]">
+            <TrendingDown size={14} className="text-[var(--foreground)]" />
+            <span className="text-xs font-bold text-[var(--foreground)]">
               {lang === "en" ? "Up to 70% Cost Savings" : "%70'e Varan Maliyet Tasarrufu"}
             </span>
           </div>
@@ -211,8 +211,8 @@ export const AiVsTraditionalPage = () => {
               key={i}
               className="rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 p-6 text-center"
             >
-              <stat.icon size={24} className="text-[var(--lime)] mx-auto mb-2" />
-              <div className="text-3xl font-black text-[var(--lime)]">{stat.value}</div>
+              <stat.icon size={24} className="text-[var(--foreground)] mx-auto mb-2" />
+              <div className="text-3xl font-black text-[var(--foreground)]">{stat.value}</div>
               <div className="text-sm text-[var(--foreground)]/70 font-bold">
                 {lang === "en" ? stat.label.en : stat.label.tr}
               </div>
@@ -245,7 +245,7 @@ export const AiVsTraditionalPage = () => {
         {/* What You Get vs What You Don't Need */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           <div className="rounded-lg bg-[var(--card)] border-3 border-[var(--lime)]/30 p-6">
-            <h3 className="text-lg font-black text-[var(--lime)] mb-4">
+            <h3 className="text-lg font-black text-[var(--foreground)] mb-4">
               {lang === "en" ? "What You Get with AI" : "AI ile Ne Alırsınız"}
             </h3>
             {[
@@ -257,7 +257,7 @@ export const AiVsTraditionalPage = () => {
               { tr: "Çok dilli içerik üretimi", en: "Multi-language content production" },
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-2 mb-2">
-                <CheckCircle2 size={16} className="text-[var(--lime)] mt-0.5 shrink-0" />
+                <CheckCircle2 size={16} className="text-[var(--foreground)] mt-0.5 shrink-0" />
                 <span className="text-sm text-[var(--foreground)]/80">
                   {lang === "en" ? item.en : item.tr}
                 </span>
@@ -289,7 +289,7 @@ export const AiVsTraditionalPage = () => {
 
         {/* CTA */}
         <div className="text-center rounded-lg bg-[var(--card)] border-3 border-[var(--lime)] p-8 shadow-[6px_6px_0px_var(--lime)]">
-          <h2 className="text-2xl font-black text-[var(--lime)] mb-3">
+          <h2 className="text-2xl font-black text-[var(--foreground)] mb-3">
             {lang === "en"
               ? "Ready to Save 70% on Production?"
               : "Prodüksiyonda %70 Tasarrufa Hazır mısınız?"}
@@ -316,7 +316,7 @@ export const AiVsTraditionalPage = () => {
             </Link>
             <Link
               href="/avatar"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border-2 border-[var(--lime)] text-[var(--lime)] font-black text-sm hover:bg-[var(--lime)]/10 transition-all"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border-2 border-[var(--dark-blue)] text-[var(--dark-blue)] font-black text-sm hover:bg-[var(--electric-blue)]/10 transition-all"
             >
               {lang === "en" ? "AI Avatar" : "AI Avatar"}
               <ArrowRight size={16} />

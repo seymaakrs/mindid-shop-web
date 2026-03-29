@@ -54,7 +54,7 @@ export const NumberInput = ({
           {icon}
         </div>
         <div>
-          <h3 className="text-lg font-bold text-[var(--cream)]">{title}</h3>
+          <h3 className="text-lg font-bold text-[var(--foreground)]">{title}</h3>
           {subtitle && (
             <p className="text-xs text-[var(--gray)]">{subtitle}</p>
           )}
@@ -83,7 +83,7 @@ export const NumberInput = ({
               onChange={handleInput}
               min={min}
               max={max}
-              className="w-16 h-12 text-center text-2xl font-black text-[var(--cream)] bg-transparent border-b-3 border-[var(--lime)] outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="w-16 h-12 text-center text-2xl font-black text-[var(--foreground)] bg-transparent border-b-3 border-[var(--lime)] outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
 
             <button
@@ -104,7 +104,7 @@ export const NumberInput = ({
             <div className="text-xs text-[var(--gray)]">
               {formatPrice(unitPrice)} / {unitLabel}
             </div>
-            <div className="text-lg font-black text-[var(--lime)]">
+            <div className="text-lg font-black text-[var(--foreground)]">
               {current === 0 ? "—" : `+${formatPrice(totalPrice)}`}
             </div>
           </div>

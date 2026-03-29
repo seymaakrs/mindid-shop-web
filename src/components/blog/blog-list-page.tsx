@@ -28,13 +28,13 @@ export const BlogListPage = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-[var(--lime)] hover:underline mb-6 text-sm font-bold"
+          className="inline-flex items-center gap-2 text-[var(--foreground)] hover:underline mb-6 text-sm font-bold"
         >
           <ArrowLeft size={16} />
           {lang === "en" ? "Home" : "Ana Sayfa"}
         </Link>
 
-        <h1 className="text-3xl md:text-4xl font-black text-[var(--lime)] mb-2">
+        <h1 className="text-3xl md:text-4xl font-black text-[var(--foreground)] mb-2">
           {lang === "en" ? "AI Advertising Blog" : "AI Reklam Blogu"}
         </h1>
         <p className="text-[var(--gray)] mb-10">

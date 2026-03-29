@@ -3,6 +3,7 @@
 import { useI18n } from "@/lib/i18n";
 import { useBlogPost } from "@/lib/hooks/use-firestore";
 import { ArrowLeft, Calendar, Tag, Clock } from "lucide-react";
+import DOMPurify from "dompurify";
 import Link from "next/link";
 
 type BlogPostPageProps = {
@@ -41,7 +42,7 @@ export const BlogPostPage = ({ slug }: BlogPostPageProps) => {
           </h1>
           <Link
             href="/blog"
-            className="text-[var(--lime)] hover:underline font-bold"
+            className="text-[var(--foreground)] hover:underline font-bold"
           >
             {lang === "en" ? "Back to blog" : "Bloga dön"}
           </Link>
@@ -100,7 +101,7 @@ export const BlogPostPage = ({ slug }: BlogPostPageProps) => {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-[var(--lime)] hover:underline mb-6 text-sm font-bold"
+          className="inline-flex items-center gap-2 text-[var(--foreground)] hover:underline mb-6 text-sm font-bold"
         >
           <ArrowLeft size={16} />
           {lang === "en" ? "All Posts" : "Tüm Yazılar"}
@@ -151,7 +152,7 @@ export const BlogPostPage = ({ slug }: BlogPostPageProps) => {
           {/* Content — basit markdown rendering */}
           <div
             className="prose max-w-none text-[var(--foreground)]/90 leading-relaxed
-              [&_h2]:text-[var(--lime)] [&_h2]:font-black [&_h2]:text-xl [&_h2]:mt-8 [&_h2]:mb-4
+              [&_h2]:text-[var(--foreground)] [&_h2]:font-black [&_h2]:text-xl [&_h2]:mt-8 [&_h2]:mb-4
               [&_h3]:text-[var(--foreground)] [&_h3]:font-bold [&_h3]:text-lg [&_h3]:mt-6 [&_h3]:mb-3
               [&_p]:mb-4 [&_p]:text-sm
               [&_a]:text-[var(--electric-blue)] [&_a]:underline
@@ -162,21 +163,24 @@ export const BlogPostPage = ({ slug }: BlogPostPageProps) => {
               [&_strong]:text-[var(--foreground)] [&_strong]:font-bold
               [&_code]:bg-[var(--electric-blue)]/10 [&_code]:px-1 [&_code]:rounded [&_code]:text-xs"
             dangerouslySetInnerHTML={{
-              __html: content
-                .replace(/\n\n/g, "</p><p>")
-                .replace(/^## (.+)$/gm, "<h2>$1</h2>")
-                .replace(/^### (.+)$/gm, "<h3>$1</h3>")
-                .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-                .replace(/\*(.+?)\*/g, "<em>$1</em>")
-                .replace(/^- (.+)$/gm, "<li>$1</li>")
-                .replace(/(<li>[\s\S]*?<\/li>)/g, "<ul>$1</ul>")
-                .replace(/<\/ul>\s*<ul>/g, ""),
+              __html: DOMPurify.sanitize(
+                content
+                  .replace(/\n\n/g, "</p><p>")
+                  .replace(/^## (.+)$/gm, "<h2>$1</h2>")
+                  .replace(/^### (.+)$/gm, "<h3>$1</h3>")
+                  .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+                  .replace(/\*(.+?)\*/g, "<em>$1</em>")
+                  .replace(/^- (.+)$/gm, "<li>$1</li>")
+                  .replace(/(<li>[\s\S]*?<\/li>)/g, "<ul>$1</ul>")
+                  .replace(/<\/ul>\s*<ul>/g, ""),
+                { ALLOWED_TAGS: ["p", "h2", "h3", "strong", "em", "ul", "li", "a", "blockquote", "code", "ol", "br", "img"] }
+              ),
             }}
           />
 
           {/* CTA */}
           <div className="mt-12 p-6 rounded-lg bg-[var(--card)] border-3 border-[var(--lime)] shadow-[4px_4px_0px_var(--lime)] text-center">
-            <h3 className="text-lg font-black text-[var(--lime)] mb-2">
+            <h3 className="text-lg font-black text-[var(--foreground)] mb-2">
               {lang === "en" ? "Ready to get started?" : "Başlamaya hazır mısınız?"}
             </h3>
             <p className="text-sm text-[var(--gray)] mb-4">

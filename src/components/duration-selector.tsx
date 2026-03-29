@@ -20,7 +20,7 @@ export const DurationSelector = ({ selected, onSelect }: DurationSelectorProps) 
           <Clock size={20} className="text-[var(--dark-blue)]" />
         </div>
         <div>
-          <h2 className="text-xl font-bold text-[var(--cream)]">
+          <h2 className="text-xl font-bold text-[var(--foreground)]">
             {t("duration.title")}
           </h2>
           <p className="text-xs text-[var(--gray)]">{t("duration.subtitle")}</p>
@@ -43,13 +43,13 @@ export const DurationSelector = ({ selected, onSelect }: DurationSelectorProps) 
                   : "border-[var(--electric-blue)]/30 bg-[var(--card)] hover:border-[var(--lime)]/50"
               }`}
             >
-              <div className={`text-2xl font-black ${isSelected ? "text-[var(--lime)]" : "text-[var(--cream)]"}`}>
+              <div className={`text-2xl font-black ${isSelected ? "text-[var(--foreground)]" : "text-[var(--foreground)]"}`}>
                 {opt.label}
               </div>
               <div className="text-[10px] uppercase tracking-wider text-[var(--gray)] mt-0.5">
                 {label}
               </div>
-              <div className={`text-xs font-bold mt-2 ${isSelected ? "text-[var(--lime)]" : "text-[var(--electric-blue)]"}`}>
+              <div className={`text-xs font-bold mt-2 ${isSelected ? "text-[var(--foreground)]" : "text-[var(--gray)]"}`}>
                 {opt.basePrice === 0 ? "Dahil" : `+${formatPrice(opt.basePrice)}`}
               </div>
             </button>

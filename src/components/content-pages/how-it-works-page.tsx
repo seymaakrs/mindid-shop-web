@@ -148,7 +148,7 @@ export const HowItWorksPage = () => {
               key={i}
               className="rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 p-5 hover:border-[var(--lime)] hover:shadow-[4px_4px_0px_var(--lime)] transition-all"
             >
-              <step.icon size={24} className="text-[var(--lime)] mb-3" />
+              <step.icon size={24} className="text-[var(--foreground)] mb-3" />
               <h3 className="text-sm font-black text-[var(--foreground)] mb-2">
                 {lang === "en" ? step.title.en : step.title.tr}
               </h3>
@@ -175,7 +175,7 @@ export const HowItWorksPage = () => {
                   key={si}
                   className="flex items-start gap-3 p-3 rounded-md bg-[var(--card)] border border-[var(--electric-blue)]/10"
                 >
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--lime)]/15 text-[var(--lime)] flex items-center justify-center text-xs font-black">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--lime)]/15 text-[var(--foreground)] flex items-center justify-center text-xs font-black">
                     {si + 1}
                   </span>
                   <span className="text-sm text-[var(--foreground)]/80">

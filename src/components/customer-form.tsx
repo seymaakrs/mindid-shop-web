@@ -158,7 +158,7 @@ export const CustomerForm = ({ onSubmit, loading, error }: CustomerFormProps) =>
           {files.length > 0 && (
             <div className="mt-3 space-y-2">
               {files.map((file, i) => (
-                <div key={i} className="flex items-center gap-2 text-xs text-[var(--cream)] bg-[var(--card)] rounded-md px-3 py-2">
+                <div key={i} className="flex items-center gap-2 text-xs text-[var(--foreground)] bg-[var(--card)] rounded-md px-3 py-2">
                   <span className="flex-1 truncate">{file.name}</span>
                   <span className="text-[var(--gray)]">{(file.size / 1024 / 1024).toFixed(1)} MB</span>
                   <button type="button" onClick={() => removeFile(i)} className="text-red-400 hover:text-red-300 cursor-pointer" disabled={loading}>

@@ -191,7 +191,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
     <div className="min-h-screen relative z-10 pb-20 lg:pb-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back link */}
-        <Link href="/#services" className="inline-flex items-center gap-2 text-[var(--lime)] hover:underline mb-6 text-sm font-bold">
+        <Link href="/#services" className="inline-flex items-center gap-2 text-[var(--foreground)] hover:underline mb-6 text-sm font-bold">
           <ArrowLeft size={16} />
           {t("nav.services")}
         </Link>
@@ -204,7 +204,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                 step === s.key
                   ? "bg-[var(--lime)] text-[var(--dark-blue)]"
                   : steps.findIndex((x) => x.key === step) > i
-                    ? "bg-[var(--lime)]/20 text-[var(--lime)]"
+                    ? "bg-[var(--lime)]/20 text-[var(--foreground)]"
                     : "bg-[var(--cream)]/5 text-[var(--gray)]"
               }`}>
                 <span className="w-5 h-5 rounded-full bg-current/20 flex items-center justify-center text-[10px]">
@@ -238,8 +238,8 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
             {/* Base package info */}
             <div className="p-4 rounded-md bg-[var(--lime)]/10 border-2 border-[var(--lime)]/30">
               <div className="flex items-center gap-2 mb-2">
-                <Package size={16} className="text-[var(--lime)]" />
-                <span className="font-bold text-[var(--lime)] text-sm">{t("config.base")}</span>
+                <Package size={16} className="text-[var(--foreground)]" />
+                <span className="font-bold text-[var(--foreground)] text-sm">{t("config.base")}</span>
               </div>
               <p className="text-xs text-[var(--gray)]">
                 {isProductPhoto ? t("config.product-photo.base.desc") : t("config.base.desc")}
@@ -536,7 +536,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                   {/* Total */}
                   <div className="flex justify-between items-center">
                     <span className="text-[var(--foreground)] font-bold">{t("config.total")}</span>
-                    <span className="text-2xl font-black text-[var(--lime)] animate-glow-pulse">
+                    <span className="text-2xl font-black text-[var(--foreground)] animate-glow-pulse">
                       {formatPrice(totalAI)}
                     </span>
                   </div>
@@ -549,12 +549,12 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                         <span className="text-[var(--gray)] line-through">{formatPrice(totalTraditional)}</span>
                       </div>
                       <div className="flex justify-between text-xs mt-1">
-                        <span className="text-[var(--lime)] font-bold">{t("checkout.saved")}</span>
-                        <span className="text-[var(--lime)] font-bold">{formatPrice(savings)}</span>
+                        <span className="text-[var(--foreground)] font-bold">{t("checkout.saved")}</span>
+                        <span className="text-[var(--foreground)] font-bold">{formatPrice(savings)}</span>
                       </div>
                       {savings > 0 && (
                         <div className="mt-2 text-center">
-                          <span className="inline-block px-2 py-0.5 rounded-full bg-[var(--lime)]/20 text-[var(--lime)] text-[10px] font-bold animate-glow-pulse">
+                          <span className="inline-block px-2 py-0.5 rounded-full bg-[var(--lime)]/20 text-[var(--foreground)] text-[10px] font-bold animate-glow-pulse">
                             %{Math.round((savings / totalTraditional) * 100)} TASARRUF
                           </span>
                         </div>
@@ -598,9 +598,9 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
         <div className="flex items-center justify-between gap-3 max-w-lg mx-auto">
           <div>
             <div className="text-[10px] text-[var(--gray)]">{t("config.total")}</div>
-            <div className="text-xl font-black text-[var(--lime)]">{formatPrice(totalAI)}</div>
+            <div className="text-xl font-black text-[var(--foreground)]">{formatPrice(totalAI)}</div>
             {savings > 0 && (
-              <div className="text-[10px] text-[var(--lime)]/70">
+              <div className="text-[10px] text-[var(--foreground)]/70">
                 %{Math.round((savings / totalTraditional) * 100)} {t("checkout.saved") || "tasarruf"}
               </div>
             )}

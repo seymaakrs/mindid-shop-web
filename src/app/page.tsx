@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import { Header } from "@/components/header";
-// import { Hero } from "@/components/hero"; /* Tadilat nedeniyle gecici olarak gizlendi */
+import { Hero } from "@/components/hero";
 import { ServiceCards } from "@/components/service-cards";
 import { SocialProof } from "@/components/social-proof";
 import { ParallaxGrid } from "@/components/parallax-grid";
@@ -193,7 +193,7 @@ const HomePage = () => {
       <ParallaxGrid />
       <Header />
       <main id="main-content">
-        {/* <Hero /> — Tadilat nedeniyle gecici olarak gizlendi */}
+        <Hero />
         <ServiceCards />
         <HowItWorks />
         <BudgetSlider />

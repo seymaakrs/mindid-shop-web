@@ -24,19 +24,19 @@ export const CongratsPage = ({ totalAI, totalTraditional, savings, serviceName }
         </div>
 
         {/* Title */}
-        <h1 className="text-4xl md:text-5xl font-black text-[var(--lime)] mb-4" >
+        <h1 className="text-4xl md:text-5xl font-black text-[var(--foreground)] mb-4" >
           {t("congrats.title")}
         </h1>
 
-        <p className="text-[var(--cream)] mb-8">
+        <p className="text-[var(--foreground)] mb-8">
           <strong>{serviceName}</strong> {t("congrats.subtitle")}
         </p>
 
         {/* Savings hero badge */}
         {savings > 0 && (
           <div className="savings-badge inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[var(--lime)]/20 border-2 border-[var(--lime)]/40 mb-6 animate-glow-pulse">
-            <TrendingDown size={18} className="text-[var(--lime)]" />
-            <span className="text-lg font-black text-[var(--lime)]">
+            <TrendingDown size={18} className="text-[var(--foreground)]" />
+            <span className="text-lg font-black text-[var(--foreground)]">
               %{savingsPercent} TASARRUF
             </span>
           </div>
@@ -76,16 +76,16 @@ export const CongratsPage = ({ totalAI, totalTraditional, savings, serviceName }
 
         {/* Next steps */}
         <div className="p-5 rounded-md bg-[var(--card)] border-3 border-[var(--electric-blue)]/30 mb-8 text-left">
-          <h3 className="font-bold text-[var(--cream)] mb-3" >
+          <h3 className="font-bold text-[var(--foreground)] mb-3" >
             Siradaki Adimlar
           </h3>
           <div className="space-y-3">
             <div className="flex items-start gap-3">
-              <Clock size={16} className="text-[var(--lime)] mt-0.5 shrink-0" />
+              <Clock size={16} className="text-[var(--foreground)] mt-0.5 shrink-0" />
               <p className="text-sm text-[var(--gray)]">24 saat icinde sizinle iletisime gececegiz.</p>
             </div>
             <div className="flex items-start gap-3">
-              <Mail size={16} className="text-[var(--lime)] mt-0.5 shrink-0" />
+              <Mail size={16} className="text-[var(--foreground)] mt-0.5 shrink-0" />
               <p className="text-sm text-[var(--gray)]">Detayli brief ve proje plani e-posta ile paylasilacak.</p>
             </div>
           </div>
@@ -93,7 +93,7 @@ export const CongratsPage = ({ totalAI, totalTraditional, savings, serviceName }
 
         {/* MindID info */}
         <div className="text-xs text-[var(--gray)] mb-6">
-          <p className="font-bold text-[var(--cream)]">MindID - AI Video Produksiyon Ajansi</p>
+          <p className="font-bold text-[var(--foreground)]">MindID - AI Video Produksiyon Ajansi</p>
           <p className="mt-1">info@mindid.com | +90 XXX XXX XX XX</p>
         </div>
 

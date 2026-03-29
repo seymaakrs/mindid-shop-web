@@ -40,7 +40,7 @@ export const OptionCardGroup = <T extends OptionItem>({
         <div className="w-8 h-8 rounded-md bg-[var(--electric-blue)] flex items-center justify-center text-[var(--lime)]">
           {icon}
         </div>
-        <h3 className="text-lg font-bold text-[var(--cream)]">
+        <h3 className="text-lg font-bold text-[var(--foreground)]">
           {title}
         </h3>
       </div>
@@ -74,11 +74,11 @@ export const OptionCardGroup = <T extends OptionItem>({
                   <Check size={14} className="text-[var(--dark-blue)]" />
                 </div>
               )}
-              <div className={`font-bold text-sm ${isActive ? "text-[var(--lime)]" : "text-[var(--cream)]"}`}>
+              <div className={`font-bold text-sm ${isActive ? "text-[var(--foreground)]" : "text-[var(--foreground)]"}`}>
                 {opt.label}
               </div>
               <div className="text-xs text-[var(--gray)] mt-1">{opt.description}</div>
-              <div className={`text-xs font-bold mt-2 ${opt.price === 0 ? "text-[var(--lime)]" : "text-[var(--electric-blue)]"}`}>
+              <div className={`text-xs font-bold mt-2 ${opt.price === 0 ? "text-[var(--foreground)]" : "text-[var(--gray)]"}`}>
                 {opt.price === 0 ? "✓ Dahil" : `+${formatPrice(opt.price)}`}
               </div>
             </button>

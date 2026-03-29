@@ -14,8 +14,8 @@ export const FinalCTA = () => {
 
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md bg-[var(--lime)]/10 border-2 border-[var(--lime)]/30 mb-6">
-          <Sparkles size={14} className="text-[var(--lime)]" />
-          <span className="text-xs font-bold text-[var(--lime)] uppercase tracking-wider">
+          <Sparkles size={14} className="text-[var(--foreground)]" />
+          <span className="text-xs font-bold text-[var(--foreground)] uppercase tracking-wider">
             {t("cta.badge")}
           </span>
         </div>
@@ -44,7 +44,7 @@ export const FinalCTA = () => {
             href="https://wa.me/905419315550"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-md bg-transparent border-3 border-[var(--lime)] text-[var(--lime)] text-base font-bold hover:bg-[var(--lime)]/10 transition-all"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-md bg-transparent border-3 border-[var(--dark-blue)] text-[var(--dark-blue)] text-base font-bold hover:bg-[var(--lime)]/10 hover:border-[var(--lime)] transition-all"
           >
             {t("cta.secondary")}
           </a>

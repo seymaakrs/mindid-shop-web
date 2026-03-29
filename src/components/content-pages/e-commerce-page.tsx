@@ -65,8 +65,8 @@ export const EcommercePage = () => {
         {/* Hero */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--lime)]/10 border border-[var(--lime)]/30 mb-4">
-            <Camera size={14} className="text-[var(--lime)]" />
-            <span className="text-xs font-bold text-[var(--lime)]">
+            <Camera size={14} className="text-[var(--foreground)]" />
+            <span className="text-xs font-bold text-[var(--foreground)]">
               {lang === "en" ? "From ₺399 — 70% Cheaper" : "399₺'den — %70 Daha Ucuz"}
             </span>
           </div>
@@ -114,7 +114,7 @@ export const EcommercePage = () => {
               key={i}
               className="rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 p-6 hover:border-[var(--lime)] transition-all"
             >
-              <benefit.icon size={28} className="text-[var(--lime)] mb-3" />
+              <benefit.icon size={28} className="text-[var(--foreground)] mb-3" />
               <h3 className="text-sm font-black text-[var(--foreground)] mb-2">
                 {lang === "en" ? benefit.title.en : benefit.title.tr}
               </h3>
@@ -127,7 +127,7 @@ export const EcommercePage = () => {
 
         {/* How It Works for E-commerce */}
         <div className="mb-12">
-          <h2 className="text-xl md:text-2xl font-black text-[var(--lime)] mb-6 text-center">
+          <h2 className="text-xl md:text-2xl font-black text-[var(--foreground)] mb-6 text-center">
             {lang === "en"
               ? "How AI Product Photography Works"
               : "AI Ürün Fotoğrafçılığı Nasıl Çalışır?"}
@@ -142,7 +142,7 @@ export const EcommercePage = () => {
               { tr: "2 ücretsiz revizyon hakkı dahil", en: "2 free revision rounds included" },
             ].map((step, i) => (
               <div key={i} className="flex items-start gap-3 p-3 rounded-md bg-[var(--card)] border border-[var(--electric-blue)]/10">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--lime)]/15 text-[var(--lime)] flex items-center justify-center text-xs font-black">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--lime)]/15 text-[var(--foreground)] flex items-center justify-center text-xs font-black">
                   {i + 1}
                 </span>
                 <span className="text-sm text-[var(--foreground)]/80">{lang === "en" ? step.en : step.tr}</span>
@@ -160,7 +160,7 @@ export const EcommercePage = () => {
             {sectors.map((sector, i) => (
               <div key={i} className="rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 p-5">
                 <div className="flex items-center gap-3 mb-2">
-                  <sector.icon size={20} className="text-[var(--lime)]" />
+                  <sector.icon size={20} className="text-[var(--foreground)]" />
                   <h3 className="text-sm font-black text-[var(--foreground)]">
                     {lang === "en" ? sector.name.en : sector.name.tr}
                   </h3>
@@ -186,7 +186,7 @@ export const EcommercePage = () => {
                   <th className="text-left p-4 text-sm font-bold text-[var(--foreground)]">
                     {lang === "en" ? "Specs" : "Özellikler"}
                   </th>
-                  <th className="text-center p-4 text-sm font-bold text-[var(--lime)]">
+                  <th className="text-center p-4 text-sm font-bold text-[var(--foreground)]">
                     {lang === "en" ? "Supported" : "Destekleniyor"}
                   </th>
                 </tr>
@@ -197,7 +197,7 @@ export const EcommercePage = () => {
                     <td className="p-4 text-sm font-bold text-[var(--foreground)]">{platform.name}</td>
                     <td className="p-4 text-xs text-[var(--foreground)]/60">{platform.specs}</td>
                     <td className="p-4 text-center">
-                      <CheckCircle2 size={16} className="text-[var(--lime)] mx-auto" />
+                      <CheckCircle2 size={16} className="text-[var(--foreground)] mx-auto" />
                     </td>
                   </tr>
                 ))}
@@ -208,7 +208,7 @@ export const EcommercePage = () => {
 
         {/* Pricing Comparison */}
         <div className="mb-12 rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 p-6">
-          <h2 className="text-xl font-black text-[var(--lime)] mb-4 text-center">
+          <h2 className="text-xl font-black text-[var(--foreground)] mb-4 text-center">
             {lang === "en" ? "Cost Comparison" : "Maliyet Karşılaştırması"}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -230,7 +230,7 @@ export const EcommercePage = () => {
               </div>
             </div>
             <div className="p-4 rounded-md border-2 border-[var(--lime)]/30">
-              <h3 className="text-sm font-black text-[var(--lime)] mb-3">
+              <h3 className="text-sm font-black text-[var(--foreground)] mb-3">
                 MindID AI
               </h3>
               <ul className="space-y-2 text-xs text-[var(--foreground)]/60">
@@ -241,7 +241,7 @@ export const EcommercePage = () => {
                 <li>• {lang === "en" ? "2 free revisions included" : "2 ücretsiz revizyon dahil"} ✓</li>
               </ul>
               <div className="mt-3 pt-3 border-t border-[var(--lime)]/20">
-                <span className="text-sm font-black text-[var(--lime)]">
+                <span className="text-sm font-black text-[var(--foreground)]">
                   {lang === "en" ? "From $11 per product" : "Ürün başına 399₺'den"}
                 </span>
               </div>
@@ -251,7 +251,7 @@ export const EcommercePage = () => {
 
         {/* CTA */}
         <div className="text-center rounded-lg bg-[var(--card)] border-3 border-[var(--lime)] p-8 shadow-[6px_6px_0px_var(--lime)]">
-          <h2 className="text-2xl font-black text-[var(--lime)] mb-3">
+          <h2 className="text-2xl font-black text-[var(--foreground)] mb-3">
             {lang === "en"
               ? "Start Saving 70% on Product Photography"
               : "Ürün Fotoğrafçılığında %70 Tasarruf Etmeye Başlayın"}

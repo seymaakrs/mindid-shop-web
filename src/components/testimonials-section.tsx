@@ -110,7 +110,7 @@ export const TestimonialsSection = () => {
                       <Star
                         key={si}
                         size={14}
-                        className={si < item.stars ? "text-[var(--lime)] fill-[var(--lime)]" : "text-[var(--gray)]/30"}
+                        className={si < item.stars ? "text-[var(--lime)] fill-[var(--lime)]" : "text-[var(--muted)]/30"}
                       />
                     ))}
                   </div>
@@ -133,8 +133,8 @@ export const TestimonialsSection = () => {
                     <span
                       className={`flex-shrink-0 text-[9px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider ${
                         isVideo
-                          ? "bg-[var(--electric-blue)]/20 text-[var(--electric-blue)] border border-[var(--electric-blue)]/30"
-                          : "bg-[var(--lime)]/20 text-[var(--lime)] border border-[var(--lime)]/30"
+                          ? "bg-[var(--electric-blue)]/10 text-[var(--foreground)] border border-[var(--electric-blue)]/30"
+                          : "bg-[var(--lime)]/20 text-[var(--foreground)] border border-[var(--lime)]/30"
                       }`}
                     >
                       {service}
