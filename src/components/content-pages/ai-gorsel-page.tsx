@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useI18n } from "@/lib/i18n";
 import Link from "next/link";
 import {
@@ -180,8 +180,36 @@ const WHY_ITEMS = [
 export const AIGorselPage = () => {
   const { lang, formatPrice } = useI18n();
   const [openGroup, setOpenGroup] = useState<string | null>("product-count");
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
   const t = (obj: { tr: string; en: string }) => (lang === "en" ? obj.en : obj.tr);
+
+  const checkScroll = () => {
+    const el = sliderRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 10);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+  };
+
+  useEffect(() => {
+    const el = sliderRef.current;
+    if (!el) return;
+    checkScroll();
+    el.addEventListener("scroll", checkScroll);
+    window.addEventListener("resize", checkScroll);
+    return () => {
+      el.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, []);
+
+  const scrollExamples = (dir: "left" | "right") => {
+    const el = sliderRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir === "right" ? 320 : -320, behavior: "smooth" });
+  };
 
   return (
     <>
@@ -256,59 +284,106 @@ export const AIGorselPage = () => {
 
       {/* ── ÖRNEK ÇALIŞMALAR ── */}
       <section className="relative py-16 z-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black text-[var(--foreground)] mb-3">
-              {lang === "en" ? "Example Works" : "Örnek Çalışmalar"}
-            </h2>
-            <p className="text-[var(--gray)] text-sm max-w-xl mx-auto">
-              {lang === "en"
-                ? "Samples from different industries and styles"
-                : "Farklı sektörler ve stiller için üretilen görsellere örnekler"}
-            </p>
-            <div className="w-20 h-1 bg-[var(--lime)] mx-auto mt-4 rounded-full" />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {EXAMPLES.map((ex, i) => {
-              const Icon = ex.icon;
-              return (
-                <article
-                  key={i}
-                  className="group rounded-lg border-3 border-[var(--dark-blue)] shadow-[5px_5px_0px_var(--dark-blue)] overflow-hidden hover:shadow-[3px_3px_0px_var(--lime)] hover:border-[var(--lime)] transition-all duration-300 hover:-translate-y-1 bg-[var(--card)]"
-                >
-                  {/* Görsel placeholder */}
-                  <div className={`h-48 bg-gradient-to-br ${ex.bg} flex items-center justify-center border-b-3 border-[var(--dark-blue)] group-hover:border-[var(--lime)] transition-colors`}>
-                    <div className="text-center">
-                      <div className="w-16 h-16 rounded-xl bg-[var(--lime)]/20 border-2 border-[var(--lime)]/40 flex items-center justify-center mx-auto mb-2">
-                        <Icon size={28} className="text-[var(--dark-blue)]" />
-                      </div>
-                      <span className="text-xs font-bold text-[var(--gray)] uppercase tracking-wider">
-                        {t(ex.category)}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="p-4">
-                    <h3 className="font-black text-sm text-[var(--foreground)] mb-1 leading-tight">
-                      {t(ex.title)}
-                    </h3>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] text-[var(--gray)] font-medium">{t(ex.style)}</span>
-                      <span className="text-[10px] font-black text-[var(--lime)] bg-[var(--dark-blue)] px-2 py-0.5 rounded">
-                        %{ex.saving} {lang === "en" ? "saving" : "tasarruf"}
-                      </span>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-
-          <div className="text-center mt-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Başlık + Portföy linki */}
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-black text-[var(--foreground)] mb-2">
+                {lang === "en" ? "Example Works" : "Örnek Çalışmalar"}
+              </h2>
+              <p className="text-[var(--gray)] text-sm max-w-xl">
+                {lang === "en"
+                  ? "Samples from different industries and styles"
+                  : "Farklı sektörler ve stiller için örnekler"}
+              </p>
+              <div className="w-16 h-1 bg-[var(--lime)] mt-3 rounded-full" />
+            </div>
             <Link
               href="/portfolio"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[var(--foreground)] border-b-2 border-[var(--lime)] pb-0.5 hover:text-[var(--electric-blue)] transition-colors"
+              className="hidden sm:inline-flex items-center gap-1.5 text-sm font-bold text-[var(--foreground)] border-b-2 border-[var(--lime)] pb-0.5 hover:text-[var(--electric-blue)] transition-colors shrink-0 ml-4"
+            >
+              {lang === "en" ? "View Full Portfolio" : "Tüm Portföyü Gör"}
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+
+          {/* Slider */}
+          <div className="relative">
+            {/* Sol ok */}
+            {canScrollLeft && (
+              <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[var(--background)] to-transparent z-10 flex items-center">
+                <button
+                  onClick={() => scrollExamples("left")}
+                  aria-label="Önceki örnekler"
+                  className="w-10 h-10 rounded-full bg-[var(--lime)] border-2 border-[var(--dark-blue)] flex items-center justify-center ml-1 cursor-pointer hover:scale-110 transition-transform shadow-lg"
+                >
+                  <ArrowRight size={18} className="text-[var(--dark-blue)] rotate-180" />
+                </button>
+              </div>
+            )}
+
+            {/* Sağ ok */}
+            {canScrollRight && (
+              <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[var(--background)] to-transparent z-10 flex items-center justify-end">
+                <button
+                  onClick={() => scrollExamples("right")}
+                  aria-label="Sonraki örnekler"
+                  className="w-10 h-10 rounded-full bg-[var(--lime)] border-2 border-[var(--dark-blue)] flex items-center justify-center mr-1 cursor-pointer hover:scale-110 transition-transform shadow-lg"
+                >
+                  <ArrowRight size={18} className="text-[var(--dark-blue)]" />
+                </button>
+              </div>
+            )}
+
+            {/* Kaydırılabilir kart listesi */}
+            <div
+              ref={sliderRef}
+              role="region"
+              aria-label="Örnek çalışmalar galerisi"
+              className="flex gap-5 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
+              {EXAMPLES.map((ex, i) => {
+                const Icon = ex.icon;
+                return (
+                  <article
+                    key={i}
+                    className="flex-shrink-0 w-[280px] md:w-[300px] lg:w-[320px] snap-start group rounded-lg border-3 border-[var(--dark-blue)] shadow-[5px_5px_0px_var(--dark-blue)] overflow-hidden hover:shadow-[3px_3px_0px_var(--lime)] hover:border-[var(--lime)] transition-all duration-300 hover:-translate-y-1 bg-[var(--card)]"
+                  >
+                    {/* Görsel placeholder */}
+                    <div className={`h-52 bg-gradient-to-br ${ex.bg} flex items-center justify-center border-b-3 border-[var(--dark-blue)] group-hover:border-[var(--lime)] transition-colors`}>
+                      <div className="text-center">
+                        <div className="w-16 h-16 rounded-xl bg-[var(--lime)]/20 border-2 border-[var(--lime)]/40 flex items-center justify-center mx-auto mb-2">
+                          <Icon size={28} className="text-[var(--dark-blue)]" />
+                        </div>
+                        <span className="text-xs font-bold text-[var(--gray)] uppercase tracking-wider">
+                          {t(ex.category)}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="p-4">
+                      <h3 className="font-black text-sm text-[var(--foreground)] mb-2 leading-tight">
+                        {t(ex.title)}
+                      </h3>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] text-[var(--gray)] font-medium">{t(ex.style)}</span>
+                        <span className="text-[10px] font-black text-[var(--lime)] bg-[var(--dark-blue)] px-2 py-0.5 rounded">
+                          %{ex.saving} {lang === "en" ? "saving" : "tasarruf"}
+                        </span>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Mobil portföy linki */}
+          <div className="text-center mt-6 sm:hidden">
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--foreground)] border-b-2 border-[var(--lime)] pb-0.5"
             >
               {lang === "en" ? "View Full Portfolio" : "Tüm Portföyü Gör"}
               <ArrowRight size={14} />

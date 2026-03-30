@@ -72,8 +72,8 @@ export const Header = () => {
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
   const navLinks = [
-    { href: "#services", label: t("nav.videoProduction") },
-    { href: "#services", label: t("nav.visualStudio") },
+    { href: "/#services", label: t("nav.videoProduction") },
+    { href: "/#services", label: t("nav.visualStudio") },
     { href: "/portfolio", label: t("nav.gallery") },
     { href: "/blog", label: "Blog" },
     { href: "/about", label: t("nav.about") },
