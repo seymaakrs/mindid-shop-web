@@ -94,7 +94,7 @@ export const Header = () => {
         {/* Logo */}
         <a href="/" className="flex items-center gap-3">
           <Image
-            src="/yuvarlak_-06.jpg"
+            src="/logo.png"
             alt="MindID Ana Sayfa"
             width={44}
             height={44}

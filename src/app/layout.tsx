@@ -78,8 +78,8 @@ export const metadata: Metadata = {
     google: "MLXSwSijfsaWlpYKCPsoqwo66ZVBY0HsJBxqhCI9b6k",
   },
   icons: {
-    icon: "/yuvarlak_-05.jpg",
-    apple: "/yuvarlak_-05.jpg",
+    icon: "/logo.png",
+    apple: "/logo.png",
   },
 };
 
@@ -89,7 +89,7 @@ const jsonLd = {
   "@type": "ProfessionalService",
   name: "MindID",
   url: "https://mindid.shop",
-  logo: "https://mindid.shop/yuvarlak_-02.jpg",
+  logo: "https://mindid.shop/logo.png",
   description:
     "AI-powered ad film production, avatar creation, and e-commerce product visual studio. 70% cheaper than traditional production.",
   priceRange: "$$",
