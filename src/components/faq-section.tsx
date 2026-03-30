@@ -53,7 +53,7 @@ export const FAQSection = () => {
           {t("faq.title")}
         </h2>
 
-        <Accordion.Root type="multiple" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <Accordion.Root type="multiple" aria-label="Sıkça sorulan sorular" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {faqItems.map((faq, i) => (
             <Accordion.Item
               key={i}
@@ -65,7 +65,7 @@ export const FAQSection = () => {
                   <span className="font-bold text-xs text-[var(--foreground)] leading-snug pr-2">
                     {faq.question}
                   </span>
-                  <ChevronDown size={14} className="text-[var(--gray)] group-data-[state=open]:text-[var(--foreground)] transition-transform group-data-[state=open]:rotate-180 shrink-0" />
+                  <ChevronDown size={14} aria-hidden="true" className="text-[var(--gray)] group-data-[state=open]:text-[var(--foreground)] transition-transform duration-200 group-data-[state=open]:rotate-180 shrink-0" />
                 </Accordion.Trigger>
               </Accordion.Header>
               <Accordion.Content className="px-3 pb-3 data-[state=open]:animate-kinetic-slide">

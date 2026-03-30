@@ -76,6 +76,7 @@ export const ServiceCards = () => {
             <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[var(--background)] to-transparent z-10 flex items-center">
               <button
                 onClick={() => scroll("left")}
+                aria-label="Önceki hizmetler"
                 className="w-10 h-10 rounded-full bg-[var(--lime)] border-2 border-[var(--dark-blue)] flex items-center justify-center ml-1 cursor-pointer hover:scale-110 transition-transform shadow-lg"
               >
                 <ArrowRight size={18} className="text-[var(--dark-blue)] rotate-180" />
@@ -88,6 +89,7 @@ export const ServiceCards = () => {
             <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[var(--background)] to-transparent z-10 flex items-center justify-end">
               <button
                 onClick={() => scroll("right")}
+                aria-label="Sonraki hizmetler"
                 className="w-10 h-10 rounded-full bg-[var(--lime)] border-2 border-[var(--dark-blue)] flex items-center justify-center mr-1 cursor-pointer hover:scale-110 transition-transform shadow-lg"
               >
                 <ArrowRight size={18} className="text-[var(--dark-blue)]" />
@@ -110,7 +112,7 @@ export const ServiceCards = () => {
                 <Link
                   key={service.id}
                   href={href}
-                  className="flex-shrink-0 w-[280px] md:w-[300px] snap-start group relative p-5 rounded-lg bg-[var(--cream)] border-3 border-[var(--dark-blue)] shadow-[5px_5px_0px_var(--dark-blue)] cursor-pointer block hover:shadow-[3px_3px_0px_var(--lime)] hover:border-[var(--lime)] transition-all duration-300 hover:-translate-y-2"
+                  className="flex-shrink-0 w-[280px] md:w-[300px] lg:w-[320px] snap-start group relative p-5 rounded-lg bg-[var(--cream)] border-3 border-[var(--dark-blue)] shadow-[5px_5px_0px_var(--dark-blue)] cursor-pointer block hover:shadow-[3px_3px_0px_var(--lime)] hover:border-[var(--lime)] transition-all duration-300 hover:-translate-y-2"
                   style={{ animationDelay: `${i * 0.08}s` }}
                 >
                   <div className="absolute -top-3 left-4 px-3 py-0.5 bg-[var(--lime)] border-3 border-[var(--dark-blue)] border-b-0 rounded-t-md">

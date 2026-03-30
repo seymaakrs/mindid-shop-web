@@ -1,192 +1,90 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
 import { useI18n } from "@/lib/i18n";
-import { usePortfolio } from "@/lib/hooks/use-firestore";
-import { Play, ArrowRight, ArrowLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Sparkles, Play, Zap } from "lucide-react";
 import Link from "next/link";
 
 export const Hero = () => {
-  const { t } = useI18n();
-  const { data: portfolioItems } = usePortfolio();
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const sliderRef = useRef<HTMLDivElement>(null);
-  const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  // İlk 5 portfolyo projesini al
-  const showcaseItems = (portfolioItems ?? []).slice(0, 5);
-
-  // Otomatik slayt geçişi
-  const startAutoPlay = useCallback(() => {
-    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
-    autoPlayRef.current = setInterval(() => {
-      setCurrentSlide((prev) => (showcaseItems.length > 0 ? (prev + 1) % showcaseItems.length : 0));
-    }, 4000);
-  }, [showcaseItems.length]);
-
-  useEffect(() => {
-    startAutoPlay();
-    return () => {
-      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
-    };
-  }, [startAutoPlay]);
-
-  // Slayt değiştiğinde scroll pozisyonunu güncelle
-  useEffect(() => {
-    if (sliderRef.current && showcaseItems.length > 0) {
-      const cardWidth = sliderRef.current.scrollWidth / showcaseItems.length;
-      sliderRef.current.scrollTo({ left: cardWidth * currentSlide, behavior: "smooth" });
-    }
-  }, [currentSlide, showcaseItems.length]);
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-    startAutoPlay(); // Reset timer
-  };
-
-  const nextSlide = () => goToSlide((currentSlide + 1) % Math.max(showcaseItems.length, 1));
-  const prevSlide = () => goToSlide((currentSlide - 1 + Math.max(showcaseItems.length, 1)) % Math.max(showcaseItems.length, 1));
+  const { t, lang } = useI18n();
 
   return (
-    <section className="relative py-8 md:py-16 z-10 leopard-pattern">
+    <section className="relative py-16 md:py-24 lg:py-32 z-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto">
-          {/* Prodüksiyon Galerisi Slider */}
-          <div className="animate-kinetic-slide">
-            {/* Başlık */}
-            <div className="mb-5">
-              <h2 className="text-xl md:text-2xl font-black text-[var(--foreground)] mb-1">
-                {t("nav.gallery")}
-              </h2>
-              <div className="w-12 h-1 bg-[var(--lime)] rounded-full" />
-            </div>
+        <div className="max-w-3xl mx-auto text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--lime)]/15 border-2 border-[var(--lime)]/30 mb-6">
+            <Sparkles size={14} className="text-[var(--foreground)]" />
+            <span className="text-xs font-bold text-[var(--foreground)] uppercase tracking-wider">
+              {t("hero.badge")}
+            </span>
+          </div>
 
-            {/* Slider */}
-            <div className="relative group">
-              {/* Slider Container */}
-              <div
-                ref={sliderRef}
-                role="region"
-                aria-label="Prodüksiyon galerisi slayt gösterisi"
-                aria-roledescription="carousel"
-                className="flex gap-3 overflow-x-hidden scroll-smooth snap-x snap-mandatory rounded-lg"
-                style={{ scrollbarWidth: "none" }}
+          {/* H1 — Ana baslik */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-[var(--foreground)] leading-tight mb-6">
+            <span className="text-[var(--lime)] inline-block relative">
+              Vibe Marketing
+              <svg
+                className="absolute -bottom-2 left-0 w-full"
+                viewBox="0 0 200 12"
+                fill="none"
+                aria-hidden="true"
               >
-                {showcaseItems.length > 0 ? (
-                  showcaseItems.map((item, i) => (
-                    <div
-                      key={item.id ?? i}
-                      className="flex-shrink-0 w-full snap-center relative rounded-lg overflow-hidden border-3 border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] bg-[var(--dark-blue)]"
-                      style={{ aspectRatio: "4/5" }}
-                    >
-                      {/* Thumbnail / Video Preview */}
-                      {item.thumbnailUrl ? (
-                        <img
-                          src={item.thumbnailUrl}
-                          alt={item.title ?? `Proje ${i + 1}`}
-                          className="absolute inset-0 w-full h-full object-cover"
-                          loading={i === 0 ? "eager" : "lazy"}
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center bg-[var(--dark-blue)]">
-                          <Play size={40} className="text-[var(--lime)]/40" />
-                        </div>
-                      )}
+                <path
+                  d="M2 8c40-6 80-6 120-2s56 4 76 0"
+                  stroke="var(--lime)"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+          </h1>
 
-                      {/* Overlay gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+          {/* Aciklama */}
+          <p className="text-base md:text-lg text-[var(--gray)] max-w-2xl mx-auto mb-8 leading-relaxed">
+            {t("hero.desc")}
+          </p>
 
-                      {/* Proje bilgisi */}
-                      <div className="absolute bottom-0 left-0 right-0 p-4">
-                        <div className="flex items-center gap-2 mb-1">
-                          {item.category && (
-                            <span className="text-[9px] uppercase tracking-wider font-bold text-[var(--lime)] bg-[var(--dark-blue)]/60 px-2 py-0.5 rounded">
-                              {item.category}
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="text-sm font-bold text-white leading-tight">
-                          {item.title ?? `Proje ${i + 1}`}
-                        </h3>
-                      </div>
-
-                      {/* Play icon */}
-                      {item.videoUrl && (
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                          <div className="w-12 h-12 rounded-full bg-[var(--lime)]/20 border-2 border-[var(--lime)] flex items-center justify-center backdrop-blur-sm hover:bg-[var(--lime)]/30 transition-all">
-                            <Play size={20} className="text-[var(--lime)] ml-0.5" />
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Slide numarası */}
-                      <div className="absolute top-3 right-3 bg-[var(--dark-blue)]/70 text-[var(--lime)] text-[10px] font-bold px-2 py-0.5 rounded backdrop-blur-sm">
-                        {i + 1}/{showcaseItems.length}
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  /* Placeholder — portfolyo yüklenene kadar */
-                  Array.from({ length: 5 }).map((_, i) => (
-                    <div
-                      key={`ph-${i}`}
-                      className="flex-shrink-0 w-full snap-center relative rounded-lg overflow-hidden border-3 border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] bg-[var(--dark-blue)]/50 animate-pulse"
-                      style={{ aspectRatio: "4/5" }}
-                    >
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Play size={40} className="text-[var(--lime)]/20" />
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-
-              {/* Slider navigasyon okları */}
-              {showcaseItems.length > 1 && (
-                <>
-                  <button
-                    onClick={prevSlide}
-                    aria-label="Önceki slayt"
-                    className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[var(--dark-blue)]/80 border-2 border-[var(--lime)] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer hover:bg-[var(--dark-blue)] z-10"
-                  >
-                    <ArrowLeft size={14} className="text-[var(--lime)]" />
-                  </button>
-                  <button
-                    onClick={nextSlide}
-                    aria-label="Sonraki slayt"
-                    className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[var(--dark-blue)]/80 border-2 border-[var(--lime)] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer hover:bg-[var(--dark-blue)] z-10"
-                  >
-                    <ArrowRight size={14} className="text-[var(--lime)]" />
-                  </button>
-                </>
-              )}
-
-              {/* Dot göstergeleri */}
-              {showcaseItems.length > 1 && (
-                <div className="flex justify-center gap-1.5 mt-3">
-                  {showcaseItems.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => goToSlide(i)}
-                      className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                        i === currentSlide
-                          ? "w-6 bg-[var(--lime)]"
-                          : "w-1.5 bg-[var(--gray)]/40 hover:bg-[var(--gray)]/60"
-                      }`}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Tüm Galeriyi Gör butonu */}
+          {/* CTA Butonlari */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+            <a
+              href="#services"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-md bg-[var(--lime)] border-3 border-[var(--dark-blue)] shadow-[5px_5px_0px_var(--dark-blue)] text-[var(--dark-blue)] text-base font-black hover:shadow-[3px_3px_0px_var(--dark-blue)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+            >
+              {t("nav.start")}
+              <ArrowRight size={18} />
+            </a>
             <Link
               href="/portfolio"
-              className="inline-flex items-center gap-2 mt-4 px-5 py-2.5 rounded-md bg-[var(--lime)] border-3 border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] text-[var(--dark-blue)] text-sm font-bold hover:shadow-[2px_2px_0px_var(--dark-blue)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-md bg-transparent border-3 border-[var(--dark-blue)] text-[var(--dark-blue)] text-base font-bold hover:bg-[var(--lime)]/10 hover:border-[var(--lime)] transition-all"
             >
-              {t("nav.viewAllGallery")}
-              <ChevronRight size={16} />
+              <Play size={16} />
+              {t("nav.gallery")}
             </Link>
+          </div>
+
+          {/* Hizli istatistikler */}
+          <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-black text-[var(--foreground)]">%70</div>
+              <div className="text-[10px] md:text-xs text-[var(--gray)] font-bold uppercase tracking-wider">
+                {lang === "en" ? "Cost Savings" : "Maliyet Tasarrufu"}
+              </div>
+            </div>
+            <div className="text-center border-x-2 border-[var(--electric-blue)]/15">
+              <div className="flex items-center justify-center gap-1">
+                <Zap size={18} className="text-[var(--lime)]" />
+                <span className="text-2xl md:text-3xl font-black text-[var(--foreground)]">3-5</span>
+              </div>
+              <div className="text-[10px] md:text-xs text-[var(--gray)] font-bold uppercase tracking-wider">
+                {lang === "en" ? "Day Delivery" : "Gün Teslimat"}
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-black text-[var(--foreground)]">48+</div>
+              <div className="text-[10px] md:text-xs text-[var(--gray)] font-bold uppercase tracking-wider">
+                {lang === "en" ? "Projects" : "Proje"}
+              </div>
+            </div>
           </div>
         </div>
       </div>

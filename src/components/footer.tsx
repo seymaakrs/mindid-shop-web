@@ -14,9 +14,9 @@ export const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
           {/* Hizmetler */}
           <div>
-            <h4 className="text-sm font-black text-[var(--lime)] mb-4">
+            <h3 className="text-sm font-black text-[var(--lime)] mb-4">
               {t("footer.services")}
-            </h4>
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/configure/reels" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
@@ -24,7 +24,7 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/configure/product-photo" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
+                <Link href="/ai-gorsel" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
                   {t("footer.aiProductPhoto")}
                 </Link>
               </li>
@@ -53,9 +53,9 @@ export const Footer = () => {
 
           {/* Kaynaklar */}
           <div>
-            <h4 className="text-sm font-black text-[var(--lime)] mb-4">
+            <h3 className="text-sm font-black text-[var(--lime)] mb-4">
               {t("footer.resources")}
-            </h4>
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/ai-vs-traditional" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
@@ -87,9 +87,9 @@ export const Footer = () => {
 
           {/* Şirket */}
           <div>
-            <h4 className="text-sm font-black text-[var(--lime)] mb-4">
+            <h3 className="text-sm font-black text-[var(--lime)] mb-4">
               {t("footer.company")}
-            </h4>
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/about" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
@@ -111,9 +111,9 @@ export const Footer = () => {
 
           {/* İletişim */}
           <div>
-            <h4 className="text-sm font-black text-[var(--lime)] mb-4">
+            <h3 className="text-sm font-black text-[var(--lime)] mb-4">
               {t("footer.contact")}
-            </h4>
+            </h3>
             <ul className="space-y-2">
               <li>
                 <a href="mailto:info@mindid.shop" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">

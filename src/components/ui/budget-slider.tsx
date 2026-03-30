@@ -103,12 +103,17 @@ export const BudgetSlider = () => {
             </span>
             <span className="text-xs text-[var(--gray)] font-bold">50.000₺</span>
           </div>
+          <label htmlFor="budget-range" className="sr-only">Bütçe seçici</label>
           <input
+            id="budget-range"
             type="range"
             min={0}
             max={BUDGET_STEPS.length - 1}
             value={budgetIndex}
             onChange={(e) => setBudgetIndex(Number(e.target.value))}
+            aria-valuenow={budget}
+            aria-valuemin={BUDGET_STEPS[0]}
+            aria-valuemax={BUDGET_STEPS[BUDGET_STEPS.length - 1]}
             className="w-full h-2 rounded-full appearance-none cursor-pointer bg-[var(--electric-blue)]/20 accent-[var(--lime)]"
           />
           <div className="mt-3 text-center">

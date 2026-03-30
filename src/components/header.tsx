@@ -2,7 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
@@ -11,6 +11,8 @@ export const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const menuRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -35,6 +37,38 @@ export const Header = () => {
     };
   }, [mobileOpen]);
 
+  // Focus trap for mobile menu
+  useEffect(() => {
+    if (!mobileOpen || !menuRef.current) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        toggleRef.current?.focus();
+      }
+
+      if (e.key === "Tab" && menuRef.current) {
+        const focusable = menuRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [mobileOpen]);
+
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
   const navLinks = [
@@ -47,7 +81,8 @@ export const Header = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b-3 border-[var(--dark-blue)] bg-[var(--lime)] leopard-pattern-dark transition-all duration-300 ${
+      role="banner"
+      className={`sticky top-0 z-50 border-b-3 border-[var(--dark-blue)] bg-[var(--lime)] transition-all duration-300 ${
         scrolled ? "shadow-lg" : ""
       }`}
     >
@@ -60,7 +95,7 @@ export const Header = () => {
         <a href="/" className="flex items-center gap-3">
           <Image
             src="/yuvarlak_-06.jpg"
-            alt="MindID"
+            alt="MindID Ana Sayfa"
             width={44}
             height={44}
             className={`rounded-full transition-all duration-300 ${scrolled ? "h-9 w-9" : "h-11 w-11"}`}
@@ -77,7 +112,7 @@ export const Header = () => {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden xl:flex items-center gap-5">
+        <nav className="hidden lg:flex items-center gap-5" aria-label="Ana navigasyon">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -89,9 +124,8 @@ export const Header = () => {
           ))}
         </nav>
 
-        {/* Right side: Sosyal Medya Uzmanı + Hamburger */}
+        {/* Right side */}
         <div className="flex items-center gap-3">
-          {/* Sosyal Medya Uzmanı — CTA yerine nav link */}
           <a
             href="/about"
             className="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[var(--dark-blue)] text-[var(--lime)] text-sm font-bold border-2 border-[var(--dark-blue)] hover:bg-[var(--electric-blue)] transition-colors whitespace-nowrap"
@@ -100,18 +134,25 @@ export const Header = () => {
           </a>
 
           <button
+            ref={toggleRef}
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="xl:hidden p-2 text-[var(--dark-blue)] cursor-pointer"
+            className="lg:hidden p-2 text-[var(--dark-blue)] cursor-pointer"
             aria-label={mobileOpen ? "Menüyü kapat" : "Menüyü aç"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu — slide down animation */}
+      {/* Mobile Menu */}
       <div
-        className={`xl:hidden border-t-2 border-[var(--dark-blue)] bg-[var(--lime)] overflow-hidden transition-all duration-300 ease-in-out ${
+        ref={menuRef}
+        id="mobile-menu"
+        role="navigation"
+        aria-label="Mobil navigasyon"
+        className={`lg:hidden border-t-2 border-[var(--dark-blue)] bg-[var(--lime)] overflow-hidden transition-all duration-300 ease-in-out ${
           mobileOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >

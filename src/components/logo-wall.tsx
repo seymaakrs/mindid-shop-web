@@ -23,7 +23,7 @@ export const LogoWall = () => {
   const allLogos = [...CLIENT_LOGOS, ...CLIENT_LOGOS];
 
   return (
-    <section className="relative py-12 z-10 overflow-hidden">
+    <section className="relative py-12 z-10 overflow-hidden" aria-label="Müşteri markaları">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
         <p className="text-center text-xs font-bold text-[var(--gray)]/60 uppercase tracking-widest">
           {t("logowall.title")}
@@ -33,8 +33,8 @@ export const LogoWall = () => {
       {/* Kayan logo bandı */}
       <div className="relative">
         {/* Sol/sağ fade efekti */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[var(--background)] to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[var(--background)] to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[var(--background)] to-transparent z-10" aria-hidden="true" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[var(--background)] to-transparent z-10" aria-hidden="true" />
 
         {/* Kayan container */}
         <div className="flex animate-scroll-x gap-10 items-center">
@@ -53,20 +53,6 @@ export const LogoWall = () => {
           ))}
         </div>
       </div>
-
-      {/* CSS animasyon — sonsuz kayan efekt */}
-      <style jsx>{`
-        @keyframes scroll-x {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-scroll-x {
-          animation: scroll-x 35s linear infinite;
-        }
-        .animate-scroll-x:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </section>
   );
 };

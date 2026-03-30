@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
+
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { Analytics } from "@/components/analytics";
 
@@ -199,14 +199,13 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         {/* Skip to main content — Accessibility */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[var(--lime)] focus:text-[var(--dark-blue)] focus:font-bold focus:rounded-md focus:text-sm"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[var(--lime)] focus:text-[var(--dark-blue)] focus:font-bold focus:rounded-md focus:text-sm focus:outline-2 focus:outline-[var(--dark-blue)]"
         >
           İçeriğe Atla
         </a>
         <Analytics />
         <Providers>
           {children}
-          <WhatsAppButton />
           <LanguageSwitcher />
         </Providers>
       </body>

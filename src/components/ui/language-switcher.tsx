@@ -51,6 +51,7 @@ export const LanguageSwitcher = () => {
       <button
         onClick={() => setOpen(!open)}
         aria-label="Dil seç"
+        aria-expanded={open}
         className="flex items-center justify-center w-10 h-10 rounded-full bg-[var(--dark-blue)] text-[var(--lime)] shadow-lg hover:scale-105 transition-transform cursor-pointer"
       >
         <span className="text-base leading-none">{current.flag}</span>

@@ -50,7 +50,7 @@ export const AIManager = () => {
   if (dismissed || !visible) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-20 left-6 z-40 flex flex-col items-start gap-3">
       {/* Speech bubble */}
       {showBubble && (
         <div className="max-w-[240px] p-3 rounded-lg bg-[var(--lime)] border-3 border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] animate-kinetic-slide">
@@ -58,7 +58,7 @@ export const AIManager = () => {
             {messages[messageIndex]}
           </p>
           {/* Triangle */}
-          <div className="absolute -bottom-2 right-6 w-4 h-4 bg-[var(--lime)] border-r-3 border-b-3 border-[var(--dark-blue)] rotate-45" />
+          <div className="absolute -bottom-2 left-6 w-4 h-4 bg-[var(--lime)] border-r-3 border-b-3 border-[var(--dark-blue)] rotate-45" />
         </div>
       )}
 

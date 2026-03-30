@@ -102,14 +102,15 @@ export const TestimonialsSection = () => {
               return (
                 <div
                   key={i}
-                  className="flex-shrink-0 w-[300px] md:w-[340px] snap-start p-5 rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/30 shadow-[5px_5px_0px_var(--electric-blue)] hover:border-[var(--lime)] hover:shadow-[3px_3px_0px_var(--lime)] transition-all duration-300"
+                  className="flex-shrink-0 w-[300px] md:w-[340px] lg:w-[360px] snap-start p-5 rounded-lg bg-[var(--card)] border-3 border-[var(--electric-blue)]/30 shadow-[5px_5px_0px_var(--electric-blue)] hover:border-[var(--lime)] hover:shadow-[3px_3px_0px_var(--lime)] transition-all duration-300"
                 >
                   {/* Stars */}
-                  <div className="flex gap-0.5 mb-3">
+                  <div className="flex gap-0.5 mb-3" role="img" aria-label={`${item.stars} / 5 yıldız`}>
                     {Array.from({ length: 5 }).map((_, si) => (
                       <Star
                         key={si}
                         size={14}
+                        aria-hidden="true"
                         className={si < item.stars ? "text-[var(--lime)] fill-[var(--lime)]" : "text-[var(--muted)]/30"}
                       />
                     ))}

@@ -16,7 +16,7 @@ export const ParallaxGrid = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
       <div
         ref={gridRef}
         className="absolute inset-0 will-change-transform"
