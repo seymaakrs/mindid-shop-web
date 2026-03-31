@@ -39,6 +39,11 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     // Blog
     { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
 
+    // Hizmet landing sayfaları — SEO/GEO için yüksek değer
+    { url: `${baseUrl}/ai-gorsel`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/ai-reklam-filmi`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/sosyal-medya-yonetimi`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+
     // İçerik sayfaları — GEO ve SEO için yüksek değer
     { url: `${baseUrl}/ai-vs-traditional`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/how-it-works`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },

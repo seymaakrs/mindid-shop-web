@@ -27,6 +27,7 @@ export const SERVICE_TYPES = [
   { id: "campaign", nameKey: "service.campaign", descKey: "service.campaign.desc", basePrice: 24999, icon: "🚀", traditionalMultiplier: 3.2 },
   { id: "corporate", nameKey: "service.corporate", descKey: "service.corporate.desc", basePrice: 34999, icon: "🏢", traditionalMultiplier: 3.0 },
   { id: "avatar", nameKey: "service.avatar", descKey: "service.avatar.desc", basePrice: 7999, icon: "🤖", traditionalMultiplier: 0 },
+  { id: "social-media", nameKey: "service.social-media", descKey: "service.social-media.desc", basePrice: 9999, icon: "📢", traditionalMultiplier: 2.5 },
 ] as const;
 
 export type ServiceType = (typeof SERVICE_TYPES)[number];

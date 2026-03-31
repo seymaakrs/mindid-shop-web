@@ -114,6 +114,8 @@ const translations: Record<string, Record<string, string>> = {
   "service.corporate.desc": { tr: "Yapay zeka kurumsal tanıtım filmi — marka hikayenizi profesyonelce anlatın", en: "AI corporate film — tell your brand story professionally" },
   "service.avatar": { tr: "AI Avatar Oluşturma", en: "AI Avatar Creation" },
   "service.avatar.desc": { tr: "Yapay zeka ile dijital avatar oluşturun — marka yüzü, dijital sunucu, influencer avatar", en: "Create digital avatars with AI — brand face, digital presenter, influencer avatar" },
+  "service.social-media": { tr: "Sosyal Medya Yönetimi", en: "Social Media Management" },
+  "service.social-media.desc": { tr: "AI destekli sosyal medya yönetimi — içerik üretimi, reklam optimizasyonu, aylık raporlama", en: "AI-powered social media management — content creation, ad optimization, monthly reporting" },
   "service.product-photo": { tr: "AI Ürün Görseli", en: "AI Product Photography" },
   "service.product-photo.desc": {
     tr: "E-ticaret ürün fotoğrafı — manken ve stüdyo masrafı olmadan %70 daha ucuz, stüdyo kalitesinde görseller",

@@ -106,7 +106,8 @@ export const ServiceCards = () => {
             {allItems.map((item, i) => {
               const service = item.service!;
               const isAvatar = service.id === "avatar";
-              const href = isAvatar ? "/avatar" : `/configure/${service.id}`;
+              const isSocialMedia = service.id === "social-media";
+              const href = isAvatar ? "/avatar" : isSocialMedia ? "/sosyal-medya-yonetimi" : `/configure/${service.id}`;
 
               return (
                 <Link
@@ -146,6 +147,9 @@ export const ServiceCards = () => {
                     <span className="text-lg font-black text-[var(--electric-blue)]">
                       {formatPrice(service.basePrice)}
                     </span>
+                    {isSocialMedia && (
+                      <span className="text-[10px] text-[var(--gray)] font-bold">/ay</span>
+                    )}
                   </div>
 
                   <div className="absolute bottom-3 right-3 w-7 h-7 rounded-md bg-[var(--dark-blue)] text-[var(--lime)] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-sm font-bold">

@@ -399,19 +399,27 @@ const PortfolioDetailPage = async ({
           </section>
 
           {/* CTA */}
-          <div className="p-6 rounded-lg bg-[var(--lime)] border-3 border-[var(--dark-blue)] shadow-[6px_6px_0px_var(--dark-blue)] text-center mb-10">
-            <h3 className="text-lg font-black text-[var(--dark-blue)] mb-2">
+          <div className="p-8 rounded-lg bg-[var(--lime)] border-3 border-[var(--dark-blue)] shadow-[6px_6px_0px_var(--dark-blue)] text-center mb-10">
+            <h3 className="text-xl md:text-2xl font-black text-[var(--dark-blue)] mb-2">
               Benzer bir proje mi istiyorsunuz?
             </h3>
-            <p className="text-sm text-[var(--dark-blue)]/70 mb-4">
-              Yapay zeka ile profesyonel prodüksiyon, geleneksel maliyetin %30&apos;u kadar.
+            <p className="text-sm text-[var(--dark-blue)]/70 mb-6 max-w-md mx-auto">
+              Yapay zeka ile profesyonel prodüksiyon — geleneksel maliyetin %30&apos;u kadar. Konfiguratörde ihtiyacınızı seçin, biz sizi arayalım.
             </p>
-            <Link
-              href={`/configure/${item.category === "reels" ? "reels" : item.category === "product-photo" ? "product-photo" : item.category === "campaign" ? "campaign" : item.category === "corporate" ? "corporate" : "product"}`}
-              className="inline-block px-6 py-3 rounded-md bg-[var(--dark-blue)] text-[var(--lime)] font-bold text-sm border-3 border-[var(--dark-blue)] hover:bg-[var(--deep-blue)] transition-colors"
-            >
-              Teklif Al
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link
+                href={`/configure/${item.category === "reels" ? "reels" : item.category === "product-photo" ? "product-photo" : item.category === "campaign" ? "campaign" : item.category === "corporate" ? "corporate" : "product"}`}
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-md bg-[var(--dark-blue)] text-[var(--lime)] font-black text-sm border-3 border-[var(--dark-blue)] hover:bg-[var(--electric-blue)] transition-colors"
+              >
+                İhtiyacını Seç →
+              </Link>
+              <Link
+                href="/portfolio"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-transparent text-[var(--dark-blue)] font-bold text-sm border-3 border-[var(--dark-blue)] hover:bg-[var(--dark-blue)]/10 transition-colors"
+              >
+                Diğer Çalışmaları Gör
+              </Link>
+            </div>
           </div>
 
           {/* Related Projects — Internal linking */}

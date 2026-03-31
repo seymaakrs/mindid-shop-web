@@ -72,8 +72,8 @@ export const Header = () => {
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
   const navLinks = [
-    { href: "/#services", label: t("nav.videoProduction") },
-    { href: "/#services", label: t("nav.visualStudio") },
+    { href: "/ai-reklam-filmi", label: t("nav.videoProduction") },
+    { href: "/ai-gorsel", label: t("nav.visualStudio") },
     { href: "/portfolio", label: t("nav.portfolio") },
     { href: "/blog", label: "Blog" },
     { href: "/about", label: t("nav.about") },
@@ -127,7 +127,7 @@ export const Header = () => {
         {/* Right side */}
         <div className="flex items-center gap-3">
           <a
-            href="/about"
+            href="/sosyal-medya-yonetimi"
             className="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[var(--dark-blue)] text-[var(--lime)] text-sm font-bold border-2 border-[var(--dark-blue)] hover:bg-[var(--electric-blue)] transition-colors whitespace-nowrap"
           >
             {t("nav.socialMediaExpert")}
@@ -170,7 +170,7 @@ export const Header = () => {
 
           <div className="pt-3 border-t-2 border-[var(--dark-blue)]/20">
             <a
-              href="/about"
+              href="/sosyal-medya-yonetimi"
               onClick={closeMobile}
               className="block w-full text-center px-5 py-2.5 rounded-md bg-[var(--dark-blue)] text-[var(--lime)] text-sm font-bold"
             >

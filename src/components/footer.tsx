@@ -19,7 +19,7 @@ export const Footer = () => {
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/configure/reels" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
+                <Link href="/ai-reklam-filmi" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
                   {t("footer.aiReels")}
                 </Link>
               </li>
@@ -46,6 +46,11 @@ export const Footer = () => {
               <li>
                 <Link href="/avatar" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
                   {t("footer.aiAvatar")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/sosyal-medya-yonetimi" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
+                  Sosyal Medya Yönetimi
                 </Link>
               </li>
             </ul>
