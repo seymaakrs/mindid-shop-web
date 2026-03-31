@@ -69,7 +69,6 @@ export const AvatarPage = () => {
       });
       setSubmitted(true);
     } catch (err) {
-      console.error("Avatar order error:", err);
       setError(err instanceof Error ? err.message : "Bir hata oluştu. Lütfen tekrar deneyin.");
     } finally {
       setLoading(false);

@@ -51,9 +51,12 @@ export const generateMetadata = async ({
       title: `${item.titleEn || item.title} — AI Production | MindID`,
       description: descriptionEn,
       url: `https://mindid.shop/portfolio/${slug}`,
-      type: "article",
+      type: "video.other",
+      videos: item.videoUrl
+        ? [{ url: item.videoUrl, secureUrl: item.videoUrl, type: "video/mp4", width: 1280, height: 720 }]
+        : undefined,
       images: item.thumbnailUrl
-        ? [{ url: item.thumbnailUrl, width: 400, height: 711, alt: item.title }]
+        ? [{ url: item.thumbnailUrl, width: 1280, height: 720, alt: item.title }]
         : undefined,
     },
     twitter: {
@@ -114,6 +117,17 @@ const PortfolioDetailPage = async ({
         duration: item.duration || "PT30S",
         contentUrl: item.videoUrl,
         embedUrl: item.videoUrl,
+        url: `https://mindid.shop/portfolio/${slug}`,
+        dateModified:
+          (item.completedAt as unknown as string) ||
+          (item.createdAt as unknown as string) ||
+          new Date().toISOString(),
+        regionsAllowed: (item as { regionTargeted?: string }).regionTargeted || "TR",
+        isFamilyFriendly: true,
+        potentialAction: {
+          "@type": "WatchAction",
+          target: `https://mindid.shop/portfolio/${slug}`,
+        },
         author: {
           "@type": "Organization",
           name: "MindID",
@@ -149,6 +163,7 @@ const PortfolioDetailPage = async ({
     genre: catLabel.en,
     inLanguage: "tr",
     keywords: [
+      ...((item as { keywords?: string[] }).keywords || []),
       "AI reklam",
       "yapay zeka prodüksiyon",
       catLabel.tr,

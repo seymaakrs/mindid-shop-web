@@ -22,6 +22,7 @@ export const metadata: Metadata = {
       "See our AI-generated ad films, digital avatars, and e-commerce product visuals. Real examples of AI production quality.",
     url: "https://mindid.shop/portfolio",
     type: "website",
+    images: [{ url: "https://mindid.shop/og-image.jpeg", width: 1200, height: 630, alt: "MindID AI Prodüksiyon Portföyü" }],
   },
   twitter: {
     card: "summary_large_image",

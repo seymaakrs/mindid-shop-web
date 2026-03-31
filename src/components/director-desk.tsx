@@ -48,7 +48,6 @@ export const DirectorDesk = ({
       });
       onSubmit();
     } catch (err) {
-      console.error("Order submission error:", err);
       setError(err instanceof Error ? err.message : "Bir hata oluştu. Lütfen tekrar deneyin.");
     } finally {
       setLoading(false);

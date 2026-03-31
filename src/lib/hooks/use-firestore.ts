@@ -119,8 +119,8 @@ export const useBlogPosts = (publishedOnly: boolean = true) => {
           posts = posts.filter((p) => p.published === true);
         }
         setData(posts);
-      } catch (err) {
-        console.error("[Blog] useBlogPosts query failed:", err);
+      } catch {
+        // Sorgu başarısız
       }
       setLoading(false);
     };
@@ -144,8 +144,8 @@ export const useBlogPost = (slug: string) => {
         if (doc) {
           setData({ id: doc.id, ...doc.data() } as BlogPost);
         }
-      } catch (err) {
-        console.error("[Blog] useBlogPost query failed:", err);
+      } catch {
+        // Sorgu başarısız
       }
       setLoading(false);
     };
@@ -172,8 +172,7 @@ export const useOrders = (statusFilter?: OrderStatus) => {
         setData(snap.docs.map((d) => ({ id: d.id, ...d.data() } as OrderSubmission)));
         setLoading(false);
       },
-      (err) => {
-        console.error("Orders listen error:", err);
+      () => {
         setLoading(false);
       },
     );

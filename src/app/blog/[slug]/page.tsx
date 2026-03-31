@@ -56,9 +56,44 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 
 const BlogPostRoute = async ({ params }: Props) => {
   const { slug } = await params;
+  const post = await getBlogPostBySlug(slug);
+
+  const blogPostingSchema = post
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.excerpt || post.title,
+        image: post.coverImage || "https://mindid.shop/og-image.jpeg",
+        url: `https://mindid.shop/blog/${slug}`,
+        datePublished: (post.publishedAt as unknown as string) || new Date().toISOString(),
+        dateModified: (post.updatedAt as unknown as string) || (post.publishedAt as unknown as string) || new Date().toISOString(),
+        author: {
+          "@type": "Organization",
+          name: "MindID",
+          url: "https://mindid.shop",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "MindID",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://mindid.shop/logo.png",
+          },
+        },
+        inLanguage: "tr",
+        keywords: (post.tags || []).join(", "),
+      }
+    : null;
 
   return (
     <>
+      {blogPostingSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
+        />
+      )}
       <ParallaxGrid />
       <Header />
       <main>

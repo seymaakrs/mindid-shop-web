@@ -91,7 +91,7 @@ export const AvatarEditor = () => {
       render: (item) =>
         item.thumbnailUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={item.thumbnailUrl} alt="" className="h-8 w-8 object-cover rounded" />
+          <img src={item.thumbnailUrl} alt={`${item.title ?? "Avatar"} önizleme`} className="h-8 w-8 object-cover rounded" />
         ) : (
           <span className="text-[var(--gray)] text-xs">—</span>
         ),

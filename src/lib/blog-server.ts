@@ -92,8 +92,54 @@ export const getBlogPostBySlug = async (
       id: getDocId(found.document),
       ...data,
     } as unknown as BlogPost;
-  } catch (err) {
-    console.error("Failed to fetch blog post by slug:", err);
+  } catch {
     return null;
+  }
+};
+
+/**
+ * Fetch all published blog posts (server-side, for sitemap generation)
+ */
+export const getBlogPosts = async (): Promise<BlogPost[]> => {
+  try {
+    const url = `${FIRESTORE_BASE}:runQuery`;
+    const body = {
+      structuredQuery: {
+        from: [{ collectionId: "mindid_blog" }],
+        where: {
+          fieldFilter: {
+            field: { fieldPath: "published" },
+            op: "EQUAL",
+            value: { booleanValue: true },
+          },
+        },
+        orderBy: [{ field: { fieldPath: "publishedAt" }, direction: "DESCENDING" }],
+      },
+    };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      next: { revalidate: 3600 },
+    });
+
+    if (!response.ok) return [];
+
+    const results = (await response.json()) as Array<{
+      document?: Record<string, unknown>;
+    }>;
+
+    return results
+      .filter((r) => r.document)
+      .map((r) => {
+        const data = parseFirestoreDoc(r.document!);
+        return {
+          id: getDocId(r.document!),
+          ...data,
+        } as unknown as BlogPost;
+      });
+  } catch {
+    return [];
   }
 };

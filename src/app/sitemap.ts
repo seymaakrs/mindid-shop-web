@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getBlogPosts } from "@/lib/blog-server";
 import { getPortfolioItems } from "@/lib/portfolio-server";
 
 const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
@@ -20,6 +21,24 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
       }));
   } catch {
     // Portfolio fetch failed — continue with static entries
+  }
+
+  // Fetch blog posts for dynamic URLs
+  let blogEntries: MetadataRoute.Sitemap = [];
+  try {
+    const posts = await getBlogPosts();
+    blogEntries = posts
+      .filter((post) => post.slug)
+      .map((post) => ({
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: post.publishedAt
+          ? new Date(post.publishedAt as unknown as string)
+          : new Date(),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      }));
+  } catch {
+    // Blog fetch failed — continue with static entries
   }
 
   return [
@@ -56,6 +75,15 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
 
     // Dinamik portfolyo proje sayfaları
     ...portfolioEntries,
+
+    // Dinamik blog yazıları
+    ...blogEntries,
+
+    // EN alternatifleri (çok dilli SEO)
+    { url: `${baseUrl}/en/portfolio`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
+    ...portfolioEntries.map((e) => ({ ...e, url: e.url.replace(baseUrl, `${baseUrl}/en`), priority: 0.6 })),
+    { url: `${baseUrl}/en/blog`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.7 },
+    ...blogEntries.map((e) => ({ ...e, url: e.url.replace(baseUrl, `${baseUrl}/en`), priority: 0.6 })),
   ];
 };
 

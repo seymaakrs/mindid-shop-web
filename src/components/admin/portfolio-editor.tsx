@@ -37,6 +37,11 @@ const emptyItem: Omit<PortfolioItem, "id" | "createdAt"> = {
   techniques: [],
   clientName: "",
   duration: "PT30S",
+  // UI & SEO/GEO
+  orientation: "vertical",
+  keywords: [],
+  keywordsEn: [],
+  regionTargeted: "TR",
 };
 
 export const PortfolioEditor = () => {
@@ -86,6 +91,10 @@ export const PortfolioEditor = () => {
       techniques: item.techniques || [],
       clientName: item.clientName || "",
       duration: item.duration || "PT30S",
+      orientation: item.orientation || "vertical",
+      keywords: item.keywords || [],
+      keywordsEn: item.keywordsEn || [],
+      regionTargeted: item.regionTargeted || "TR",
     });
     setShowForm(true);
   };
@@ -138,7 +147,7 @@ export const PortfolioEditor = () => {
       render: (item) =>
         item.thumbnailUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={item.thumbnailUrl} alt="" className="h-8 w-12 object-cover rounded" />
+          <img src={item.thumbnailUrl} alt={`${item.title ?? "Proje"} önizleme`} className="h-8 w-12 object-cover rounded" />
         ) : (
           <span className="text-[var(--gray)] text-xs">—</span>
         ),
@@ -240,6 +249,58 @@ export const PortfolioEditor = () => {
                     onChange={(e) => setForm({ ...form, order: Number(e.target.value) })}
                     className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm focus:border-[var(--lime)] focus:outline-none"
                   />
+                </div>
+              </div>
+
+              {/* UI & GEO Fields */}
+              <div className="border-t border-[var(--electric-blue)]/20 pt-3 mt-2">
+                <p className="text-xs font-bold text-[var(--lime)] mb-2">Görünüm & Hedefleme</p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-[var(--gray)] mb-1">Video Yönü</label>
+                    <select
+                      value={form.orientation || "vertical"}
+                      onChange={(e) => setForm({ ...form, orientation: e.target.value as "horizontal" | "vertical" | "square" })}
+                      className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm focus:border-[var(--lime)] focus:outline-none"
+                    >
+                      <option value="vertical">Dikey 9:16 (Reels, Avatar)</option>
+                      <option value="horizontal">Yatay 16:9 (Film, Reklam)</option>
+                      <option value="square">Kare 1:1 (Ürün Görseli)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-[var(--gray)] mb-1">Hedef Bölge (GEO)</label>
+                    <select
+                      value={form.regionTargeted || "TR"}
+                      onChange={(e) => setForm({ ...form, regionTargeted: e.target.value })}
+                      className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm focus:border-[var(--lime)] focus:outline-none"
+                    >
+                      <option value="TR">Türkiye (TR)</option>
+                      <option value="MENA">Orta Doğu & Kuzey Afrika</option>
+                      <option value="EU">Avrupa (EU)</option>
+                      <option value="GLOBAL">Global</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3 mt-2">
+                  <div>
+                    <label className="block text-xs font-bold text-[var(--gray)] mb-1">Anahtar Kelimeler TR (virgülle)</label>
+                    <input
+                      value={(form.keywords || []).join(", ")}
+                      onChange={(e) => setForm({ ...form, keywords: e.target.value.split(",").map((s) => s.trim()).filter(Boolean) })}
+                      className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm focus:border-[var(--lime)] focus:outline-none"
+                      placeholder="AI reklam, yapay zeka video, reklam filmi"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-[var(--gray)] mb-1">Keywords EN (comma separated)</label>
+                    <input
+                      value={(form.keywordsEn || []).join(", ")}
+                      onChange={(e) => setForm({ ...form, keywordsEn: e.target.value.split(",").map((s) => s.trim()).filter(Boolean) })}
+                      className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm focus:border-[var(--lime)] focus:outline-none"
+                      placeholder="AI ad film, artificial intelligence video"
+                    />
+                  </div>
                 </div>
               </div>
 

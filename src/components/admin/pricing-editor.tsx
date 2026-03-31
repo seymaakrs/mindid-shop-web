@@ -83,20 +83,17 @@ export const PricingEditor = () => {
     setSaving(true);
     try {
       const data = JSON.parse(JSON.stringify(config));
-      console.log("Saving pricing config...", data);
       const docRef = doc(db, "mindid_pricing", "config");
       await setDoc(docRef, data);
       // Verify by reading from server (not cache)
       const verify = await getDocFromServer(docRef);
       if (verify.exists()) {
-        console.log("Verified! Server data:", verify.data());
         setSaved(true);
         setTimeout(() => setSaved(false), 2000);
       } else {
         setError("Kayıt sunucuya ulaşmadı. Firestore rules'u kontrol edin.");
       }
     } catch (err) {
-      console.error("Pricing save error:", err);
       setError(err instanceof Error ? err.message : "Kayıt başarısız oldu.");
     } finally {
       setSaving(false);

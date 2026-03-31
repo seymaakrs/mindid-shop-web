@@ -88,7 +88,6 @@ export const BlogEditor = () => {
       setEditing(null);
       window.location.reload();
     } catch (err) {
-      console.error("Blog save error:", err);
       alert("Kaydetme hatası: " + (err instanceof Error ? err.message : "Bilinmeyen hata"));
     }
     setSaving(false);
@@ -99,8 +98,8 @@ export const BlogEditor = () => {
     try {
       await deleteDoc(doc(db, "mindid_blog", id));
       window.location.reload();
-    } catch (err) {
-      console.error("Blog delete error:", err);
+    } catch {
+      // Silme işlemi başarısız
     }
   };
 

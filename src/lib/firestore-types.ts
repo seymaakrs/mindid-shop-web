@@ -25,6 +25,11 @@ export type PortfolioItem = {
   clientName?: string;
   duration?: string; // ISO 8601 e.g. "PT30S"
   completedAt?: Timestamp;
+  // UI & SEO/GEO/AEO fields (2026)
+  orientation?: "horizontal" | "vertical" | "square"; // 16:9 / 9:16 / 1:1
+  keywords?: string[];   // TR SEO keywords
+  keywordsEn?: string[]; // EN SEO keywords
+  regionTargeted?: string; // GEO: "TR" | "MENA" | "EU"
 };
 
 export type SiteSettings = {

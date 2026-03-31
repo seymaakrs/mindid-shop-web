@@ -89,7 +89,6 @@ export const getPortfolioItems = async (): Promise<PortfolioItem[]> => {
     });
 
     if (!response.ok) {
-      console.error("Firestore REST API error:", response.status, await response.text());
       return [];
     }
 
@@ -117,8 +116,7 @@ export const getPortfolioItems = async (): Promise<PortfolioItem[]> => {
     cacheTime = Date.now();
 
     return items;
-  } catch (err) {
-    console.error("Failed to fetch portfolio items:", err);
+  } catch {
     return [];
   }
 };
@@ -170,8 +168,7 @@ export const getPortfolioItemBySlug = async (
       createdAt: data.createdAt || null,
       completedAt: data.completedAt || null,
     } as unknown as PortfolioItem;
-  } catch (err) {
-    console.error("Failed to fetch portfolio item by slug:", err);
+  } catch {
     return null;
   }
 };
