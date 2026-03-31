@@ -443,14 +443,14 @@ export const SosyalMedyaPage = () => {
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       {/* ── HERO ───────────────────────────────────────────────────── */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+      <section className="relative pt-28 pb-16 md:pt-40 md:pb-28 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full border-2 border-[var(--lime)] bg-[var(--lime)]/10 text-sm font-semibold text-[var(--dark-blue)]">
-            <Sparkles className="w-4 h-4" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 mb-5 sm:mb-6 rounded-full border-2 border-[var(--lime)] bg-[var(--lime)]/10 text-xs sm:text-sm font-semibold text-[var(--dark-blue)]">
+            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             {lang === "en" ? "AI + Traditional Production" : "AI + Geleneksel Produksiyon"}
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-[var(--dark-blue)] mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-[var(--dark-blue)] mb-5 sm:mb-6">
             {lang === "en" ? (
               <>
                 Social Media with{" "}
@@ -464,14 +464,14 @@ export const SosyalMedyaPage = () => {
             )}
           </h1>
 
-          <p className="max-w-3xl mx-auto text-lg md:text-xl text-[var(--gray)] mb-6">
+          <p className="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-[var(--gray)] mb-5 sm:mb-6">
             {lang === "en"
               ? "Drone footage, professional video production, AI-powered high-volume content. We combine traditional craftsmanship with vibe marketing philosophy."
               : "Drone cekimi, profesyonel video produksiyon, AI destekli yuksek hacimli icerik. Geleneksel zanaat ile vibe marketing felsefesini birlestiriyoruz."}
           </p>
 
           {/* Quick stats */}
-          <div className="flex flex-wrap items-center justify-center gap-6 mb-10">
+          <div className="grid grid-cols-4 gap-3 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-6 mb-8 sm:mb-10">
             {[
               { num: "10+", label: { tr: "Carousel/ay", en: "Carousels/mo" } },
               { num: "5+", label: { tr: "Reels/ay", en: "Reels/mo" } },
@@ -479,25 +479,25 @@ export const SosyalMedyaPage = () => {
               { num: "4K", label: { tr: "Drone Cekimi", en: "Drone Footage" } },
             ].map((stat) => (
               <div key={stat.num} className="text-center">
-                <div className="text-2xl sm:text-3xl font-extrabold text-[var(--lime)]">{stat.num}</div>
-                <div className="text-xs sm:text-sm text-[var(--gray)] font-medium">
+                <div className="text-xl sm:text-3xl font-extrabold text-[var(--lime)]">{stat.num}</div>
+                <div className="text-[10px] sm:text-sm text-[var(--gray)] font-medium leading-tight">
                   {lang === "en" ? stat.label.en : stat.label.tr}
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <a
               href="#paketler"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[var(--lime)] text-[var(--dark-blue)] font-bold text-lg border-3 border-[var(--dark-blue)] shadow-[5px_5px_0px_var(--dark-blue)] hover:shadow-[2px_2px_0px_var(--dark-blue)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-lg bg-[var(--lime)] text-[var(--dark-blue)] font-bold text-base sm:text-lg border-3 border-[var(--dark-blue)] shadow-[5px_5px_0px_var(--dark-blue)] hover:shadow-[2px_2px_0px_var(--dark-blue)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all w-full sm:w-auto text-center justify-center"
             >
               {lang === "en" ? "View Packages" : "Paketleri Incele"}
               <ArrowRight className="w-5 h-5" />
             </a>
             <a
               href="#konfigurator"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[var(--card)] text-[var(--dark-blue)] font-bold text-lg border-3 border-[var(--dark-blue)] shadow-[5px_5px_0px_var(--dark-blue)] hover:shadow-[2px_2px_0px_var(--dark-blue)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-lg bg-[var(--card)] text-[var(--dark-blue)] font-bold text-base sm:text-lg border-3 border-[var(--dark-blue)] shadow-[5px_5px_0px_var(--dark-blue)] hover:shadow-[2px_2px_0px_var(--dark-blue)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all w-full sm:w-auto text-center justify-center"
             >
               {lang === "en" ? "Build Your Package" : "Kendi Paketini Olustur"}
             </a>
@@ -506,26 +506,26 @@ export const SosyalMedyaPage = () => {
       </section>
 
       {/* ── PACKAGES (3 tiers) ──────────────────────────────────────── */}
-      <section id="paketler" className="py-20 bg-[var(--cream)]">
+      <section id="paketler" className="py-14 sm:py-20 bg-[var(--cream)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--dark-blue)] mb-4">
+          <div className="text-center mb-10 sm:mb-14">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[var(--dark-blue)] mb-3 sm:mb-4">
               {lang === "en" ? "Choose Your Package" : "Paketinizi Secin"}
             </h2>
-            <p className="text-[var(--gray)] text-lg max-w-2xl mx-auto">
+            <p className="text-[var(--gray)] text-base sm:text-lg max-w-2xl mx-auto">
               {lang === "en"
                 ? "Three packages designed for every stage of growth. All include AI-powered content creation and professional production."
                 : "Her buyume asamasina uygun 3 paket. Hepsi AI destekli icerik uretimi ve profesyonel produksiyon iceriyor."}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
             {PACKAGES.map((pkg) => (
               <div
                 key={pkg.price}
-                className={`relative flex flex-col rounded-lg border-3 bg-[var(--card)] p-7 transition-transform hover:-translate-y-1 ${
+                className={`relative flex flex-col rounded-lg border-3 bg-[var(--card)] p-5 sm:p-7 transition-transform hover:-translate-y-1 ${
                   pkg.popular
-                    ? "border-[var(--lime)] shadow-[6px_6px_0px_var(--lime)] scale-[1.02] z-10"
+                    ? "border-[var(--lime)] shadow-[6px_6px_0px_var(--lime)] lg:scale-[1.02] z-10"
                     : "border-[var(--dark-blue)] shadow-[5px_5px_0px_var(--dark-blue)]"
                 }`}
               >
@@ -555,8 +555,8 @@ export const SosyalMedyaPage = () => {
                 </div>
 
                 {/* Price */}
-                <div className="mb-5 mt-3">
-                  <span className="text-4xl font-extrabold text-[var(--dark-blue)]">
+                <div className="mb-4 sm:mb-5 mt-3">
+                  <span className="text-3xl sm:text-4xl font-extrabold text-[var(--dark-blue)]">
                     {formatTRY(pkg.price)}
                   </span>
                   <span className="text-[var(--gray)] font-medium">
@@ -635,15 +635,16 @@ export const SosyalMedyaPage = () => {
       </section>
 
       {/* ── COMPARISON TABLE ────────────────────────────────────────── */}
-      <section className="py-20 bg-[var(--background)]">
+      <section className="py-14 sm:py-20 bg-[var(--background)]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--dark-blue)] mb-4">
+          <div className="text-center mb-10 sm:mb-14">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[var(--dark-blue)] mb-4">
               {lang === "en" ? "Package Comparison" : "Paket Karsilastirmasi"}
             </h2>
           </div>
 
-          <div className="overflow-x-auto rounded-lg border-3 border-[var(--dark-blue)] shadow-[5px_5px_0px_var(--dark-blue)]">
+          {/* Desktop table */}
+          <div className="hidden sm:block overflow-x-auto rounded-lg border-3 border-[var(--dark-blue)] shadow-[5px_5px_0px_var(--dark-blue)]">
             <table className="w-full">
               <thead>
                 <tr className="bg-[var(--dark-blue)] text-white">
@@ -678,17 +679,52 @@ export const SosyalMedyaPage = () => {
               </tbody>
             </table>
           </div>
+
+          {/* Mobile comparison cards */}
+          <div className="sm:hidden space-y-4">
+            {COMPARISON_ROWS.map((row, i) => (
+              <div
+                key={i}
+                className="rounded-lg border-2 border-[var(--dark-blue)] bg-[var(--card)] p-4 shadow-[3px_3px_0px_var(--dark-blue)]"
+              >
+                <div className="text-xs font-bold text-[var(--dark-blue)] uppercase tracking-wide mb-3">
+                  {lang === "en" ? row.label.en : row.label.tr}
+                </div>
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { name: lang === "en" ? "Starter" : "Baslangic", idx: 0, highlight: false },
+                    { name: lang === "en" ? "Standard" : "Standart", idx: 1, highlight: true },
+                    { name: "Premium", idx: 2, highlight: false },
+                  ].map((tier) => {
+                    const val = row.values[tier.idx];
+                    const displayVal = typeof val === "string" ? val : lang === "en" ? val.en : val.tr;
+                    return (
+                      <div
+                        key={tier.idx}
+                        className={`text-center rounded-md py-2 px-1 ${
+                          tier.highlight ? "bg-[var(--lime)]/15 border border-[var(--lime)]" : "bg-[var(--background)]"
+                        }`}
+                      >
+                        <div className="text-[10px] text-[var(--gray)] font-medium mb-1">{tier.name}</div>
+                        <div className="text-xs font-bold text-[var(--dark-blue)]">{displayVal}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── CONFIGURATOR ───────────────────────────────────────────── */}
-      <section id="konfigurator" className="py-20 bg-[var(--cream)]">
+      <section id="konfigurator" className="py-14 sm:py-20 bg-[var(--cream)]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--dark-blue)] mb-4">
+          <div className="text-center mb-10 sm:mb-14">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[var(--dark-blue)] mb-3 sm:mb-4">
               {lang === "en" ? "Build Your Own Package" : "Kendi Paketinizi Olusturun"}
             </h2>
-            <p className="text-[var(--gray)] text-lg max-w-xl mx-auto">
+            <p className="text-[var(--gray)] text-base sm:text-lg max-w-xl mx-auto">
               {lang === "en"
                 ? "Select the features you need. Pay only for what you use."
                 : "Ihtiyaciniz olan ozellikleri secin. Yalnizca kullandiginiz icin odeyin."}
@@ -699,12 +735,12 @@ export const SosyalMedyaPage = () => {
             {CONFIG_CATEGORIES.map((cat) => (
               <div
                 key={cat.id}
-                className="rounded-lg border-3 border-[var(--dark-blue)] bg-[var(--card)] p-6 shadow-[4px_4px_0px_var(--dark-blue)]"
+                className="rounded-lg border-3 border-[var(--dark-blue)] bg-[var(--card)] p-4 sm:p-6 shadow-[4px_4px_0px_var(--dark-blue)]"
               >
-                <h3 className="text-lg font-bold text-[var(--dark-blue)] mb-4">
+                <h3 className="text-base sm:text-lg font-bold text-[var(--dark-blue)] mb-3 sm:mb-4">
                   {lang === "en" ? cat.title.en : cat.title.tr}
                 </h3>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   {cat.options.map((opt, idx) => {
                     const isActive = configSelections[cat.id] === idx;
                     return (
@@ -712,7 +748,7 @@ export const SosyalMedyaPage = () => {
                         key={idx}
                         type="button"
                         onClick={() => handleSingleSelect(cat.id, idx)}
-                        className={`px-4 py-2.5 rounded-lg border-2 text-sm font-semibold transition-all ${
+                        className={`px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg border-2 text-xs sm:text-sm font-semibold transition-all ${
                           isActive
                             ? "bg-[var(--lime)] border-[var(--dark-blue)] text-[var(--dark-blue)] shadow-[3px_3px_0px_var(--dark-blue)]"
                             : "bg-[var(--background)] border-[var(--gray)]/30 text-[var(--foreground)] hover:border-[var(--dark-blue)]"
@@ -730,11 +766,11 @@ export const SosyalMedyaPage = () => {
             ))}
 
             {/* Extras */}
-            <div className="rounded-lg border-3 border-[var(--dark-blue)] bg-[var(--card)] p-6 shadow-[4px_4px_0px_var(--dark-blue)]">
-              <h3 className="text-lg font-bold text-[var(--dark-blue)] mb-4">
+            <div className="rounded-lg border-3 border-[var(--dark-blue)] bg-[var(--card)] p-4 sm:p-6 shadow-[4px_4px_0px_var(--dark-blue)]">
+              <h3 className="text-base sm:text-lg font-bold text-[var(--dark-blue)] mb-3 sm:mb-4">
                 {lang === "en" ? "Extra Services" : "Ek Hizmetler"}
               </h3>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                 {EXTRA_SERVICES.map((svc, idx) => {
                   const isActive = selectedExtras.has(idx);
                   return (
@@ -742,7 +778,7 @@ export const SosyalMedyaPage = () => {
                       key={idx}
                       type="button"
                       onClick={() => toggleExtra(idx)}
-                      className={`px-4 py-2.5 rounded-lg border-2 text-sm font-semibold transition-all ${
+                      className={`px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg border-2 text-xs sm:text-sm font-semibold transition-all ${
                         isActive
                           ? "bg-[var(--electric-blue)] border-[var(--dark-blue)] text-white shadow-[3px_3px_0px_var(--dark-blue)]"
                           : "bg-[var(--background)] border-[var(--gray)]/30 text-[var(--foreground)] hover:border-[var(--dark-blue)]"
@@ -758,14 +794,14 @@ export const SosyalMedyaPage = () => {
           </div>
 
           {/* Sticky price bar */}
-          <div className="sticky bottom-4 mt-10 rounded-lg border-3 border-[var(--dark-blue)] bg-[var(--lime)] p-5 shadow-[5px_5px_0px_var(--dark-blue)] flex flex-col sm:flex-row items-center justify-between gap-4 z-20">
-            <div>
-              <p className="text-sm font-medium text-[var(--dark-blue)] opacity-70">
+          <div className="sticky bottom-3 sm:bottom-4 mt-8 sm:mt-10 rounded-lg border-3 border-[var(--dark-blue)] bg-[var(--lime)] p-3 sm:p-5 shadow-[5px_5px_0px_var(--dark-blue)] flex flex-row items-center justify-between gap-3 sm:gap-4 z-20">
+            <div className="min-w-0">
+              <p className="text-xs sm:text-sm font-medium text-[var(--dark-blue)] opacity-70 hidden sm:block">
                 {lang === "en" ? "Your custom package" : "Ozel paketiniz"}
               </p>
-              <p className="text-3xl font-extrabold text-[var(--dark-blue)]">
+              <p className="text-2xl sm:text-3xl font-extrabold text-[var(--dark-blue)]">
                 {formatTRY(configTotal)}
-                <span className="text-base font-semibold opacity-70">
+                <span className="text-xs sm:text-base font-semibold opacity-70">
                   /{lang === "en" ? "mo" : "ay"}
                 </span>
               </p>
@@ -778,23 +814,23 @@ export const SosyalMedyaPage = () => {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-[var(--dark-blue)] text-white font-bold border-2 border-[var(--dark-blue)] shadow-[3px_3px_0px_var(--foreground)] hover:shadow-none hover:translate-y-[2px] transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-8 sm:py-3.5 rounded-lg bg-[var(--dark-blue)] text-white font-bold text-sm sm:text-base border-2 border-[var(--dark-blue)] shadow-[3px_3px_0px_var(--foreground)] hover:shadow-none hover:translate-y-[2px] transition-all shrink-0"
             >
               {lang === "en" ? "Request Proposal" : "Teklif Iste"}
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
           </div>
         </div>
       </section>
 
       {/* ── FEATURES ───────────────────────────────────────────────── */}
-      <section className="py-20 bg-[var(--background)]">
+      <section className="py-14 sm:py-20 bg-[var(--background)]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--dark-blue)] mb-4">
+          <div className="text-center mb-10 sm:mb-14">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[var(--dark-blue)] mb-3 sm:mb-4">
               {lang === "en" ? "Why MindID?" : "Neden MindID?"}
             </h2>
-            <p className="text-[var(--gray)] text-lg max-w-2xl mx-auto">
+            <p className="text-[var(--gray)] text-base sm:text-lg max-w-2xl mx-auto">
               {lang === "en"
                 ? "We combine traditional craftsmanship (drone, video, photography) with AI-powered vibe marketing. The result: 3-5x more content at competitive prices."
                 : "Geleneksel zanaat (drone, video, fotograf) ile AI destekli vibe marketing'i birlestiriyoruz. Sonuc: Rekabetci fiyatlarla 3-5 kat daha fazla icerik."}
@@ -823,13 +859,13 @@ export const SosyalMedyaPage = () => {
       </section>
 
       {/* ── PROCESS ────────────────────────────────────────────────── */}
-      <section className="py-20 bg-[var(--cream)]">
+      <section className="py-14 sm:py-20 bg-[var(--cream)]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--dark-blue)] mb-4">
+          <div className="text-center mb-10 sm:mb-14">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[var(--dark-blue)] mb-3 sm:mb-4">
               {lang === "en" ? "How It Works" : "Nasil Calisir?"}
             </h2>
-            <p className="text-[var(--gray)] text-lg max-w-xl mx-auto">
+            <p className="text-[var(--gray)] text-base sm:text-lg max-w-xl mx-auto">
               {lang === "en"
                 ? "From analysis to results in 4 clear steps."
                 : "Analizden sonuca 4 net adim."}
@@ -861,21 +897,21 @@ export const SosyalMedyaPage = () => {
       </section>
 
       {/* ── CTA ────────────────────────────────────────────────────── */}
-      <section className="py-20 bg-[var(--dark-blue)]">
+      <section className="py-14 sm:py-20 bg-[var(--dark-blue)]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-6">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-5 sm:mb-6">
             {lang === "en"
               ? "Ready to Grow Your Brand?"
               : "Markanizi Buyutmeye Hazir misiniz?"}
           </h2>
-          <p className="text-lg text-white/70 mb-10 max-w-xl mx-auto">
+          <p className="text-base sm:text-lg text-white/70 mb-8 sm:mb-10 max-w-xl mx-auto">
             {lang === "en"
               ? "Book a free strategy call. We'll analyze your brand and create a custom social media roadmap with vibe marketing."
               : "Ucretsiz strateji gorusmesi planlayin. Markanizi analiz edelim ve vibe marketing ile size ozel bir sosyal medya yol haritasi olusturalim."}
           </p>
           <a
             href="#paketler"
-            className="inline-flex items-center gap-2 px-10 py-4 rounded-lg bg-[var(--lime)] text-[var(--dark-blue)] font-bold text-lg border-3 border-white shadow-[5px_5px_0px_white] hover:shadow-[2px_2px_0px_white] hover:translate-x-[3px] hover:translate-y-[3px] transition-all"
+            className="inline-flex items-center gap-2 px-8 py-3 sm:px-10 sm:py-4 rounded-lg bg-[var(--lime)] text-[var(--dark-blue)] font-bold text-base sm:text-lg border-3 border-white shadow-[5px_5px_0px_white] hover:shadow-[2px_2px_0px_white] hover:translate-x-[3px] hover:translate-y-[3px] transition-all"
           >
             {lang === "en" ? "View Packages" : "Paketleri Incele"}
             <ArrowRight className="w-5 h-5" />
