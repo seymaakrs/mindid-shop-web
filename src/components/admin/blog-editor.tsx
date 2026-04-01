@@ -57,7 +57,22 @@ export const BlogEditor = () => {
       .replace(/[ö]/g, "o")
       .replace(/[ç]/g, "c")
       .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-|-$/g, "");
+      .replace(/^-|-$/g, "")
+      .slice(0, 200);
+
+  const sanitizeText = (text: string, maxLength: number) =>
+    text.replace(/<[^>]*>/g, "").slice(0, maxLength);
+
+  const validateImageUrl = (url: string): string => {
+    if (!url) return "";
+    try {
+      const parsed = new URL(url);
+      if (parsed.protocol !== "https:") return "";
+      return url;
+    } catch {
+      return "";
+    }
+  };
 
   const handleSave = async () => {
     if (!editing || !editing.title || !editing.slug) return;
@@ -65,15 +80,15 @@ export const BlogEditor = () => {
     try {
       const now = Timestamp.now();
       const data = {
-        title: editing.title,
-        titleEn: editing.titleEn,
-        slug: editing.slug,
-        excerpt: editing.excerpt,
-        excerptEn: editing.excerptEn,
+        title: sanitizeText(editing.title, 300),
+        titleEn: sanitizeText(editing.titleEn, 300),
+        slug: generateSlug(editing.slug || editing.title),
+        excerpt: sanitizeText(editing.excerpt, 1000),
+        excerptEn: sanitizeText(editing.excerptEn, 1000),
         content: editing.content,
         contentEn: editing.contentEn,
-        coverImage: editing.coverImage,
-        tags: editing.tags,
+        coverImage: validateImageUrl(editing.coverImage),
+        tags: editing.tags.map((tag) => sanitizeText(tag, 50)).filter(Boolean),
         category: editing.category,
         published: editing.published,
         updatedAt: now,

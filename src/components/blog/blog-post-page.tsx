@@ -173,7 +173,7 @@ export const BlogPostPage = ({ slug }: BlogPostPageProps) => {
                   .replace(/^- (.+)$/gm, "<li>$1</li>")
                   .replace(/(<li>[\s\S]*?<\/li>)/g, "<ul>$1</ul>")
                   .replace(/<\/ul>\s*<ul>/g, ""),
-                { ALLOWED_TAGS: ["p", "h2", "h3", "strong", "em", "ul", "li", "a", "blockquote", "code", "ol", "br", "img"] }
+                { ALLOWED_TAGS: ["p", "h2", "h3", "strong", "em", "ul", "li", "a", "blockquote", "code", "ol", "br"], ALLOWED_ATTR: ["href", "target", "rel"], ADD_ATTR: ["rel"] }
               ),
             }}
           />

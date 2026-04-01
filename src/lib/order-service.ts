@@ -6,6 +6,18 @@ import type { OrderConfig, OrderCustomer, OrderSubmission } from "@/lib/firestor
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 MB
 
+const ALLOWED_FILE_TYPES = [
+  "image/jpeg", "image/png", "image/webp", "image/gif", "image/svg+xml",
+  "video/mp4", "video/quicktime", "video/webm",
+  "application/pdf",
+  "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/vnd.ms-powerpoint", "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  "application/zip", "application/x-rar-compressed",
+];
+
+const sanitizeFileName = (name: string): string =>
+  name.replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 200);
+
 const serializeConfig = (config: ConfigState): OrderConfig => {
   const result: OrderConfig = {};
 
@@ -75,8 +87,12 @@ const uploadFiles = async (files: File[]): Promise<string[]> => {
     if (file.size > MAX_FILE_SIZE) {
       throw new Error(`Dosya çok büyük: ${file.name} (max 50 MB)`);
     }
+    if (file.type && !ALLOWED_FILE_TYPES.includes(file.type)) {
+      throw new Error(`Desteklenmeyen dosya türü: ${file.name} (${file.type})`);
+    }
     const timestamp = Date.now();
-    const storageRef = ref(storage, `mindid-site/orders/${timestamp}_${file.name}`);
+    const safeName = sanitizeFileName(file.name);
+    const storageRef = ref(storage, `mindid-site/orders/${timestamp}_${safeName}`);
     await uploadBytes(storageRef, file);
     const url = await getDownloadURL(storageRef);
     urls.push(url);
@@ -93,7 +109,20 @@ type SubmitOrderParams = {
   files: File[];
 };
 
+const validateCustomer = (customer: OrderCustomer) => {
+  if (!customer.name || customer.name.length > 200) {
+    throw new Error("Geçersiz isim");
+  }
+  if (!customer.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email)) {
+    throw new Error("Geçersiz e-posta adresi");
+  }
+  if (!customer.phone || customer.phone.length > 30) {
+    throw new Error("Geçersiz telefon numarası");
+  }
+};
+
 export const submitOrder = async (params: SubmitOrderParams): Promise<string> => {
+  validateCustomer(params.customer);
   const fileUrls = await uploadFiles(params.files);
 
   const now = Timestamp.now();
