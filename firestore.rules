@@ -3,9 +3,20 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Orders: anyone can create, only admins can read/update/delete
+    // Orders: anyone can create (with validation), only admins can read/update/delete
     match /mindid_orders/{orderId} {
-      allow create: if true;
+      allow create: if request.resource.data.keys().hasAll(["customer", "serviceId", "serviceName", "pricing", "status", "createdAt"])
+        && request.resource.data.customer is map
+        && request.resource.data.customer.name is string
+        && request.resource.data.customer.email is string
+        && request.resource.data.customer.phone is string
+        && request.resource.data.status == "new"
+        && request.resource.data.customer.name.size() > 0
+        && request.resource.data.customer.name.size() <= 200
+        && request.resource.data.customer.email.size() > 0
+        && request.resource.data.customer.email.size() <= 320
+        && request.resource.data.customer.phone.size() > 0
+        && request.resource.data.customer.phone.size() <= 30;
       allow read, update, delete: if request.auth != null
         && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
@@ -47,10 +58,19 @@ service cloud.firestore {
         && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
 
-    // Blog: published posts public read, admin write
+    // Blog: only published posts public read, admin full access
     match /mindid_blog/{docId} {
-      allow read: if true;
+      allow read: if resource.data.published == true
+        || (request.auth != null
+          && exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
       allow write: if request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Analytics: anyone can write (page views), only admin can read
+    match /mindid_analytics/{docId} {
+      allow create, update: if true;
+      allow read: if request.auth != null
         && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
 

@@ -8,6 +8,7 @@ import { HowItWorks } from "@/components/how-it-works";
 import { Footer } from "@/components/footer";
 
 // Below-the-fold: lazy loaded for faster initial page load
+const AIStudioShowcase = dynamic(() => import("@/components/ai-studio-showcase").then((m) => ({ default: m.AIStudioShowcase })));
 const BudgetSlider = dynamic(() => import("@/components/ui/budget-slider").then((m) => ({ default: m.BudgetSlider })));
 const TestimonialsSection = dynamic(() => import("@/components/testimonials-section").then((m) => ({ default: m.TestimonialsSection })));
 const FAQSection = dynamic(() => import("@/components/faq-section").then((m) => ({ default: m.FAQSection })));
@@ -194,6 +195,7 @@ const HomePage = () => {
       <Header />
       <main id="main-content">
         <Hero />
+        <AIStudioShowcase />
         <ServiceCards />
         <HowItWorks />
         <BudgetSlider />

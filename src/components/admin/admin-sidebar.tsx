@@ -17,10 +17,12 @@ import {
   Settings,
   LogOut,
   Clapperboard,
+  BarChart3,
 } from "lucide-react";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/analytics", label: "Ziyaretçi Analizi", icon: BarChart3 },
   { href: "/admin/orders", label: "Siparişler", icon: ClipboardList, badge: true },
   { href: "/admin/portfolio", label: "Portfolio", icon: Film },
   { href: "/admin/pricing", label: "Fiyatlandırma", icon: DollarSign },
