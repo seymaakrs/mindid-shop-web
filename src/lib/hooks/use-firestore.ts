@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { collection, getDocs, doc, getDoc, orderBy, query, onSnapshot, where, type QueryConstraint } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, orderBy, query, onSnapshot, where, type QueryConstraint } from "firebase/firestore"; // orderBy kept for useBlogPosts and useOrders
 import { db } from "@/lib/firebase";
 import type {
   PortfolioItem,
@@ -26,13 +26,21 @@ function useFirestoreCollection<T>(
   useEffect(() => {
     const fetch = async () => {
       try {
-        const constraints: QueryConstraint[] = [orderBy(orderField, "asc")];
+        // NOTE: orderBy removed to avoid composite index requirement with where("visible")
+        // Sorting is done in-memory after fetch
+        const constraints: QueryConstraint[] = [];
         if (filterVisible) {
-          constraints.unshift(where("visible", "==", true));
+          constraints.push(where("visible", "==", true));
         }
         const q = query(collection(db, `mindid_${collectionName}`), ...constraints);
         const snap = await getDocs(q);
-        setData(snap.docs.map((d) => ({ id: d.id, ...d.data() } as T)));
+        const docs = snap.docs.map((d) => ({ id: d.id, ...d.data() } as T));
+        docs.sort((a, b) => {
+          const av = ((a as Record<string, unknown>)[orderField] as number) ?? 999;
+          const bv = ((b as Record<string, unknown>)[orderField] as number) ?? 999;
+          return av - bv;
+        });
+        setData(docs);
       } catch {
         // Firestore unavailable — keep empty array, fallback will be used
       }
