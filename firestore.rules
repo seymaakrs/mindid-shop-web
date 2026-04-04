@@ -67,9 +67,32 @@ service cloud.firestore {
         && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
 
-    // Analytics: anyone can write (page views), only admin can read
+    // Leads: exit-intent popup ve formlardan gelen potansiyel müşteriler
+    // Herkes oluşturabilir (popup formu), sadece admin okuyabilir/güncelleyebilir
+    match /mindid_leads/{leadId} {
+      allow create: if request.resource.data.keys().hasAll(["name", "source", "page", "status", "createdAt", "updatedAt"])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 200
+        && request.resource.data.status == "new"
+        && (
+          !("phone" in request.resource.data)
+          || (request.resource.data.phone is string && request.resource.data.phone.size() <= 30)
+        )
+        && (
+          !("email" in request.resource.data)
+          || (request.resource.data.email is string && request.resource.data.email.size() <= 320)
+        );
+      allow read, update, delete: if request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Analytics: sayfa görüntülemeleri için herkes yazabilir, sadece admin okuyabilir
+    // Not: Aynı belgeyi artırımlı güncellemek için create+update gerekli
     match /mindid_analytics/{docId} {
-      allow create, update: if true;
+      allow create, update: if request.resource.data.keys().hasAll(["date", "pageViews"])
+        && request.resource.data.date is string
+        && request.resource.data.date.size() == 10;
       allow read: if request.auth != null
         && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
