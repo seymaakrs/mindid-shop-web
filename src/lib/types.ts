@@ -118,3 +118,30 @@ export type ConfigState = {
   background: BackgroundOption | null;
   photoRetouch: PhotoRetouchOption | null;
 };
+
+export type ServicePackage = {
+  id: string;
+  name: string;
+  badge?: string;
+  badgeVariant?: "popular" | "value" | "anchor" | "new";
+  tagline: string;
+  price: number;
+  highlighted: boolean;
+  features: string[];
+  presetIds: {
+    duration?: string;
+    scenario?: string;
+    voice?: string;
+    music?: string;
+    visualStyle?: string;
+    postProduction?: string[];
+    revision?: string;
+    productCount?: string;
+    photoAngle?: string;
+    photoModel?: string;
+    colorPackage?: string;
+    photoVisualStyle?: string;
+    background?: string;
+    photoRetouch?: string;
+  };
+};

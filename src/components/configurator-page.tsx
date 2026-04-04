@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import type { ConfigState, PostProductionOption } from "@/lib/types";
+import type { ConfigState, PostProductionOption, ServicePackage } from "@/lib/types";
 import {
   SCENARIO_OPTIONS,
   VOICE_OPTIONS,
@@ -17,8 +17,10 @@ import {
   PHOTO_VISUAL_STYLE_OPTIONS,
   BACKGROUND_OPTIONS,
   PHOTO_RETOUCH_OPTIONS,
+  SERVICE_PACKAGES,
 } from "@/lib/pricing-data";
 import type { ServiceType } from "@/lib/pricing-data";
+import { PackageTierSelector } from "./package-tier-selector";
 import { usePricing } from "@/lib/hooks/use-firestore";
 import { DurationSelector } from "./duration-selector";
 import { OptionCardGroup } from "./option-card-group";
@@ -75,6 +77,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
   const { data: pricingConfig } = usePricing();
   const [config, setConfig] = useState<ConfigState>(initialConfig);
   const [step, setStep] = useState<Step>("configure");
+  const [selectedPackage, setSelectedPackage] = useState<ServicePackage | null>(null);
 
   const isProductPhoto = serviceId === "product-photo";
   const optionsRef = useRef<HTMLDivElement>(null);
@@ -114,6 +117,52 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
   const service = services.find((s) => s.id === serviceId) as ServiceType | undefined;
   if (!service) return null;
 
+  const applyPackagePreset = (pkg: ServicePackage): ConfigState => {
+    const { presetIds } = pkg;
+    const durationOpts = pricingConfig?.durations ?? [];
+    const DURATION_OPTIONS_ALL = [
+      { id: "8s", label: "8", seconds: 8, description: "Bumper reklam & hikâye", basePrice: 0 },
+      { id: "15s", label: "15", seconds: 15, description: "Pre-roll & kısa spot", basePrice: 999 },
+      { id: "30s", label: "30", seconds: 30, description: "Standart dijital reklam", basePrice: 2499 },
+      { id: "45s", label: "45", seconds: 45, description: "Detaylı tanıtım", basePrice: 3999 },
+      { id: "60s", label: "60", seconds: 60, description: "1 dakika tam reklam filmi", basePrice: 5999 },
+      { id: "90s", label: "90", seconds: 90, description: "1.5 dakika tanıtım filmi", basePrice: 9999 },
+      { id: "120s", label: "120", seconds: 120, description: "2 dakika marka filmi", basePrice: 14999 },
+      { id: "180s", label: "180", seconds: 180, description: "3 dakika kurumsal", basePrice: 22999 },
+      { id: "300s", label: "300", seconds: 300, description: "5 dakika uzun format", basePrice: 39999 },
+    ];
+    const durations = durationOpts.length > 0 ? durationOpts : DURATION_OPTIONS_ALL;
+
+    return {
+      duration: presetIds.duration ? (durations.find((d) => d.id === presetIds.duration) ?? null) : null,
+      scenario: presetIds.scenario ? (scenarioOptions.find((s) => s.id === presetIds.scenario) ?? null) : null,
+      voice: presetIds.voice ? (voiceOptions.find((v) => v.id === presetIds.voice) ?? null) : null,
+      music: presetIds.music ? (musicOptions.find((m) => m.id === presetIds.music) ?? null) : null,
+      visualStyle: presetIds.visualStyle ? (visualStyleOptions.find((vs) => vs.id === presetIds.visualStyle) ?? null) : null,
+      postProduction: (presetIds.postProduction ?? []).map((id) => postProductionOptions.find((p) => p.id === id)).filter(Boolean) as PostProductionOption[],
+      revision: presetIds.revision ? (revisionPackages.find((r) => r.id === presetIds.revision) ?? null) : null,
+      productCount: presetIds.productCount ? (productCountOptions.find((pc) => pc.id === presetIds.productCount) ?? null) : null,
+      photoAngle: presetIds.photoAngle ? (photoAngleOptions.find((a) => a.id === presetIds.photoAngle) ?? null) : null,
+      photoModel: presetIds.photoModel ? (photoModelOptions.find((m) => m.id === presetIds.photoModel) ?? null) : null,
+      colorPackage: presetIds.colorPackage ? (colorPackageOptions.find((c) => c.id === presetIds.colorPackage) ?? null) : null,
+      photoVisualStyle: presetIds.photoVisualStyle ? (photoVisualStyleOptions.find((pvs) => pvs.id === presetIds.photoVisualStyle) ?? null) : null,
+      background: presetIds.background ? (backgroundOptions.find((bg) => bg.id === presetIds.background) ?? null) : null,
+      photoRetouch: presetIds.photoRetouch ? (photoRetouchOptions.find((r) => r.id === presetIds.photoRetouch) ?? null) : null,
+    };
+  };
+
+  const handlePackageSelect = (pkg: ServicePackage) => {
+    setSelectedPackage(pkg);
+    setConfig(applyPackagePreset(pkg));
+  };
+
+  const handlePackageClear = () => {
+    setSelectedPackage(null);
+    setConfig(initialConfig);
+  };
+
+  const packages = SERVICE_PACKAGES[serviceId] ?? [];
+
   const togglePostProd = (option: PostProductionOption) => {
     setConfig((prev) => {
       const exists = prev.postProduction.some((p) => p.id === option.id);
@@ -130,7 +179,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
   const basePrice = service.basePrice;
   const revisionPrice = config.revision?.price ?? 0;
 
-  let totalAI: number;
+  let calculatedAI: number;
   if (isProductPhoto) {
     const productCountPrice = config.productCount?.price ?? 0;
     const anglePrice = config.photoAngle?.price ?? 0;
@@ -139,7 +188,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
     const photoVisualPrice = config.photoVisualStyle?.price ?? 0;
     const bgPrice = config.background?.price ?? 0;
     const retouchPrice = config.photoRetouch?.price ?? 0;
-    totalAI = basePrice + productCountPrice + anglePrice + modelPrice + colorPkgPrice + photoVisualPrice + bgPrice + retouchPrice + revisionPrice;
+    calculatedAI = basePrice + productCountPrice + anglePrice + modelPrice + colorPkgPrice + photoVisualPrice + bgPrice + retouchPrice + revisionPrice;
   } else {
     const durationPrice = config.duration?.basePrice ?? 0;
     const scenarioPrice = config.scenario?.price ?? 0;
@@ -147,13 +196,14 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
     const musicPrice = config.music?.price ?? 0;
     const visualPrice = config.visualStyle?.price ?? 0;
     const postProdPrice = config.postProduction.reduce((sum, p) => sum + p.price, 0);
-    totalAI = basePrice + durationPrice + scenarioPrice + voicePrice + musicPrice + visualPrice + postProdPrice + revisionPrice;
+    calculatedAI = basePrice + durationPrice + scenarioPrice + voicePrice + musicPrice + visualPrice + postProdPrice + revisionPrice;
   }
 
-  const totalTraditional = Math.round(totalAI * service.traditionalMultiplier);
+  const totalAI = selectedPackage ? selectedPackage.price : calculatedAI;
+  const totalTraditional = Math.round(totalAI * (service.traditionalMultiplier || 3));
   const savings = totalTraditional - totalAI;
 
-  const canProceed = isProductPhoto ? !!config.productCount : !!config.duration;
+  const canProceed = selectedPackage !== null || (isProductPhoto ? !!config.productCount : !!config.duration);
 
   if (step === "congrats") {
     return (
@@ -235,6 +285,17 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-8">
           {/* Left: Configurator playground */}
           <div className="space-y-8">
+            {/* Package Tier Selector */}
+            {packages.length > 0 && (
+              <PackageTierSelector
+                packages={packages}
+                selected={selectedPackage}
+                onSelect={handlePackageSelect}
+                onClear={handlePackageClear}
+                formatPrice={formatPrice}
+              />
+            )}
+
             {/* Base package info */}
             <div className="p-4 rounded-md bg-[var(--lime)]/10 border-2 border-[var(--lime)]/30">
               <div className="flex items-center gap-2 mb-2">
