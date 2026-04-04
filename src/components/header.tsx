@@ -82,8 +82,10 @@ export const Header = () => {
   return (
     <header
       role="banner"
-      className={`sticky top-0 z-50 border-b border-[var(--dark-blue)]/20 bg-white transition-all duration-300 ${
-        scrolled ? "shadow-md" : ""
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/90 backdrop-blur-xl shadow-lg border-b border-[var(--dark-blue)]/10"
+          : "bg-white/60 backdrop-blur-md border-b border-[var(--dark-blue)]/5"
       }`}
     >
       <div
@@ -152,7 +154,7 @@ export const Header = () => {
         id="mobile-menu"
         role="navigation"
         aria-label="Mobil navigasyon"
-        className={`lg:hidden border-t border-[var(--dark-blue)]/20 bg-white overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`lg:hidden border-t border-[var(--dark-blue)]/10 bg-white/90 backdrop-blur-xl overflow-hidden transition-all duration-300 ease-in-out ${
           mobileOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >

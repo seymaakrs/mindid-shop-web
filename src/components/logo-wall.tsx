@@ -2,16 +2,12 @@
 
 import { useI18n } from "@/lib/i18n";
 
-// Gerçek müşteri referansları — testimoniallerden ve portfolyodan
 const CLIENT_REFS = [
-  { name: "Tekno Elektronik", sector: { tr: "Elektronik", en: "Electronics" } },
-  { name: "Moda Atölyesi", sector: { tr: "Moda", en: "Fashion" } },
-  { name: "Demir Mobilya", sector: { tr: "Mobilya", en: "Furniture" } },
-  { name: "Çelik Kozmetik", sector: { tr: "Kozmetik", en: "Cosmetics" } },
-  { name: "Özkan İnşaat", sector: { tr: "İnşaat", en: "Construction" } },
-  { name: "Aras Gıda", sector: { tr: "Gıda", en: "Food" } },
-  { name: "TRVAİnşaat", sector: { tr: "İnşaat", en: "Construction" } },
-  { name: "SY Parfüm", sector: { tr: "Parfüm", en: "Perfume" } },
+  { name: "TRVAİnşaat", sector: { tr: "İnşaat", en: "Construction" }, initial: "T" },
+  { name: "SY Parfüm", sector: { tr: "Parfüm", en: "Perfume" }, initial: "S" },
+  { name: "Çelik Kozmetik", sector: { tr: "Kozmetik", en: "Cosmetics" }, initial: "Ç" },
+  { name: "Demir Mobilya", sector: { tr: "Mobilya", en: "Furniture" }, initial: "D" },
+  { name: "Aras Gıda", sector: { tr: "Gıda", en: "Food" }, initial: "A" },
 ];
 
 export const LogoWall = () => {
@@ -20,40 +16,78 @@ export const LogoWall = () => {
   const allItems = [...CLIENT_REFS, ...CLIENT_REFS];
 
   return (
-    <section className="relative py-10 z-10 overflow-hidden" aria-label="Müşteri referansları">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-5">
-        <p className="text-center text-xs font-bold text-[var(--gray)]/60 uppercase tracking-widest">
-          {t("logowall.title")}
-        </p>
-      </div>
+    <section
+      className="relative z-10 overflow-hidden"
+      aria-label="Müşteri referansları"
+      style={{ background: "linear-gradient(180deg, #1c1242 0%, #100a2c 100%)" }}
+    >
+      {/* Dot grid */}
+      <div
+        className="absolute inset-0 opacity-[0.02] pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
 
-      <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[var(--background)] to-transparent z-10" aria-hidden="true" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[var(--background)] to-transparent z-10" aria-hidden="true" />
+      <div className="relative py-12 sm:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "rgba(255,255,255,0.35)" }}>
+            {t("logowall.title")}
+          </p>
+        </div>
 
-        <div className="flex animate-scroll-x gap-6 items-center">
-          {allItems.map((client, i) => (
-            <div
-              key={`${client.name}-${i}`}
-              className="flex-shrink-0 h-14 px-6 flex items-center gap-3 rounded-lg border border-[var(--electric-blue)]/10 bg-[var(--card)] opacity-60 hover:opacity-100 transition-opacity"
-            >
-              <div className="w-8 h-8 rounded-full bg-[var(--electric-blue)]/10 flex items-center justify-center">
-                <span className="text-xs font-black text-[var(--electric-blue)]">
-                  {client.name.charAt(0)}
-                </span>
+        <div className="relative">
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10" style={{ background: "linear-gradient(to right, #1c1242, transparent)" }} aria-hidden="true" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10" style={{ background: "linear-gradient(to left, #100a2c, transparent)" }} aria-hidden="true" />
+
+          <div className="flex animate-scroll-x gap-8 items-center">
+            {allItems.map((client, i) => (
+              <div
+                key={`${client.name}-${i}`}
+                className="flex-shrink-0 h-16 px-7 flex items-center gap-4 rounded-xl transition-all duration-300"
+                style={{
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  opacity: 0.65,
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.opacity = "1";
+                  (e.currentTarget as HTMLDivElement).style.borderColor = "#ade94f30";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.opacity = "0.65";
+                  (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.08)";
+                }}
+              >
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center"
+                  style={{
+                    background: "rgba(173,233,79,0.1)",
+                    border: "1.5px solid rgba(173,233,79,0.3)",
+                  }}
+                >
+                  <span className="text-sm font-black" style={{ color: "#ade94f" }}>
+                    {client.initial}
+                  </span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold text-white whitespace-nowrap">
+                    {client.name}
+                  </span>
+                  <span className="text-[10px] whitespace-nowrap" style={{ color: "rgba(255,255,255,0.35)" }}>
+                    {lang === "en" ? client.sector.en : client.sector.tr}
+                  </span>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-bold text-[var(--foreground)] whitespace-nowrap">
-                  {client.name}
-                </span>
-                <span className="text-[9px] text-[var(--gray)] whitespace-nowrap">
-                  {lang === "en" ? client.sector.en : client.sector.tr}
-                </span>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* Dark → cream geçiş */}
+      <div className="h-24 sm:h-32" style={{ background: "linear-gradient(180deg, #100a2c 0%, var(--background) 100%)" }} />
     </section>
   );
 };

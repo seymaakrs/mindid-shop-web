@@ -1,462 +1,472 @@
 "use client";
 
-import { useState, useRef, useCallback, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useI18n } from "@/lib/i18n";
 import { usePortfolio } from "@/lib/hooks/use-firestore";
-import { ArrowLeft, Play, Sparkles, Clapperboard, Camera, Smartphone } from "lucide-react";
+import {
+  motion,
+  useMotionValue,
+  AnimatePresence,
+} from "motion/react";
+import { ShoppingBag, Sparkles, ThumbsUp, ThumbsDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { VideoPlayerModal } from "./video-player-modal";
 import type { PortfolioItem } from "@/lib/firestore-types";
 
-/* ── Service Groups ── */
-const SERVICE_GROUP_MAP: Record<string, "film" | "gorsel" | "sosyal"> = {
-  campaign: "film",
-  corporate: "film",
-  product: "film",
-  "product-photo": "gorsel",
-  reels: "sosyal",
-  avatar: "sosyal",
-};
-
-const SERVICE_TABS = [
-  { id: "all", tr: "Tümü", en: "All", icon: null },
-  { id: "film", tr: "AI Reklam & Video", en: "AI Ad & Video", icon: Clapperboard },
-  { id: "gorsel", tr: "AI Studio Görsel", en: "AI Studio Visual", icon: Camera },
-  { id: "sosyal", tr: "Sosyal Medya Uzmanı", en: "Social Media Expert", icon: Smartphone },
+/* ── Hizmetler ── */
+const SERVICES = [
+  {
+    id: "reels",
+    nameTr: "AI Reels",
+    nameEn: "AI Reels",
+    tagTr: "Sosyal Medya Video",
+    tagEn: "Social Media Video",
+    price: "1.990",
+    portfolioCategory: "reels",
+    gradient: "linear-gradient(135deg, #2d1060 0%, #6b21a8 50%, #c084fc 100%)",
+    configureId: "reels",
+  },
+  {
+    id: "product-photo",
+    nameTr: "AI Studio Görsel",
+    nameEn: "AI Studio Visual",
+    tagTr: "E-Ticaret Fotoğrafı",
+    tagEn: "E-Commerce Photo",
+    price: "1.490",
+    portfolioCategory: "product-photo",
+    gradient: "linear-gradient(135deg, #042a60 0%, #1e60a8 50%, #60a5fa 100%)",
+    configureId: "product-photo",
+  },
+  {
+    id: "product",
+    nameTr: "AI Ürün Filmi",
+    nameEn: "AI Product Film",
+    tagTr: "Ürün Reklamı",
+    tagEn: "Product Ad",
+    price: "1.990",
+    portfolioCategory: "product",
+    gradient: "linear-gradient(135deg, #3c2a00 0%, #a16207 50%, #fbbf24 100%)",
+    configureId: "product",
+  },
+  {
+    id: "campaign",
+    nameTr: "AI Kampanya",
+    nameEn: "AI Campaign",
+    tagTr: "Reklam Kampanyası",
+    tagEn: "Ad Campaign",
+    price: "1.990",
+    portfolioCategory: "campaign",
+    gradient: "linear-gradient(135deg, #3c0035 0%, #be185d 50%, #f472b6 100%)",
+    configureId: "campaign",
+  },
+  {
+    id: "corporate",
+    nameTr: "AI Kurumsal",
+    nameEn: "AI Corporate",
+    tagTr: "Kurumsal Tanıtım",
+    tagEn: "Corporate Film",
+    price: "1.990",
+    portfolioCategory: "corporate",
+    gradient: "linear-gradient(135deg, #003c2a 0%, #059669 50%, #34d399 100%)",
+    configureId: "corporate",
+  },
+  {
+    id: "avatar",
+    nameTr: "AI Avatar",
+    nameEn: "AI Avatar",
+    tagTr: "Dijital Temsilci",
+    tagEn: "Digital Ambassador",
+    price: "6.900",
+    portfolioCategory: "avatar",
+    gradient: "linear-gradient(135deg, #1a3a00 0%, #65a30d 50%, #ade94f 100%)",
+    configureId: "avatar",
+  },
+  {
+    id: "social-media",
+    nameTr: "Sosyal Medya",
+    nameEn: "Social Media",
+    tagTr: "Yönetim & Büyüme",
+    tagEn: "Management & Growth",
+    price: "4.900",
+    portfolioCategory: "reels",
+    gradient: "linear-gradient(135deg, #3c1500 0%, #c2410c 50%, #fb923c 100%)",
+    configureId: "social-media",
+  },
 ];
 
-/* ── Orientation fallback ── */
-const getOrientation = (item: PortfolioItem): "horizontal" | "vertical" | "square" => {
-  if (item.orientation) return item.orientation;
-  if (["campaign", "corporate", "product"].includes(item.category)) return "horizontal";
-  if (item.category === "product-photo") return "square";
-  return "vertical";
-};
-
-/* ── Aspect ratio class ── */
-const aspectClass: Record<string, string> = {
-  horizontal: "aspect-video",
-  vertical: "aspect-[9/16]",
-  square: "aspect-square",
-};
-
-/* ── Hover Video Card ── */
-const HoverVideoCard = ({
-  videoUrl,
-  thumbnailUrl,
-  title,
-  altText,
-  category,
-  orientation,
-}: {
-  videoUrl?: string;
-  thumbnailUrl?: string;
-  title: string;
-  altText: string;
-  category: string;
-  orientation: "horizontal" | "vertical" | "square";
-}) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [hovering, setHovering] = useState(false);
-
-  const handleMouseEnter = useCallback(() => {
-    setHovering(true);
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play().catch(() => {});
-    }
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setHovering(false);
-    if (videoRef.current) videoRef.current.pause();
-  }, []);
-
-  const catLabel = SERVICE_TABS.find((t) => t.id === SERVICE_GROUP_MAP[category]);
-  const orientIcon = orientation === "horizontal" ? "16:9" : orientation === "square" ? "1:1" : "9:16";
-
-  return (
-    <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="absolute inset-0">
-      {thumbnailUrl && (
-        <Image
-          src={thumbnailUrl}
-          alt={altText}
-          fill
-          className={`object-cover transition-opacity duration-500 ${hovering && videoUrl ? "opacity-0" : "opacity-100"}`}
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-        />
-      )}
-      {videoUrl && (
-        <video
-          ref={videoRef}
-          src={videoUrl}
-          muted
-          loop
-          playsInline
-          preload="none"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${hovering ? "opacity-100" : "opacity-0"}`}
-        />
-      )}
-      <div className={`absolute inset-0 transition-all duration-300 ${
-        hovering
-          ? "bg-gradient-to-t from-black/60 via-transparent to-transparent"
-          : "bg-gradient-to-t from-black/70 via-black/20 to-transparent"
-      }`} />
-      {/* Play button */}
-      <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
-        hovering ? "opacity-100 scale-100" : "opacity-60 scale-90"
-      }`}>
-        <div className={`w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center backdrop-blur-sm transition-all duration-300 ${
-          hovering ? "bg-[var(--lime)]/30 border-[var(--lime)]/50 scale-110" : "bg-black/30"
-        }`}>
-          <Play size={18} className={`ml-0.5 transition-colors duration-300 ${hovering ? "text-[var(--lime)]" : "text-white"}`} />
-        </div>
-      </div>
-      {/* Top badges */}
-      <div className="absolute top-2 left-2 right-2 flex items-start justify-between gap-1">
-        {catLabel && (
-          <span className="px-2 py-0.5 rounded-md bg-[var(--dark-blue)]/80 backdrop-blur-sm text-white text-[9px] font-bold uppercase tracking-wider">
-            {catLabel.tr}
-          </span>
-        )}
-        <span className="px-1.5 py-0.5 rounded-md bg-black/50 backdrop-blur-sm text-white/60 text-[9px] font-bold">
-          {orientIcon}
-        </span>
-      </div>
-      {/* Title */}
-      <div className="absolute bottom-0 left-0 right-0 p-3">
-        <p className="text-xs font-bold text-white leading-tight">{title}</p>
-      </div>
-    </div>
-  );
-};
-
-/* ── Hero Featured Video ── */
-const PortfolioHero = ({
-  item,
-  lang,
-}: {
-  item: PortfolioItem;
-  lang: string;
-}) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const title = lang === "en" ? item.titleEn || item.title : item.title;
-
+/* ── Responsive breakpoint hook ── */
+const useIsMobile = () => {
+  const [mobile, setMobile] = useState(false);
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
-  }, [item.videoUrl]);
+    const check = () => setMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return mobile;
+};
 
-  return (
-    <div className="relative w-full aspect-video max-h-[70vh] overflow-hidden rounded-2xl border-3 border-[var(--electric-blue)]/20">
-      {/* Background: video or thumbnail */}
-      {item.videoUrl ? (
-        <video
-          ref={videoRef}
-          src={item.videoUrl}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster={item.thumbnailUrl}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      ) : item.thumbnailUrl ? (
-        <Image src={item.thumbnailUrl} alt={title} fill className="object-cover" priority />
-      ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--dark-blue)] to-[var(--deep-blue)]" />
-      )}
-      {/* Frosted glass overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-      {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="px-3 py-1 rounded-full bg-[var(--lime)]/20 border border-[var(--lime)]/40 text-[var(--lime)] text-[10px] font-black uppercase tracking-wider">
-            {lang === "en" ? "Featured" : "Öne Çıkan"}
-          </span>
-          {item.clientName && (
-            <span className="px-2 py-1 rounded-full bg-white/10 text-white/70 text-[10px] font-bold">
-              {item.clientName}
-            </span>
-          )}
-        </div>
-        <h2 className="text-2xl md:text-3xl font-black text-white mb-2 leading-tight max-w-xl">
-          {title}
-        </h2>
-        {item.slug && (
-          <Link
-            href={`/portfolio/${item.slug}`}
-            className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-lg bg-[var(--lime)] text-[var(--dark-blue)] text-sm font-black border-2 border-[var(--dark-blue)] shadow-[3px_3px_0px_var(--dark-blue)] hover:shadow-[1px_1px_0px_var(--dark-blue)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
-          >
-            <Play size={14} className="ml-0.5" />
-            {lang === "en" ? "Watch Full Video" : "Tam Videoyu İzle"}
-          </Link>
-        )}
-      </div>
-    </div>
-  );
+/* ── Fan card transform — responsive ── */
+const getCardTransform = (index: number, active: number, total: number, mobile: boolean) => {
+  const offset = index - active;
+  const absOffset = Math.abs(offset);
+  const spread = mobile ? 50 : 72;
+  const rot = mobile ? 6 : 5;
+
+  return {
+    x: offset * spread,
+    rotate: offset * rot,
+    scale: Math.max(0.7, 1 - absOffset * (mobile ? 0.08 : 0.07)),
+    zIndex: total - absOffset,
+    opacity: absOffset > (mobile ? 2 : 3) ? 0 : Math.max(0.25, 1 - absOffset * 0.22),
+  };
 };
 
 /* ── Portfolio Page ── */
 export const PortfolioPage = () => {
-  const { t, lang } = useI18n();
-  const { data: portfolio, loading } = usePortfolio();
+  const { lang } = useI18n();
+  const { data: portfolio } = usePortfolio();
   const [selectedVideo, setSelectedVideo] = useState<{ url: string; title: string } | null>(null);
-  const [activeTab, setActiveTab] = useState("all");
+  const [activeIndex, setActiveIndex] = useState(2);
+  const dragX = useMotionValue(0);
+  const isMobile = useIsMobile();
 
-  /* Filter by service group */
-  const filteredItems = useMemo(() => {
-    if (activeTab === "all") return portfolio;
-    return portfolio.filter((item) => SERVICE_GROUP_MAP[item.category] === activeTab);
-  }, [portfolio, activeTab]);
+  /* Responsive card dimensions */
+  const cardW = isMobile ? 170 : 210;
+  const cardH = isMobile ? 260 : 320;
+  const containerH = isMobile ? 340 : 480;
 
-  /* Featured item: first item with a video in current filter */
-  const featuredItem = useMemo(
-    () => filteredItems.find((item) => item.videoUrl) ?? null,
-    [filteredItems]
-  );
-
-  /* Grid items: all except featured */
-  const gridItems = useMemo(
-    () => (featuredItem ? filteredItems.filter((i) => i.id !== featuredItem.id) : filteredItems),
-    [filteredItems, featuredItem]
-  );
-
-  /* Service tab counts */
-  const tabCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: portfolio.length };
+  /* Thumbnail lookup */
+  const thumbnailByCategory = useMemo(() => {
+    const map: Record<string, PortfolioItem> = {};
     portfolio.forEach((item) => {
-      const group = SERVICE_GROUP_MAP[item.category];
-      if (group) counts[group] = (counts[group] || 0) + 1;
+      if (item.thumbnailUrl && !map[item.category]) {
+        map[item.category] = item;
+      }
     });
-    return counts;
+    return map;
   }, [portfolio]);
 
-  /* Grid config per tab */
-  const gridConfig = useMemo(() => {
-    switch (activeTab) {
-      case "film":
-        return { cols: "grid-cols-2 sm:grid-cols-3", featuredSpan: "sm:col-span-2", fallbackOrientation: "horizontal" as const };
-      case "gorsel":
-        return { cols: "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4", featuredSpan: "sm:col-span-2", fallbackOrientation: "square" as const };
-      case "sosyal":
-        return { cols: "grid-cols-2 sm:grid-cols-4 lg:grid-cols-5", featuredSpan: "sm:col-span-2", fallbackOrientation: "vertical" as const };
-      default:
-        return { cols: "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4", featuredSpan: "sm:col-span-2", fallbackOrientation: "vertical" as const };
-    }
-  }, [activeTab]);
+  /* Background image */
+  const bgImage = useMemo(() => {
+    const item = portfolio.find((p) => p.thumbnailUrl);
+    return item?.thumbnailUrl ?? null;
+  }, [portfolio]);
 
-  const hasItems = portfolio.length > 0;
+  /* Nav */
+  const goTo = (i: number) => setActiveIndex(Math.max(0, Math.min(i, SERVICES.length - 1)));
+
+  const activeService = SERVICES[activeIndex];
 
   return (
-    <div className="min-h-screen relative z-10">
-      {/* ── Hero Banner ── */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--dark-blue)] via-[var(--deep-blue)] to-[var(--dark-blue)]" />
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 50%, var(--lime) 0%, transparent 50%), radial-gradient(circle at 80% 20%, var(--lime) 0%, transparent 40%)",
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-          }}
-        />
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-8 text-sm font-bold"
-          >
-            <ArrowLeft size={16} />
-            {lang === "en" ? "Home" : "Ana Sayfa"}
-          </Link>
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--lime)]/10 border border-[var(--lime)]/30 mb-4">
-              <Sparkles size={12} className="text-[var(--lime)]" />
-              <span className="text-[10px] font-bold text-[var(--lime)] uppercase tracking-wider">
-                {lang === "en" ? "Our Work" : "Portfolyo"}
-              </span>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-black text-white mb-3 leading-tight">
-              {t("portfolio.title")}
-            </h1>
-            <p className="text-base text-white/60 leading-relaxed max-w-lg">
-              {t("portfolio.subtitle")}
-            </p>
-            {hasItems && (
-              <div className="flex items-center gap-6 mt-6">
-                <div>
-                  <div className="text-2xl font-black text-[var(--lime)]">{portfolio.length}+</div>
-                  <div className="text-[10px] text-white/40 uppercase tracking-wider font-bold">
-                    {lang === "en" ? "Projects" : "Proje"}
-                  </div>
-                </div>
-                <div className="w-px h-8 bg-white/10" />
-                <div>
-                  <div className="text-2xl font-black text-[var(--lime)]">3</div>
-                  <div className="text-[10px] text-white/40 uppercase tracking-wider font-bold">
-                    {lang === "en" ? "Services" : "Hizmet"}
-                  </div>
-                </div>
-                <div className="w-px h-8 bg-white/10" />
-                <div>
-                  <div className="text-2xl font-black text-[var(--lime)]">AI</div>
-                  <div className="text-[10px] text-white/40 uppercase tracking-wider font-bold">
-                    {lang === "en" ? "Powered" : "Destekli"}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+    <div className="min-h-screen relative overflow-hidden" style={{ background: "#0a0714" }}>
+
+      {/* ── Background ── */}
+      {bgImage && (
+        <div className="absolute inset-0" style={{ zIndex: 0 }}>
+          <Image
+            src={bgImage}
+            alt=""
+            fill
+            className="object-cover"
+            style={{ opacity: 0.12, filter: "blur(60px) saturate(1.5)" }}
+            priority
+          />
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-6 bg-[var(--background)] rounded-t-[24px]" />
-      </div>
+      )}
+      <div
+        className="absolute inset-0"
+        style={{ zIndex: 0, background: "radial-gradient(ellipse at 30% 40%, transparent 30%, #0a0714 75%)" }}
+      />
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{ zIndex: 0, backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "24px 24px" }}
+      />
 
       {/* ── Content ── */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div className="relative" style={{ zIndex: 1 }}>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-8 sm:pb-12">
 
-        {/* ── Service Tabs ── */}
-        {hasItems && (
-          <div className="sticky top-0 z-20 bg-[var(--background)] py-4 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 border-b border-[var(--electric-blue)]/10 mb-8">
-            <div className="flex flex-wrap items-center gap-2 max-w-6xl mx-auto">
-              {SERVICE_TABS.map((tab) => {
-                const count = tabCounts[tab.id] || 0;
-                if (tab.id !== "all" && count === 0) return null;
-                const isActive = activeTab === tab.id;
-                const Icon = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer border-2 ${
-                      isActive
-                        ? "bg-[var(--dark-blue)] text-white border-[var(--dark-blue)] shadow-[3px_3px_0px_var(--lime)]"
-                        : "bg-[var(--card)] text-[var(--foreground)]/70 border-[var(--electric-blue)]/15 hover:border-[var(--dark-blue)]/30 hover:text-[var(--foreground)]"
-                    }`}
-                  >
-                    {Icon && <Icon size={12} />}
-                    {lang === "en" ? tab.en : tab.tr}
-                    <span className={`text-[10px] ${isActive ? "text-[var(--lime)]" : "text-[var(--gray)]"}`}>
-                      {count}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
+          {/* Badge */}
+          <motion.div
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 sm:mb-10"
+            style={{ background: "rgba(173,233,79,0.08)", border: "1px solid rgba(173,233,79,0.2)" }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Sparkles size={11} style={{ color: "#ade94f" }} />
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "#ade94f" }}>
+              {lang === "en" ? "Portfolio" : "Portfolyo"}
+            </span>
+          </motion.div>
 
-        {/* ── Hero Featured Video ── */}
-        {!loading && featuredItem && (
-          <div className="mb-8">
-            <PortfolioHero item={featuredItem} lang={lang} />
-          </div>
-        )}
+          {/* ── Layout: Title + Cards ── */}
+          <div className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-0">
 
-        {/* ── Grid ── */}
-        {loading ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {Array.from({ length: 8 }, (_, i) => (
-              <div
-                key={i}
-                className="aspect-[9/16] rounded-xl bg-[var(--card)] border-2 border-[var(--electric-blue)]/10 overflow-hidden animate-pulse"
+            {/* ── LEFT: Title ── */}
+            <div className="lg:w-[38%] lg:pr-4 lg:pt-8">
+              <motion.p
+                className="font-hand text-2xl sm:text-3xl lg:text-5xl italic mb-1"
+                style={{ color: "rgba(255,255,255,0.5)" }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.6, ease: [0.05, 0.7, 0.1, 1] }}
               >
-                <div className="w-full h-full bg-gradient-to-b from-[var(--electric-blue)]/5 to-[var(--electric-blue)]/10" />
-              </div>
-            ))}
-          </div>
-        ) : gridItems.length > 0 ? (
-          <div className={`grid ${gridConfig.cols} gap-4`}>
-            {gridItems.map((item, index) => {
-              const orientation = getOrientation(item);
-              const title = lang === "en" ? item.titleEn || item.title : item.title;
-              const altText = `${title} — AI ${item.category} prodüksiyon | MindID`;
-              const hasSlug = !!item.slug;
-              const isFeaturedSize = index === 0 && activeTab !== "all";
+                {lang === "en" ? "crafted for" : "markanız için"}
+              </motion.p>
+              <motion.h1
+                className="font-black leading-[0.88] mb-4 sm:mb-6"
+                style={{ fontSize: "clamp(2.2rem, 6vw, 4.5rem)", color: "#ffffff" }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.7, ease: [0.05, 0.7, 0.1, 1] }}
+              >
+                {lang === "en" ? (
+                  <>Best AI for<br /><span className="font-hand italic" style={{ color: "#ade94f" }}>your brand</span></>
+                ) : (
+                  <>En İyi AI<br /><span className="font-hand italic" style={{ color: "#ade94f" }}>hizmetler</span></>
+                )}
+              </motion.h1>
+              <motion.p
+                className="text-xs sm:text-sm leading-relaxed mb-4 sm:mb-8 max-w-xs"
+                style={{ color: "rgba(255,255,255,0.35)" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              >
+                {lang === "en"
+                  ? "Transform your brand with AI-crafted ads, visuals, and digital avatars. Swipe to explore."
+                  : "Yapay zeka ile reklam filmi, görsel ve dijital avatar. Kaydırarak keşfedin."}
+              </motion.p>
 
-              const cardClass = [
-                "rounded-xl bg-[var(--card)] border-2 border-[var(--electric-blue)]/10 overflow-hidden cursor-pointer group relative",
-                "hover:shadow-[0_8px_30px_rgba(16,10,44,0.15)] hover:border-[var(--lime)]/40 transition-all duration-300 hover:-translate-y-1",
-                aspectClass[orientation],
-                isFeaturedSize ? gridConfig.featuredSpan : "",
-              ].filter(Boolean).join(" ");
-
-              const cardInner = item.thumbnailUrl ? (
-                <HoverVideoCard
-                  videoUrl={item.videoUrl}
-                  thumbnailUrl={item.thumbnailUrl}
-                  title={title}
-                  altText={altText}
-                  category={item.category}
-                  orientation={orientation}
-                />
-              ) : (
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-b from-[var(--electric-blue)]/5 to-[var(--electric-blue)]/10">
-                  <div className="w-12 h-12 rounded-full bg-[var(--electric-blue)]/15 flex items-center justify-center group-hover:bg-[var(--lime)]/15 transition-colors">
-                    <Play size={18} className="text-[var(--gray)] group-hover:text-[var(--foreground)] ml-0.5 transition-colors" />
-                  </div>
-                  <span className="text-xs font-bold text-[var(--foreground)] text-center px-3">{title}</span>
-                </div>
-              );
-
-              if (hasSlug) {
-                return (
-                  <Link key={item.id} href={`/portfolio/${item.slug}`} className={cardClass}>
-                    {cardInner}
-                  </Link>
-                );
-              }
-              return (
-                <div
-                  key={item.id}
-                  onClick={() => item.videoUrl && setSelectedVideo({ url: item.videoUrl, title })}
-                  className={cardClass}
+              {/* Desktop: active service info + CTA */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeService.id}
+                  initial={{ opacity: 0, x: -15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 15 }}
+                  transition={{ duration: 0.25, ease: [0.2, 0, 0, 1] }}
+                  className="mb-8 hidden lg:block"
                 >
-                  {cardInner}
-                </div>
-              );
-            })}
-          </div>
-        ) : !loading && hasItems ? (
-          <div className="text-center py-20">
-            <div className="w-16 h-16 rounded-full bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 flex items-center justify-center mx-auto mb-4">
-              <Play size={24} className="text-[var(--gray)]" />
+                  <p className="text-lg font-black text-white mb-1">
+                    {lang === "en" ? activeService.nameEn : activeService.nameTr}
+                  </p>
+                  <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+                    {lang === "en" ? activeService.tagEn : activeService.tagTr}
+                  </p>
+                  <p className="font-hand text-2xl mt-2" style={{ color: "#ade94f" }}>
+                    {activeService.price}₺
+                  </p>
+                  <Link
+                    href={`/configure/${activeService.configureId}`}
+                    className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full font-black text-sm transition-all hover:brightness-110 active:scale-95"
+                    style={{ background: "#ade94f", color: "#0a0714" }}
+                  >
+                    <ShoppingBag size={15} />
+                    {lang === "en" ? "Order Now" : "Sipariş Ver"}
+                  </Link>
+                </motion.div>
+              </AnimatePresence>
             </div>
-            <p className="text-[var(--foreground)] font-bold mb-4">{t("portfolio.noResults")}</p>
-            <button
-              onClick={() => setActiveTab("all")}
-              className="px-4 py-2 rounded-full bg-[var(--dark-blue)] text-white text-xs font-bold cursor-pointer hover:shadow-[3px_3px_0px_var(--lime)] transition-all"
-            >
-              {t("portfolio.showAll")}
-            </button>
-          </div>
-        ) : (
-          /* Placeholder grid while empty */
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {Array.from({ length: 12 }, (_, i) => (
+
+            {/* ── RIGHT: Fan card carousel ── */}
+            <div className="lg:w-[62%] flex flex-col items-center">
+
+              {/* Card stack */}
               <div
-                key={i}
-                className="aspect-[9/16] rounded-xl bg-[var(--card)] border-2 border-[var(--electric-blue)]/10 flex flex-col items-center justify-center gap-3 hover:border-[var(--lime)]/30 transition-all cursor-pointer group duration-300 hover:-translate-y-1"
+                className="relative w-full"
+                style={{ height: containerH, perspective: isMobile ? 800 : 1200 }}
               >
-                <div className="w-12 h-12 rounded-full bg-[var(--electric-blue)]/10 flex items-center justify-center group-hover:bg-[var(--lime)]/10 transition-colors">
-                  <Play size={18} className="text-[var(--gray)] group-hover:text-[var(--foreground)] ml-0.5 transition-colors" />
-                </div>
-                <span className="text-[10px] font-bold text-[var(--gray)] uppercase tracking-wider">
-                  {t("portfolio.coming")}
-                </span>
-                <span className="text-[10px] text-[var(--gray)]/50">#{String(i + 1).padStart(2, "0")}</span>
+                {SERVICES.map((service, index) => {
+                  const t = getCardTransform(index, activeIndex, SERVICES.length, isMobile);
+                  const thumb = thumbnailByCategory[service.portfolioCategory];
+                  const name = lang === "en" ? service.nameEn : service.nameTr;
+                  const tag = lang === "en" ? service.tagEn : service.tagTr;
+
+                  return (
+                    <motion.div
+                      key={service.id}
+                      className="absolute left-1/2 top-1/2 origin-bottom"
+                      style={{
+                        width: cardW,
+                        height: cardH,
+                        marginLeft: -(cardW / 2),
+                        marginTop: -(cardH / 2) - (isMobile ? 10 : 20),
+                        zIndex: t.zIndex,
+                        cursor: index === activeIndex ? "default" : "pointer",
+                        pointerEvents: t.opacity < 0.35 ? "none" : "auto",
+                      }}
+                      animate={{
+                        x: t.x,
+                        rotate: t.rotate,
+                        scale: t.scale,
+                        opacity: t.opacity,
+                      }}
+                      transition={{ type: "spring", stiffness: 300, damping: 28 }}
+                      onClick={() => index !== activeIndex && goTo(index)}
+                      drag="x"
+                      dragConstraints={{ left: 0, right: 0 }}
+                      dragElastic={0.15}
+                      onDragEnd={(_, info) => {
+                        if (Math.abs(info.offset.x) > (isMobile ? 30 : 40)) {
+                          goTo(activeIndex + (info.offset.x > 0 ? -1 : 1));
+                        }
+                      }}
+                      whileHover={index === activeIndex ? { scale: 1.06, y: -8 } : { scale: t.scale + 0.03 }}
+                    >
+                      <div
+                        className="w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden relative"
+                        style={{
+                          boxShadow: index === activeIndex
+                            ? "0 30px 60px rgba(0,0,0,0.6), 0 0 0 2px rgba(255,255,255,0.1)"
+                            : "0 15px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05)",
+                        }}
+                      >
+                        {/* Background */}
+                        {thumb?.thumbnailUrl ? (
+                          <>
+                            <Image
+                              src={thumb.thumbnailUrl}
+                              alt={name}
+                              fill
+                              className="object-cover"
+                              sizes={`${cardW}px`}
+                              draggable={false}
+                            />
+                            <div
+                              className="absolute inset-0"
+                              style={{
+                                background: "linear-gradient(to top, rgba(10,7,20,0.85) 0%, rgba(10,7,20,0.2) 50%, rgba(10,7,20,0.3) 100%)",
+                              }}
+                            />
+                          </>
+                        ) : (
+                          <div className="absolute inset-0" style={{ background: service.gradient, opacity: 0.85 }} />
+                        )}
+
+                        {/* Warm light */}
+                        <div
+                          className="absolute inset-0"
+                          style={{
+                            background: "linear-gradient(160deg, rgba(251,191,36,0.06) 0%, transparent 60%)",
+                            mixBlendMode: "screen",
+                          }}
+                        />
+
+                        {/* Name badge */}
+                        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+                          <div
+                            className="rounded-xl sm:rounded-2xl px-2.5 sm:px-3 py-2 sm:py-2.5"
+                            style={{
+                              background: "rgba(0,0,0,0.55)",
+                              backdropFilter: "blur(16px)",
+                              border: "1px solid rgba(255,255,255,0.08)",
+                            }}
+                          >
+                            <p className="font-black text-white text-xs sm:text-sm leading-tight">{name}</p>
+                            <p className="text-[9px] sm:text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.45)" }}>{tag}</p>
+                          </div>
+                        </div>
+
+                        {/* Active bar */}
+                        {index === activeIndex && (
+                          <motion.div
+                            className="absolute top-0 left-3 right-3 sm:left-4 sm:right-4"
+                            style={{ height: 3, borderRadius: 2, background: "#ade94f" }}
+                            layoutId="activeBar"
+                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                          />
+                        )}
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
-            ))}
+
+              {/* Dots */}
+              <div className="flex items-center gap-1.5 sm:gap-2 mt-0 sm:mt-2">
+                {SERVICES.map((_, i) => (
+                  <motion.button
+                    key={i}
+                    onClick={() => goTo(i)}
+                    className="rounded-full"
+                    style={{ border: "none", cursor: "pointer" }}
+                    animate={{
+                      width: i === activeIndex ? (isMobile ? 22 : 28) : (isMobile ? 6 : 8),
+                      height: isMobile ? 6 : 8,
+                      background: i === activeIndex ? "#ade94f" : "rgba(255,255,255,0.15)",
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    whileHover={{ background: i === activeIndex ? "#ade94f" : "rgba(255,255,255,0.35)" }}
+                  />
+                ))}
+              </div>
+
+              {/* Mobile CTA */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeService.id}
+                  className="lg:hidden mt-5 text-center w-full max-w-xs mx-auto"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2, ease: [0.2, 0, 0, 1] }}
+                >
+                  <p className="text-sm sm:text-base font-black text-white">
+                    {lang === "en" ? activeService.nameEn : activeService.nameTr}
+                  </p>
+                  <p className="text-[10px] sm:text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+                    {lang === "en" ? activeService.tagEn : activeService.tagTr}
+                  </p>
+                  <p className="font-hand text-lg sm:text-xl mt-1" style={{ color: "#ade94f" }}>
+                    {activeService.price}₺
+                  </p>
+                  <Link
+                    href={`/configure/${activeService.configureId}`}
+                    className="inline-flex items-center gap-2 mt-3 px-6 py-3 rounded-full font-black text-sm active:scale-95 transition-transform"
+                    style={{ background: "#ade94f", color: "#0a0714" }}
+                  >
+                    <ShoppingBag size={15} />
+                    {lang === "en" ? "Order Now" : "Sipariş Ver"}
+                  </Link>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
-        )}
+
+          {/* Bottom: Thumbs */}
+          <motion.div
+            className="flex items-center gap-3 sm:gap-4 mt-6 lg:mt-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.4 }}
+          >
+            <motion.div
+              className="flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full"
+              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
+              whileHover={{ background: "rgba(173,233,79,0.1)", borderColor: "rgba(173,233,79,0.25)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <ThumbsUp size={isMobile ? 14 : 16} style={{ color: "#ade94f" }} />
+              <span className="font-black text-white text-sm sm:text-base">107</span>
+            </motion.div>
+            <motion.div
+              className="flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full"
+              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
+              whileHover={{ background: "rgba(255,255,255,0.06)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <ThumbsDown size={isMobile ? 14 : 16} style={{ color: "rgba(255,255,255,0.3)" }} />
+            </motion.div>
+            <p className="text-[10px] sm:text-xs font-bold" style={{ color: "rgba(255,255,255,0.3)" }}>
+              {lang === "en" ? "Likes" : "Beğenme"}
+            </p>
+          </motion.div>
+
+        </div>
       </div>
 
       <VideoPlayerModal

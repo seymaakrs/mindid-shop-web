@@ -198,8 +198,8 @@ const HomePage = () => {
       <Header />
       <main id="main-content">
         <Hero />
-        <AIStudioShowcase />
         <ServiceCards />
+        <AIStudioShowcase />
         <HowItWorks />
         <TestimonialsSection />
         <FAQSection />
