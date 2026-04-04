@@ -15,25 +15,25 @@ const filmComparison: ComparisonRow[] = [
   {
     label: { tr: "30 sn Ürün Reklam Filmi", en: "30s Product Ad Film" },
     traditional: { tr: "80.000₺ – 200.000₺", en: "$2,200 – $5,600" },
-    ai: { tr: "9.999₺'den", en: "From $280" },
+    ai: { tr: "1.990₺'den", en: "From $55" },
     savings: "70%",
   },
   {
     label: { tr: "Kampanya Filmi (60 sn)", en: "Campaign Film (60s)" },
     traditional: { tr: "150.000₺ – 500.000₺", en: "$4,200 – $14,000" },
-    ai: { tr: "19.999₺'den", en: "From $560" },
+    ai: { tr: "1.990₺'den", en: "From $55" },
     savings: "70%",
   },
   {
     label: { tr: "Kurumsal Tanıtım Filmi", en: "Corporate Film" },
     traditional: { tr: "300.000₺ – 750.000₺", en: "$8,400 – $21,000" },
-    ai: { tr: "29.999₺'den", en: "From $840" },
+    ai: { tr: "1.990₺'den", en: "From $55" },
     savings: "70%",
   },
   {
     label: { tr: "Instagram Reels", en: "Instagram Reels" },
     traditional: { tr: "15.000₺ – 50.000₺", en: "$420 – $1,400" },
-    ai: { tr: "999₺'den", en: "From $28" },
+    ai: { tr: "1.990₺'den", en: "From $55" },
     savings: "75%",
   },
   {
@@ -52,7 +52,7 @@ const avatarComparison: ComparisonRow[] = [
   {
     label: { tr: "Sunucu / Model (günlük)", en: "Presenter / Model (daily)" },
     traditional: { tr: "5.000₺ – 25.000₺/gün", en: "$140 – $700/day" },
-    ai: { tr: "5.999₺ (sınırsız)", en: "$168 (unlimited)" },
+    ai: { tr: "6.900₺ (sınırsız)", en: "$190 (unlimited)" },
     savings: "90%",
   },
   {
@@ -71,7 +71,7 @@ const visualComparison: ComparisonRow[] = [
   {
     label: { tr: "Ürün Fotoğrafı (adet)", en: "Product Photo (per item)" },
     traditional: { tr: "500₺ – 2.000₺/adet", en: "$14 – $56/item" },
-    ai: { tr: "399₺'den", en: "From $11" },
+    ai: { tr: "1.490₺'den", en: "From $35" },
     savings: "70%",
   },
   {

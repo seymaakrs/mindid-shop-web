@@ -61,8 +61,8 @@ const serviceSchema = {
   areaServed: "Worldwide",
   offers: {
     "@type": "AggregateOffer",
-    lowPrice: "499",
-    highPrice: "12999",
+    lowPrice: "1490",
+    highPrice: "7900",
     priceCurrency: "TRY",
     availability: "https://schema.org/InStock",
   },

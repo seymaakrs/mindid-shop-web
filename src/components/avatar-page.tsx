@@ -64,7 +64,7 @@ export const AvatarPage = () => {
           background: null,
           photoRetouch: null,
         },
-        pricing: { basePrice: 5999, totalAI: 5999, totalTraditional: 5999, savings: 0 },
+        pricing: { basePrice: 6900, totalAI: 6900, totalTraditional: 6900, savings: 0 },
         files: [],
       });
       setSubmitted(true);
@@ -111,7 +111,7 @@ export const AvatarPage = () => {
           <h1 className="text-3xl md:text-4xl font-black text-[var(--foreground)] mb-2">{t("avatar.title")}</h1>
           <p className="text-[var(--gray)] mb-2">{t("avatar.subtitle")}</p>
           <div className="inline-flex px-4 py-1.5 rounded-md bg-[var(--lime)] text-[var(--dark-blue)] font-black text-lg border-3 border-[var(--dark-blue)] shadow-[3px_3px_0px_var(--dark-blue)]">
-            {formatPrice(5999)}
+            {formatPrice(6900)}
           </div>
         </div>
 

@@ -117,7 +117,7 @@ const jsonLd = {
           name: "AI Reels (Instagram/TikTok)",
           description: "AI-generated short-form video ads for social media",
         },
-        price: "999",
+        price: "1990",
         priceCurrency: "TRY",
       },
       {
@@ -128,7 +128,7 @@ const jsonLd = {
           description:
             "Studio-quality product images without mannequins or studios. 70% cheaper than traditional shoots.",
         },
-        price: "399",
+        price: "1490",
         priceCurrency: "TRY",
       },
       {
@@ -138,7 +138,7 @@ const jsonLd = {
           name: "AI Product Ad Film",
           description: "Professional AI-generated product advertising films",
         },
-        price: "9999",
+        price: "1990",
         priceCurrency: "TRY",
       },
       {
@@ -148,7 +148,7 @@ const jsonLd = {
           name: "AI Campaign Film",
           description: "Full AI campaign film production",
         },
-        price: "19999",
+        price: "1990",
         priceCurrency: "TRY",
       },
       {
@@ -158,7 +158,7 @@ const jsonLd = {
           name: "AI Corporate Film",
           description: "AI corporate brand and promotional films",
         },
-        price: "29999",
+        price: "1990",
         priceCurrency: "TRY",
       },
       {
@@ -169,7 +169,7 @@ const jsonLd = {
           description:
             "Create realistic AI avatars for brand spokesperson, digital presenter, or influencer",
         },
-        price: "5999",
+        price: "6900",
         priceCurrency: "TRY",
       },
     ],

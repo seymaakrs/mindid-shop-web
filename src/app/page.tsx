@@ -41,7 +41,7 @@ const faqSchema = {
       name: "Can AI replace mannequins for e-commerce product photos?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. MindID produces studio-quality e-commerce product images without mannequins or studios at 70% less cost. We serve Shopify, Amazon, Trendyol, and Hepsiburada sellers with AI-generated product photography starting from ₺399.",
+        text: "Yes. MindID produces studio-quality e-commerce product images without mannequins or studios at 70% less cost. We serve Shopify, Amazon, Trendyol, and Hepsiburada sellers with AI-generated product photography starting from ₺1,490.",
       },
     },
     {
@@ -49,7 +49,7 @@ const faqSchema = {
       name: "How to create AI avatars for marketing?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "MindID creates realistic AI digital avatars for brand spokespersons, digital presenters, and influencer avatars. You can use your AI avatar to produce content in multiple languages without ever being on camera. AI avatar creation starts from ₺5,999.",
+        text: "MindID creates realistic AI digital avatars for brand spokespersons, digital presenters, and influencer avatars. You can use your AI avatar to produce content in multiple languages without ever being on camera. AI avatar creation starts from ₺6,900.",
       },
     },
     {
@@ -89,7 +89,7 @@ const faqSchema = {
       name: "Which e-commerce platforms are AI product images compatible with?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "MindID prepares AI product images for all major platforms: Trendyol, Hepsiburada, Shopify, Amazon, N11, Etsy, eBay, AliExpress, and WooCommerce. Each platform's specific size, format, and background requirements are met. Starting from ₺399 per product.",
+        text: "MindID prepares AI product images for all major platforms: Trendyol, Hepsiburada, Shopify, Amazon, N11, Etsy, eBay, AliExpress, and WooCommerce. Each platform's specific size, format, and background requirements are met. Starting from ₺1,490 per product.",
       },
     },
     {

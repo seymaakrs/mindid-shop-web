@@ -38,8 +38,8 @@ const avatarServiceSchema = {
   areaServed: "Worldwide",
   offers: {
     "@type": "AggregateOffer",
-    lowPrice: "5999",
-    highPrice: "14999",
+    lowPrice: "6900",
+    highPrice: "6900",
     priceCurrency: "TRY",
     availability: "https://schema.org/InStock",
   },
