@@ -29,7 +29,7 @@ export const PackageTierSelector = ({ packages, selected, onSelect, onClear, for
           <h2 className="text-sm font-black text-[var(--foreground)] uppercase tracking-wider">
             Hazır Paket Seçin
           </h2>
-          <span className="hidden sm:inline text-[10px] text-[var(--gray)]">— veya aşağıdan tek tek özelleştirin</span>
+          <span className="hidden sm:inline text-[10px] text-[var(--gray)]">— size en uygun paketi belirleyin</span>
         </div>
         {selected && (
           <button
@@ -116,7 +116,7 @@ export const PackageTierSelector = ({ packages, selected, onSelect, onClear, for
       {selected && (
         <div className="mt-3 px-3 py-2 rounded-lg bg-[var(--lime)]/10 border border-[var(--lime)]/30 flex items-center justify-between">
           <span className="text-[10px] text-[var(--foreground)] font-bold">
-            <span className="text-[var(--lime)]">✓</span> {selected.name} paketi seçili — aşağıdan isteğe göre düzenleyebilirsiniz
+            <span className="text-[var(--lime)]">✓</span> {selected.name} paketi seçili — ek hizmetlerle zenginleştirebilirsiniz
           </span>
           <span className="text-xs font-black text-[var(--lime)]">{formatPrice(selected.price)}</span>
         </div>

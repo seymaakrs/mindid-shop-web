@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
-import type { ConfigState } from "@/lib/types";
+import type { ConfigState, ServicePackage, AddOnService } from "@/lib/types";
 import type { ServiceType } from "@/lib/pricing-data";
 import type { OrderCustomer } from "@/lib/firestore-types";
 import { submitOrder } from "@/lib/order-service";
@@ -18,6 +18,8 @@ type DirectorDeskProps = {
   basePrice: number;
   onBack: () => void;
   onSubmit: () => void;
+  selectedPackage?: ServicePackage | null;
+  selectedAddOns?: AddOnService[];
 };
 
 export const DirectorDesk = ({
@@ -29,6 +31,8 @@ export const DirectorDesk = ({
   basePrice,
   onBack,
   onSubmit,
+  selectedPackage,
+  selectedAddOns,
 }: DirectorDeskProps) => {
   const { t, formatPrice } = useI18n();
   const [loading, setLoading] = useState(false);
@@ -97,26 +101,53 @@ export const DirectorDesk = ({
           </div>
         </div>
 
-        {/* Trading cards scattered on desk */}
+        {/* Package summary or Trading cards */}
         <div className="p-6 rounded-lg bg-[var(--dark-blue)]/80 border-3 border-[var(--electric-blue)] mb-8">
-          <div className="flex flex-wrap gap-3">
-            {cards.map((card, i) => (
-              <div
-                key={i}
-                className="trading-card p-3 rounded-md border-3 bg-[var(--cream)]"
-                style={{
-                  borderColor: card.color,
-                  boxShadow: `4px 4px 0px ${card.color}`,
-                  transform: `rotate(${(i % 2 === 0 ? -1 : 1) * (1 + (i % 3))}deg)`,
-                }}
-              >
-                <div className="text-[10px] uppercase tracking-wider font-bold" style={{ color: card.color === "var(--lime)" ? "var(--electric-blue)" : "var(--dark-blue)" }}>
-                  {card.label}
-                </div>
-                <div className="text-sm font-bold text-[var(--dark-blue)] mt-0.5">{card.value}</div>
+          {selectedPackage ? (
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="font-bold text-[var(--foreground)]">{selectedPackage.name} Paketi</span>
+                <span className="font-bold text-[var(--foreground)]">{formatPrice(selectedPackage.price)}</span>
               </div>
-            ))}
-          </div>
+              <ul className="space-y-1">
+                {selectedPackage.features.map((f, i) => (
+                  <li key={i} className="text-[10px] text-[var(--gray)] flex items-center gap-1">
+                    <span className="text-[var(--lime)]">&#10003;</span> {f}
+                  </li>
+                ))}
+              </ul>
+              {selectedAddOns && selectedAddOns.length > 0 && (
+                <>
+                  <p className="text-[10px] font-bold text-[var(--gray)] uppercase mt-2">Ek Hizmetler</p>
+                  {selectedAddOns.map((addon) => (
+                    <div key={addon.id} className="flex justify-between text-xs">
+                      <span className="text-[var(--gray)]">{addon.name}</span>
+                      <span className="text-[var(--foreground)]">+{formatPrice(addon.price)}</span>
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
+          ) : (
+            <div className="flex flex-wrap gap-3">
+              {cards.map((card, i) => (
+                <div
+                  key={i}
+                  className="trading-card p-3 rounded-md border-3 bg-[var(--cream)]"
+                  style={{
+                    borderColor: card.color,
+                    boxShadow: `4px 4px 0px ${card.color}`,
+                    transform: `rotate(${(i % 2 === 0 ? -1 : 1) * (1 + (i % 3))}deg)`,
+                  }}
+                >
+                  <div className="text-[10px] uppercase tracking-wider font-bold" style={{ color: card.color === "var(--lime)" ? "var(--electric-blue)" : "var(--dark-blue)" }}>
+                    {card.label}
+                  </div>
+                  <div className="text-sm font-bold text-[var(--dark-blue)] mt-0.5">{card.value}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Price summary bar */}

@@ -32,7 +32,7 @@ const SERVICE_TYPES = [
   {
     icon: Smartphone,
     title: { tr: "Instagram Reels & TikTok", en: "Instagram Reels & TikTok" },
-    price: "1.199",
+    price: "1.990",
     desc: {
       tr: "Kisa formatta dikkat cekici reklam videolari. 15-60 sn, dikey format, trend uyumlu.",
       en: "Attention-grabbing short-form ad videos. 15-60s, vertical format, trend-ready.",
@@ -42,7 +42,7 @@ const SERVICE_TYPES = [
   {
     icon: Film,
     title: { tr: "Urun Tanitim Filmi", en: "Product Promo Film" },
-    price: "12.999",
+    price: "1.990",
     desc: {
       tr: "Urun ozelliklerini on plana cikaran profesyonel tanitim videolari. 30-90 sn.",
       en: "Professional product showcase videos highlighting key features. 30-90s.",
@@ -52,7 +52,7 @@ const SERVICE_TYPES = [
   {
     icon: Megaphone,
     title: { tr: "Kampanya Filmi", en: "Campaign Film" },
-    price: "24.999",
+    price: "1.990",
     desc: {
       tr: "Sezonluk kampanya ve lansman icin etkileyici reklam filmleri. 30-120 sn.",
       en: "Impactful ad films for seasonal campaigns and launches. 30-120s.",
@@ -62,7 +62,7 @@ const SERVICE_TYPES = [
   {
     icon: Building2,
     title: { tr: "Kurumsal Tanitim", en: "Corporate Intro" },
-    price: "34.999",
+    price: "1.990",
     desc: {
       tr: "Marka hikayenizi anlatan premium kurumsal tanitim filmleri. 60-180 sn.",
       en: "Premium corporate films telling your brand story. 60-180s.",

@@ -499,8 +499,8 @@ export const AIGorselPage = () => {
           <div className="mt-8 text-center">
             <p className="text-xs text-[var(--gray)] mb-4">
               {lang === "en"
-                ? "Base price starts at ₺499 · Final price calculated by the configurator"
-                : "Taban fiyat 499₺'den başlar · Nihai fiyat yapılandırıcı ile hesaplanır"}
+                ? "Base price starts at ₺1,490 · Final price calculated by the configurator"
+                : "Taban fiyat 1.490₺'den başlar · Nihai fiyat yapılandırıcı ile hesaplanır"}
             </p>
             <Link
               href="/configure/product-photo"

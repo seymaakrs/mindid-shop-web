@@ -7,7 +7,7 @@ import { ParallaxGrid } from "@/components/parallax-grid";
 export const metadata: Metadata = {
   title: "E-ticaret İçin AI Ürün Görseli — Manken ve Stüdyo Masrafına Son",
   description:
-    "Trendyol, Hepsiburada, Shopify, Amazon satıcıları için AI ürün fotoğrafçılığı. Manken ve stüdyo masrafı olmadan %70 daha ucuz, stüdyo kalitesinde ürün görselleri. 399₺'den.",
+    "Trendyol, Hepsiburada, Shopify, Amazon satıcıları için AI ürün fotoğrafçılığı. Manken ve stüdyo masrafı olmadan %70 daha ucuz, stüdyo kalitesinde ürün görselleri. 1.490₺'den.",
   keywords: [
     "e-ticaret ürün fotoğrafı ai",
     "ai ürün görseli",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AI Product Photography for E-commerce — No Mannequin, No Studio",
     description:
-      "Studio-quality product images for Shopify, Amazon, Trendyol, Hepsiburada. 70% cheaper without mannequins or studios. From ₺399.",
+      "Studio-quality product images for Shopify, Amazon, Trendyol, Hepsiburada. 70% cheaper without mannequins or studios. From ₺1,490.",
     url: "https://mindid.shop/e-commerce",
   },
   twitter: {

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | MindID",
   },
   description:
-    "AI ile reklam filmi, dijital avatar oluşturma ve e-ticaret ürün görseli üretimi. Manken ve stüdyo masrafı olmadan %70 daha az maliyetle stüdyo kalitesinde sonuçlar. 399₺'den başlayan fiyatlar.",
+    "AI ile reklam filmi, dijital avatar oluşturma ve e-ticaret ürün görseli üretimi. Manken ve stüdyo masrafı olmadan %70 daha az maliyetle stüdyo kalitesinde sonuçlar. 1.490₺'den başlayan fiyatlar.",
   keywords: [
     "yapay zeka reklam filmi",
     "ai reklam videosu",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     siteName: "MindID",
     title: "MindID — AI Reklam Filmleri, Avatar & Ürün Görselleri",
     description:
-      "Yapay zeka ile reklam filmi, avatar oluşturma ve ürün görseli üretimi. %70 maliyet tasarrufu. 399₺'den başlayan fiyatlar.",
+      "Yapay zeka ile reklam filmi, avatar oluşturma ve ürün görseli üretimi. %70 maliyet tasarrufu. 1.490₺'den başlayan fiyatlar.",
     images: [
       {
         url: "/og-image.jpeg",

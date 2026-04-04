@@ -7,7 +7,7 @@ import { ParallaxGrid } from "@/components/parallax-grid";
 export const metadata: Metadata = {
   title: "AI Ürün Görseli — Stüdyo Olmadan E-ticaret Fotoğrafçılığı",
   description:
-    "Trendyol, Hepsiburada, Amazon için AI ürün görseli. Manken ve stüdyo masrafı olmadan %70 daha ucuz, 3-5 iş günü teslim. 499₺'den başlayan fiyatlar.",
+    "Trendyol, Hepsiburada, Amazon için AI ürün görseli. Manken ve stüdyo masrafı olmadan %70 daha ucuz, 3-5 iş günü teslim. 1.490₺'den başlayan fiyatlar.",
   keywords: [
     "ai ürün görseli",
     "yapay zeka ürün fotoğrafı",

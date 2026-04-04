@@ -71,7 +71,7 @@ const PACKAGES: PricingPackage[] = [
   {
     name: { tr: "Baslangic Paketi", en: "Starter Package" },
     subtitle: { tr: "Dijitale ilk adim", en: "Your first step into digital" },
-    price: 9999,
+    price: 4900,
     icon: <Smartphone className="w-6 h-6" />,
     accent: "var(--electric-blue)",
     deliverables: {
@@ -96,7 +96,7 @@ const PACKAGES: PricingPackage[] = [
   {
     name: { tr: "Standart Paket", en: "Standard Package" },
     subtitle: { tr: "Buyuyen markalar icin", en: "For growing brands" },
-    price: 22999,
+    price: 9900,
     popular: true,
     icon: <TrendingUp className="w-6 h-6" />,
     accent: "var(--lime)",
@@ -123,7 +123,7 @@ const PACKAGES: PricingPackage[] = [
   {
     name: { tr: "Premium Paket", en: "Premium Package" },
     subtitle: { tr: "Tam donanim, sinirsiz buyume", en: "Full power, unlimited growth" },
-    price: 37999,
+    price: 17900,
     icon: <Crown className="w-6 h-6" />,
     accent: "var(--dark-blue)",
     deliverables: {

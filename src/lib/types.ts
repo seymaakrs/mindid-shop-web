@@ -145,3 +145,11 @@ export type ServicePackage = {
     photoRetouch?: string;
   };
 };
+
+export type AddOnService = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: "video" | "photo" | "social";
+};

@@ -67,7 +67,7 @@ export const EcommercePage = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--lime)]/10 border border-[var(--lime)]/30 mb-4">
             <Camera size={14} className="text-[var(--foreground)]" />
             <span className="text-xs font-bold text-[var(--foreground)]">
-              {lang === "en" ? "From ₺399 — 70% Cheaper" : "399₺'den — %70 Daha Ucuz"}
+              {lang === "en" ? "From ₺1,490 — 70% Cheaper" : "1.490₺'den — %70 Daha Ucuz"}
             </span>
           </div>
           <h1 className="text-3xl md:text-4xl font-black text-[var(--foreground)] mb-4">
@@ -242,7 +242,7 @@ export const EcommercePage = () => {
               </ul>
               <div className="mt-3 pt-3 border-t border-[var(--lime)]/20">
                 <span className="text-sm font-black text-[var(--foreground)]">
-                  {lang === "en" ? "From $11 per product" : "Ürün başına 399₺'den"}
+                  {lang === "en" ? "From $35 per product" : "Ürün başına 1.490₺'den"}
                 </span>
               </div>
             </div>

@@ -7,7 +7,7 @@ import { ParallaxGrid } from "@/components/parallax-grid";
 export const metadata: Metadata = {
   title: "AI Reklam Filmi — Yapay Zeka ile Profesyonel Video Prodüksiyon",
   description:
-    "AI reklam filmi ile %70 maliyet tasarrufu, 3-5 gün teslimat. Yapay zeka video prodüksiyon: Instagram Reels, TikTok, ürün tanıtım filmi, kampanya filmi. 1.199₺'den başlayan fiyatlar.",
+    "AI reklam filmi ile %70 maliyet tasarrufu, 3-5 gün teslimat. Yapay zeka video prodüksiyon: Instagram Reels, TikTok, ürün tanıtım filmi, kampanya filmi. 1.990₺'den başlayan fiyatlar.",
   keywords: [
     "ai reklam filmi",
     "yapay zeka reklam videosu",
