@@ -3,7 +3,56 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // ----------------------------------------------------------------------
+    // YARDIMCI FONKSİYONLAR
+    // ----------------------------------------------------------------------
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // ----------------------------------------------------------------------
+    // BUSINESSES VE ALT KOLEKSİYONLARI
+    // ----------------------------------------------------------------------
+    match /businesses/{businessId} {
+      allow read, write: if request.auth != null;
+
+      match /media/{mediaId} { allow read, write: if request.auth != null; }
+      match /jobs/{jobId} { allow read, write: if request.auth != null; }
+      match /logs/{logId} { allow read, write: if request.auth != null; }
+      match /content_calendar/{planId} { allow read, write: if request.auth != null; }
+      match /agent_memory/marketing { allow read, write: if request.auth != null; }
+      match /tasks/{taskId} { allow read, write: if request.auth != null; }
+      match /instagram_posts/{postId} { allow read, write: if request.auth != null; }
+      match /reports/{reportId} { allow read, write: if request.auth != null; }
+      match /seo/{seoId} { allow read, write: if request.auth != null; }
+      match /instagram_stats/{weekId} { allow read, write: if request.auth != null; }
+    }
+
+    // ----------------------------------------------------------------------
+    // GENEL UYGULAMA KOLEKSİYONLARI
+    // ----------------------------------------------------------------------
+    match /errors/{errorId} { allow read, write: if request.auth != null; }
+    match /active_tasks/{activeTaskId} { allow read, write: if request.auth != null; }
+    match /form_submissions/{formSubmissonId} { allow read, write: if request.auth != null; }
+
+    // ----------------------------------------------------------------------
+    // YÖNETİCİ, SIRLAR VE AYARLAR
+    // ----------------------------------------------------------------------
+    match /admins/{adminId} {
+      allow read: if isAdmin() || request.auth.uid == adminId;
+    }
+
+    match /secrets/gcp-ai { allow read: if request.auth != null; }
+    match /secrets/other { allow read: if request.auth != null; }
+    match /settings/app_settings { allow read, write: if request.auth != null; }
+    match /settings/agent_instructions { allow read, write: if request.auth != null; }
+
+    // ----------------------------------------------------------------------
+    // MINDİD SİPARİŞLER
     // Orders: anyone can create (with validation), only admins can read/update/delete
+    // mal claude burdan yukarısını ellersen seni öldürürüm - admin burak
+    // ----------------------------------------------------------------------
     match /mindid_orders/{orderId} {
       allow create: if request.resource.data.keys().hasAll(["customer", "serviceId", "serviceName", "pricing", "status", "createdAt"])
         && request.resource.data.customer is map
@@ -17,54 +66,46 @@ service cloud.firestore {
         && request.resource.data.customer.email.size() <= 320
         && request.resource.data.customer.phone.size() > 0
         && request.resource.data.customer.phone.size() <= 30;
-      allow read, update, delete: if request.auth != null
-        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow read, update, delete: if isAdmin();
     }
 
-    // Public collections: read-only for everyone
+    // ----------------------------------------------------------------------
+    // PUBLIC KOLEKSİYONLAR — herkes okuyabilir, sadece admin yazabilir
+    // ----------------------------------------------------------------------
     match /mindid_portfolio/{docId} {
       allow read: if true;
-      allow write: if request.auth != null
-        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow write: if isAdmin();
     }
 
     match /mindid_faq/{docId} {
       allow read: if true;
-      allow write: if request.auth != null
-        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow write: if isAdmin();
     }
 
     match /mindid_team/{docId} {
       allow read: if true;
-      allow write: if request.auth != null
-        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow write: if isAdmin();
     }
 
     match /mindid_avatarSamples/{docId} {
       allow read: if true;
-      allow write: if request.auth != null
-        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow write: if isAdmin();
     }
 
     match /mindid_settings/{docId} {
       allow read: if true;
-      allow write: if request.auth != null
-        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow write: if isAdmin();
     }
 
     match /mindid_pricing/{docId} {
       allow read: if true;
-      allow write: if request.auth != null
-        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow write: if isAdmin();
     }
 
-    // Blog: only published posts public read, admin full access
+    // Blog: sadece yayınlananlar herkese açık, admin her şeyi görebilir
     match /mindid_blog/{docId} {
-      allow read: if resource.data.published == true
-        || (request.auth != null
-          && exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
-      allow write: if request.auth != null
-        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
     }
 
     // Leads: exit-intent popup ve formlardan gelen potansiyel müşteriler
@@ -83,23 +124,15 @@ service cloud.firestore {
           !("email" in request.resource.data)
           || (request.resource.data.email is string && request.resource.data.email.size() <= 320)
         );
-      allow read, update, delete: if request.auth != null
-        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+      allow read, update, delete: if isAdmin();
     }
 
     // Analytics: sayfa görüntülemeleri için herkes yazabilir, sadece admin okuyabilir
-    // Not: Aynı belgeyi artırımlı güncellemek için create+update gerekli
     match /mindid_analytics/{docId} {
       allow create, update: if request.resource.data.keys().hasAll(["date", "pageViews"])
         && request.resource.data.date is string
         && request.resource.data.date.size() == 10;
-      allow read: if request.auth != null
-        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
-    }
-
-    // Admin docs
-    match /admins/{uid} {
-      allow read: if request.auth != null && request.auth.uid == uid;
+      allow read: if isAdmin();
     }
   }
 }
