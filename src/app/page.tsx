@@ -15,6 +15,9 @@ const FAQSection = dynamic(() => import("@/components/faq-section").then((m) => 
 const FinalCTA = dynamic(() => import("@/components/final-cta").then((m) => ({ default: m.FinalCTA })));
 const LogoWall = dynamic(() => import("@/components/logo-wall").then((m) => ({ default: m.LogoWall })));
 const AIManager = dynamic(() => import("@/components/ai-manager").then((m) => ({ default: m.AIManager })));
+const ExitIntentPopup = dynamic(() => import("@/components/exit-intent-popup").then((m) => ({ default: m.ExitIntentPopup })));
+const SocialProofToast = dynamic(() => import("@/components/social-proof-toast").then((m) => ({ default: m.SocialProofToast })));
+const StickyCTABar = dynamic(() => import("@/components/sticky-cta-bar").then((m) => ({ default: m.StickyCTABar })));
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -206,6 +209,9 @@ const HomePage = () => {
       </main>
       <Footer />
       <AIManager />
+      <ExitIntentPopup />
+      <SocialProofToast />
+      <StickyCTABar />
     </>
   );
 };

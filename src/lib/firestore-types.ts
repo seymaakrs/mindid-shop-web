@@ -135,6 +135,24 @@ export type BlogPost = {
   updatedAt: Timestamp;
 };
 
+// Lead capture (exit-intent popup, newsletter)
+export type LeadStatus = "new" | "contacted" | "converted" | "lost";
+
+export type LeadSource = "exit_intent" | "popup" | "footer" | "other";
+
+export type LeadCapture = {
+  id?: string;
+  name: string;
+  phone?: string;
+  email?: string;
+  source: LeadSource;
+  page: string; // hangi sayfadayken yakalandı
+  status: LeadStatus;
+  notes: string;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+};
+
 // Order management types
 export type OrderStatus = "new" | "seen" | "in-progress" | "completed" | "cancelled";
 

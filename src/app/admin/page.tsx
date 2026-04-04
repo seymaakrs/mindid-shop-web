@@ -12,6 +12,7 @@ import {
   Bot,
   ClipboardList,
   ArrowRight,
+  UserPlus,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -22,10 +23,12 @@ type CollectionCount = {
   avatarSamples: number;
   ordersTotal: number;
   ordersNew: number;
+  leadsNew: number;
 };
 
 const quickLinks = [
   { href: "/admin/orders", label: "Siparişler", icon: ClipboardList, color: "var(--lime)" },
+  { href: "/admin/leads", label: "Potansiyel Müşteriler", icon: UserPlus, color: "var(--lime)" },
   { href: "/admin/portfolio", label: "Portfolio Yönet", icon: Film, color: "var(--electric-blue)" },
   { href: "/admin/pricing", label: "Fiyatları Düzenle", icon: DollarSign, color: "var(--lime)" },
   { href: "/admin/faq", label: "SSS Düzenle", icon: HelpCircle, color: "var(--electric-blue)" },
@@ -42,19 +45,22 @@ const AdminDashboard = () => {
     avatarSamples: 0,
     ordersTotal: 0,
     ordersNew: 0,
+    leadsNew: 0,
   });
 
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        const [portfolio, faq, team, avatarSamples, orders] = await Promise.all([
+        const [portfolio, faq, team, avatarSamples, orders, leads] = await Promise.all([
           getDocs(collection(db, "mindid_portfolio")),
           getDocs(collection(db, "mindid_faq")),
           getDocs(collection(db, "mindid_team")),
           getDocs(collection(db, "mindid_avatarSamples")),
           getDocs(collection(db, "mindid_orders")),
+          getDocs(collection(db, "mindid_leads")),
         ]);
         const ordersNew = orders.docs.filter((d) => d.data().status === "new").length;
+        const leadsNew = leads.docs.filter((d) => d.data().status === "new").length;
         setCounts({
           portfolio: portfolio.size,
           faq: faq.size,
@@ -62,6 +68,7 @@ const AdminDashboard = () => {
           avatarSamples: avatarSamples.size,
           ordersTotal: orders.size,
           ordersNew,
+          leadsNew,
         });
       } catch {
         // Firestore not configured yet — counts stay 0
@@ -83,6 +90,7 @@ const AdminDashboard = () => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
         {[
           { label: "Yeni Siparişler", count: counts.ordersNew, icon: ClipboardList, highlight: true },
+          { label: "Yeni Lead'ler", count: counts.leadsNew, icon: UserPlus, highlight: true },
           { label: "Toplam Siparişler", count: counts.ordersTotal, icon: ClipboardList },
           { label: "Portfolio", count: counts.portfolio, icon: Film },
           { label: "SSS", count: counts.faq, icon: HelpCircle },
