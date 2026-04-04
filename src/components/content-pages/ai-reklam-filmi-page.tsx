@@ -114,8 +114,8 @@ const STEPS = [
     icon: FileText,
     title: { tr: "Brief", en: "Brief" },
     desc: {
-      tr: "Markanizi, hedef kitlenizi ve mesajinizi anlatin. Form veya WhatsApp ile.",
-      en: "Tell us about your brand, target audience and message. Via form or WhatsApp.",
+      tr: "Markanizi, hedef kitlenizi ve mesajinizi anlatin. Form ile.",
+      en: "Tell us about your brand, target audience and message. Via our form.",
     },
   },
   {

@@ -606,13 +606,7 @@ export const SosyalMedyaPage = () => {
 
                 {/* CTA */}
                 <a
-                  href={`https://wa.me/905551234567?text=${encodeURIComponent(
-                    lang === "en"
-                      ? `Hi! I'm interested in the ${pkg.name.en} (${formatTRY(pkg.price)}/mo).`
-                      : `Merhaba! ${pkg.name.tr} (${formatTRY(pkg.price)}/ay) hakkinda bilgi almak istiyorum.`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="mailto:info@mindid.shop"
                   className={`block text-center py-3.5 rounded-lg font-bold border-2 border-[var(--dark-blue)] transition-all hover:translate-y-[2px] hover:shadow-none ${
                     pkg.popular
                       ? "bg-[var(--lime)] text-[var(--dark-blue)] shadow-[3px_3px_0px_var(--dark-blue)]"
@@ -807,13 +801,7 @@ export const SosyalMedyaPage = () => {
               </p>
             </div>
             <a
-              href={`https://wa.me/905551234567?text=${encodeURIComponent(
-                lang === "en"
-                  ? `Hi! I'd like a custom social media package (${formatTRY(configTotal)}/mo).`
-                  : `Merhaba! Ozel sosyal medya paketi (${formatTRY(configTotal)}/ay) hakkinda bilgi almak istiyorum.`
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:info@mindid.shop"
               className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-8 sm:py-3.5 rounded-lg bg-[var(--dark-blue)] text-white font-bold text-sm sm:text-base border-2 border-[var(--dark-blue)] shadow-[3px_3px_0px_var(--foreground)] hover:shadow-none hover:translate-y-[2px] transition-all shrink-0"
             >
               {lang === "en" ? "Request Proposal" : "Teklif Iste"}

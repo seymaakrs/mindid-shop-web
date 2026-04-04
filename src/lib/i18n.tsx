@@ -77,7 +77,7 @@ const translations: Record<string, Record<string, string>> = {
     es: "Contenido de calidad profesional a un 60-70% menos que la producción tradicional. Dé el primer paso, le contactaremos en 24 horas.",
   },
   "cta.primary": { tr: "Hizmetleri İncele", en: "Explore Services", es: "Ver Servicios" },
-  "cta.secondary": { tr: "WhatsApp ile Yazın", en: "Message on WhatsApp", es: "Escríbanos por WhatsApp" },
+  "cta.secondary": { tr: "Bize Yazın", en: "Contact Us", es: "Contáctenos" },
   "cta.trust": { tr: "Ücretsiz danışma · 2 revizyon dahil · 3-5 gün teslimat", en: "Free consultation · 2 revisions included · 3-5 day delivery", es: "Consulta gratuita · 2 revisiones incluidas · Entrega en 3-5 días" },
 
   // Logo Wall

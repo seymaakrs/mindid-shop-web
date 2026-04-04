@@ -41,9 +41,7 @@ export const FinalCTA = () => {
           </a>
 
           <a
-            href="https://wa.me/905419315550"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:info@mindid.shop"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-md bg-transparent border-3 border-[var(--dark-blue)] text-[var(--dark-blue)] text-base font-bold hover:bg-[var(--lime)]/10 hover:border-[var(--lime)] transition-all"
           >
             {t("cta.secondary")}

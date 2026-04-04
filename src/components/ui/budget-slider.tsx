@@ -19,7 +19,7 @@ const services: ServiceOption[] = [
     id: "product-photo",
     name: { tr: "AI Ürün Görseli", en: "AI Product Photography" },
     desc: { tr: "E-ticaret ürün fotoğrafı — manken ve stüdyo masrafı olmadan", en: "E-commerce product photos — without mannequin or studio costs" },
-    minPrice: 399,
+    minPrice: 1490,
     href: "/configure/product-photo",
     tag: { tr: "E-ticaret", en: "E-commerce" },
   },
@@ -27,23 +27,31 @@ const services: ServiceOption[] = [
     id: "reels",
     name: { tr: "AI Instagram Reels", en: "AI Instagram Reels" },
     desc: { tr: "Sosyal medya için kısa format AI video", en: "Short-form AI video for social media" },
-    minPrice: 999,
+    minPrice: 1990,
     href: "/configure/reels",
+    tag: { tr: "Sosyal Medya", en: "Social Media" },
+  },
+  {
+    id: "social-media",
+    name: { tr: "Sosyal Medya Yönetimi", en: "Social Media Management" },
+    desc: { tr: "AI destekli içerik üretimi ve sosyal medya yönetimi", en: "AI-powered content creation and social media management" },
+    minPrice: 4900,
+    href: "/sosyal-medya-yonetimi",
     tag: { tr: "Sosyal Medya", en: "Social Media" },
   },
   {
     id: "avatar",
     name: { tr: "AI Avatar Oluşturma", en: "AI Avatar Creation" },
     desc: { tr: "Dijital sunucu, marka yüzü, influencer avatar", en: "Digital presenter, brand face, influencer avatar" },
-    minPrice: 5999,
+    minPrice: 6900,
     href: "/avatar",
     tag: { tr: "Avatar", en: "Avatar" },
   },
   {
     id: "product",
     name: { tr: "AI Ürün Reklam Filmi", en: "AI Product Ad Film" },
-    desc: { tr: "Sinema kalitesinde ürün reklam videosu", en: "Cinema-quality product ad video" },
-    minPrice: 9999,
+    desc: { tr: "Mini'den Platinum'a — her bütçeye video paketi", en: "From Mini to Platinum — video package for every budget" },
+    minPrice: 1990,
     href: "/configure/product",
     tag: { tr: "Reklam Filmi", en: "Ad Film" },
   },
@@ -51,7 +59,7 @@ const services: ServiceOption[] = [
     id: "campaign",
     name: { tr: "AI Kampanya Filmi", en: "AI Campaign Film" },
     desc: { tr: "Kampanya odaklı profesyonel reklam filmi", en: "Campaign-focused professional ad film" },
-    minPrice: 19999,
+    minPrice: 1990,
     href: "/configure/campaign",
     tag: { tr: "Kampanya", en: "Campaign" },
   },
@@ -59,13 +67,13 @@ const services: ServiceOption[] = [
     id: "corporate",
     name: { tr: "AI Kurumsal Tanıtım Filmi", en: "AI Corporate Film" },
     desc: { tr: "Marka hikayenizi profesyonelce anlatın", en: "Tell your brand story professionally" },
-    minPrice: 29999,
+    minPrice: 1990,
     href: "/configure/corporate",
     tag: { tr: "Kurumsal", en: "Corporate" },
   },
 ];
 
-const BUDGET_STEPS = [399, 1000, 3000, 5000, 10000, 20000, 30000, 50000];
+const BUDGET_STEPS = [1490, 2000, 3000, 5000, 7000, 10000, 20000, 50000, 65000];
 
 export const BudgetSlider = () => {
   const { lang, formatPrice } = useI18n();
@@ -97,11 +105,11 @@ export const BudgetSlider = () => {
         {/* Slider */}
         <div className="bg-[var(--card)] border-3 border-[var(--electric-blue)]/20 rounded-lg p-6 mb-8">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs text-[var(--gray)] font-bold">399₺</span>
+            <span className="text-xs text-[var(--gray)] font-bold">1.490₺</span>
             <span className="text-2xl font-black text-[var(--foreground)]">
               {formatPrice(budget)}
             </span>
-            <span className="text-xs text-[var(--gray)] font-bold">50.000₺</span>
+            <span className="text-xs text-[var(--gray)] font-bold">65.000₺</span>
           </div>
           <label htmlFor="budget-range" className="sr-only">Bütçe seçici</label>
           <input

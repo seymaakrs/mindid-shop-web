@@ -248,14 +248,12 @@ export const AIGorselPage = () => {
               {lang === "en" ? "Configure & Get Quote" : "Fiyat Hesapla"}
               <ArrowRight size={18} />
             </Link>
-            <a
-              href="https://wa.me/905419315550"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/configure/product-photo"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-md border-3 border-[var(--dark-blue)] text-[var(--dark-blue)] text-base font-bold hover:bg-[var(--lime)]/10 transition-all"
             >
-              {lang === "en" ? "Ask on WhatsApp" : "WhatsApp'ta Sor"}
-            </a>
+              {lang === "en" ? "Contact Us" : "Bize Ulaşın"}
+            </Link>
           </div>
 
           {/* Hızlı istatistikler */}
@@ -554,7 +552,7 @@ export const AIGorselPage = () => {
 
           <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { step: 1, title: { tr: "Ürünü Gönderin", en: "Send Your Product" }, desc: { tr: "Ürün fotoğrafınızı veya dosyanızı WhatsApp veya form ile gönderin", en: "Send your product photo or file via WhatsApp or form" } },
+              { step: 1, title: { tr: "Ürünü Gönderin", en: "Send Your Product" }, desc: { tr: "Ürün fotoğrafınızı veya dosyanızı form ile gönderin", en: "Send your product photo or file via our form" } },
               { step: 2, title: { tr: "Parametreleri Seçin", en: "Choose Parameters" }, desc: { tr: "Stil, arka plan, açı ve model tercihlerinizi belirleyin", en: "Set your style, background, angle and model preferences" } },
               { step: 3, title: { tr: "AI Üretir", en: "AI Produces" }, desc: { tr: "Yapay zekamız 3-5 iş günü içinde profesyonel görseller üretir", en: "Our AI produces professional visuals within 3-5 business days" } },
               { step: 4, title: { tr: "Teslim & Yayın", en: "Deliver & Publish" }, desc: { tr: "Platform boyutlarına hazır, hemen yayına alın", en: "Platform-ready, publish immediately" } },
@@ -591,14 +589,12 @@ export const AIGorselPage = () => {
               {lang === "en" ? "Configure & Quote" : "Teklif Al"}
               <ArrowRight size={18} />
             </Link>
-            <a
-              href="https://wa.me/905419315550"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/configure/product-photo"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-md border-3 border-[var(--dark-blue)] text-[var(--dark-blue)] text-base font-bold hover:bg-[var(--lime)]/10 hover:border-[var(--lime)] transition-all"
             >
-              {lang === "en" ? "Chat on WhatsApp" : "WhatsApp'ta Yaz"}
-            </a>
+              {lang === "en" ? "Contact Us" : "Bize Yazın"}
+            </Link>
           </div>
         </div>
       </section>

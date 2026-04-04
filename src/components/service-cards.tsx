@@ -14,8 +14,14 @@ export const ServiceCards = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
-  // Use Firestore services if available, otherwise fallback
-  const services = pricingConfig?.services ?? SERVICE_TYPES.map((s) => ({ ...s }));
+  // Always use code-defined prices as source of truth (Firestore may have stale data)
+  const services = SERVICE_TYPES.map((s) => {
+    const firestoreService = pricingConfig?.services?.find((fs: { id: string }) => fs.id === s.id);
+    return {
+      ...s,
+      ...(firestoreService ? { nameKey: firestoreService.nameKey || s.nameKey, descKey: firestoreService.descKey || s.descKey, icon: firestoreService.icon || s.icon } : {}),
+    };
+  });
 
   // Sort services by price ascending (excluding avatar, adding it at the end)
   const sortedServices = [...services]

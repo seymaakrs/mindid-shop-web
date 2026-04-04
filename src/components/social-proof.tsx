@@ -30,7 +30,7 @@ const trustBadges = [
   { tr: "Güvenli Ödeme", en: "Secure Payment" },
   { tr: "Teslimat Garantisi", en: "Delivery Guarantee" },
   { tr: "2 Ücretsiz Revizyon", en: "2 Free Revisions" },
-  { tr: "7/24 WhatsApp Destek", en: "24/7 WhatsApp Support" },
+  { tr: "7/24 Online Destek", en: "24/7 Online Support" },
 ];
 
 export const SocialProof = () => {

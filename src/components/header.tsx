@@ -82,8 +82,8 @@ export const Header = () => {
   return (
     <header
       role="banner"
-      className={`sticky top-0 z-50 border-b-3 border-[var(--dark-blue)] bg-[var(--lime)] transition-all duration-300 ${
-        scrolled ? "shadow-lg" : ""
+      className={`sticky top-0 z-50 border-b border-[var(--dark-blue)]/20 bg-white transition-all duration-300 ${
+        scrolled ? "shadow-md" : ""
       }`}
     >
       <div
@@ -96,16 +96,16 @@ export const Header = () => {
           <Image
             src="/logo.png"
             alt="MindID Ana Sayfa"
-            width={44}
-            height={44}
-            className={`rounded-full transition-all duration-300 ${scrolled ? "h-9 w-9" : "h-11 w-11"}`}
+            width={56}
+            height={56}
+            className={`rounded-full transition-all duration-300 ${scrolled ? "h-10 w-10" : "h-14 w-14"}`}
             priority
           />
           <div className="flex flex-col">
-            <span className="text-base font-black text-[var(--dark-blue)] leading-tight tracking-tight">
+            <span className="text-lg font-black text-[var(--dark-blue)] leading-tight tracking-tight">
               MindID
             </span>
-            <span className="text-[10px] font-semibold text-[var(--dark-blue)]/60 leading-tight">
+            <span className="text-xs font-semibold text-[var(--dark-blue)]/50 leading-tight">
               Your Creative Mind
             </span>
           </div>
@@ -152,7 +152,7 @@ export const Header = () => {
         id="mobile-menu"
         role="navigation"
         aria-label="Mobil navigasyon"
-        className={`lg:hidden border-t-2 border-[var(--dark-blue)] bg-[var(--lime)] overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`lg:hidden border-t border-[var(--dark-blue)]/20 bg-white overflow-hidden transition-all duration-300 ease-in-out ${
           mobileOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
