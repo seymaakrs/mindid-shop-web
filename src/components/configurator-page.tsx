@@ -6,6 +6,7 @@ import { SERVICE_TYPES, SERVICE_PACKAGES, ADD_ON_SERVICES } from "@/lib/pricing-
 import type { ServiceType } from "@/lib/pricing-data";
 import { PackageTierSelector } from "./package-tier-selector";
 import { AddOnSelector } from "./add-on-selector";
+import { CrossSell } from "./cross-sell";
 import { DirectorDesk } from "./director-desk";
 import { CongratsPage } from "./congrats-page";
 import { useI18n } from "@/lib/i18n";
@@ -191,6 +192,11 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
                 onToggle={toggleAddOn}
                 formatPrice={formatPrice}
               />
+            )}
+
+            {/* Cross-sell — çapraz satış önerileri */}
+            {selectedPackage && (
+              <CrossSell serviceId={serviceId} />
             )}
 
             {/* Trust badges */}
