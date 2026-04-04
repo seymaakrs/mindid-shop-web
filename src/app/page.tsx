@@ -9,7 +9,7 @@ import { Footer } from "@/components/footer";
 
 // Below-the-fold: lazy loaded for faster initial page load
 const AIStudioShowcase = dynamic(() => import("@/components/ai-studio-showcase").then((m) => ({ default: m.AIStudioShowcase })));
-const BudgetSlider = dynamic(() => import("@/components/ui/budget-slider").then((m) => ({ default: m.BudgetSlider })));
+// BudgetSlider kaldırıldı — ServiceCards aynı işlevi görüyor
 const TestimonialsSection = dynamic(() => import("@/components/testimonials-section").then((m) => ({ default: m.TestimonialsSection })));
 const FAQSection = dynamic(() => import("@/components/faq-section").then((m) => ({ default: m.FAQSection })));
 const FinalCTA = dynamic(() => import("@/components/final-cta").then((m) => ({ default: m.FinalCTA })));
@@ -198,7 +198,6 @@ const HomePage = () => {
         <AIStudioShowcase />
         <ServiceCards />
         <HowItWorks />
-        <BudgetSlider />
         <TestimonialsSection />
         <FAQSection />
         <FinalCTA />
