@@ -33,6 +33,47 @@ const robots = (): MetadataRoute.Robots => ({
       allow: "/",
       disallow: ["/admin"],
     },
+    // Anthropic / Claude
+    {
+      userAgent: "ClaudeBot",
+      allow: "/",
+      disallow: ["/admin"],
+    },
+    {
+      userAgent: "anthropic-ai",
+      allow: "/",
+      disallow: ["/admin"],
+    },
+    // Meta AI
+    {
+      userAgent: "Meta-ExternalAgent",
+      allow: "/",
+      disallow: ["/admin"],
+    },
+    // Mistral AI
+    {
+      userAgent: "MistralBot",
+      allow: "/",
+      disallow: ["/admin"],
+    },
+    // Cohere AI
+    {
+      userAgent: "cohere-ai",
+      allow: "/",
+      disallow: ["/admin"],
+    },
+    // Common Crawl (AI eğitim veri setleri)
+    {
+      userAgent: "CCBot",
+      allow: "/",
+      disallow: ["/admin"],
+    },
+    // Apple AI
+    {
+      userAgent: "Applebot-Extended",
+      allow: "/",
+      disallow: ["/admin"],
+    },
   ],
   sitemap: "https://mindid.shop/sitemap.xml",
 });
