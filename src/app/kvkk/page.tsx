@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "KVKK Aydınlatma Metni | MindID",
   description: "MindID KVKK (6698 Sayılı Kişisel Verilerin Korunması Kanunu) kapsamında kişisel verilerin işlenmesine ilişkin aydınlatma metni.",
+  alternates: {
+    canonical: "https://mindid.shop/kvkk",
+  },
 };
 
 const KVKKPage = () => {

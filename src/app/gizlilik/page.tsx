@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Gizlilik Politikası | MindID",
   description: "MindID gizlilik politikası — kişisel verilerinizin nasıl toplandığı, kullanıldığı ve korunduğu hakkında bilgi.",
+  alternates: {
+    canonical: "https://mindid.shop/gizlilik",
+  },
 };
 
 const GizlilikPage = () => {

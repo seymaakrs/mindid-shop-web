@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
@@ -6,6 +7,21 @@ import { SocialProof } from "@/components/social-proof";
 import { ParallaxGrid } from "@/components/parallax-grid";
 import { HowItWorks } from "@/components/how-it-works";
 import { Footer } from "@/components/footer";
+
+export const metadata: Metadata = {
+  title: "MindID — Yapay Zeka Reklam Filmleri, Avatar & Ürün Görselleri",
+  description:
+    "AI ile reklam filmi, dijital avatar oluşturma ve e-ticaret ürün görseli üretimi. Manken ve stüdyo masrafı olmadan %70 daha az maliyetle stüdyo kalitesinde sonuçlar. 1.490₺'den başlayan fiyatlar.",
+  alternates: {
+    canonical: "https://mindid.shop",
+  },
+  openGraph: {
+    title: "MindID — AI Reklam Filmleri, Avatar & Ürün Görselleri",
+    description:
+      "Yapay zeka ile reklam filmi, avatar oluşturma ve ürün görseli üretimi. %70 maliyet tasarrufu. 1.490₺'den başlayan fiyatlar.",
+    url: "https://mindid.shop",
+  },
+};
 
 // Below-the-fold: lazy loaded for faster initial page load
 const AIStudioShowcase = dynamic(() => import("@/components/ai-studio-showcase").then((m) => ({ default: m.AIStudioShowcase })));

@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Kullanım Koşulları | MindID",
   description: "MindID web sitesi ve hizmetlerinin kullanım koşulları, sorumluluklar ve yasal bilgilendirme.",
+  alternates: {
+    canonical: "https://mindid.shop/kullanim-kosullari",
+  },
 };
 
 const KullanimKosullariPage = () => {

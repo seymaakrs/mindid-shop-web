@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "AI Reklam Blogu — Film, Avatar & Görsel Trendleri",
   description:
     "Yapay zeka ile reklam filmi, avatar oluşturma ve ürün görseli hakkında rehberler, trendler ve karşılaştırmalar. MindID blog.",
+  alternates: {
+    canonical: "https://mindid.shop/blog",
+  },
   keywords: [
     "ai reklam blogu",
     "yapay zeka reklam trendleri",

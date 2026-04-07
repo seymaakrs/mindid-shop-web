@@ -81,6 +81,9 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
   return {
     title: meta.title,
     description: meta.desc,
+    alternates: {
+      canonical: `https://mindid.shop/configure/${serviceId}`,
+    },
     keywords: meta.keywords,
     openGraph: {
       title: meta.titleEn,

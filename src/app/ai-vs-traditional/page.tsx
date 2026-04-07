@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "AI vs Geleneksel Prodüksiyon — Maliyet, Süre & Kalite Karşılaştırması",
   description:
     "AI reklam filmi, avatar ve ürün görseli üretimi ile geleneksel prodüksiyonun maliyet, süre ve kalite karşılaştırması. Gerçek rakamlarla %70 tasarruf analizi.",
+  alternates: {
+    canonical: "https://mindid.shop/ai-vs-traditional",
+  },
   keywords: [
     "ai vs geleneksel prodüksiyon",
     "yapay zeka reklam filmi maliyeti",
