@@ -84,71 +84,7 @@ export const metadata: Metadata = {
   },
 };
 
-// FAQPage Schema — SERP'te SSS olarak görünmesini sağlar
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Yapay zeka reklam filmi ne kadar sürede hazır olur?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Standart projeler 3-5 iş günü içinde teslim edilir. Acil projeler için 24-48 saatte teslim mümkündür.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "AI ürün görseli için fiziksel ürün göndermem gerekiyor mu?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Hayır. Sadece yüksek kaliteli ürün fotoğrafları göndermeniz yeterlidir. Fiziksel kargo gerekmez.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Yapay zeka reklam filmi geleneksel prodüksiyondan daha mı ucuz?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Evet. Geleneksel prodüksiyon stüdyo, model, ekip ve post-prodüksiyon maliyetleriyle 150.000₺'yi aşabilir. MindID ile aynı kalitede içerik 1.490₺'den başlayan fiyatlarla üretilir — %70 daha ucuz.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "AI reklam filmi kalitesi gerçek prodüksiyonla karşılaştırılabilir mi?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Evet. MindID'nin AI sistemi stüdyo kalitesinde çıktı üretir. Portfolyomuzdaki gerçek müşteri projelerini mindid.shop/portfolio adresinden inceleyebilirsiniz.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Revizyon hakkım var mı?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Evet, tüm paketlerde sınırsız revizyon hakkı bulunmaktadır.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "AI dijital avatar ne için kullanılır?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "AI dijital avatar; marka sözcüsü, dijital sunucu, sanal influencer veya ürün tanıtım videoları için kullanılır. Gerçek bir model tutmak yerine kalıcı, ölçeklenebilir bir dijital kimlik oluşturursunuz.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Hangi platformlar için içerik üretiyorsunuz?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Instagram, TikTok, YouTube, LinkedIn reklamları; Shopify, Amazon, Trendyol, Hepsiburada ürün görselleri ve web sitesi içerikleri için üretim yapıyoruz.",
-      },
-    },
-  ],
-};
-
-// Schema.org Structured Data — GEO için kritik
+// Schema.org Structured Data — Site geneli (tüm sayfalarda yüklenir)
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -252,16 +188,12 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@400;600;700&family=Inter:wght@400;500;600;700;800;900&subset=latin,latin-ext&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@400;600;700&family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&subset=latin,latin-ext&display=swap"
           rel="stylesheet"
         />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       </head>
       <body className="antialiased">

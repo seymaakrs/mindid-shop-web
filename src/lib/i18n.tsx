@@ -124,6 +124,7 @@ const translations: Record<string, Record<string, string>> = {
   "service.portfolio": { tr: "Portfolyo", en: "Portfolio" },
   "service.portfolio.desc": { tr: "Yapay zeka ile ürettiğimiz çalışmalarımızı inceleyin", en: "Explore our AI-produced works" },
   "service.from": { tr: "Başlayan", en: "Starting" },
+  "service.explore": { tr: "Keşfet", en: "Explore" },
 
   // Portfolio
   "portfolio.title": { tr: "Portfolyo", en: "Portfolio" },

@@ -85,7 +85,7 @@ export const Header = () => {
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-white/90 backdrop-blur-xl shadow-lg border-b border-[var(--dark-blue)]/10"
-          : "bg-white/60 backdrop-blur-md border-b border-[var(--dark-blue)]/5"
+          : "bg-transparent"
       }`}
     >
       <div
