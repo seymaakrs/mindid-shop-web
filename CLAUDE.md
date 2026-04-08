@@ -110,6 +110,8 @@ public/           → Statik dosyalar (logo, favicon, og-image)
 - `C:/Users/asus/.n8n/` → Burak'in n8n workflow veritabani. Dokunma.
 - `functions/` → Firebase Cloud Functions. Degisiklik yapmadan once Burak'a danisilmali.
 - `C:/Users/asus/OneDrive/Desktop/pazarlaMa Growth/` → Seyma'nin satis sistemi.
+- `firestore.rules` → **ASLA mevcut kurallari SILME.** Sadece yeni kural EKLE. Burak bu dosyayi yonetiyor. Degisiklik gerekirse Burak'a danisilmali.
+- `public/PORTFOLYO/` → Lokal kopya. GitHub'a commit ETME. Videolar Firebase Storage uzerinden admin panelinden yukleniyor.
 
 ## Kapanmis Projeler
 - **ari-personel**: Kapanmis musteri projesi. Bu projeye referans verme, dosyalarini okuma, orneklerinde kullanma. Hukuki nedenlerle dosyalar saklanmaktadir ancak Claude icin ilgisizdir.

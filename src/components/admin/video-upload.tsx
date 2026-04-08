@@ -3,20 +3,42 @@
 import { useState, useRef } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "@/lib/firebase";
-import { Upload, Film, X } from "lucide-react";
+import { Upload, Film, X, Info } from "lucide-react";
+
+type SizeGuide = {
+  label: string;
+  size: string;
+  tip?: string;
+};
+
+const DEFAULT_GUIDES: SizeGuide[] = [
+  { label: "Portfolio Video (Dikey)", size: "1080×1920 px — 9:16", tip: "MP4, maks 500 MB" },
+  { label: "Portfolio Video (Yatay)", size: "1920×1080 px — 16:9", tip: "MP4, maks 500 MB" },
+  { label: "Portfolio Video (Kare)", size: "1080×1080 px — 1:1", tip: "MP4, maks 500 MB" },
+];
 
 type VideoUploadProps = {
   storagePath: string;
   currentUrl?: string;
   onUpload: (url: string) => void;
   label?: string;
+  sizeGuides?: SizeGuide[];
 };
 
-export const VideoUpload = ({ storagePath, currentUrl, onUpload, label = "Video Yükle" }: VideoUploadProps) => {
+export const VideoUpload = ({
+  storagePath,
+  currentUrl,
+  onUpload,
+  label = "Video Yükle",
+  sizeGuides,
+}: VideoUploadProps) => {
   const [progress, setProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
+  const [showGuide, setShowGuide] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const guides = sizeGuides ?? DEFAULT_GUIDES;
 
   const handleUpload = (file: File) => {
     if (!file.type.startsWith("video/")) {
@@ -51,7 +73,37 @@ export const VideoUpload = ({ storagePath, currentUrl, onUpload, label = "Video 
 
   return (
     <div>
-      <label className="block text-xs font-bold text-[var(--gray)] mb-1.5">{label}</label>
+      <div className="flex items-center gap-2 mb-1.5">
+        <label className="block text-xs font-bold text-[var(--gray)]">{label}</label>
+        <button
+          type="button"
+          onClick={() => setShowGuide((v) => !v)}
+          className="text-[var(--lime)] hover:opacity-70 transition-opacity"
+          title="Boyut Rehberi"
+        >
+          <Info size={13} />
+        </button>
+      </div>
+
+      {/* Boyut Rehberi */}
+      {showGuide && (
+        <div className="mb-2 p-2.5 rounded-md bg-[var(--lime)]/8 border border-[var(--lime)]/25 space-y-1">
+          <p className="text-[10px] font-black text-[var(--lime)] uppercase tracking-wider mb-1.5">
+            🎬 Önerilen Video Boyutları
+          </p>
+          {guides.map((g, i) => (
+            <div key={i} className="flex items-start justify-between gap-2">
+              <span className="text-[10px] text-[var(--cream)]/70">{g.label}</span>
+              <div className="text-right">
+                <span className="text-[10px] font-bold text-[var(--cream)]">{g.size}</span>
+                {g.tip && (
+                  <p className="text-[9px] text-[var(--gray)]">{g.tip}</p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {currentUrl && !uploading && (
         <div className="mb-2 p-2 rounded-md bg-[var(--dark-blue)] border border-[var(--electric-blue)]/30 flex items-center gap-2">

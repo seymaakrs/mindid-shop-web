@@ -14,9 +14,9 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AdminGuard>
-      <div className="flex min-h-screen">
+      <div className="admin-layout flex min-h-screen">
         <AdminSidebar />
-        <main className="flex-1 p-6 overflow-auto">{children}</main>
+        <main className="flex-1 p-6 overflow-auto bg-[#0d0a24]">{children}</main>
       </div>
     </AdminGuard>
   );

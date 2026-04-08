@@ -38,21 +38,21 @@ export const trackOrderSubmission = (serviceId: string, totalPrice: number) => {
       value: totalPrice,
       currency: "TRY",
     });
-    gtag("event", "conversion", {
-      send_to: GA_MEASUREMENT_ID,
+    gtag("event", "purchase", {
       event_category: "order_submitted",
       event_label: serviceId,
       value: totalPrice,
+      currency: "TRY",
     });
   }
 };
 
-// Track page views for SPA navigation
+// Track page views for SPA navigation (GA4 uses page_view event, not config re-call)
 export const trackPageView = (url: string, title: string) => {
   if (typeof window !== "undefined" && GA_MEASUREMENT_ID && (window as unknown as Record<string, unknown>).gtag) {
     const gtag = (window as unknown as Record<string, unknown>).gtag as (...args: unknown[]) => void;
-    gtag("config", GA_MEASUREMENT_ID, {
-      page_path: url,
+    gtag("event", "page_view", {
+      page_location: window.location.origin + url,
       page_title: title,
     });
   }

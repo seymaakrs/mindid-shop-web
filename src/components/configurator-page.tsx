@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { ServicePackage, AddOnService } from "@/lib/types";
 import { SERVICE_TYPES, SERVICE_PACKAGES, ADD_ON_SERVICES } from "@/lib/pricing-data";
 import type { ServiceType } from "@/lib/pricing-data";
@@ -12,6 +12,9 @@ import { CongratsPage } from "./congrats-page";
 import { useI18n } from "@/lib/i18n";
 import { ArrowLeft, Package, Shield, Clock, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import type { PricingPackageItem } from "@/lib/firestore-types";
 
 type ConfiguratorPageProps = {
   serviceId: string;
@@ -30,16 +33,54 @@ const SERVICE_ADDON_CATEGORY: Record<string, "video" | "photo" | "social"> = {
   avatar: "social",
 };
 
+// Map serviceId to which Firestore package key to use
+const SERVICE_PACKAGE_KEY: Record<string, "videoPackages" | "photoPackages" | "socialPackages"> = {
+  reels: "videoPackages",
+  product: "videoPackages",
+  campaign: "videoPackages",
+  corporate: "videoPackages",
+  "product-photo": "photoPackages",
+  "social-media": "socialPackages",
+  avatar: "socialPackages",
+};
+
+// Merge static presetIds into Firestore packages (Firestore only stores editable fields)
+const mergePresets = (firestorePkgs: PricingPackageItem[], staticPkgs: ServicePackage[]): ServicePackage[] => {
+  return firestorePkgs.map((fp) => {
+    const staticPkg = staticPkgs.find((s) => s.id === fp.id);
+    return {
+      ...staticPkg,
+      ...fp,
+      presetIds: staticPkg?.presetIds ?? {},
+    } as ServicePackage;
+  });
+};
+
 export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
   const { t, formatPrice } = useI18n();
   const [step, setStep] = useState<Step>("configure");
   const [selectedPackage, setSelectedPackage] = useState<ServicePackage | null>(null);
   const [selectedAddOns, setSelectedAddOns] = useState<AddOnService[]>([]);
+  const [dynamicPackages, setDynamicPackages] = useState<ServicePackage[] | null>(null);
+
+  useEffect(() => {
+    const pkgKey = SERVICE_PACKAGE_KEY[serviceId];
+    if (!pkgKey) return;
+    getDoc(doc(db, "mindid_pricing", "config")).then((snap) => {
+      if (snap.exists()) {
+        const data = snap.data();
+        const pkgs = data[pkgKey] as PricingPackageItem[] | undefined;
+        if (pkgs && pkgs.length > 0) {
+          setDynamicPackages(mergePresets(pkgs, SERVICE_PACKAGES[serviceId] ?? []));
+        }
+      }
+    }).catch(() => {});
+  }, [serviceId]);
 
   const service = SERVICE_TYPES.find((s) => s.id === serviceId) as ServiceType | undefined;
   if (!service) return null;
 
-  const packages = SERVICE_PACKAGES[serviceId] ?? [];
+  const packages = dynamicPackages ?? SERVICE_PACKAGES[serviceId] ?? [];
   const addonCategory = SERVICE_ADDON_CATEGORY[serviceId] ?? "video";
   const availableAddOns = ADD_ON_SERVICES.filter((a) => a.category === addonCategory);
 

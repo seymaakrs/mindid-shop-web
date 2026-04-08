@@ -18,6 +18,7 @@ import {
   LogOut,
   Clapperboard,
   BarChart3,
+  Share2,
 } from "lucide-react";
 
 const navItems = [
@@ -30,6 +31,7 @@ const navItems = [
   { href: "/admin/hero", label: "Hero / Video", icon: MonitorPlay },
   { href: "/admin/about", label: "Hakkımızda", icon: Users },
   { href: "/admin/avatar", label: "Avatar Örnekleri", icon: Bot },
+  { href: "/admin/sosyal-medya", label: "Sosyal Medya", icon: Share2 },
   { href: "/admin/blog", label: "Blog", icon: FileText },
   { href: "/admin/settings", label: "Ayarlar", icon: Settings },
 ];

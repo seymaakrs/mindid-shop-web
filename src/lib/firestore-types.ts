@@ -92,6 +92,16 @@ export type PricingRevisionItem = {
   price: number;
 };
 
+export type PricingPackageItem = {
+  id: string;
+  name: string;
+  tagline: string;
+  price: number;
+  badge?: string;
+  highlighted: boolean;
+  features: string[];
+};
+
 export type PricingConfig = {
   services: PricingServiceItem[];
   durations: PricingDurationItem[];
@@ -106,6 +116,14 @@ export type PricingConfig = {
   colorCountUnitPrice?: number;
   photoVisualStyles?: PricingOptionItem[];
   backgrounds?: PricingOptionItem[];
+  photoAngles?: PricingOptionItem[];
+  photoModels?: PricingOptionItem[];
+  colorPackages?: PricingOptionItem[];
+  photoRetouches?: PricingOptionItem[];
+  // Service packages (video / photo / social)
+  videoPackages?: PricingPackageItem[];
+  photoPackages?: PricingPackageItem[];
+  socialPackages?: PricingPackageItem[];
 };
 
 export type AvatarSample = {
@@ -133,6 +151,29 @@ export type BlogPost = {
   published: boolean;
   publishedAt: Timestamp;
   updatedAt: Timestamp;
+};
+
+// ─── Sosyal Medya Yönetimi ───────────────────────────────────────────────────
+
+export type SocialPlatform = "instagram" | "tiktok" | "linkedin" | "facebook";
+export type SocialPostStatus = "idea" | "draft" | "scheduled" | "published";
+export type SocialContentType = "feed" | "reel" | "story" | "carousel" | "video";
+
+export type SocialPost = {
+  id?: string;
+  caption: string;
+  hashtags: string[];
+  platforms: SocialPlatform[];
+  mediaUrl?: string;
+  mediaType?: "image" | "video";
+  status: SocialPostStatus;
+  contentType?: SocialContentType;
+  category?: string;
+  scheduledAt?: Timestamp;
+  publishedAt?: Timestamp;
+  notes?: string;
+  createdAt: Timestamp;
+  updatedAt?: Timestamp;
 };
 
 // Lead capture (exit-intent popup, newsletter)

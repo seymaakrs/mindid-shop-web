@@ -75,6 +75,20 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--dark-blue);
 }
 
+/* ── Admin Paneli Koyu Tema ── */
+.admin-layout {
+  --card:       #160f3a;
+  --card-hover: #1c1548;
+  --background: #0d0a24;
+  --foreground: #eeeadc;
+  --border:     #2a1f6e;
+  background: #0d0a24;
+}
+
+.admin-layout main {
+  background: #0d0a24;
+}
+
 /* Neo-brutalist borders */
 .neo-border {
   border: 3px solid var(--dark-blue);
