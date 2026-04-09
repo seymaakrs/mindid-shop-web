@@ -137,14 +137,41 @@ export const PortfolioPage = () => {
   const cardH = isMobile ? 260 : 320;
   const containerH = isMobile ? 340 : 480;
 
-  /* Thumbnail lookup */
+  /* Thumbnail lookup — kategori eşleşmesi (esnek, büyük/küçük harf ve kısmi eşleme) */
   const thumbnailByCategory = useMemo(() => {
     const map: Record<string, PortfolioItem> = {};
-    portfolio.forEach((item) => {
-      if (item.thumbnailUrl && !map[item.category]) {
-        map[item.category] = item;
+    const itemsWithThumb = portfolio.filter((p) => p.thumbnailUrl);
+
+    // Önce tam/kısmi kategori eşleşmesi dene
+    itemsWithThumb.forEach((item) => {
+      const cat = (item.category || "").toLowerCase().replace(/\s+/g, "-");
+      if (!map[item.category]) map[item.category] = item;
+
+      // Kısmi eşleşme: "AI Reels" → "reels", "product-photo" vb.
+      const ALIASES: Record<string, string[]> = {
+        reels: ["reels", "ai reels", "instagram", "tiktok", "sosyal"],
+        "product-photo": ["product-photo", "ürün", "stüdyo", "kozmetik", "parfüm", "mobilya", "perde"],
+        product: ["product", "ürün-filmi", "yemek"],
+        campaign: ["campaign", "kampanya", "inşaat", "moda"],
+        corporate: ["corporate", "kurumsal", "iç-mekan"],
+        avatar: ["avatar", "dijital"],
+      };
+      for (const [serviceCategory, aliases] of Object.entries(ALIASES)) {
+        if (!map[serviceCategory] && aliases.some((a) => cat.includes(a))) {
+          map[serviceCategory] = item;
+        }
       }
     });
+
+    // Hiç thumbnail bulunamayan servis kartları için herhangi bir thumbnail kullan
+    const fallback = itemsWithThumb[0] ?? null;
+    if (fallback) {
+      const serviceCats = ["reels", "product-photo", "product", "campaign", "corporate", "avatar"];
+      serviceCats.forEach((sc) => {
+        if (!map[sc]) map[sc] = fallback;
+      });
+    }
+
     return map;
   }, [portfolio]);
 
