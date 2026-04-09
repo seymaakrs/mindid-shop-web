@@ -43,7 +43,7 @@ export const PackageTierSelector = ({ packages, selected, onSelect, onClear, for
       </div>
 
       {/* Tier Cards */}
-      <div className="flex gap-3 overflow-x-auto pb-3 snap-x snap-mandatory -mx-1 px-1">
+      <div className="flex gap-3 overflow-x-auto pb-3 snap-x snap-mandatory -mx-1 px-1 items-stretch">
         {packages.map((pkg) => {
           const isSelected = selected?.id === pkg.id;
           const badgeStyle = pkg.badgeVariant ? BADGE_STYLES[pkg.badgeVariant] : null;
@@ -53,7 +53,7 @@ export const PackageTierSelector = ({ packages, selected, onSelect, onClear, for
               key={pkg.id}
               onClick={() => onSelect(pkg)}
               className={cn(
-                "snap-start flex-none w-52 rounded-xl overflow-hidden cursor-pointer transition-all duration-200 select-none",
+                "snap-start flex-none w-56 rounded-xl overflow-hidden cursor-pointer transition-all duration-200 select-none flex flex-col",
                 "hover:-translate-y-1 hover:shadow-lg",
                 pkg.highlighted
                   ? "border-2 border-[var(--lime)] shadow-[3px_3px_0px_var(--lime)]"
@@ -61,17 +61,17 @@ export const PackageTierSelector = ({ packages, selected, onSelect, onClear, for
                 isSelected && "ring-2 ring-[var(--lime)] ring-offset-2 ring-offset-[var(--background)] -translate-y-1",
               )}
             >
-              {/* Badge row */}
+              {/* Badge row — her kartta eşit yükseklikte */}
               {badgeStyle ? (
-                <div className={cn("px-3 py-1.5 text-[9px] font-black text-center tracking-widest", badgeStyle)}>
+                <div className={cn("px-3 py-1.5 text-[9px] font-black text-center tracking-widest shrink-0", badgeStyle)}>
                   {pkg.badge}
                 </div>
               ) : (
-                <div className="h-6 bg-[var(--card)] border-b border-[var(--electric-blue)]/10" />
+                <div className="h-[30px] bg-[var(--card)] border-b border-[var(--electric-blue)]/10 shrink-0" />
               )}
 
-              {/* Card body */}
-              <div className="p-4 bg-[var(--card)] flex flex-col h-full">
+              {/* Card body — flex-1 ile butonun hep altta kalmasını sağlar */}
+              <div className="p-4 bg-[var(--card)] flex flex-col flex-1">
                 {/* Name + tagline */}
                 <div className="mb-3">
                   <p className="text-xs font-black text-[var(--foreground)] uppercase tracking-wide mb-1">{pkg.name}</p>
@@ -83,7 +83,7 @@ export const PackageTierSelector = ({ packages, selected, onSelect, onClear, for
                   <p className="text-xl font-black text-[var(--foreground)]">{formatPrice(pkg.price)}</p>
                 </div>
 
-                {/* Feature list */}
+                {/* Feature list — flex-1 ile kalan alanı doldurur */}
                 <ul className="space-y-1.5 mb-5 flex-1">
                   {pkg.features.map((f, i) => (
                     <li key={i} className="flex items-start gap-1.5 text-[10px] text-[var(--foreground)]/75 leading-relaxed">
@@ -93,10 +93,10 @@ export const PackageTierSelector = ({ packages, selected, onSelect, onClear, for
                   ))}
                 </ul>
 
-                {/* CTA Button */}
+                {/* CTA Button — her zaman altta */}
                 <button
                   className={cn(
-                    "w-full py-2 rounded-lg text-xs font-black border-2 transition-all cursor-pointer",
+                    "w-full py-2.5 rounded-lg text-xs font-black border-2 transition-all cursor-pointer shrink-0",
                     isSelected
                       ? "bg-[var(--lime)] text-[var(--dark-blue)] border-[var(--dark-blue)] shadow-[1px_1px_0px_var(--dark-blue)]"
                       : pkg.highlighted
