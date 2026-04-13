@@ -47,24 +47,28 @@ interface ServiceCard {
 const HeroCard = ({
   card,
   index,
-  mounted,
+  visible,
+  scatterOffset,
+  enableFloat,
 }: {
   card: ServiceCard;
   index: number;
-  mounted: boolean;
+  visible: boolean;
+  scatterOffset: string;
+  enableFloat: boolean;
 }) => {
   return (
     <div
-      className={`${card.floatClass} group/card rounded-2xl p-7 shadow-lg border border-[var(--dark-blue)]/10 backdrop-blur-sm w-[320px] cursor-pointer ${card.color}`}
+      className={`${enableFloat ? card.floatClass : ""} group/card rounded-2xl p-7 shadow-lg border border-[var(--dark-blue)]/10 backdrop-blur-sm w-[320px] cursor-pointer ${card.color}`}
       style={
         {
           "--rot": card.rotation,
-          opacity: mounted ? 1 : 0,
-          transform: mounted
-            ? `translateY(0) scale(1) rotate(${card.rotation})`
-            : "translateY(50px) scale(0.85)",
-          transition: `opacity 0.7s cubic-bezier(0.05,0.7,0.1,1) ${0.2 + index * 0.15}s, transform 0.7s cubic-bezier(0.05,0.7,0.1,1) ${0.2 + index * 0.15}s, box-shadow 0.3s ease`,
-          animationDelay: mounted ? `${index * 0.9}s` : undefined,
+          opacity: visible ? 1 : 0,
+          transform: visible
+            ? `translate(0, 0) scale(1) rotate(${card.rotation})`
+            : `${scatterOffset} scale(0.3) rotate(${index % 2 === 0 ? "20deg" : "-20deg"})`,
+          transition: `opacity 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.1}s, transform 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.1}s, box-shadow 0.3s ease`,
+          animationDelay: enableFloat ? `${index * 0.9}s` : undefined,
           boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
         } as React.CSSProperties
       }
@@ -161,10 +165,16 @@ const MobileCard = ({
 export const Hero = () => {
   const { lang } = useI18n();
   const [mounted, setMounted] = useState(false);
+  const [showVibe, setShowVibe] = useState(false);
+  const [cardsOut, setCardsOut] = useState(false);
+  const [floatActive, setFloatActive] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 100);
-    return () => clearTimeout(t);
+    const t1 = setTimeout(() => setMounted(true), 100);
+    const t2 = setTimeout(() => setShowVibe(true), 1600);
+    const t3 = setTimeout(() => setCardsOut(true), 2200);
+    const t4 = setTimeout(() => setFloatActive(true), 3400);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
   }, []);
 
   const cards: ServiceCard[] = [
@@ -230,6 +240,14 @@ export const Hero = () => {
   ];
 
   /* ─── Hızlı Erişim Chip'leri (SEO/GEO: sık sorulan ihtiyaçlar) ─── */
+  /* ─── Scatter: kartların merkezden uçuş yönleri ─── */
+  const scatterOffsets = [
+    "translate(32vw, 25vh)",   // sol-üst kart → merkezden sol-üste uçar
+    "translate(-32vw, 25vh)",  // sağ-üst kart → merkezden sağ-üste uçar
+    "translate(32vw, -22vh)",  // sol-alt kart → merkezden sol-alta uçar
+    "translate(-32vw, -22vh)", // sağ-alt kart → merkezden sağ-alta uçar
+  ];
+
   const chips = lang === "en"
     ? [
         { label: "AI Reels", href: "/configure/reels" },
@@ -256,18 +274,18 @@ export const Hero = () => {
         }
       >
         {/* ─── Arka Plan Video ─── */}
-        <div className="absolute inset-0 z-0 hidden sm:block">
+        <div className="absolute inset-0 z-0">
           <video
             autoPlay
             muted
             loop
             playsInline
-            className="absolute inset-0 w-full h-full object-cover opacity-15"
+            className="absolute inset-0 w-full h-full object-cover opacity-60"
             poster="/kaplan-yatay.png"
           >
             <source src="/hero-video.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-[var(--background)]/85" />
+          <div className="absolute inset-0 bg-[var(--background)]/35" />
         </div>
 
         {/* ─── Desktop: Floating Kartlar ─── */}
@@ -278,7 +296,13 @@ export const Hero = () => {
               className="absolute pointer-events-auto"
               style={card.desktopStyle}
             >
-              <HeroCard card={card} index={i} mounted={mounted} />
+              <HeroCard
+                card={card}
+                index={i}
+                visible={cardsOut}
+                scatterOffset={scatterOffsets[i]}
+                enableFloat={floatActive}
+              />
             </div>
           ))}
         </div>
@@ -315,6 +339,21 @@ export const Hero = () => {
               ? "what's your brand's next move?"
               : "markanın bir sonraki adımı ne?"}
           </h1>
+
+          {/* ─── Vibe Marketing Badge ─── */}
+          <div
+            style={{
+              opacity: showVibe ? 1 : 0,
+              transform: showVibe
+                ? "translateY(0) scale(1)"
+                : "translateY(20px) scale(0.85)",
+              transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s",
+            }}
+          >
+            <span className="inline-block text-xs md:text-base font-bold tracking-[0.25em] md:tracking-[0.3em] uppercase text-[var(--dark-blue)] bg-[var(--lime)] px-4 md:px-6 py-2 md:py-2.5 rounded-full shadow-lg">
+              vibe marketing
+            </span>
+          </div>
 
           {/* ─── AI Asistan Arama Çubuğu ─── */}
           <div
