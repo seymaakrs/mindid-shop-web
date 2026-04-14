@@ -27,15 +27,15 @@ export const generateMetadata = async ({
   const item = await getPortfolioItemBySlug(slug);
   if (!item) return { title: "Proje Bulunamadı" };
 
-  const title = `${item.title} — AI ${item.category === "reels" ? "Reels" : item.category === "product" ? "Ürün Görseli" : item.category === "campaign" ? "Kampanya Filmi" : item.category === "corporate" ? "Kurumsal Film" : "Prodüksiyon"} | MindID`;
+  const title = `${item.title} — AI ${item.category === "reels" ? "Reels" : item.category === "product" ? "Ürün Görseli" : item.category === "campaign" ? "Kampanya Filmi" : item.category === "corporate" ? "Kurumsal Film" : "Prodüksiyon"} | slowdays`;
   const description =
     item.seoDescription ||
     item.description ||
-    `MindID tarafından yapay zeka ile üretilen ${item.title}. AI reklam prodüksiyon örneği.`;
+    `slowdays tarafından yapay zeka ile üretilen ${item.title}. AI reklam prodüksiyon örneği.`;
   const descriptionEn =
     item.seoDescriptionEn ||
     item.descriptionEn ||
-    `${item.titleEn || item.title} — AI production by MindID.`;
+    `${item.titleEn || item.title} — AI production by slowdays.`;
 
   return {
     title,
@@ -48,7 +48,7 @@ export const generateMetadata = async ({
       },
     },
     openGraph: {
-      title: `${item.titleEn || item.title} — AI Production | MindID`,
+      title: `${item.titleEn || item.title} — AI Production | slowdays`,
       description: descriptionEn,
       url: `https://mindid.shop/portfolio/${slug}`,
       type: "video.other",
@@ -108,7 +108,7 @@ const PortfolioDetailPage = async ({
         "@type": "VideoObject",
         name: item.title,
         description:
-          item.seoDescription || item.description || `${item.title} — MindID AI prodüksiyon`,
+          item.seoDescription || item.description || `${item.title} — slowdays AI prodüksiyon`,
         thumbnailUrl: item.thumbnailUrl || "https://mindid.shop/og-image.jpeg",
         uploadDate:
           (item.completedAt as unknown as string) ||
@@ -130,12 +130,12 @@ const PortfolioDetailPage = async ({
         },
         author: {
           "@type": "Organization",
-          name: "MindID",
+          name: "slowdays",
           url: "https://mindid.shop",
         },
         publisher: {
           "@type": "Organization",
-          name: "MindID",
+          name: "slowdays",
           logo: {
             "@type": "ImageObject",
             url: "https://mindid.shop/leopard-icon.png",
@@ -154,7 +154,7 @@ const PortfolioDetailPage = async ({
     image: item.thumbnailUrl,
     author: {
       "@type": "Organization",
-      name: "MindID",
+      name: "slowdays",
       url: "https://mindid.shop",
     },
     dateCreated:
@@ -183,7 +183,7 @@ const PortfolioDetailPage = async ({
         name: `Bu ${catLabel.tr.toLowerCase()} nasıl üretildi?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `MindID'in yapay zeka prodüksiyon hattı kullanılarak üretilmiştir. Geleneksel stüdyo, ekipman veya oyuncu gerekmeden, AI teknolojileri ile profesyonel kalitede sonuç elde edilmiştir.`,
+          text: `slowdays'in yapay zeka prodüksiyon hattı kullanılarak üretilmiştir. Geleneksel stüdyo, ekipman veya oyuncu gerekmeden, AI teknolojileri ile profesyonel kalitede sonuç elde edilmiştir.`,
         },
       },
       {
@@ -199,7 +199,7 @@ const PortfolioDetailPage = async ({
         name: "Fiyatlandırma nasıl çalışır?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "MindID'de konfigüratör üzerinden ihtiyacınıza göre seçim yapabilirsiniz. Fiyatlar proje türü, süre ve ek seçeneklere göre belirlenir. Geleneksel yöntemlere göre %70'e varan tasarruf sağlanır.",
+          text: "slowdays'de konfigüratör üzerinden ihtiyacınıza göre seçim yapabilirsiniz. Fiyatlar proje türü, süre ve ek seçeneklere göre belirlenir. Geleneksel yöntemlere göre %70'e varan tasarruf sağlanır.",
         },
       },
     ],
@@ -210,7 +210,7 @@ const PortfolioDetailPage = async ({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
+      { "@type": "ListItem", position: 1, name: "slowdays", item: "https://mindid.shop" },
       {
         "@type": "ListItem",
         position: 2,
@@ -289,7 +289,7 @@ const PortfolioDetailPage = async ({
               </span>
             )}
             <span>
-              Prodüksiyon: <strong className="text-[var(--lime)]">MindID</strong>
+              Prodüksiyon: <strong className="text-[var(--lime)]">slowdays</strong>
             </span>
             <span>Tür: {catLabel.tr}</span>
           </div>
@@ -318,7 +318,7 @@ const PortfolioDetailPage = async ({
               <div className="relative aspect-[9/16] max-w-sm mx-auto rounded-lg overflow-hidden border-3 border-[var(--lime)] shadow-[6px_6px_0px_var(--electric-blue)]">
                 <Image
                   src={item.thumbnailUrl}
-                  alt={`${item.title} — AI ${catLabel.tr} | MindID`}
+                  alt={`${item.title} — AI ${catLabel.tr} | slowdays`}
                   fill
                   className="object-cover"
                   sizes="(max-width: 640px) 100vw, 400px"
@@ -335,7 +335,7 @@ const PortfolioDetailPage = async ({
             </h2>
             <div className="prose prose-invert max-w-none">
               <p className="text-[var(--cream)]/80 leading-relaxed">
-                {item.description || item.seoDescription || `${item.title}, MindID tarafından yapay zeka teknolojileri kullanılarak üretilmiş bir ${catLabel.tr.toLowerCase()} projesidir. Geleneksel prodüksiyon yöntemlerine kıyasla %70'e varan maliyet tasarrufu sağlanmıştır.`}
+                {item.description || item.seoDescription || `${item.title}, slowdays tarafından yapay zeka teknolojileri kullanılarak üretilmiş bir ${catLabel.tr.toLowerCase()} projesidir. Geleneksel prodüksiyon yöntemlerine kıyasla %70'e varan maliyet tasarrufu sağlanmıştır.`}
               </p>
             </div>
           </section>
@@ -391,7 +391,7 @@ const PortfolioDetailPage = async ({
                   Bu {catLabel.tr.toLowerCase()} nasıl üretildi?
                 </summary>
                 <p className="mt-2 text-sm text-[var(--cream)]/70">
-                  MindID&apos;in yapay zeka prodüksiyon hattı kullanılarak üretilmiştir. Geleneksel stüdyo, ekipman veya oyuncu gerekmeden, AI teknolojileri ile profesyonel kalitede sonuç elde edilmiştir.
+                  slowdays&apos;in yapay zeka prodüksiyon hattı kullanılarak üretilmiştir. Geleneksel stüdyo, ekipman veya oyuncu gerekmeden, AI teknolojileri ile profesyonel kalitede sonuç elde edilmiştir.
                 </p>
               </details>
               <details className="group p-4 rounded-lg bg-[var(--card)] border-2 border-[var(--electric-blue)]/20">
@@ -407,7 +407,7 @@ const PortfolioDetailPage = async ({
                   Fiyatlandırma nasıl çalışır?
                 </summary>
                 <p className="mt-2 text-sm text-[var(--cream)]/70">
-                  MindID&apos;de konfigüratör üzerinden ihtiyacınıza göre seçim yapabilirsiniz. Fiyatlar proje türü, süre ve ek seçeneklere göre belirlenir. Geleneksel yöntemlere göre %70&apos;e varan tasarruf sağlanır.
+                  slowdays&apos;de konfigüratör üzerinden ihtiyacınıza göre seçim yapabilirsiniz. Fiyatlar proje türü, süre ve ek seçeneklere göre belirlenir. Geleneksel yöntemlere göre %70&apos;e varan tasarruf sağlanır.
                 </p>
               </details>
             </div>
@@ -453,7 +453,7 @@ const PortfolioDetailPage = async ({
                     {related.thumbnailUrl && (
                       <Image
                         src={related.thumbnailUrl}
-                        alt={`${related.title} — AI ${catLabel.tr} | MindID`}
+                        alt={`${related.title} — AI ${catLabel.tr} | slowdays`}
                         fill
                         className="object-cover"
                         sizes="(max-width: 640px) 50vw, 25vw"

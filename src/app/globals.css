@@ -230,6 +230,17 @@ h1, h2, h3, h4, h5, h6 {
 .stagger-children > *:nth-child(3) { animation-delay: 0.19s; }
 .stagger-children > *:nth-child(4) { animation-delay: 0.26s; }
 .stagger-children > *:nth-child(5) { animation-delay: 0.33s; }
+
+/* ── Service Panel Animations ── */
+.service-panel {
+  animation: kinetic-slide 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes panel-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 .stagger-children > *:nth-child(6) { animation-delay: 0.40s; }
 
 /* 3D perspective container */

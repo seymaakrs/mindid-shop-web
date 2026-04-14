@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "AI Reklam Filmi — MindID",
+    title: "AI Reklam Filmi — slowdays",
     description:
       "Yapay zeka ile profesyonel reklam filmi üretimi. %70 maliyet tasarrufu, 3-5 gün teslimat.",
     url: "https://mindid.shop/ai-reklam-filmi",
@@ -34,14 +34,14 @@ export const metadata: Metadata = {
         url: "/og-image.jpeg",
         width: 1200,
         height: 630,
-        alt: "MindID AI Reklam Filmi",
+        alt: "slowdays AI Reklam Filmi",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@mindidshop",
-    title: "AI Reklam Filmi | MindID",
+    title: "AI Reklam Filmi | slowdays",
     description:
       "Yapay zeka ile reklam filmi. %70 tasarruf, 3-5 gün teslimat.",
     images: ["/og-image.jpeg"],
@@ -55,7 +55,7 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 1,
-      name: "MindID",
+      name: "slowdays",
       item: "https://mindid.shop",
     },
     {
@@ -76,7 +76,7 @@ const serviceSchema = {
   category: "AI Video Production",
   provider: {
     "@type": "Organization",
-    name: "MindID",
+    name: "slowdays",
     url: "https://mindid.shop",
   },
   areaServed: "Worldwide",

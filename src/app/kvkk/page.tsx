@@ -3,8 +3,8 @@ import { Footer } from "@/components/footer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "KVKK Aydınlatma Metni | MindID",
-  description: "MindID KVKK (6698 Sayılı Kişisel Verilerin Korunması Kanunu) kapsamında kişisel verilerin işlenmesine ilişkin aydınlatma metni.",
+  title: "KVKK Aydınlatma Metni | slowdays",
+  description: "slowdays KVKK (6698 Sayılı Kişisel Verilerin Korunması Kanunu) kapsamında kişisel verilerin işlenmesine ilişkin aydınlatma metni.",
   alternates: {
     canonical: "https://mindid.shop/kvkk",
   },
@@ -25,11 +25,11 @@ const KVKKPage = () => {
             <section>
               <h2 className="text-lg font-bold text-[var(--lime)] mb-3">1. Veri Sorumlusu</h2>
               <p>
-                6698 sayılı Kişisel Verilerin Korunması Kanunu (&quot;KVKK&quot;) uyarınca, MindID (&quot;Şirket&quot;) olarak,
+                6698 sayılı Kişisel Verilerin Korunması Kanunu (&quot;KVKK&quot;) uyarınca, slowdays (&quot;Şirket&quot;) olarak,
                 veri sorumlusu sıfatıyla kişisel verilerinizi aşağıda açıklanan amaçlar kapsamında işlemekteyiz.
               </p>
               <p>
-                <strong>Şirket Bilgileri:</strong> MindID — İstanbul, Türkiye<br />
+                <strong>Şirket Bilgileri:</strong> slowdays — İstanbul, Türkiye<br />
                 <strong>İletişim:</strong> info@mindid.shop
               </p>
             </section>

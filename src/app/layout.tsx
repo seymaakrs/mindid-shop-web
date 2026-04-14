@@ -8,8 +8,8 @@ import { PageTracker } from "@/components/page-tracker";
 
 export const metadata: Metadata = {
   title: {
-    default: "MindID — Yapay Zeka Reklam Filmleri, Avatar & Ürün Görselleri",
-    template: "%s | MindID",
+    default: "slowdays — Yapay Zeka Reklam Filmleri, Avatar & Ürün Görselleri",
+    template: "%s | slowdays",
   },
   description:
     "AI ile reklam filmi, dijital avatar oluşturma ve e-ticaret ürün görseli üretimi. Manken ve stüdyo masrafı olmadan %70 daha az maliyetle stüdyo kalitesinde sonuçlar. 1.490₺'den başlayan fiyatlar.",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     "dijital avatar",
     "manken olmadan ürün fotoğrafı",
   ],
-  authors: [{ name: "MindID Lab Technology" }],
-  creator: "MindID",
-  publisher: "MindID Lab Technology",
+  authors: [{ name: "slowdays Lab Technology" }],
+  creator: "slowdays",
+  publisher: "slowdays Lab Technology",
   metadataBase: new URL("https://mindid.shop"),
   alternates: {
     canonical: "https://mindid.shop",
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
     locale: "tr_TR",
     alternateLocale: ["en_US", "es_ES"],
     url: "https://mindid.shop",
-    siteName: "MindID",
-    title: "MindID — AI Reklam Filmleri, Avatar & Ürün Görselleri",
+    siteName: "slowdays",
+    title: "slowdays — AI Reklam Filmleri, Avatar & Ürün Görselleri",
     description:
       "Yapay zeka ile reklam filmi, avatar oluşturma ve ürün görseli üretimi. %70 maliyet tasarrufu. 1.490₺'den başlayan fiyatlar.",
     images: [
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpeg",
         width: 1200,
         height: 630,
-        alt: "MindID — AI Reklam Prodüksiyon Stüdyosu",
+        alt: "slowdays — AI Reklam Prodüksiyon Stüdyosu",
       },
     ],
   },
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@mindidshop",
     creator: "@mindidshop",
-    title: "MindID — AI Reklam Filmleri & Ürün Görselleri",
+    title: "slowdays — AI Reklam Filmleri & Ürün Görselleri",
     description:
       "AI ile reklam filmi ve ürün görseli üretimi. Stüdyo kalitesinde, %70 daha az maliyet.",
     images: ["/og-image.jpeg"],
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "MindID",
+  name: "slowdays",
   url: "https://mindid.shop",
   logo: "https://mindid.shop/logo.png",
   description:

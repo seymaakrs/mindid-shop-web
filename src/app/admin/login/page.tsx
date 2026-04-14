@@ -46,7 +46,7 @@ const AdminLoginPage = () => {
           </div>
           <div>
             <span className="text-2xl font-black text-[var(--cream)]">
-              Mind<span className="text-[var(--electric-blue)]">ID</span>
+              slowdays
             </span>
             <span className="block text-xs font-bold text-[var(--lime)]">Admin Panel</span>
           </div>

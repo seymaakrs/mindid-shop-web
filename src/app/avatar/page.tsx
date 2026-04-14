@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@mindidshop",
     creator: "@mindidshop",
-    title: "AI Avatar Oluşturma | MindID",
+    title: "AI Avatar Oluşturma | slowdays",
     description: "Yapay zeka ile dijital avatar — marka yüzü, sunucu, influencer avatar.",
   },
 };
@@ -34,7 +34,7 @@ const avatarServiceSchema = {
   name: "AI Avatar Creation",
   description: "Create realistic AI digital avatars for brand spokespersons, digital presenters, and influencer avatars. Produce video content in multiple languages without being on camera.",
   category: "AI Avatar Creation",
-  provider: { "@type": "Organization", name: "MindID", url: "https://mindid.shop" },
+  provider: { "@type": "Organization", name: "slowdays", url: "https://mindid.shop" },
   areaServed: "Worldwide",
   offers: {
     "@type": "AggregateOffer",
@@ -50,7 +50,7 @@ const breadcrumb = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
+    { "@type": "ListItem", position: 1, name: "slowdays", item: "https://mindid.shop" },
     { "@type": "ListItem", position: 2, name: "AI Avatar Creation", item: "https://mindid.shop/avatar" },
   ],
 };

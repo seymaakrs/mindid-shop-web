@@ -97,7 +97,7 @@ export const Header = () => {
         <a href="/" className="flex items-center gap-3">
           <Image
             src="/logo.png"
-            alt="MindID Ana Sayfa"
+            alt="slowdays Ana Sayfa"
             width={56}
             height={56}
             className={`rounded-full transition-all duration-300 ${scrolled ? "h-10 w-10" : "h-14 w-14"}`}
@@ -105,7 +105,7 @@ export const Header = () => {
           />
           <div className="flex flex-col">
             <span className="text-lg font-black text-[var(--dark-blue)] leading-tight tracking-tight">
-              MindID
+              slowdays
             </span>
             <span className="text-xs font-semibold text-[var(--dark-blue)]/50 leading-tight">
               Your Creative Mind

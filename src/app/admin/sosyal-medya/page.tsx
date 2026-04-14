@@ -1,7 +1,7 @@
 import { SosyalMedyaEditor } from "@/components/admin/sosyal-medya-editor";
 
 export const metadata = {
-  title: "Sosyal Medya Yönetimi — MindID Admin",
+  title: "Sosyal Medya Yönetimi — slowdays Admin",
 };
 
 const SosyalMedyaPage = () => {

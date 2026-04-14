@@ -10,7 +10,7 @@ const defaultSettings: SiteSettings = {
   heroVideoUrl: "",
   contactEmail: "",
   contactPhone: "",
-  companyName: "MindID -Lab Technology",
+  companyName: "slowdays",
   usdRate: 0.028,
 };
 

@@ -97,8 +97,8 @@ export const AIStudioShowcase = () => {
         </h2>
         <p className="text-center text-[var(--gray)] mt-3 max-w-xl mx-auto">
           {lang === "en"
-            ? "Real AI-generated ad films and product visuals produced by MindID."
-            : "MindID tarafından üretilmiş gerçek AI reklam filmleri ve ürün görselleri."}
+            ? "Real AI-generated ad films and product visuals produced by slowdays."
+            : "slowdays tarafından üretilmiş gerçek AI reklam filmleri ve ürün görselleri."}
         </p>
       </div>
 

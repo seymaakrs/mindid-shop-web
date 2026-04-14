@@ -42,24 +42,24 @@ const serviceMetadata: Record<string, ServiceMeta> = {
     schema: { name: "AI Product Photography for E-commerce", description: "Studio-quality product images without mannequins or studios. 70% cheaper than traditional product photography. Perfect for Shopify, Amazon, Trendyol, Hepsiburada.", lowPrice: "1490", highPrice: "7900", category: "AI Product Photography" },
   },
   product: {
-    title: "AI Ürün Reklam Filmi — 1.990₺'den — MindID",
-    titleEn: "AI Product Ad Film — From ₺1,990 — MindID",
+    title: "AI Ürün Reklam Filmi — 1.990₺'den — slowdays",
+    titleEn: "AI Product Ad Film — From ₺1,990 — slowdays",
     desc: "AI ile ürün reklam filmi. Geleneksel prodüksiyonun %70 altında maliyetle sinema kalitesinde reklam videoları. 1.990₺'den.",
     descEn: "AI product advertising films. Cinema-quality ad videos at 70% less cost. From ₺1,990.",
     keywords: ["ai ürün reklam filmi", "yapay zeka reklam videosu", "AI product ad film", "AI commercial maker"],
     schema: { name: "AI Product Advertising Film", description: "Professional AI-generated product advertising videos with custom scenarios. Cinema-quality at 70% less cost than traditional production.", lowPrice: "1990", highPrice: "64900", category: "AI Video Production" },
   },
   campaign: {
-    title: "AI Kampanya Filmi Yapımı — 1.990₺'den — MindID",
-    titleEn: "AI Campaign Film Production — From ₺1,990 — MindID",
+    title: "AI Kampanya Filmi Yapımı — 1.990₺'den — slowdays",
+    titleEn: "AI Campaign Film Production — From ₺1,990 — slowdays",
     desc: "Yapay zeka ile kampanya filmi prodüksiyonu. Profesyonel AI reklam filmi 1.990₺'den.",
     descEn: "AI-powered campaign film production. Professional AI ad films from ₺1,990.",
     keywords: ["ai kampanya filmi", "yapay zeka reklam filmi", "AI campaign film", "affordable AI ad production"],
     schema: { name: "AI Campaign Film Production", description: "AI-powered campaign ad film production. Professional advertising films for product launches, seasonal campaigns, and brand awareness.", lowPrice: "1990", highPrice: "64900", category: "AI Video Production" },
   },
   corporate: {
-    title: "AI Kurumsal Tanıtım Filmi — 1.990₺'den — MindID",
-    titleEn: "AI Corporate Film Production — From ₺1,990 — MindID",
+    title: "AI Kurumsal Tanıtım Filmi — 1.990₺'den — slowdays",
+    titleEn: "AI Corporate Film Production — From ₺1,990 — slowdays",
     desc: "Yapay zeka ile kurumsal tanıtım filmi. Markanızı profesyonelce tanıtın. 1.990₺'den.",
     descEn: "AI corporate and brand films. Professionally present your brand. From ₺1,990.",
     keywords: ["ai kurumsal tanıtım filmi", "yapay zeka kurumsal film", "AI corporate video", "AI brand film"],
@@ -73,7 +73,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 
   if (!meta) {
     return {
-      title: "Hizmet Yapılandırıcı — MindID",
+      title: "Hizmet Yapılandırıcı — slowdays",
       description: "AI reklam hizmetinizi yapılandırın ve fiyatınızı anında görün.",
     };
   }
@@ -105,7 +105,7 @@ const ConfigureServicePage = async ({ params }: Props) => {
         category: meta.schema.category,
         provider: {
           "@type": "Organization",
-          name: "MindID",
+          name: "slowdays",
           url: "https://mindid.shop",
         },
         areaServed: "Worldwide",
@@ -124,7 +124,7 @@ const ConfigureServicePage = async ({ params }: Props) => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
+      { "@type": "ListItem", position: 1, name: "slowdays", item: "https://mindid.shop" },
       { "@type": "ListItem", position: 2, name: meta?.schema.name ?? serviceId, item: `https://mindid.shop/configure/${serviceId}` },
     ],
   };

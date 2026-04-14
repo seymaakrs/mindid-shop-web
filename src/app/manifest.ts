@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 
 const manifest = (): MetadataRoute.Manifest => ({
-  name: "MindID — AI Reklam Prodüksiyon Stüdyosu",
-  short_name: "MindID",
+  name: "slowdays — AI Reklam Prodüksiyon Stüdyosu",
+  short_name: "slowdays",
   description:
     "AI ile reklam filmi, dijital avatar oluşturma ve e-ticaret ürün görseli üretimi.",
   start_url: "/",

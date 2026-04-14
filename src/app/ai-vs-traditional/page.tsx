@@ -29,7 +29,7 @@ const breadcrumb = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
+    { "@type": "ListItem", position: 1, name: "slowdays", item: "https://mindid.shop" },
     { "@type": "ListItem", position: 2, name: "AI vs Geleneksel", item: "https://mindid.shop/ai-vs-traditional" },
   ],
 };
@@ -40,8 +40,8 @@ const articleSchema = {
   headline: "AI vs Traditional Production: Cost, Speed & Quality Comparison",
   description:
     "Comprehensive comparison of AI-powered production vs traditional methods for ad films, digital avatars, and e-commerce product photography.",
-  author: { "@type": "Organization", name: "MindID", url: "https://mindid.shop" },
-  publisher: { "@type": "Organization", name: "MindID", url: "https://mindid.shop" },
+  author: { "@type": "Organization", name: "slowdays", url: "https://mindid.shop" },
+  publisher: { "@type": "Organization", name: "slowdays", url: "https://mindid.shop" },
   mainEntityOfPage: "https://mindid.shop/ai-vs-traditional",
 };
 

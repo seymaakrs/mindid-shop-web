@@ -59,7 +59,7 @@ export const AIManager = () => {
         <div className="flex items-center justify-between px-4 py-3 bg-[var(--dark-blue)]">
           <div className="flex items-center gap-2">
             <Bot size={18} className="text-[var(--lime)]" />
-            <span className="text-sm font-bold text-[var(--lime)]">MindID Asistan</span>
+            <span className="text-sm font-bold text-[var(--lime)]">slowdays Asistan</span>
           </div>
           <button onClick={toggle} className="text-white/60 hover:text-white cursor-pointer" aria-label="Kapat">
             <X size={16} />

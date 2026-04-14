@@ -7,7 +7,7 @@ import { ParallaxGrid } from "@/components/parallax-grid";
 export const metadata: Metadata = {
   title: "AI Reklam Blogu — Film, Avatar & Görsel Trendleri",
   description:
-    "Yapay zeka ile reklam filmi, avatar oluşturma ve ürün görseli hakkında rehberler, trendler ve karşılaştırmalar. MindID blog.",
+    "Yapay zeka ile reklam filmi, avatar oluşturma ve ürün görseli hakkında rehberler, trendler ve karşılaştırmalar. slowdays blog.",
   alternates: {
     canonical: "https://mindid.shop/blog",
   },
@@ -29,7 +29,7 @@ const breadcrumb = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
+    { "@type": "ListItem", position: 1, name: "slowdays", item: "https://mindid.shop" },
     { "@type": "ListItem", position: 2, name: "Blog", item: "https://mindid.shop/blog" },
   ],
 };

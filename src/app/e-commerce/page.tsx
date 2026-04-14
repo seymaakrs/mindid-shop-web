@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@mindidshop",
     creator: "@mindidshop",
-    title: "E-ticaret AI Ürün Görseli | MindID",
+    title: "E-ticaret AI Ürün Görseli | slowdays",
     description: "AI ürün fotoğrafçılığı — manken ve stüdyo masrafı olmadan %70 tasarruf.",
   },
 };
@@ -42,7 +42,7 @@ const breadcrumb = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
+    { "@type": "ListItem", position: 1, name: "slowdays", item: "https://mindid.shop" },
     { "@type": "ListItem", position: 2, name: "E-commerce AI", item: "https://mindid.shop/e-commerce" },
   ],
 };
@@ -54,7 +54,7 @@ const serviceSchema = {
   description:
     "Studio-quality AI-generated product images without mannequins or studio costs. 70% cheaper than traditional product photography. Perfect for Shopify, Amazon, Trendyol, Hepsiburada sellers.",
   category: "AI Product Photography",
-  provider: { "@type": "Organization", name: "MindID", url: "https://mindid.shop" },
+  provider: { "@type": "Organization", name: "slowdays", url: "https://mindid.shop" },
   areaServed: "Worldwide",
   offers: {
     "@type": "AggregateOffer",

@@ -27,15 +27,15 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "AI Ürün Görseli — MindID",
+    title: "AI Ürün Görseli — slowdays",
     description: "Stüdyo olmadan, manken olmadan AI ürün görseli. %70 maliyet tasarrufu, 3-5 gün teslimat.",
     url: "https://mindid.shop/ai-gorsel",
-    images: [{ url: "/og-image.jpeg", width: 1200, height: 630, alt: "MindID AI Ürün Görseli" }],
+    images: [{ url: "/og-image.jpeg", width: 1200, height: 630, alt: "slowdays AI Ürün Görseli" }],
   },
   twitter: {
     card: "summary_large_image",
     site: "@mindidshop",
-    title: "AI Ürün Görseli | MindID",
+    title: "AI Ürün Görseli | slowdays",
     description: "Stüdyo olmadan AI ürün fotoğrafçılığı. %70 tasarruf.",
     images: ["/og-image.jpeg"],
   },
@@ -45,7 +45,7 @@ const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
+    { "@type": "ListItem", position: 1, name: "slowdays", item: "https://mindid.shop" },
     { "@type": "ListItem", position: 2, name: "AI Ürün Görseli", item: "https://mindid.shop/ai-gorsel" },
   ],
 };
@@ -57,7 +57,7 @@ const serviceSchema = {
   description:
     "Yapay zeka ile e-ticaret ürün görseli üretimi. Manken ve stüdyo masrafı olmadan %70 daha ucuz, platform uyumlu boyutlarda stüdyo kalitesinde görseller.",
   category: "AI Product Photography",
-  provider: { "@type": "Organization", name: "MindID", url: "https://mindid.shop" },
+  provider: { "@type": "Organization", name: "slowdays", url: "https://mindid.shop" },
   areaServed: "Worldwide",
   offers: {
     "@type": "AggregateOffer",
