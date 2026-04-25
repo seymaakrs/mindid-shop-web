@@ -10,7 +10,7 @@ const defaultSettings: SiteSettings = {
   heroVideoUrl: "",
   contactEmail: "",
   contactPhone: "",
-  companyName: "slowdays",
+  companyName: "MindID",
   usdRate: 0.028,
 };
 
@@ -63,7 +63,7 @@ export const SettingsEditor = () => {
             value={form.contactEmail}
             onChange={(e) => setForm({ ...form, contactEmail: e.target.value })}
             className="w-full p-2.5 rounded-md bg-[var(--dark-blue)] border-2 border-[var(--electric-blue)]/30 text-[var(--cream)] text-sm focus:border-[var(--lime)] focus:outline-none"
-            placeholder="info@mindid.com"
+            placeholder="info@mindid.shop"
           />
         </div>
 

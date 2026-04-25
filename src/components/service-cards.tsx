@@ -87,7 +87,7 @@ export const ServiceCards = () => {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: "slowdays AI Hizmetleri",
+            name: "MindID AI Hizmetleri",
             itemListElement: services.map((s, i) => ({
               "@type": "ListItem",
               position: i + 1,
@@ -97,7 +97,7 @@ export const ServiceCards = () => {
                 description: s.data ? t(s.data.descKey) : "",
                 provider: {
                   "@type": "Organization",
-                  name: "slowdays",
+                  name: "MindID",
                   url: "https://mindid.shop",
                 },
                 areaServed: { "@type": "Country", name: "Turkey" },

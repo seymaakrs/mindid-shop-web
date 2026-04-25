@@ -8,7 +8,7 @@ import { getPortfolioItems } from "@/lib/portfolio-server";
 export const metadata: Metadata = {
   title: "AI Reklam Portföyü — Film, Avatar & E-ticaret Görselleri",
   description:
-    "slowdays AI prodüksiyon örnekleri. Yapay zeka ile üretilen reklam filmleri, dijital avatarlar ve e-ticaret ürün görselleri. Gerçek AI prodüksiyon kalitesini inceleyin.",
+    "MindID AI prodüksiyon örnekleri. Yapay zeka ile üretilen reklam filmleri, dijital avatarlar ve e-ticaret ürün görselleri. Gerçek AI prodüksiyon kalitesini inceleyin.",
   alternates: {
     canonical: "https://mindid.shop/portfolio",
     languages: {
@@ -17,18 +17,18 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "AI Ad Portfolio — Films, Avatars & E-commerce Visuals | slowdays",
+    title: "AI Ad Portfolio — Films, Avatars & E-commerce Visuals | MindID",
     description:
       "See our AI-generated ad films, digital avatars, and e-commerce product visuals. Real examples of AI production quality.",
     url: "https://mindid.shop/portfolio",
     type: "website",
-    images: [{ url: "https://mindid.shop/og-image.jpeg", width: 1200, height: 630, alt: "slowdays AI Prodüksiyon Portföyü" }],
+    images: [{ url: "https://mindid.shop/og-image.jpeg", width: 1200, height: 630, alt: "MindID AI Prodüksiyon Portföyü" }],
   },
   twitter: {
     card: "summary_large_image",
     site: "@mindidshop",
     creator: "@mindidshop",
-    title: "AI Reklam Portföyü | slowdays",
+    title: "AI Reklam Portföyü | MindID",
     description:
       "Yapay zeka ile üretilen reklam filmleri, dijital avatarlar ve ürün görselleri.",
   },
@@ -46,7 +46,7 @@ const PortfolioRoute = async () => {
       {
         "@type": "ListItem",
         position: 1,
-        name: "slowdays",
+        name: "MindID",
         item: "https://mindid.shop",
       },
       {
@@ -62,7 +62,7 @@ const PortfolioRoute = async () => {
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "slowdays AI Prodüksiyon Portföyü",
+    name: "MindID AI Prodüksiyon Portföyü",
     description:
       "Yapay zeka ile üretilen reklam filmleri, dijital avatarlar ve e-ticaret ürün görselleri koleksiyonu.",
     numberOfItems: items.length,
@@ -81,18 +81,18 @@ const PortfolioRoute = async () => {
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "AI Reklam Portföyü — slowdays",
+    name: "AI Reklam Portföyü — MindID",
     description:
-      "slowdays tarafından yapay zeka ile üretilen reklam filmleri, avatarlar ve ürün görselleri. Türkiye'nin AI reklam prodüksiyon stüdyosu.",
+      "MindID tarafından yapay zeka ile üretilen reklam filmleri, avatarlar ve ürün görselleri. Türkiye'nin AI reklam prodüksiyon stüdyosu.",
     url: "https://mindid.shop/portfolio",
     isPartOf: {
       "@type": "WebSite",
-      name: "slowdays",
+      name: "MindID",
       url: "https://mindid.shop",
     },
     author: {
       "@type": "Organization",
-      name: "slowdays",
+      name: "MindID",
       url: "https://mindid.shop",
     },
     inLanguage: ["tr", "en"],

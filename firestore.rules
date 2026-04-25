@@ -66,7 +66,8 @@ service cloud.firestore {
         && request.resource.data.customer.email.size() <= 320
         && request.resource.data.customer.phone.size() > 0
         && request.resource.data.customer.phone.size() <= 30;
-      allow read, update, delete: if isAdmin();
+      allow read: if isAdmin() || (request.auth != null && resource.data.customer.email == request.auth.token.email);
+      allow update, delete: if isAdmin();
     }
 
     // ----------------------------------------------------------------------
@@ -133,6 +134,52 @@ service cloud.firestore {
         && request.resource.data.date is string
         && request.resource.data.date.size() == 10;
       allow read: if isAdmin();
+    }
+
+    // ----------------------------------------------------------------------
+    // MÜŞTERİ SİSTEMİ (SaaS)
+    // Customers can read/update their own profile, admins can do anything
+    // ----------------------------------------------------------------------
+    match /mindid_customers/{customerId} {
+      allow create: if request.auth != null
+        && request.auth.uid == customerId
+        && request.resource.data.keys().hasAll(["uid", "email", "name", "plan", "credits", "createdAt"])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.plan == "free"
+        && request.resource.data.credits == 0;
+      allow read: if request.auth != null && request.auth.uid == customerId;
+      allow update: if request.auth != null && request.auth.uid == customerId
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(["plan", "credits", "totalSpent"]);
+      allow read, write: if isAdmin();
+    }
+
+    // Müşteri siparişlerini okuyabilmesi için order rules güncelleme
+    // (Mevcut create ve admin kuralları korunuyor, müşteri read ekleniyor)
+
+    // Bildirimler: müşteri kendi bildirimlerini okuyabilir
+    match /mindid_notifications/{notifId} {
+      allow read: if request.auth != null
+        && resource.data.customerId == request.auth.uid;
+      allow update: if request.auth != null
+        && resource.data.customerId == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["read"]);
+      allow create, delete: if isAdmin();
+    }
+
+    // Ödeme kayıtları: müşteri kendi ödemelerini görebilir
+    match /mindid_payments/{paymentId} {
+      allow read: if request.auth != null
+        && resource.data.customerId == request.auth.uid;
+      allow write: if isAdmin();
+    }
+
+    // Müşteri dosyaları: müşteri kendi dosyalarını görebilir
+    match /mindid_customer_files/{fileId} {
+      allow read: if request.auth != null
+        && resource.data.customerId == request.auth.uid;
+      allow create: if request.auth != null
+        && request.resource.data.customerId == request.auth.uid;
+      allow write: if isAdmin();
     }
   }
 }

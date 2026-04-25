@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { getPortfolioItemBySlug } from "@/lib/portfolio-server";
 
 export const runtime = "edge";
-export const alt = "slowdays Portfolio";
+export const alt = "MindID Portfolio";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -19,7 +19,7 @@ const OGImage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
   const item = await getPortfolioItemBySlug(slug);
 
-  const title = item?.title || "slowdays Portfolio";
+  const title = item?.title || "MindID Portfolio";
   const category = item?.category
     ? categoryLabels[item.category] || item.category.toUpperCase()
     : "AI PRODÜKSIYON";
@@ -86,7 +86,7 @@ const OGImage = async ({ params }: { params: Promise<{ slug: string }> }) => {
             textAlign: "center",
           }}
         >
-          AI Prodüksiyon — slowdays
+          AI Prodüksiyon — MindID
         </p>
 
         {/* Bottom bar */}

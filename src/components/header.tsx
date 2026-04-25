@@ -1,13 +1,15 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn, User } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { useAuth } from "@/lib/auth-context";
 import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export const Header = () => {
   const { t } = useI18n();
+  const { user, isCustomer, isAdmin } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -97,7 +99,7 @@ export const Header = () => {
         <a href="/" className="flex items-center gap-3">
           <Image
             src="/logo.png"
-            alt="slowdays Ana Sayfa"
+            alt="MindID Ana Sayfa"
             width={56}
             height={56}
             className={`rounded-full transition-all duration-300 ${scrolled ? "h-10 w-10" : "h-14 w-14"}`}
@@ -105,7 +107,7 @@ export const Header = () => {
           />
           <div className="flex flex-col">
             <span className="text-lg font-black text-[var(--dark-blue)] leading-tight tracking-tight">
-              slowdays
+              MindID
             </span>
             <span className="text-xs font-semibold text-[var(--dark-blue)]/50 leading-tight">
               Your Creative Mind
@@ -134,6 +136,24 @@ export const Header = () => {
           >
             {t("nav.socialMediaExpert")}
           </a>
+
+          {user ? (
+            <a
+              href={isAdmin ? "/admin" : "/dashboard"}
+              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[var(--lime)] text-[var(--dark-blue)] text-sm font-bold hover:brightness-110 transition-all whitespace-nowrap"
+            >
+              <User size={16} />
+              {isAdmin ? "Admin" : "Panelim"}
+            </a>
+          ) : (
+            <a
+              href="/login"
+              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-md border-2 border-[var(--dark-blue)]/20 text-[var(--dark-blue)] text-sm font-bold hover:border-[var(--dark-blue)] transition-colors whitespace-nowrap"
+            >
+              <LogIn size={16} />
+              Giriş Yap
+            </a>
+          )}
 
           <button
             ref={toggleRef}
@@ -170,7 +190,7 @@ export const Header = () => {
             </a>
           ))}
 
-          <div className="pt-3 border-t-2 border-[var(--dark-blue)]/20">
+          <div className="pt-3 border-t-2 border-[var(--dark-blue)]/20 space-y-2">
             <a
               href="/sosyal-medya-yonetimi"
               onClick={closeMobile}
@@ -178,6 +198,25 @@ export const Header = () => {
             >
               {t("nav.socialMediaExpert")}
             </a>
+            {user ? (
+              <a
+                href={isAdmin ? "/admin" : "/dashboard"}
+                onClick={closeMobile}
+                className="flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-md bg-[var(--lime)] text-[var(--dark-blue)] text-sm font-bold"
+              >
+                <User size={16} />
+                {isAdmin ? "Admin Panel" : "Panelim"}
+              </a>
+            ) : (
+              <a
+                href="/login"
+                onClick={closeMobile}
+                className="flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-md border-2 border-[var(--dark-blue)]/20 text-[var(--dark-blue)] text-sm font-bold"
+              >
+                <LogIn size={16} />
+                Giriş Yap
+              </a>
+            )}
           </div>
         </div>
       </div>

@@ -142,14 +142,14 @@ export const Footer = () => {
           <div className="flex items-center gap-3">
             <Image
               src="/logo.png"
-              alt="slowdays"
+              alt="MindID"
               width={36}
               height={36}
               className="h-9 w-9 rounded-full"
             />
             <div className="flex flex-col">
               <span className="text-sm font-black text-[var(--lime)] leading-tight">
-                slowdays
+                MindID
               </span>
               <span className="text-[9px] font-semibold text-[var(--cream)]/40 leading-tight uppercase tracking-wider">
                 Your Creative Mind
@@ -186,7 +186,7 @@ export const Footer = () => {
 
           {/* Yasal linkler + telif */}
           <div className="flex items-center gap-3 text-xs text-[var(--gray)]">
-            <span>&copy; {new Date().getFullYear()} slowdays. {t("footer.rights")}</span>
+            <span>&copy; {new Date().getFullYear()} MindID. {t("footer.rights")}</span>
             <span className="text-[var(--cream)]/20">|</span>
             <Link href="/kvkk" className="hover:text-[var(--lime)] transition-colors">KVKK</Link>
             <Link href="/gizlilik" className="hover:text-[var(--lime)] transition-colors">

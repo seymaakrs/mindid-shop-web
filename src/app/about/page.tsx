@@ -5,15 +5,15 @@ import { Footer } from "@/components/footer";
 import { ParallaxGrid } from "@/components/parallax-grid";
 
 export const metadata: Metadata = {
-  title: "slowdays Hakkında — AI Reklam Filmi & Görsel Üretim Ajansı",
+  title: "MindID Hakkında — AI Reklam Filmi & Görsel Üretim Ajansı",
   description:
-    "slowdays, yapay zeka ile reklam filmi, dijital avatar ve e-ticaret ürün görseli üreten bir prodüksiyon ajansıdır. Geleneksel prodüksiyona göre %70 maliyet tasarrufu.",
+    "MindID, yapay zeka ile reklam filmi, dijital avatar ve e-ticaret ürün görseli üreten bir prodüksiyon ajansıdır. Geleneksel prodüksiyona göre %70 maliyet tasarrufu.",
   alternates: {
     canonical: "https://mindid.shop/about",
     languages: { "tr-TR": "https://mindid.shop/about", "en-US": "https://mindid.shop/en/about" },
   },
   openGraph: {
-    title: "About slowdays — AI Ad Film & Visual Production Agency",
+    title: "About MindID — AI Ad Film & Visual Production Agency",
     description:
       "AI-powered ad film production, avatar creation, and e-commerce product visuals. 70% cheaper than traditional production.",
     url: "https://mindid.shop/about",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@mindidshop",
     creator: "@mindidshop",
-    title: "slowdays Hakkında — AI Reklam Ajansı",
+    title: "MindID Hakkında — AI Reklam Ajansı",
     description: "Yapay zeka ile reklam filmi ve ürün görseli üreten prodüksiyon ajansı.",
   },
 };
@@ -31,8 +31,8 @@ const breadcrumb = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "slowdays", item: "https://mindid.shop" },
-    { "@type": "ListItem", position: 2, name: "About slowdays", item: "https://mindid.shop/about" },
+    { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
+    { "@type": "ListItem", position: 2, name: "About MindID", item: "https://mindid.shop/about" },
   ],
 };
 
@@ -40,8 +40,8 @@ const breadcrumb = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "slowdays",
-  alternateName: "slowdays Lab Technology",
+  name: "MindID",
+  alternateName: "MindID Lab Technology",
   url: "https://mindid.shop",
   logo: "https://mindid.shop/leopard-icon.png",
   description:
@@ -83,7 +83,7 @@ const founderSchema = {
   jobTitle: "Founder & Creative Director",
   worksFor: {
     "@type": "Organization",
-    name: "slowdays",
+    name: "MindID",
     url: "https://mindid.shop",
   },
   knowsAbout: [

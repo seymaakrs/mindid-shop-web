@@ -3,8 +3,8 @@ import { Footer } from "@/components/footer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Kullanım Koşulları | slowdays",
-  description: "slowdays web sitesi ve hizmetlerinin kullanım koşulları, sorumluluklar ve yasal bilgilendirme.",
+  title: "Kullanım Koşulları | MindID",
+  description: "MindID web sitesi ve hizmetlerinin kullanım koşulları, sorumluluklar ve yasal bilgilendirme.",
   alternates: {
     canonical: "https://mindid.shop/kullanim-kosullari",
   },
@@ -26,14 +26,14 @@ const KullanimKosullariPage = () => {
               <h2 className="text-lg font-bold text-[var(--lime)] mb-3">1. Genel Hükümler</h2>
               <p>
                 Bu web sitesini (mindid.shop) kullanarak aşağıdaki koşulları kabul etmiş sayılırsınız.
-                slowdays, bu koşulları önceden bildirimde bulunmaksızın değiştirme hakkını saklı tutar.
+                MindID, bu koşulları önceden bildirimde bulunmaksızın değiştirme hakkını saklı tutar.
               </p>
             </section>
 
             <section>
               <h2 className="text-lg font-bold text-[var(--lime)] mb-3">2. Hizmet Tanımı</h2>
               <p>
-                slowdays, yapay zeka teknolojileri kullanarak reklam filmi prodüksiyonu, dijital avatar
+                MindID, yapay zeka teknolojileri kullanarak reklam filmi prodüksiyonu, dijital avatar
                 oluşturma ve e-ticaret ürün görseli üretimi hizmetleri sunmaktadır. Web sitemiz
                 bu hizmetler hakkında bilgi sağlar ve sipariş talebi almak amacıyla kullanılır.
               </p>
@@ -51,9 +51,9 @@ const KullanimKosullariPage = () => {
             <section>
               <h2 className="text-lg font-bold text-[var(--lime)] mb-3">4. Fikri Mülkiyet</h2>
               <p>
-                slowdays tarafından üretilen tüm içerikler (video, görsel, avatar) teslim ve tam
+                MindID tarafından üretilen tüm içerikler (video, görsel, avatar) teslim ve tam
                 ödeme sonrası müşteriye ait olur. Müşteri, teslim edilen içerikleri ticari
-                amaçlarla sınırsız kullanabilir. slowdays, portfolyo ve referans amacıyla
+                amaçlarla sınırsız kullanabilir. MindID, portfolyo ve referans amacıyla
                 içerikleri kullanma hakkını saklı tutar (aksi sözleşmede belirtilmedikçe).
               </p>
             </section>
@@ -79,9 +79,9 @@ const KullanimKosullariPage = () => {
             <section>
               <h2 className="text-lg font-bold text-[var(--lime)] mb-3">7. Yapay Zeka İçerik Bildirimi</h2>
               <p>
-                slowdays hizmetleri yapay zeka teknolojileri kullanılarak üretilmektedir.
+                MindID hizmetleri yapay zeka teknolojileri kullanılarak üretilmektedir.
                 AI ile üretilen içerikler konusundaki telif hakkı mevzuatı gelişmekte olup,
-                slowdays bu konuda güncel yasal gelişmeleri takip etmektedir. Detaylar için
+                MindID bu konuda güncel yasal gelişmeleri takip etmektedir. Detaylar için
                 SSS bölümümüzü inceleyebilirsiniz.
               </p>
             </section>
@@ -89,9 +89,9 @@ const KullanimKosullariPage = () => {
             <section>
               <h2 className="text-lg font-bold text-[var(--lime)] mb-3">8. Sorumluluk Sınırı</h2>
               <p>
-                slowdays, web sitesinin kesintisiz çalışacağını garanti etmez. Hizmet
+                MindID, web sitesinin kesintisiz çalışacağını garanti etmez. Hizmet
                 kalitesi ve sonuçları konusunda makul düzeyde profesyonel özen gösterilir.
-                slowdays&apos;nin sorumluluğu, alınan hizmet bedelini aşamaz.
+                MindID&apos;nin sorumluluğu, alınan hizmet bedelini aşamaz.
               </p>
             </section>
 

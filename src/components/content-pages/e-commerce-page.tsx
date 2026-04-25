@@ -231,7 +231,7 @@ export const EcommercePage = () => {
             </div>
             <div className="p-4 rounded-md border-2 border-[var(--lime)]/30">
               <h3 className="text-sm font-black text-[var(--foreground)] mb-3">
-                slowdays AI
+                MindID AI
               </h3>
               <ul className="space-y-2 text-xs text-[var(--foreground)]/60">
                 <li>• {lang === "en" ? "No studio needed" : "Stüdyo gerekmez"} ✓</li>

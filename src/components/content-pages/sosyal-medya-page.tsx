@@ -816,7 +816,7 @@ export const SosyalMedyaPage = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-14">
             <h2 className="text-2xl sm:text-4xl font-extrabold text-[var(--dark-blue)] mb-3 sm:mb-4">
-              {lang === "en" ? "Why slowdays?" : "Neden slowdays?"}
+              {lang === "en" ? "Why MindID?" : "Neden MindID?"}
             </h2>
             <p className="text-[var(--gray)] text-base sm:text-lg max-w-2xl mx-auto">
               {lang === "en"

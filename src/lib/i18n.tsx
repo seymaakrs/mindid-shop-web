@@ -22,7 +22,7 @@ const translations: Record<string, Record<string, string>> = {
   "nav.visualStudio": { tr: "AI Görsel Stüdyo", en: "AI Visual Studio", es: "Estudio Visual IA" },
   "nav.gallery": { tr: "Prodüksiyon Galerisi", en: "Production Gallery", es: "Galería de Producción" },
   "nav.portfolio": { tr: "Portfolyo", en: "Portfolio", es: "Portafolio" },
-  "nav.about": { tr: "slowdays Ne Yapar?", en: "What Does slowdays Do?", es: "¿Qué hace slowdays?" },
+  "nav.about": { tr: "MindID Ne Yapar?", en: "What Does MindID Do?", es: "¿Qué hace MindID?" },
   "nav.socialMediaExpert": { tr: "Sosyal Medya Uzmanı", en: "Social Media Expert", es: "Experto en Redes Sociales" },
   "nav.howItWorks": { tr: "Nasıl Çalışır?", en: "How It Works", es: "¿Cómo Funciona?" },
   "nav.faq": { tr: "SSS", en: "FAQ", es: "Preguntas Frecuentes" },
@@ -88,8 +88,8 @@ const translations: Record<string, Record<string, string>> = {
   "hero.title1": { tr: "Yeni Nesil", en: "Next Gen" },
   "hero.title2": { tr: "Reklamcılık", en: "Advertising" },
   "hero.desc": {
-    tr: "Yapay zeka ile reklam filmi, dijital avatar ve e-ticaret ürün görseli üretimi artık çok daha kolay. Geleneksel prodüksiyon için 150.000₺+ bütçe ayırmanız gerekirken, slowdays ile aynı profesyonel kaliteyi %70'e varan tasarrufla elde ediyorsunuz. Manken yok, stüdyo kirası yok, kalabalık ekip yok. Yapay zeka reklam filmleri, avatar oluşturma ve ürün fotoğrafçılığında yeni nesil çözümler.",
-    en: "AI ad film production, digital avatar creation, and e-commerce product photography are now easier than ever. While traditional production requires $4,200+ budgets, slowdays delivers the same professional quality with up to 70% savings. No mannequins, no studio rental, no large crews. Next-generation solutions in AI advertising films, avatar creation, and product visuals.",
+    tr: "Yapay zeka ile reklam filmi, dijital avatar ve e-ticaret ürün görseli üretimi artık çok daha kolay. Geleneksel prodüksiyon için 150.000₺+ bütçe ayırmanız gerekirken, MindID ile aynı profesyonel kaliteyi %70'e varan tasarrufla elde ediyorsunuz. Manken yok, stüdyo kirası yok, kalabalık ekip yok. Yapay zeka reklam filmleri, avatar oluşturma ve ürün fotoğrafçılığında yeni nesil çözümler.",
+    en: "AI ad film production, digital avatar creation, and e-commerce product photography are now easier than ever. While traditional production requires $4,200+ budgets, MindID delivers the same professional quality with up to 70% savings. No mannequins, no studio rental, no large crews. Next-generation solutions in AI advertising films, avatar creation, and product visuals.",
   },
   "hero.video_title": { tr: "Tanıtım Videosu", en: "Intro Video" },
 
@@ -183,15 +183,15 @@ const translations: Record<string, Record<string, string>> = {
   "checkout.subtitle": { tr: "Seçimleriniz hazır! Son bir adım kaldı.", en: "Your selections are ready! One final step." },
   "checkout.send": { tr: "Yönetmene Gönder", en: "Send to Director" },
   "checkout.traditional": { tr: "Geleneksel Stüdyo Maliyeti", en: "Traditional Studio Cost" },
-  "checkout.ai": { tr: "slowdays AI Fiyatı", en: "slowdays AI Price" },
+  "checkout.ai": { tr: "MindID AI Fiyatı", en: "MindID AI Price" },
   "checkout.saved": { tr: "Net Tasarrufunuz", en: "Your Net Savings" },
   "checkout.smart_move": {
     tr: "Bu kararı verdiğiniz için tebrikler. Aynı kaliteyi, çok daha akıllı bir fiyata alıyorsunuz.",
     en: "Congratulations on this decision. You're getting the same quality at a much smarter price.",
   },
   "checkout.comparison_note": {
-    tr: "Geleneksel stüdyo maliyetleri; ekip, ekipman, mekân, post-prodüksiyon ve lisans ücretlerini içerir. slowdays AI ile bu maliyetlerin büyük kısmı ortadan kalkar.",
-    en: "Traditional studio costs include crew, equipment, location, post-production and licensing fees. With slowdays AI, most of these costs are eliminated.",
+    tr: "Geleneksel stüdyo maliyetleri; ekip, ekipman, mekân, post-prodüksiyon ve lisans ücretlerini içerir. MindID AI ile bu maliyetlerin büyük kısmı ortadan kalkar.",
+    en: "Traditional studio costs include crew, equipment, location, post-production and licensing fees. With MindID AI, most of these costs are eliminated.",
   },
 
   // Congrats
@@ -201,7 +201,7 @@ const translations: Record<string, Record<string, string>> = {
     en: "your request has been received. We will contact you within 24 hours.",
   },
   "congrats.traditional_cost": { tr: "Geleneksel stüdyo maliyeti", en: "Traditional studio cost" },
-  "congrats.ai_cost": { tr: "slowdays AI ile ödeyeceğiniz", en: "Your slowdays AI cost" },
+  "congrats.ai_cost": { tr: "MindID AI ile ödeyeceğiniz", en: "Your MindID AI cost" },
   "congrats.profit": { tr: "Cebinizde kalan", en: "Money you keep" },
 
   // Form
@@ -239,8 +239,8 @@ const translations: Record<string, Record<string, string>> = {
 
   "faq.q4": { tr: "Geleneksel prodüksiyona göre ne kadar tasarruf ederim?", en: "How much do I save compared to traditional production?" },
   "faq.a4": {
-    tr: "Bu sorunun cevabı sizi çok memnun edecek. Geleneksel bir reklam filmi prodüksiyonunda sadece 30 saniyelik bir video için bile minimum 80.000₺ ile 200.000₺ arasında bütçe gerekir. Buna stüdyo kirası (günlük 5.000-15.000₺), profesyonel çekim ekibi (yönetmen, kameraman, ışıkçı, sesçi - günlük 20.000-50.000₺), oyuncu ücretleri, mekân izinleri, ekipman kirası, post-prodüksiyon ve lisans bedelleri dahildir. Kurumsal bir tanıtım filmi için bu rakam 300.000₺ ile 750.000₺ arasına çıkabilir. slowdays AI ile aynı profesyonel kalitede bir içerik, bu maliyetlerin %60 ile %70 altında üretilir. Yani 200.000₺'lik bir projeyi 60.000-80.000₺'ye yaptırabilirsiniz. Bu sadece bir indirim değil, işletmeniz için stratejik bir rekabet avantajıdır. Tasarruf ettiğiniz bütçeyi pazarlama, marka bilinirliğine veya yeni kampanyalara yönlendirerek rakiplerinizin önüne geçebilirsiniz.",
-    en: "The answer will make you very happy. For traditional ad production, even a 30-second video requires a minimum budget of $2,200 to $5,600. This includes studio rental ($140-420/day), professional crew (director, cameraman, lighting, sound - $560-1,400/day), talent fees, location permits, equipment rental, post-production and licensing. For a corporate intro film, costs can reach $8,400 to $21,000. With slowdays AI, the same professional quality is produced at 60-70% less than these costs. So a $5,600 project can be done for $1,680-2,240. This isn't just a discount - it's a strategic competitive advantage for your business. You can redirect saved budget to marketing, brand awareness, or new campaigns to stay ahead of competitors.",
+    tr: "Bu sorunun cevabı sizi çok memnun edecek. Geleneksel bir reklam filmi prodüksiyonunda sadece 30 saniyelik bir video için bile minimum 80.000₺ ile 200.000₺ arasında bütçe gerekir. Buna stüdyo kirası (günlük 5.000-15.000₺), profesyonel çekim ekibi (yönetmen, kameraman, ışıkçı, sesçi - günlük 20.000-50.000₺), oyuncu ücretleri, mekân izinleri, ekipman kirası, post-prodüksiyon ve lisans bedelleri dahildir. Kurumsal bir tanıtım filmi için bu rakam 300.000₺ ile 750.000₺ arasına çıkabilir. MindID AI ile aynı profesyonel kalitede bir içerik, bu maliyetlerin %60 ile %70 altında üretilir. Yani 200.000₺'lik bir projeyi 60.000-80.000₺'ye yaptırabilirsiniz. Bu sadece bir indirim değil, işletmeniz için stratejik bir rekabet avantajıdır. Tasarruf ettiğiniz bütçeyi pazarlama, marka bilinirliğine veya yeni kampanyalara yönlendirerek rakiplerinizin önüne geçebilirsiniz.",
+    en: "The answer will make you very happy. For traditional ad production, even a 30-second video requires a minimum budget of $2,200 to $5,600. This includes studio rental ($140-420/day), professional crew (director, cameraman, lighting, sound - $560-1,400/day), talent fees, location permits, equipment rental, post-production and licensing. For a corporate intro film, costs can reach $8,400 to $21,000. With MindID AI, the same professional quality is produced at 60-70% less than these costs. So a $5,600 project can be done for $1,680-2,240. This isn't just a discount - it's a strategic competitive advantage for your business. You can redirect saved budget to marketing, brand awareness, or new campaigns to stay ahead of competitors.",
   },
 
   "faq.q5": { tr: "Hangi platformlar için içerik üretiyorsunuz?", en: "Which platforms do you produce content for?" },
@@ -251,8 +251,8 @@ const translations: Record<string, Record<string, string>> = {
 
   "faq.q6": { tr: "Yapay zeka ile üretilen içeriklerde telif hakkı durumu nedir?", en: "What is the copyright status of AI-generated content?" },
   "faq.a6": {
-    tr: "Bu çok önemli bir konudur ve şeffaf olmak istiyoruz. Yapay zeka destekli içerik üretimi, reklamcılık dünyasına yeni girmiş bir teknolojidir ve hukuki açıdan hâlâ 'gri alan' olarak değerlendirilmektedir. Türkiye'de ve dünya genelinde bu konudaki yasal çerçeve hızla gelişmektedir - ülkemiz bu alanda yeni yasalar çıkardıkça oyunun kuralları değişecektir. Mevcut durumda: slowdays olarak ürettiğimiz tüm içerikler size özel oluşturulur ve tam ticari kullanım hakkı tarafımızdan size devredilir. AI araçlarının ürettiği görseller üzerinde şu an için geleneksel anlamdaki 'telif hakkı' tanımının nasıl uygulanacağı tartışma konusudur. Ancak biz her projede; orijinal prompt tasarımı, yaratıcı yönetim, post-prodüksiyon ve final düzenleme gibi insan yaratıcılığı gerektiren katkılar ekliyoruz ki bu da içeriğe telif hakkı koruması sağlamaktadır. Ayrıca stok görsel, müzik ve ses efektleri için lisanslı kaynaklar kullanıyoruz. Müşterilerimize tam yasal güvenlik sağlamak için sürekli güncellenen hukuki danışmanlık alıyoruz.",
-    en: "This is a very important topic and we want to be transparent. AI-powered content creation is a new technology in advertising and is still considered a 'gray area' legally. The legal framework in Turkey and worldwide is rapidly evolving - as countries introduce new laws, the rules of the game will change. Currently: All content produced by slowdays is created exclusively for you with full commercial usage rights transferred to you. How traditional 'copyright' definitions apply to AI-generated images is still debated. However, we add human creativity contributions in every project - original prompt design, creative direction, post-production and final editing - which provides copyright protection. We also use licensed sources for stock visuals, music and sound effects. We continuously receive updated legal consultation to ensure full legal security for our clients.",
+    tr: "Bu çok önemli bir konudur ve şeffaf olmak istiyoruz. Yapay zeka destekli içerik üretimi, reklamcılık dünyasına yeni girmiş bir teknolojidir ve hukuki açıdan hâlâ 'gri alan' olarak değerlendirilmektedir. Türkiye'de ve dünya genelinde bu konudaki yasal çerçeve hızla gelişmektedir - ülkemiz bu alanda yeni yasalar çıkardıkça oyunun kuralları değişecektir. Mevcut durumda: MindID olarak ürettiğimiz tüm içerikler size özel oluşturulur ve tam ticari kullanım hakkı tarafımızdan size devredilir. AI araçlarının ürettiği görseller üzerinde şu an için geleneksel anlamdaki 'telif hakkı' tanımının nasıl uygulanacağı tartışma konusudur. Ancak biz her projede; orijinal prompt tasarımı, yaratıcı yönetim, post-prodüksiyon ve final düzenleme gibi insan yaratıcılığı gerektiren katkılar ekliyoruz ki bu da içeriğe telif hakkı koruması sağlamaktadır. Ayrıca stok görsel, müzik ve ses efektleri için lisanslı kaynaklar kullanıyoruz. Müşterilerimize tam yasal güvenlik sağlamak için sürekli güncellenen hukuki danışmanlık alıyoruz.",
+    en: "This is a very important topic and we want to be transparent. AI-powered content creation is a new technology in advertising and is still considered a 'gray area' legally. The legal framework in Turkey and worldwide is rapidly evolving - as countries introduce new laws, the rules of the game will change. Currently: All content produced by MindID is created exclusively for you with full commercial usage rights transferred to you. How traditional 'copyright' definitions apply to AI-generated images is still debated. However, we add human creativity contributions in every project - original prompt design, creative direction, post-production and final editing - which provides copyright protection. We also use licensed sources for stock visuals, music and sound effects. We continuously receive updated legal consultation to ensure full legal security for our clients.",
   },
 
   "faq.q7": { tr: "Projeye başlamak için ne gerekiyor?", en: "What's needed to start a project?" },
@@ -342,21 +342,21 @@ const translations: Record<string, Record<string, string>> = {
     en: "Yes, we offer special pricing for bulk orders. Up to 15% discount for 50+ product images, up to 25% for 200+ products. We also have special catalog shooting packages for e-commerce sellers — even a 350-product catalog shoot can be completed in days. Use our configurator or contact us for a detailed quote.",
   },
 
-  "faq.q21": { tr: "slowdays hangi ülkelere hizmet veriyor?", en: "Which countries does slowdays serve?" },
+  "faq.q21": { tr: "MindID hangi ülkelere hizmet veriyor?", en: "Which countries does MindID serve?" },
   "faq.a21": {
-    tr: "slowdays olarak İstanbul merkezli çalışmakla birlikte tüm dünyaya hizmet veriyoruz. AI destekli prodüksiyon süreci tamamen dijital olduğu için fiziksel konum sınırlaması yoktur. Türkiye, ABD, İngiltere, Almanya, BAE ve birçok ülkeden müşterilerimize hizmet sunuyoruz. İngilizce ve Türkçe olmak üzere iki dilde iletişim sağlıyoruz.",
-    en: "slowdays is based in Istanbul but serves clients worldwide. Since our AI-powered production process is entirely digital, there are no physical location limitations. We serve clients from Turkey, USA, UK, Germany, UAE, and many other countries. We communicate in both English and Turkish.",
+    tr: "MindID olarak İstanbul merkezli çalışmakla birlikte tüm dünyaya hizmet veriyoruz. AI destekli prodüksiyon süreci tamamen dijital olduğu için fiziksel konum sınırlaması yoktur. Türkiye, ABD, İngiltere, Almanya, BAE ve birçok ülkeden müşterilerimize hizmet sunuyoruz. İngilizce ve Türkçe olmak üzere iki dilde iletişim sağlıyoruz.",
+    en: "MindID is based in Istanbul but serves clients worldwide. Since our AI-powered production process is entirely digital, there are no physical location limitations. We serve clients from Turkey, USA, UK, Germany, UAE, and many other countries. We communicate in both English and Turkish.",
   },
 
   // About
-  "about.title": { tr: "slowdays Ne Yapar?", en: "What Does slowdays Do?" },
+  "about.title": { tr: "MindID Ne Yapar?", en: "What Does MindID Do?" },
   "about.subtitle": {
     tr: "Yapay zeka reklam filmleri, avatar oluşturma ve e-ticaret ürün görselleri ile markanızı büyütüyoruz.",
     en: "We grow your brand with AI ad films, avatar creation, and e-commerce product visuals.",
   },
   "about.desc": {
-    tr: "slowdays, yapay zeka ile reklam filmi yapımı, dijital avatar oluşturma ve e-ticaret ürün fotoğrafçılığı alanlarında Türkiye'nin öncü ajanslarından biridir. Manken ve stüdyo masrafı olmadan, %70'e varan tasarrufla stüdyo kalitesinde ürün görselleri üretiyoruz. Ekibimiz; yapay zeka mühendisleri, yaratıcı yönetmenler, ses tasarımcıları ve dijital pazarlama uzmanlarından oluşur.",
-    en: "slowdays is one of Turkey's pioneering agencies in AI ad film production, digital avatar creation, and e-commerce product photography. We produce studio-quality product visuals without mannequin or studio costs, with up to 70% savings. Our team consists of AI engineers, creative directors, sound designers, and digital marketing experts.",
+    tr: "MindID, yapay zeka ile reklam filmi yapımı, dijital avatar oluşturma ve e-ticaret ürün fotoğrafçılığı alanlarında Türkiye'nin öncü ajanslarından biridir. Manken ve stüdyo masrafı olmadan, %70'e varan tasarrufla stüdyo kalitesinde ürün görselleri üretiyoruz. Ekibimiz; yapay zeka mühendisleri, yaratıcı yönetmenler, ses tasarımcıları ve dijital pazarlama uzmanlarından oluşur.",
+    en: "MindID is one of Turkey's pioneering agencies in AI ad film production, digital avatar creation, and e-commerce product photography. We produce studio-quality product visuals without mannequin or studio costs, with up to 70% savings. Our team consists of AI engineers, creative directors, sound designers, and digital marketing experts.",
   },
   "about.team": { tr: "Ekibimiz", en: "Our Team" },
 
@@ -397,8 +397,8 @@ const translations: Record<string, Record<string, string>> = {
   "testimonial.3.name": { tr: "Burak Demir", en: "Burak Demir" },
   "testimonial.3.role": { tr: "Kurucu, Demir Mobilya", en: "Founder, Demir Furniture" },
   "testimonial.3.text": {
-    tr: "Kurumsal tanıtım filmimizi 3 günde aldık. Eskiden bunun için haftalarca bekliyorduk. slowdays ile çalışmak büyük avantaj.",
-    en: "We received our corporate intro film in 3 days. We used to wait weeks for this. Working with slowdays is a huge advantage.",
+    tr: "Kurumsal tanıtım filmimizi 3 günde aldık. Eskiden bunun için haftalarca bekliyorduk. MindID ile çalışmak büyük avantaj.",
+    en: "We received our corporate intro film in 3 days. We used to wait weeks for this. Working with MindID is a huge advantage.",
   },
   "testimonial.3.service": { tr: "AI Video", en: "AI Video" },
   "testimonial.4.name": { tr: "Elif Çelik", en: "Elif Celik" },
@@ -453,7 +453,7 @@ const translations: Record<string, Record<string, string>> = {
   "footer.howItWorks": { tr: "Nasıl Çalışır?", en: "How It Works", es: "¿Cómo Funciona?" },
   "footer.ecommerce": { tr: "E-ticaret Çözümleri", en: "E-commerce Solutions", es: "Soluciones E-commerce" },
   "footer.portfolio": { tr: "Portfolyo", en: "Portfolio", es: "Portafolio" },
-  "footer.aboutMindid": { tr: "slowdays Hakkında", en: "About slowdays", es: "Acerca de slowdays" },
+  "footer.aboutMindid": { tr: "MindID Hakkında", en: "About MindID", es: "Acerca de MindID" },
   "footer.faq": { tr: "SSS", en: "FAQ", es: "Preguntas Frecuentes" },
   "footer.testimonials": { tr: "Müşteri Yorumları", en: "Testimonials", es: "Testimonios" },
   "footer.privacy": { tr: "Gizlilik", en: "Privacy", es: "Privacidad" },

@@ -27,7 +27,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     title,
     description,
     openGraph: {
-      title: `${title} | slowdays Blog`,
+      title: `${title} | MindID Blog`,
       description,
       url: `https://mindid.shop/blog/${slug}`,
       type: "article",
@@ -44,7 +44,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} | slowdays Blog`,
+      title: `${title} | MindID Blog`,
       description,
       ...(post.coverImage && { images: [post.coverImage] }),
     },
@@ -70,12 +70,12 @@ const BlogPostRoute = async ({ params }: Props) => {
         dateModified: (post.updatedAt as unknown as string) || (post.publishedAt as unknown as string) || new Date().toISOString(),
         author: {
           "@type": "Organization",
-          name: "slowdays",
+          name: "MindID",
           url: "https://mindid.shop",
         },
         publisher: {
           "@type": "Organization",
-          name: "slowdays",
+          name: "MindID",
           logo: {
             "@type": "ImageObject",
             url: "https://mindid.shop/logo.png",

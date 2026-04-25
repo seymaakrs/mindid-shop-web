@@ -3,8 +3,8 @@ import { Footer } from "@/components/footer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Gizlilik Politikası | slowdays",
-  description: "slowdays gizlilik politikası — kişisel verilerinizin nasıl toplandığı, kullanıldığı ve korunduğu hakkında bilgi.",
+  title: "Gizlilik Politikası | MindID",
+  description: "MindID gizlilik politikası — kişisel verilerinizin nasıl toplandığı, kullanıldığı ve korunduğu hakkında bilgi.",
   alternates: {
     canonical: "https://mindid.shop/gizlilik",
   },
@@ -25,7 +25,7 @@ const GizlilikPage = () => {
             <section>
               <h2 className="text-lg font-bold text-[var(--lime)] mb-3">1. Genel Bakış</h2>
               <p>
-                slowdays olarak gizliliğinize önem veriyoruz. Bu politika, mindid.shop web sitesini
+                MindID olarak gizliliğinize önem veriyoruz. Bu politika, mindid.shop web sitesini
                 ziyaret ettiğinizde ve hizmetlerimizi kullandığınızda kişisel bilgilerinizin
                 nasıl toplandığını, kullanıldığını ve korunduğunu açıklar.
               </p>

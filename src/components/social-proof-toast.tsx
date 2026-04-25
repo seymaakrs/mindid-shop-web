@@ -18,7 +18,7 @@ const TOASTS: ToastData[] = [
   { icon: TrendingUp, text: "Bu ay 47 marka AI prodüksiyon tercih etti", sub: "Nisan 2026", color: "var(--lime)" },
   { icon: Star, text: "Burak D. Sosyal Medya paketini talep etti", sub: "15 dakika önce", color: "var(--electric-blue)" },
   { icon: Users, text: "İstanbul'dan bir kozmetik markası teklif aldı", sub: "22 dakika önce", color: "var(--lime)" },
-  { icon: TrendingUp, text: "Geleneksel prodüksiyona göre ortalama %68 tasarruf", sub: "slowdays müşterileri", color: "var(--electric-blue)" },
+  { icon: TrendingUp, text: "Geleneksel prodüksiyona göre ortalama %68 tasarruf", sub: "MindID müşterileri", color: "var(--electric-blue)" },
 ];
 
 export const SocialProofToast = () => {

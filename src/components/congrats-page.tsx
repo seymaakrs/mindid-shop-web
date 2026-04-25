@@ -93,8 +93,8 @@ export const CongratsPage = ({ totalAI, totalTraditional, savings, serviceName }
 
         {/* MindID info */}
         <div className="text-xs text-[var(--gray)] mb-6">
-          <p className="font-bold text-[var(--foreground)]">slowdays - AI Video Produksiyon Ajansi</p>
-          <p className="mt-1">info@mindid.com | +90 XXX XXX XX XX</p>
+          <p className="font-bold text-[var(--foreground)]">MindID - AI Video Produksiyon Ajansi</p>
+          <p className="mt-1">info@mindid.shop | +90 541 931 55 50</p>
         </div>
 
         <Link

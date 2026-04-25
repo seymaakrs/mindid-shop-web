@@ -7,7 +7,7 @@ import { ParallaxGrid } from "@/components/parallax-grid";
 export const metadata: Metadata = {
   title: "Nasıl Çalışır? — AI Reklam Filmi, Avatar & Ürün Görseli Süreci",
   description:
-    "slowdays'de AI reklam filmi, avatar oluşturma ve e-ticaret ürün görseli nasıl üretilir? Adım adım süreç rehberi. Manken ve stüdyo masrafı olmadan profesyonel sonuçlar.",
+    "MindID'de AI reklam filmi, avatar oluşturma ve e-ticaret ürün görseli nasıl üretilir? Adım adım süreç rehberi. Manken ve stüdyo masrafı olmadan profesyonel sonuçlar.",
   keywords: [
     "ai reklam filmi nasıl yapılır",
     "yapay zeka ile reklam yapımı",
@@ -22,15 +22,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: "How It Works — AI Ad Film, Avatar & Product Visual Process",
     description:
-      "Step-by-step guide: How slowdays produces AI ad films, creates digital avatars, and generates e-commerce product visuals.",
+      "Step-by-step guide: How MindID produces AI ad films, creates digital avatars, and generates e-commerce product visuals.",
     url: "https://mindid.shop/how-it-works",
   },
   twitter: {
     card: "summary_large_image",
     site: "@mindidshop",
     creator: "@mindidshop",
-    title: "AI Reklam Nasıl Yapılır? | slowdays",
-    description: "slowdays'de AI reklam filmi, avatar ve ürün görseli üretim süreci.",
+    title: "AI Reklam Nasıl Yapılır? | MindID",
+    description: "MindID'de AI reklam filmi, avatar ve ürün görseli üretim süreci.",
   },
 };
 
@@ -38,7 +38,7 @@ const breadcrumb = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "slowdays", item: "https://mindid.shop" },
+    { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
     { "@type": "ListItem", position: 2, name: "Nasıl Çalışır?", item: "https://mindid.shop/how-it-works" },
   ],
 };
@@ -46,8 +46,8 @@ const breadcrumb = {
 const howToSchema = {
   "@context": "https://schema.org",
   "@type": "HowTo",
-  name: "How to Order AI Production Services from slowdays",
-  description: "Step-by-step guide to ordering AI ad films, digital avatars, and e-commerce product visuals from slowdays.",
+  name: "How to Order AI Production Services from MindID",
+  description: "Step-by-step guide to ordering AI ad films, digital avatars, and e-commerce product visuals from MindID.",
   step: [
     { "@type": "HowToStep", position: 1, name: "Choose Your Service", text: "Select from AI ad films, avatar creation, or product photography." },
     { "@type": "HowToStep", position: 2, name: "Configure & See Price", text: "Use our configurator to customize options and see the price instantly." },

@@ -123,7 +123,7 @@ const ComparisonTable = ({
               {lang === "en" ? "Traditional" : "Geleneksel"}
             </th>
             <th className="text-left p-4 text-sm font-bold text-[var(--foreground)]">
-              slowdays AI
+              MindID AI
             </th>
             <th className="text-center p-4 text-sm font-bold text-[var(--foreground)]">
               {lang === "en" ? "Savings" : "Tasarruf"}
@@ -183,8 +183,8 @@ export const AiVsTraditionalPage = () => {
           </h1>
           <p className="text-lg text-[var(--foreground)]/70 max-w-2xl mx-auto">
             {lang === "en"
-              ? "Real cost, speed, and quality comparison between AI-powered production and traditional methods. See exactly how much you save with slowdays."
-              : "AI destekli prodüksiyon ile geleneksel yöntemlerin gerçek maliyet, hız ve kalite karşılaştırması. slowdays ile ne kadar tasarruf ettiğinizi görün."}
+              ? "Real cost, speed, and quality comparison between AI-powered production and traditional methods. See exactly how much you save with MindID."
+              : "AI destekli prodüksiyon ile geleneksel yöntemlerin gerçek maliyet, hız ve kalite karşılaştırması. MindID ile ne kadar tasarruf ettiğinizi görün."}
           </p>
         </div>
 

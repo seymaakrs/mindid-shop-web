@@ -254,3 +254,55 @@ export type OrderSubmission = {
   seenAt?: Timestamp;
   updatedAt: Timestamp;
 };
+
+// ─── SaaS Müşteri Sistemi ────────────────────────────────────────────────────
+
+export type CustomerPlan = "free" | "starter" | "growth" | "agency";
+
+export type CustomerDoc = {
+  id?: string;
+  uid: string;
+  email: string;
+  name: string;
+  company: string;
+  phone: string;
+  sector?: string;
+  plan: CustomerPlan;
+  credits: number;
+  totalSpent: number;
+  orderCount: number;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+  lastLoginAt?: Timestamp;
+  // Subscription
+  subscriptionId?: string;
+  subscriptionStatus?: "active" | "cancelled" | "past_due" | "trialing";
+  subscriptionEndDate?: Timestamp;
+  // Payment
+  paymentProvider?: "iyzico" | "stripe";
+  paymentCustomerId?: string;
+};
+
+export type CustomerNotification = {
+  id?: string;
+  customerId: string;
+  type: "order_update" | "payment" | "system" | "promo";
+  title: string;
+  message: string;
+  read: boolean;
+  actionUrl?: string;
+  createdAt: Timestamp;
+};
+
+export type PaymentRecord = {
+  id?: string;
+  customerId: string;
+  orderId?: string;
+  amount: number;
+  currency: string;
+  provider: "iyzico" | "stripe" | "manual";
+  status: "pending" | "completed" | "failed" | "refunded";
+  providerPaymentId?: string;
+  description: string;
+  createdAt: Timestamp;
+};

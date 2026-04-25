@@ -136,8 +136,8 @@ export const HowItWorksPage = () => {
           </h1>
           <p className="text-lg text-[var(--foreground)]/70 max-w-2xl mx-auto">
             {lang === "en"
-              ? "From choosing your service to receiving your content — here's the complete slowdays production process, step by step."
-              : "Hizmet seçiminden içerik teslimatına — slowdays üretim sürecinin tamamı, adım adım."}
+              ? "From choosing your service to receiving your content — here's the complete MindID production process, step by step."
+              : "Hizmet seçiminden içerik teslimatına — MindID üretim sürecinin tamamı, adım adım."}
           </p>
         </div>
 

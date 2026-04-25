@@ -9,14 +9,14 @@ import { HowItWorks } from "@/components/how-it-works";
 import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "slowdays — Yapay Zeka Reklam Filmleri, Avatar & Ürün Görselleri",
+  title: "MindID — Yapay Zeka Reklam Filmleri, Avatar & Ürün Görselleri",
   description:
     "AI ile reklam filmi, dijital avatar oluşturma ve e-ticaret ürün görseli üretimi. Manken ve stüdyo masrafı olmadan %70 daha az maliyetle stüdyo kalitesinde sonuçlar. 1.490₺'den başlayan fiyatlar.",
   alternates: {
     canonical: "https://mindid.shop",
   },
   openGraph: {
-    title: "slowdays — AI Reklam Filmleri, Avatar & Ürün Görselleri",
+    title: "MindID — AI Reklam Filmleri, Avatar & Ürün Görselleri",
     description:
       "Yapay zeka ile reklam filmi, avatar oluşturma ve ürün görseli üretimi. %70 maliyet tasarrufu. 1.490₺'den başlayan fiyatlar.",
     url: "https://mindid.shop",
@@ -52,7 +52,7 @@ const faqSchema = {
       name: "How much do I save compared to traditional production?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "With slowdays AI, the same professional quality is produced at 60-70% less than traditional costs. A traditional 30-second video requires $2,200 to $5,600 minimum. Corporate intro films can cost $8,400 to $21,000 traditionally. With slowdays AI, these are done at 60-70% less cost. This is a strategic competitive advantage for your business.",
+        text: "With MindID AI, the same professional quality is produced at 60-70% less than traditional costs. A traditional 30-second video requires $2,200 to $5,600 minimum. Corporate intro films can cost $8,400 to $21,000 traditionally. With MindID AI, these are done at 60-70% less cost. This is a strategic competitive advantage for your business.",
       },
     },
     {
@@ -60,7 +60,7 @@ const faqSchema = {
       name: "Can AI replace mannequins for e-commerce product photos?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. slowdays produces studio-quality e-commerce product images without mannequins or studios at 70% less cost. We serve Shopify, Amazon, Trendyol, and Hepsiburada sellers with AI-generated product photography starting from ₺1,490.",
+        text: "Yes. MindID produces studio-quality e-commerce product images without mannequins or studios at 70% less cost. We serve Shopify, Amazon, Trendyol, and Hepsiburada sellers with AI-generated product photography starting from ₺1,490.",
       },
     },
     {
@@ -68,7 +68,7 @@ const faqSchema = {
       name: "How to create AI avatars for marketing?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "slowdays creates realistic AI digital avatars for brand spokespersons, digital presenters, and influencer avatars. You can use your AI avatar to produce content in multiple languages without ever being on camera. AI avatar creation starts from ₺6,900.",
+        text: "MindID creates realistic AI digital avatars for brand spokespersons, digital presenters, and influencer avatars. You can use your AI avatar to produce content in multiple languages without ever being on camera. AI avatar creation starts from ₺6,900.",
       },
     },
     {
@@ -100,7 +100,7 @@ const faqSchema = {
       name: "Do AI avatars look realistic?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. slowdays' AI avatar technology produces highly realistic results. Facial expressions, lip-sync, eye contact, and natural body language are precisely generated. Your avatar can speak in multiple languages with automatic lip synchronization. Many viewers cannot distinguish between an AI avatar and a real person.",
+        text: "Yes. MindID's AI avatar technology produces highly realistic results. Facial expressions, lip-sync, eye contact, and natural body language are precisely generated. Your avatar can speak in multiple languages with automatic lip synchronization. Many viewers cannot distinguish between an AI avatar and a real person.",
       },
     },
     {
@@ -108,7 +108,7 @@ const faqSchema = {
       name: "Which e-commerce platforms are AI product images compatible with?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "slowdays prepares AI product images for all major platforms: Trendyol, Hepsiburada, Shopify, Amazon, N11, Etsy, eBay, AliExpress, and WooCommerce. Each platform's specific size, format, and background requirements are met. Starting from ₺1,490 per product.",
+        text: "MindID prepares AI product images for all major platforms: Trendyol, Hepsiburada, Shopify, Amazon, N11, Etsy, eBay, AliExpress, and WooCommerce. Each platform's specific size, format, and background requirements are met. Starting from ₺1,490 per product.",
       },
     },
     {
@@ -126,7 +126,7 @@ const faqSchema = {
 const reviewSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "slowdays",
+  name: "MindID",
   url: "https://mindid.shop",
   image: "https://mindid.shop/og-image.jpeg",
   priceRange: "$$",
@@ -162,7 +162,7 @@ const reviewSchema = {
       "@type": "Review",
       author: { "@type": "Person", name: "Burak Demir" },
       datePublished: "2025-11-05",
-      reviewBody: "Kurumsal tanıtım filmimizi 3 günde aldık. Eskiden bunun için haftalarca bekliyorduk. slowdays ile çalışmak büyük avantaj.",
+      reviewBody: "Kurumsal tanıtım filmimizi 3 günde aldık. Eskiden bunun için haftalarca bekliyorduk. MindID ile çalışmak büyük avantaj.",
       reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
     },
     {
