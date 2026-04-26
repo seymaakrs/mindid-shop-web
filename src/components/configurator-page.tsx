@@ -16,6 +16,7 @@ import Link from "next/link";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import type { PricingPackageItem } from "@/lib/firestore-types";
+import { trackEvent } from "@/lib/tracking";
 
 type ConfiguratorPageProps = {
   serviceId: string;
@@ -79,6 +80,17 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
   }, [serviceId]);
 
   const service = SERVICE_TYPES.find((s) => s.id === serviceId) as ServiceType | undefined;
+
+  useEffect(() => {
+    if (!service) return;
+    trackEvent("view_content", {
+      contentId: serviceId,
+      contentName: t(service.nameKey),
+      contentCategory: "service",
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serviceId]);
+
   if (!service) return null;
 
   const packages = dynamicPackages ?? SERVICE_PACKAGES[serviceId] ?? [];
@@ -112,6 +124,32 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
   const handlePackageSelect = (pkg: ServicePackage) => {
     setSelectedPackage(pkg);
     setSelectedAddOns([]);
+    trackEvent("add_to_cart", {
+      value: pkg.price,
+      currency: "TRY",
+      contentId: pkg.id,
+      contentName: pkg.name,
+      contentCategory: serviceId,
+      contents: [{ id: pkg.id, quantity: 1, price: pkg.price }],
+    });
+  };
+
+  const goToCheckout = () => {
+    trackEvent("begin_checkout", {
+      value: totalAI,
+      currency: "TRY",
+      contentId: selectedPackage?.id,
+      contentName: selectedPackage?.name,
+      contentCategory: serviceId,
+      numItems: 1 + selectedAddOns.length,
+      contents: selectedPackage
+        ? [
+            { id: selectedPackage.id, quantity: 1, price: selectedPackage.price },
+            ...selectedAddOns.map((a) => ({ id: a.id, quantity: 1, price: a.price })),
+          ]
+        : undefined,
+    });
+    setStep("checkout");
   };
 
   const handlePackageClear = () => {
@@ -360,7 +398,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
 
                   {/* CTA */}
                   <button
-                    onClick={() => canProceed && setStep("checkout")}
+                    onClick={() => canProceed && goToCheckout()}
                     disabled={!canProceed}
                     className={`mt-4 w-full py-3 rounded-md border-3 text-sm font-black transition-all cursor-pointer ${
                       canProceed
@@ -394,7 +432,7 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
             )}
           </div>
           <button
-            onClick={() => canProceed && setStep("checkout")}
+            onClick={() => canProceed && goToCheckout()}
             disabled={!canProceed}
             className={`px-6 py-2.5 rounded-md border-3 text-sm font-black transition-all ${
               canProceed

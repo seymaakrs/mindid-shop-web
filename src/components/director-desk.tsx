@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useI18n } from "@/lib/i18n";
 import type { ConfigState, ServicePackage, AddOnService } from "@/lib/types";
 import type { ServiceType } from "@/lib/pricing-data";
@@ -9,6 +10,7 @@ import { submitOrder } from "@/lib/order-service";
 import { CustomerForm } from "./customer-form";
 import { ArrowLeft, Clapperboard } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
+import { trackEvent } from "@/lib/tracking";
 
 type DirectorDeskProps = {
   config: ConfigState;
@@ -37,6 +39,7 @@ export const DirectorDesk = ({
 }: DirectorDeskProps) => {
   const { t, formatPrice } = useI18n();
   const { user, isCustomer, customerData } = useAuth();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,7 +47,7 @@ export const DirectorDesk = ({
     setLoading(true);
     setError(null);
     try {
-      await submitOrder({
+      const result = await submitOrder({
         customer,
         serviceId: service.id,
         serviceName: t(service.nameKey),
@@ -52,7 +55,20 @@ export const DirectorDesk = ({
         pricing: { basePrice, totalAI, totalTraditional, savings },
         files,
         customerUid: user?.uid,
+        paymentMethod: "bank_transfer",
       });
+
+      trackEvent("lead", {
+        value: totalAI,
+        currency: "TRY",
+        contentId: service.id,
+        contentName: t(service.nameKey),
+        contentCategory: service.id,
+        email: customer.email,
+      });
+
+      // Redirect to payment instructions page (bank transfer flow).
+      router.push(`/checkout/payment?order=${result.orderId}&session=${result.payment.sessionId}`);
       onSubmit();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Bir hata oluştu. Lütfen tekrar deneyin.");

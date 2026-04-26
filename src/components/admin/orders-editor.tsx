@@ -5,6 +5,7 @@ import { doc, updateDoc, Timestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useOrders } from "@/lib/hooks/use-firestore";
 import type { OrderSubmission, OrderStatus } from "@/lib/firestore-types";
+import { notifyOrderStatusChange } from "@/lib/notifications";
 import { ConfirmDialog } from "./confirm-dialog";
 import {
   ClipboardList,
@@ -16,7 +17,19 @@ import {
   X,
   Loader2,
   MessageSquare,
+  Wallet,
 } from "lucide-react";
+
+const PAYMENT_STATUS_LABEL: Record<string, { label: string; cls: string }> = {
+  pending: { label: "Bekliyor", cls: "bg-gray-500/20 text-gray-300 border-gray-500/30" },
+  awaiting_confirmation: {
+    label: "Onay Bekliyor",
+    cls: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+  },
+  paid: { label: "Ödendi", cls: "bg-green-500/20 text-green-300 border-green-500/30" },
+  failed: { label: "Başarısız", cls: "bg-red-500/20 text-red-300 border-red-500/30" },
+  refunded: { label: "İade", cls: "bg-purple-500/20 text-purple-300 border-purple-500/30" },
+};
 
 const STATUS_CONFIG: Record<OrderStatus, { label: string; color: string; bg: string }> = {
   new: { label: "Yeni", color: "text-blue-400", bg: "bg-blue-500/20 border-blue-500/30" },
@@ -64,6 +77,11 @@ export const OrdersEditor = () => {
     const updates: Record<string, unknown> = { status: newStatus, updatedAt: Timestamp.now() };
     if (newStatus === "seen") updates.seenAt = Timestamp.now();
     await updateDoc(doc(db, "mindid_orders", order.id), updates);
+    // Notify customer via in-app + email (non-blocking-ish: errors are swallowed inside).
+    await notifyOrderStatusChange(order.customerUid, order.id, newStatus, {
+      email: order.customer?.email,
+      name: order.customer?.name,
+    });
   };
 
   const saveNotes = async (order: OrderSubmission) => {
@@ -71,6 +89,41 @@ export const OrdersEditor = () => {
     await updateDoc(doc(db, "mindid_orders", order.id), {
       adminNotes,
       updatedAt: Timestamp.now(),
+    });
+  };
+
+  const confirmPayment = async (order: OrderSubmission) => {
+    if (!order.id) return;
+    const now = Timestamp.now();
+    // Flip order to paid + in-progress so production can begin.
+    await updateDoc(doc(db, "mindid_orders", order.id), {
+      paymentStatus: "paid",
+      paidAt: now,
+      status: "in-progress",
+      updatedAt: now,
+    });
+    // Mark the linked payment session as paid (best-effort).
+    if (order.paymentSessionId) {
+      try {
+        await updateDoc(doc(db, "mindid_payment_sessions", order.paymentSessionId), {
+          status: "paid",
+          paidAt: now,
+          updatedAt: now,
+        });
+      } catch {
+        // session may have been deleted — safe to ignore
+      }
+    }
+    // Notify customer via in-app notification + email.
+    await notifyOrderStatusChange(order.customerUid, order.id, "in-progress", {
+      email: order.customer?.email,
+      name: order.customer?.name,
+    });
+    setSelected({
+      ...order,
+      paymentStatus: "paid",
+      paidAt: now,
+      status: "in-progress",
     });
   };
 
@@ -270,6 +323,64 @@ export const OrdersEditor = () => {
                     <div className="text-lg font-black text-[var(--electric-blue)]">{formatPrice(selected.pricing.savings)}</div>
                   </div>
                 </div>
+              </div>
+
+              {/* Payment */}
+              <div>
+                <h3 className="text-xs font-bold text-[var(--lime)] uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                  <Wallet size={12} /> Ödeme
+                </h3>
+                <div className="grid grid-cols-2 gap-3 text-sm mb-3">
+                  <div>
+                    <span className="text-[var(--gray)]">Yöntem:</span>{" "}
+                    <span className="text-[var(--cream)] font-bold ml-1">
+                      {selected.paymentMethod === "bank_transfer"
+                        ? "Havale/EFT"
+                        : selected.paymentMethod ?? "—"}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-[var(--gray)]">Durum:</span>{" "}
+                    {selected.paymentStatus ? (
+                      <span
+                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold border ml-1 ${
+                          PAYMENT_STATUS_LABEL[selected.paymentStatus]?.cls ??
+                          "bg-gray-500/20 text-gray-300 border-gray-500/30"
+                        }`}
+                      >
+                        {PAYMENT_STATUS_LABEL[selected.paymentStatus]?.label ??
+                          selected.paymentStatus}
+                      </span>
+                    ) : (
+                      <span className="text-[var(--gray)] ml-1">—</span>
+                    )}
+                  </div>
+                  {selected.paymentReference && (
+                    <div className="col-span-2">
+                      <span className="text-[var(--gray)]">Referans:</span>{" "}
+                      <span className="font-mono text-[var(--lime)] font-bold ml-1">
+                        {selected.paymentReference}
+                      </span>
+                    </div>
+                  )}
+                  {selected.paidAt && (
+                    <div className="col-span-2">
+                      <span className="text-[var(--gray)]">Ödeme Tarihi:</span>{" "}
+                      <span className="text-[var(--cream)] ml-1">
+                        {formatDate(selected.paidAt)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                {selected.paymentStatus !== "paid" &&
+                  selected.paymentStatus !== "refunded" && (
+                    <button
+                      onClick={() => confirmPayment(selected)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[var(--lime)] text-[var(--dark-blue)] border-2 border-[var(--dark-blue)] text-xs font-bold hover:brightness-110 transition-all cursor-pointer"
+                    >
+                      <CheckCircle size={14} /> Ödemeyi Onayla
+                    </button>
+                  )}
               </div>
 
               {/* Files */}

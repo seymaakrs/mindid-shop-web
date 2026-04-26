@@ -8,6 +8,10 @@ import { PageTracker } from "@/components/page-tracker";
 import { PwaInstallPrompt } from "@/components/pwa-install-prompt";
 import { PwaRegister } from "@/components/pwa-register";
 import { MobileBottomNav } from "@/components/mobile-bottom-nav";
+import { MetaPixel } from "@/components/tracking/meta-pixel";
+import { GoogleAds } from "@/components/tracking/google-ads";
+import { UtmCapture } from "@/components/tracking/utm-capture";
+import { Suspense } from "react";
 
 export const viewport: Viewport = {
   themeColor: "#ade94f",
@@ -220,6 +224,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           İçeriğe Atla
         </a>
         <Analytics />
+        <MetaPixel />
+        <GoogleAds />
+        <Suspense fallback={null}>
+          <UtmCapture />
+        </Suspense>
         <PageTracker />
         <PwaRegister />
         <Providers>

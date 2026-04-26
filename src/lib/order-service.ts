@@ -1,8 +1,51 @@
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { collection, addDoc, doc, updateDoc, Timestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "@/lib/firebase";
 import type { ConfigState } from "@/lib/types";
 import type { OrderConfig, OrderCustomer, OrderSubmission } from "@/lib/firestore-types";
+import { getPaymentProvider } from "@/lib/payments";
+import type { PaymentInitResult, PaymentMethod } from "@/lib/payments";
+import { renderOrderConfirmationEmail } from "@/lib/email-templates";
+
+/**
+ * Queue a transactional email via the Firestore "mail" collection.
+ * Owner: Install Firebase Email Trigger extension OR connect to
+ * Resend/SendGrid. (functions/src/index.ts already sends a Resend-based
+ * confirmation on order create — this Firestore queue is a redundant,
+ * decoupled fallback. Safe to ship even if neither is configured.)
+ */
+const queueEmail = async (params: {
+  to: string;
+  subject: string;
+  html: string;
+}): Promise<void> => {
+  try {
+    await addDoc(collection(db, "mail"), {
+      to: params.to,
+      message: {
+        subject: params.subject,
+        html: params.html,
+      },
+      createdAt: Timestamp.now(),
+    });
+  } catch (err) {
+    console.error("[mail queue] Failed to enqueue email:", err);
+  }
+};
+
+const buildConfigLines = (config: OrderConfig): string[] => {
+  const lines: string[] = [];
+  if (config.duration) lines.push(`Süre: ${config.duration.label}`);
+  if (config.scenario) lines.push(`Senaryo: ${config.scenario.label}`);
+  if (config.voice) lines.push(`Ses: ${config.voice.label}`);
+  if (config.music) lines.push(`Müzik: ${config.music.label}`);
+  if (config.visualStyle) lines.push(`Görsel Stil: ${config.visualStyle.label}`);
+  if (config.productCount) lines.push(`Ürün Sayısı: ${config.productCount.label}`);
+  if (config.photoVisualStyle) lines.push(`Foto Stili: ${config.photoVisualStyle.label}`);
+  if (config.background) lines.push(`Arka Plan: ${config.background.label}`);
+  if (config.revision) lines.push(`Revizyon: ${config.revision.label}`);
+  return lines;
+};
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 MB
 
@@ -108,6 +151,25 @@ type SubmitOrderParams = {
   pricing: { basePrice: number; totalAI: number; totalTraditional: number; savings: number };
   files: File[];
   customerUid?: string;
+  paymentMethod?: PaymentMethod;
+};
+
+const readStoredAttribution = (): OrderSubmission["attribution"] | undefined => {
+  if (typeof window === "undefined") return undefined;
+  try {
+    const raw = window.localStorage.getItem("mindid_utm");
+    if (!raw) return undefined;
+    const parsed = JSON.parse(raw) as OrderSubmission["attribution"];
+    return parsed && typeof parsed === "object" ? parsed : undefined;
+  } catch {
+    return undefined;
+  }
+};
+
+export type SubmitOrderResult = {
+  orderId: string;
+  payment: PaymentInitResult;
+  paymentMethod: PaymentMethod;
 };
 
 const validateCustomer = (customer: OrderCustomer) => {
@@ -122,11 +184,15 @@ const validateCustomer = (customer: OrderCustomer) => {
   }
 };
 
-export const submitOrder = async (params: SubmitOrderParams): Promise<string> => {
+export const submitOrder = async (
+  params: SubmitOrderParams
+): Promise<SubmitOrderResult> => {
   validateCustomer(params.customer);
   const fileUrls = await uploadFiles(params.files);
 
+  const paymentMethod: PaymentMethod = params.paymentMethod ?? "bank_transfer";
   const now = Timestamp.now();
+  const attribution = readStoredAttribution();
   const order: Omit<OrderSubmission, "id"> = {
     customer: params.customer,
     serviceId: params.serviceId,
@@ -137,17 +203,48 @@ export const submitOrder = async (params: SubmitOrderParams): Promise<string> =>
     status: "new",
     adminNotes: "",
     ...(params.customerUid ? { customerUid: params.customerUid } : {}),
+    ...(attribution ? { attribution } : {}),
+    paymentMethod,
+    paymentStatus: "pending",
     createdAt: now,
     updatedAt: now,
   };
 
   const docRef = await addDoc(collection(db, "mindid_orders"), order);
 
+  // Initialize payment session via the chosen provider.
+  let paymentResult: PaymentInitResult;
+  try {
+    const provider = getPaymentProvider(paymentMethod);
+    paymentResult = await provider.init({
+      orderId: docRef.id,
+      customerId: params.customerUid ?? params.customer.email,
+      customerEmail: params.customer.email,
+      amount: params.pricing.totalAI,
+      currency: "TRY",
+    });
+  } catch (err) {
+    // Payment init failed — order is already created, but we mark it failed
+    // so admin can follow up manually. Re-throw so caller can show error UI.
+    await updateDoc(doc(db, "mindid_orders", docRef.id), {
+      paymentStatus: "failed",
+      updatedAt: Timestamp.now(),
+    }).catch(() => undefined);
+    throw err;
+  }
+
+  // Persist payment session reference + awaiting_confirmation status on order.
+  await updateDoc(doc(db, "mindid_orders", docRef.id), {
+    paymentSessionId: paymentResult.sessionId,
+    paymentReference: paymentResult.instructions?.reference ?? null,
+    updatedAt: Timestamp.now(),
+  });
+
   // Update customer stats if logged in
   if (params.customerUid) {
     try {
-      const { doc: firestoreDoc, updateDoc, increment } = await import("firebase/firestore");
-      await updateDoc(firestoreDoc(db, "mindid_customers", params.customerUid), {
+      const { doc: firestoreDoc, updateDoc: updateDocLazy, increment } = await import("firebase/firestore");
+      await updateDocLazy(firestoreDoc(db, "mindid_customers", params.customerUid), {
         orderCount: increment(1),
         totalSpent: increment(params.pricing.totalAI),
         updatedAt: now,
@@ -157,5 +254,58 @@ export const submitOrder = async (params: SubmitOrderParams): Promise<string> =>
     }
   }
 
-  return docRef.id;
+  // ─── Queue customer confirmation email (Firestore "mail" collection) ───
+  // Awaits the doc write but swallows errors — order succeeds regardless.
+  const bankInstr = paymentResult.instructions;
+  await queueEmail({
+    to: params.customer.email,
+    subject: `Siparişin alındı! 🎬 — Sipariş #${docRef.id.slice(0, 8).toUpperCase()}`,
+    html: renderOrderConfirmationEmail({
+      orderId: docRef.id,
+      customerName: params.customer.name,
+      serviceName: params.serviceName,
+      totalTRY: params.pricing.totalAI,
+      configLines: buildConfigLines(serializeConfig(params.config)),
+      paymentStatus:
+        paymentMethod === "bank_transfer" ? "awaiting_confirmation" : undefined,
+      bankInfo:
+        paymentMethod === "bank_transfer" && bankInstr
+          ? {
+              bankName: bankInstr.bankName ?? "-",
+              accountHolder: bankInstr.accountHolder ?? "-",
+              iban: bankInstr.iban ?? "-",
+              reference:
+                bankInstr.reference ?? docRef.id.slice(0, 8).toUpperCase(),
+            }
+          : undefined,
+      expectedDeliveryDays: 5,
+    }),
+  });
+
+  return { orderId: docRef.id, payment: paymentResult, paymentMethod };
+};
+
+/**
+ * Marks the bank-transfer-style payment as customer-claimed
+ * (status: awaiting_confirmation). Admin must verify in bank statement
+ * before flipping to "paid".
+ */
+export const markPaymentClaimed = async (orderId: string, paymentSessionId: string): Promise<void> => {
+  const now = Timestamp.now();
+  // Update the payment-session doc (customer-writable per Firestore rules).
+  await updateDoc(doc(db, "mindid_payment_sessions", paymentSessionId), {
+    status: "awaiting_confirmation",
+    customerClaimedAt: now,
+    updatedAt: now,
+  });
+  // Best-effort: bump the order doc too. If the customer is anon and rules deny
+  // it, we swallow — admin reconciles via the session doc + admin UI.
+  try {
+    await updateDoc(doc(db, "mindid_orders", orderId), {
+      paymentStatus: "awaiting_confirmation",
+      updatedAt: now,
+    });
+  } catch {
+    // permission denied for non-admin — acceptable
+  }
 };

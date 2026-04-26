@@ -197,6 +197,17 @@ export type LeadCapture = {
 // Order management types
 export type OrderStatus = "new" | "seen" | "in-progress" | "completed" | "cancelled";
 
+// Payment fields embedded on orders (mirror of payment-session state for fast read).
+// Full payment-provider types live in src/lib/payments/types.ts; we re-declare
+// the union here to avoid a circular import from firestore-types.
+export type OrderPaymentMethod = "bank_transfer" | "iyzico" | "stripe" | "credits";
+export type OrderPaymentStatus =
+  | "pending"
+  | "awaiting_confirmation"
+  | "paid"
+  | "failed"
+  | "refunded";
+
 export type OrderCustomer = {
   name: string;
   email: string;
@@ -254,6 +265,24 @@ export type OrderSubmission = {
   createdAt: Timestamp;
   seenAt?: Timestamp;
   updatedAt: Timestamp;
+  // Payment integration
+  paymentMethod?: OrderPaymentMethod;
+  paymentStatus?: OrderPaymentStatus;
+  paymentSessionId?: string;
+  paymentReference?: string;
+  paidAt?: Timestamp;
+  // Marketing attribution (captured from URL UTM params)
+  attribution?: {
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+    utm_term?: string;
+    utm_content?: string;
+    fbclid?: string;
+    gclid?: string;
+    captured_at?: string;
+    landing_page?: string;
+  };
 };
 
 // ─── SaaS Müşteri Sistemi ────────────────────────────────────────────────────

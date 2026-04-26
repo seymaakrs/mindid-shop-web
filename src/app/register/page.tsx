@@ -6,6 +6,7 @@ import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
 import { grantSignupBonus } from "@/lib/credits";
 import { useAuth } from "@/lib/auth-context";
+import { trackEvent, identifyUser } from "@/lib/tracking";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { UserPlus, Eye, EyeOff, ArrowRight, Check } from "lucide-react";
@@ -78,6 +79,9 @@ const RegisterPage = () => {
       } catch (bonusErr) {
         console.error("Signup bonus failed", bonusErr);
       }
+
+      identifyUser(cred.user.uid, form.email);
+      trackEvent("sign_up", { customerId: cred.user.uid, email: form.email });
 
       router.replace("/dashboard");
     } catch (err: unknown) {

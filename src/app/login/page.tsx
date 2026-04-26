@@ -86,6 +86,14 @@ const LoginPage = () => {
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
+              <div className="mt-2 text-right">
+                <Link
+                  href="/sifremi-unuttum"
+                  className="text-xs text-gray-400 hover:text-[var(--lime)] font-medium transition-colors"
+                >
+                  Şifremi Unuttum?
+                </Link>
+              </div>
             </div>
 
             {error && (

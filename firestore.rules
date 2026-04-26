@@ -181,5 +181,40 @@ service cloud.firestore {
         && request.resource.data.customerId == request.auth.uid;
       allow write: if isAdmin();
     }
+
+    // ----------------------------------------------------------------------
+    // ÖDEME OTURUMLARI (Payment Sessions)
+    // Bank transfer + future iyzico/stripe sessions live here.
+    // create: anyone may open a session (matches order create policy)
+    //         but must include the required shape and start in a non-paid state.
+    // read:   admin or the customer who owns it (uid match or email match).
+    // update: customer may only flip status to "awaiting_confirmation"
+    //         (claim "Ödeme Yaptım"); admin can do anything.
+    // ----------------------------------------------------------------------
+    match /mindid_payment_sessions/{sessionId} {
+      allow create: if request.resource.data.keys().hasAll(["orderId", "customerEmail", "amount", "currency", "method", "status", "createdAt"])
+        && request.resource.data.orderId is string
+        && request.resource.data.customerEmail is string
+        && request.resource.data.amount is number
+        && request.resource.data.amount > 0
+        && request.resource.data.method in ["bank_transfer", "iyzico", "stripe", "credits"]
+        && request.resource.data.status in ["pending", "awaiting_confirmation"];
+
+      allow read: if isAdmin()
+        || (request.auth != null && (
+          resource.data.customerId == request.auth.uid
+          || resource.data.customerEmail == request.auth.token.email
+        ));
+
+      allow update: if isAdmin()
+        || (
+          request.auth != null
+          && resource.data.customerEmail == request.auth.token.email
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["status", "customerClaimedAt", "updatedAt"])
+          && request.resource.data.status == "awaiting_confirmation"
+        );
+
+      allow delete: if isAdmin();
+    }
   }
 }

@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Search, Filter, Sparkles, Crown, TrendingUp, ArrowRight } from "lucide-react";
 import { TEMPLATES, TEMPLATE_CATEGORIES } from "@/lib/template-data";
 import type { Template, TemplateCategory } from "@/lib/firestore-types";
 import { useAuth } from "@/lib/auth-context";
+import { trackEvent } from "@/lib/tracking";
 
 type SortMode = "popular" | "new" | "recommended";
 
@@ -20,6 +21,15 @@ export const TemplateGallery = () => {
   const [activeCategory, setActiveCategory] = useState<"all" | TemplateCategory>("all");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<SortMode>("popular");
+
+  useEffect(() => {
+    const q = search.trim();
+    if (!q) return;
+    const handle = setTimeout(() => {
+      trackEvent("search", { searchQuery: q, contentCategory: "template" });
+    }, 700);
+    return () => clearTimeout(handle);
+  }, [search]);
 
   const filtered = useMemo(() => {
     let list = TEMPLATES.slice();
@@ -149,9 +159,19 @@ export const TemplateCard = ({ template }: { template: Template }) => {
     ? "/dashboard?tab=credits"
     : `/configure/${template.serviceId}?template=${template.id}`;
 
+  const onUse = () => {
+    if (needsCredits) return;
+    trackEvent("use_template", {
+      contentId: template.id,
+      contentName: template.title,
+      contentCategory: template.serviceId,
+    });
+  };
+
   return (
     <Link
       href={href}
+      onClick={onUse}
       className="group relative block overflow-hidden rounded-2xl bg-white border-2 border-[var(--dark-blue)]/5 hover:border-[var(--lime)]/40 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
     >
       {/* Preview */}
