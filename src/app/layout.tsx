@@ -6,6 +6,7 @@ import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { Analytics } from "@/components/analytics";
 import { PageTracker } from "@/components/page-tracker";
 import { PwaInstallPrompt } from "@/components/pwa-install-prompt";
+import { AiAgentGreeter } from "@/components/ai-agent-greeter";
 import { PwaRegister } from "@/components/pwa-register";
 import { MobileBottomNav } from "@/components/mobile-bottom-nav";
 import { MetaPixel } from "@/components/tracking/meta-pixel";
@@ -235,6 +236,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           {children}
           <LanguageSwitcher />
           <PwaInstallPrompt />
+          <AiAgentGreeter />
           <MobileBottomNav />
         </Providers>
       </body>
