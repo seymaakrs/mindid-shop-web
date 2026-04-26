@@ -1,10 +1,20 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { Analytics } from "@/components/analytics";
 import { PageTracker } from "@/components/page-tracker";
+import { PwaInstallPrompt } from "@/components/pwa-install-prompt";
+import { PwaRegister } from "@/components/pwa-register";
+import { MobileBottomNav } from "@/components/mobile-bottom-nav";
+
+export const viewport: Viewport = {
+  themeColor: "#ade94f",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   title: {
@@ -81,6 +91,11 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
+  },
+  appleWebApp: {
+    title: "MindID",
+    statusBarStyle: "black-translucent",
+    capable: true,
   },
 };
 
@@ -206,9 +221,12 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         </a>
         <Analytics />
         <PageTracker />
+        <PwaRegister />
         <Providers>
           {children}
           <LanguageSwitcher />
+          <PwaInstallPrompt />
+          <MobileBottomNav />
         </Providers>
       </body>
     </html>

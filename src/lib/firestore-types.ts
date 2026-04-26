@@ -270,6 +270,9 @@ export type CustomerDoc = {
   sector?: string;
   plan: CustomerPlan;
   credits: number;
+  totalCreditsEarned: number;
+  totalCreditsSpent: number;
+  signupBonusGiven: boolean;
   totalSpent: number;
   orderCount: number;
   createdAt: Timestamp;
@@ -305,5 +308,32 @@ export type PaymentRecord = {
   status: "pending" | "completed" | "failed" | "refunded";
   providerPaymentId?: string;
   description: string;
+  createdAt: Timestamp;
+};
+
+// ─── Template Gallery ────────────────────────────────────────────────────────
+
+export type TemplateCategory =
+  | "reels"
+  | "product-photo"
+  | "campaign"
+  | "corporate"
+  | "social"
+  | "avatar";
+
+export type Template = {
+  id: string;
+  title: string;
+  description: string;
+  category: TemplateCategory;
+  serviceId: string; // links to /configure/[serviceId]
+  packageId?: string; // optional preset package
+  previewUrl: string; // image or video preview
+  previewType: "image" | "video";
+  tags: string[];
+  popularity: number; // for sorting
+  isNew?: boolean;
+  isPro?: boolean;
+  creditCost?: number;
   createdAt: Timestamp;
 };

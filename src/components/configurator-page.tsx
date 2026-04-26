@@ -9,6 +9,7 @@ import { AddOnSelector } from "./add-on-selector";
 import { CrossSell } from "./cross-sell";
 import { DirectorDesk } from "./director-desk";
 import { CongratsPage } from "./congrats-page";
+import { LivePreview } from "./live-preview";
 import { useI18n } from "@/lib/i18n";
 import { ArrowLeft, Package, Shield, Clock, Sparkles } from "lucide-react";
 import Link from "next/link";
@@ -213,9 +214,20 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8">
           {/* Left: Package selector + Add-ons */}
           <div>
+            {/* Mobile LivePreview (renders only its lg:hidden half on small screens) */}
+            <div className="lg:hidden">
+              <LivePreview
+                serviceId={serviceId}
+                selectedPackage={selectedPackage}
+                selectedAddOns={selectedAddOns}
+                totalAI={totalAI}
+                formatPrice={formatPrice}
+              />
+            </div>
+
             {/* Package Selector */}
             <PackageTierSelector
               packages={packages}
@@ -257,8 +269,18 @@ export const ConfiguratorPage = ({ serviceId }: ConfiguratorPageProps) => {
             </div>
           </div>
 
-          {/* Right: Receipt panel (sticky) */}
-          <div className="lg:block">
+          {/* Right: Live preview + Receipt panel (sticky) */}
+          <div className="lg:block space-y-6">
+            {/* Desktop-only LivePreview */}
+            <div className="hidden lg:block">
+              <LivePreview
+                serviceId={serviceId}
+                selectedPackage={selectedPackage}
+                selectedAddOns={selectedAddOns}
+                totalAI={totalAI}
+                formatPrice={formatPrice}
+              />
+            </div>
             <div className="sticky top-20">
               <div className="rounded-lg bg-[var(--card)] border-3 border-[var(--lime)] shadow-[6px_6px_0px_var(--lime)] overflow-hidden">
                 <div className="p-4 bg-[var(--lime)] text-[var(--dark-blue)]">

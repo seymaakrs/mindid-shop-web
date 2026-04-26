@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X, LogIn, User } from "lucide-react";
+import { Menu, X, LogIn, User, Coins, Sparkles } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth-context";
 import { useState, useEffect, useCallback, useRef } from "react";
@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 
 export const Header = () => {
   const { t } = useI18n();
-  const { user, isCustomer, isAdmin } = useAuth();
+  const { user, isCustomer, isAdmin, customerData } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -73,9 +73,10 @@ export const Header = () => {
 
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
-  const navLinks = [
+  const navLinks: { href: string; label: string; icon?: React.ReactNode }[] = [
     { href: "/ai-reklam-filmi", label: t("nav.videoProduction") },
     { href: "/ai-gorsel", label: t("nav.visualStudio") },
+    { href: "/templates", label: "Şablonlar", icon: <Sparkles size={13} /> },
     { href: "/portfolio", label: t("nav.portfolio") },
     { href: "/blog", label: "Blog" },
     { href: "/about", label: t("nav.about") },
@@ -121,8 +122,9 @@ export const Header = () => {
             <a
               key={link.label}
               href={link.href}
-              className="text-[13px] font-bold text-[var(--dark-blue)] hover:text-[var(--electric-blue)] transition-colors whitespace-nowrap"
+              className="inline-flex items-center gap-1 text-[13px] font-bold text-[var(--dark-blue)] hover:text-[var(--electric-blue)] transition-colors whitespace-nowrap"
             >
+              {link.icon}
               {link.label}
             </a>
           ))}
@@ -138,13 +140,25 @@ export const Header = () => {
           </a>
 
           {user ? (
-            <a
-              href={isAdmin ? "/admin" : "/dashboard"}
-              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[var(--lime)] text-[var(--dark-blue)] text-sm font-bold hover:brightness-110 transition-all whitespace-nowrap"
-            >
-              <User size={16} />
-              {isAdmin ? "Admin" : "Panelim"}
-            </a>
+            <>
+              {isCustomer && (
+                <a
+                  href="/dashboard/credits"
+                  title="Kredi bakiyesi"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-md bg-[var(--lime)]/10 text-[var(--dark-blue)] text-sm font-bold border-2 border-[var(--lime)]/30 hover:border-[var(--lime)] transition-colors whitespace-nowrap"
+                >
+                  <Coins size={16} className="text-[var(--lime)]" />
+                  <span>{customerData?.credits ?? 0}</span>
+                </a>
+              )}
+              <a
+                href={isAdmin ? "/admin" : "/dashboard"}
+                className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[var(--lime)] text-[var(--dark-blue)] text-sm font-bold hover:brightness-110 transition-all whitespace-nowrap"
+              >
+                <User size={16} />
+                {isAdmin ? "Admin" : "Panelim"}
+              </a>
+            </>
           ) : (
             <a
               href="/login"
@@ -184,8 +198,9 @@ export const Header = () => {
               key={link.label}
               href={link.href}
               onClick={closeMobile}
-              className="block text-sm font-bold text-[var(--dark-blue)] py-1 hover:text-[var(--electric-blue)] transition-colors"
+              className="flex items-center gap-2 text-sm font-bold text-[var(--dark-blue)] py-1 hover:text-[var(--electric-blue)] transition-colors"
             >
+              {link.icon}
               {link.label}
             </a>
           ))}

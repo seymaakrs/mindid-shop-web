@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
+import { grantSignupBonus } from "@/lib/credits";
 import { useAuth } from "@/lib/auth-context";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -62,11 +63,21 @@ const RegisterPage = () => {
         phone: form.phone,
         plan: "free",
         credits: 0,
+        totalCreditsEarned: 0,
+        totalCreditsSpent: 0,
+        signupBonusGiven: false,
         totalSpent: 0,
         orderCount: 0,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       });
+
+      // Grant free signup credits (freemium)
+      try {
+        await grantSignupBonus(cred.user.uid);
+      } catch (bonusErr) {
+        console.error("Signup bonus failed", bonusErr);
+      }
 
       router.replace("/dashboard");
     } catch (err: unknown) {
