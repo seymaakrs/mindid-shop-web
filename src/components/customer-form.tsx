@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useI18n } from "@/lib/i18n";
 import type { OrderCustomer } from "@/lib/firestore-types";
 import { Upload, User, Mail, Phone, Building, Target, MessageSquare, Briefcase, Loader2, X } from "lucide-react";
@@ -9,23 +9,33 @@ type CustomerFormProps = {
   onSubmit: (customer: OrderCustomer, files: File[]) => void;
   loading?: boolean;
   error?: string | null;
+  initialData?: Partial<OrderCustomer>;
 };
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 MB
 
-export const CustomerForm = ({ onSubmit, loading, error }: CustomerFormProps) => {
+export const CustomerForm = ({ onSubmit, loading, error, initialData }: CustomerFormProps) => {
   const { t } = useI18n();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [company, setCompany] = useState("");
+  const [name, setName] = useState(initialData?.name ?? "");
+  const [email, setEmail] = useState(initialData?.email ?? "");
+  const [phone, setPhone] = useState(initialData?.phone ?? "");
+  const [company, setCompany] = useState(initialData?.company ?? "");
   const [sector, setSector] = useState("");
   const [targetAudience, setTargetAudience] = useState("");
   const [message, setMessage] = useState("");
   const [files, setFiles] = useState<File[]>([]);
   const [fileError, setFileError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (initialData) {
+      if (initialData.name) setName(initialData.name);
+      if (initialData.email) setEmail(initialData.email);
+      if (initialData.phone) setPhone(initialData.phone);
+      if (initialData.company) setCompany(initialData.company);
+    }
+  }, [initialData]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = Array.from(e.target.files || []);

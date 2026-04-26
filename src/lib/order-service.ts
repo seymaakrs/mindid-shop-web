@@ -107,6 +107,7 @@ type SubmitOrderParams = {
   config: ConfigState;
   pricing: { basePrice: number; totalAI: number; totalTraditional: number; savings: number };
   files: File[];
+  customerUid?: string;
 };
 
 const validateCustomer = (customer: OrderCustomer) => {
@@ -135,10 +136,26 @@ export const submitOrder = async (params: SubmitOrderParams): Promise<string> =>
     fileUrls,
     status: "new",
     adminNotes: "",
+    ...(params.customerUid ? { customerUid: params.customerUid } : {}),
     createdAt: now,
     updatedAt: now,
   };
 
   const docRef = await addDoc(collection(db, "mindid_orders"), order);
+
+  // Update customer stats if logged in
+  if (params.customerUid) {
+    try {
+      const { doc: firestoreDoc, updateDoc, increment } = await import("firebase/firestore");
+      await updateDoc(firestoreDoc(db, "mindid_customers", params.customerUid), {
+        orderCount: increment(1),
+        totalSpent: increment(params.pricing.totalAI),
+        updatedAt: now,
+      });
+    } catch {
+      // Non-critical — don't fail the order
+    }
+  }
+
   return docRef.id;
 };

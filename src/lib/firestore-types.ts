@@ -250,6 +250,7 @@ export type OrderSubmission = {
   fileUrls: string[];
   status: OrderStatus;
   adminNotes: string;
+  customerUid?: string;
   createdAt: Timestamp;
   seenAt?: Timestamp;
   updatedAt: Timestamp;

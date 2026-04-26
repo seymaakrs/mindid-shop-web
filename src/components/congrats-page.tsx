@@ -1,7 +1,8 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
-import { PartyPopper, TrendingDown, Clock, Mail } from "lucide-react";
+import { useAuth } from "@/lib/auth-context";
+import { PartyPopper, TrendingDown, Clock, Mail, User, LogIn } from "lucide-react";
 import Link from "next/link";
 
 type CongratsPageProps = {
@@ -13,6 +14,7 @@ type CongratsPageProps = {
 
 export const CongratsPage = ({ totalAI, totalTraditional, savings, serviceName }: CongratsPageProps) => {
   const { t, formatPrice } = useI18n();
+  const { user, isCustomer } = useAuth();
   const savingsPercent = totalTraditional > 0 ? Math.round((savings / totalTraditional) * 100) : 0;
 
   return (
@@ -95,6 +97,39 @@ export const CongratsPage = ({ totalAI, totalTraditional, savings, serviceName }
         <div className="text-xs text-[var(--gray)] mb-6">
           <p className="font-bold text-[var(--foreground)]">MindID - AI Video Produksiyon Ajansi</p>
           <p className="mt-1">info@mindid.shop | +90 541 931 55 50</p>
+        </div>
+
+        {/* Sipariş takip / kayıt bölümü */}
+        <div className="p-5 rounded-md bg-[var(--card)] border-3 border-[var(--lime)]/30 mb-8">
+          {user && isCustomer ? (
+            <div>
+              <p className="text-sm text-[var(--gray)] mb-4">Siparişini panelden takip et.</p>
+              <Link
+                href="/dashboard/orders"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[var(--lime)] text-[var(--dark-blue)] border-3 border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] font-bold hover:shadow-[2px_2px_0px_var(--dark-blue)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+              >
+                <User size={16} /> Siparişlerimi Gör
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <p className="text-sm text-[var(--gray)] mb-4">Ücretsiz kaydol ve siparişini takip et.</p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link
+                  href="/register"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-md bg-[var(--lime)] text-[var(--dark-blue)] border-3 border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] font-bold hover:shadow-[2px_2px_0px_var(--dark-blue)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+                >
+                  <User size={16} /> Ücretsiz Kaydol
+                </Link>
+                <Link
+                  href="/login"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-md bg-[var(--card)] text-[var(--foreground)] border-3 border-[var(--gray)]/30 font-bold hover:border-[var(--lime)]/50 transition-all"
+                >
+                  <LogIn size={16} /> Giriş Yap
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
 
         <Link

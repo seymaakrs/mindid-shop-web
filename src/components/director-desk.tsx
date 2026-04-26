@@ -8,6 +8,7 @@ import type { OrderCustomer } from "@/lib/firestore-types";
 import { submitOrder } from "@/lib/order-service";
 import { CustomerForm } from "./customer-form";
 import { ArrowLeft, Clapperboard } from "lucide-react";
+import { useAuth } from "@/lib/auth-context";
 
 type DirectorDeskProps = {
   config: ConfigState;
@@ -35,6 +36,7 @@ export const DirectorDesk = ({
   selectedAddOns,
 }: DirectorDeskProps) => {
   const { t, formatPrice } = useI18n();
+  const { user, isCustomer, customerData } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -49,6 +51,7 @@ export const DirectorDesk = ({
         config,
         pricing: { basePrice, totalAI, totalTraditional, savings },
         files,
+        customerUid: user?.uid,
       });
       onSubmit();
     } catch (err) {
@@ -190,7 +193,17 @@ export const DirectorDesk = ({
         </div>
 
         {/* Customer form */}
-        <CustomerForm onSubmit={handleFormSubmit} loading={loading} error={error} />
+        <CustomerForm
+          onSubmit={handleFormSubmit}
+          loading={loading}
+          error={error || undefined}
+          initialData={isCustomer && customerData ? {
+            name: customerData.name,
+            email: customerData.email,
+            phone: customerData.phone,
+            company: customerData.company,
+          } : undefined}
+        />
       </div>
     </div>
   );
