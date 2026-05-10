@@ -71,7 +71,7 @@ export const DirectorDesk = ({
       router.push(`/checkout/payment?order=${result.orderId}&session=${result.payment.sessionId}`);
       onSubmit();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Bir hata oluştu. Lütfen tekrar deneyin.");
+      setError(err instanceof Error ? err.message : t("config.errorGeneric"));
     } finally {
       setLoading(false);
     }
@@ -79,24 +79,24 @@ export const DirectorDesk = ({
 
   // Build trading cards from selections
   const cards: { label: string; value: string; color: string }[] = [];
-  cards.push({ label: "Hizmet", value: t(service.nameKey), color: "var(--lime)" });
-  if (config.duration) cards.push({ label: "Sure", value: `${config.duration.seconds}sn`, color: "var(--electric-blue)" });
-  if (config.scenario) cards.push({ label: "Senaryo", value: config.scenario.label, color: "var(--lime)" });
-  if (config.voice) cards.push({ label: "Ses", value: config.voice.label, color: "var(--electric-blue)" });
-  if (config.music) cards.push({ label: "Muzik", value: config.music.label, color: "var(--lime)" });
-  if (config.visualStyle) cards.push({ label: "Gorsel", value: config.visualStyle.label, color: "var(--electric-blue)" });
+  cards.push({ label: t("config.service"), value: t(service.nameKey), color: "var(--lime)" });
+  if (config.duration) cards.push({ label: t("config.duration"), value: `${config.duration.seconds}sn`, color: "var(--electric-blue)" });
+  if (config.scenario) cards.push({ label: t("config.scenario"), value: config.scenario.label, color: "var(--lime)" });
+  if (config.voice) cards.push({ label: t("config.voice"), value: config.voice.label, color: "var(--electric-blue)" });
+  if (config.music) cards.push({ label: t("config.music"), value: config.music.label, color: "var(--lime)" });
+  if (config.visualStyle) cards.push({ label: t("config.visual"), value: config.visualStyle.label, color: "var(--electric-blue)" });
   config.postProduction.forEach((pp) => {
-    cards.push({ label: "Post", value: pp.label, color: "var(--lime)" });
+    cards.push({ label: t("config.post"), value: pp.label, color: "var(--lime)" });
   });
   // Product photo fields
-  if (config.productCount) cards.push({ label: "Ürün Sayısı", value: config.productCount.label, color: "var(--lime)" });
-  if (config.photoAngle) cards.push({ label: "Çekim Açısı", value: config.photoAngle.label, color: "var(--electric-blue)" });
-  if (config.photoModel) cards.push({ label: "Model", value: config.photoModel.label, color: "var(--lime)" });
-  if (config.colorPackage) cards.push({ label: "Renk Paketi", value: config.colorPackage.label, color: "var(--electric-blue)" });
-  if (config.photoVisualStyle) cards.push({ label: "Görsel Stili", value: config.photoVisualStyle.label, color: "var(--lime)" });
-  if (config.background) cards.push({ label: "Arka Plan", value: config.background.label, color: "var(--electric-blue)" });
-  if (config.photoRetouch) cards.push({ label: "Rötuş", value: config.photoRetouch.label, color: "var(--lime)" });
-  if (config.revision) cards.push({ label: "Revizyon", value: config.revision.label, color: "var(--electric-blue)" });
+  if (config.productCount) cards.push({ label: t("config.productCount"), value: config.productCount.label, color: "var(--lime)" });
+  if (config.photoAngle) cards.push({ label: t("config.photoAngle"), value: config.photoAngle.label, color: "var(--electric-blue)" });
+  if (config.photoModel) cards.push({ label: t("config.photoModel"), value: config.photoModel.label, color: "var(--lime)" });
+  if (config.colorPackage) cards.push({ label: t("config.colorPackage"), value: config.colorPackage.label, color: "var(--electric-blue)" });
+  if (config.photoVisualStyle) cards.push({ label: t("config.photoVisualStyle"), value: config.photoVisualStyle.label, color: "var(--lime)" });
+  if (config.background) cards.push({ label: t("config.background"), value: config.background.label, color: "var(--electric-blue)" });
+  if (config.photoRetouch) cards.push({ label: t("config.photoRetouch"), value: config.photoRetouch.label, color: "var(--lime)" });
+  if (config.revision) cards.push({ label: t("config.revision"), value: config.revision.label, color: "var(--electric-blue)" });
 
   return (
     <div className="min-h-screen relative z-10">

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Sparkles, Plus, Package, User } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 type NavItem = {
   href: string;
@@ -11,42 +12,43 @@ type NavItem = {
   match: (pathname: string) => boolean;
 };
 
-const items: NavItem[] = [
-  {
-    href: "/",
-    label: "Ana Sayfa",
-    icon: Home,
-    match: (p) => p === "/",
-  },
-  {
-    href: "/templates",
-    label: "Şablonlar",
-    icon: Sparkles,
-    match: (p) => p.startsWith("/templates"),
-  },
-  {
-    href: "/dashboard/orders",
-    label: "Siparişler",
-    icon: Package,
-    match: (p) => p.startsWith("/dashboard/orders"),
-  },
-  {
-    href: "/dashboard",
-    label: "Profil",
-    icon: User,
-    match: (p) => p === "/dashboard" || (p.startsWith("/dashboard") && !p.startsWith("/dashboard/orders")),
-  },
-];
-
 export const MobileBottomNav = () => {
   const pathname = usePathname() ?? "/";
+  const { t } = useI18n();
+
+  const items: NavItem[] = [
+    {
+      href: "/",
+      label: t("nav.bottom.home"),
+      icon: Home,
+      match: (p) => p === "/",
+    },
+    {
+      href: "/templates",
+      label: t("nav.bottom.templates"),
+      icon: Sparkles,
+      match: (p) => p.startsWith("/templates"),
+    },
+    {
+      href: "/dashboard/orders",
+      label: t("nav.bottom.orders"),
+      icon: Package,
+      match: (p) => p.startsWith("/dashboard/orders"),
+    },
+    {
+      href: "/dashboard",
+      label: t("nav.bottom.profile"),
+      icon: User,
+      match: (p) => p === "/dashboard" || (p.startsWith("/dashboard") && !p.startsWith("/dashboard/orders")),
+    },
+  ];
 
   // Hide inside admin layout
   if (pathname.startsWith("/admin")) return null;
 
   return (
     <nav
-      aria-label="Alt navigasyon"
+      aria-label={t("nav.bottom.aria")}
       className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--card)]/95 backdrop-blur-xl border-t border-[var(--dark-blue)]/10 pb-[env(safe-area-inset-bottom)]"
     >
       <div className="grid grid-cols-5 items-end h-16 max-w-md mx-auto px-2">
@@ -74,7 +76,7 @@ export const MobileBottomNav = () => {
         <div className="flex items-start justify-center -mt-5">
           <Link
             href="/#services"
-            aria-label="Yeni sipariş"
+            aria-label={t("nav.bottom.newOrder")}
             className="w-14 h-14 rounded-full bg-[var(--lime)] text-[var(--dark-blue)] flex items-center justify-center shadow-[0_6px_18px_rgba(173,233,79,0.45)] border-4 border-[var(--card)] hover:scale-105 active:scale-95 transition-transform"
           >
             <Plus size={26} strokeWidth={3} />

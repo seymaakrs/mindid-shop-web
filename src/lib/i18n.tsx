@@ -40,6 +40,16 @@ const translations: Record<string, Record<string, string>> = {
   "nav.mainNav": { tr: "Ana navigasyon", en: "Main navigation", es: "Navegación principal" },
   "nav.mobileNav": { tr: "Mobil navigasyon", en: "Mobile navigation", es: "Navegación móvil" },
   "nav.home": { tr: "MindID Ana Sayfa", en: "MindID Home", es: "MindID Inicio" },
+  "nav.bottom.home": { tr: "Ana Sayfa", en: "Home", es: "Inicio" },
+  "nav.bottom.templates": { tr: "Şablonlar", en: "Templates", es: "Plantillas" },
+  "nav.bottom.orders": { tr: "Siparişler", en: "Orders", es: "Pedidos" },
+  "nav.bottom.profile": { tr: "Profil", en: "Profile", es: "Perfil" },
+  "nav.bottom.aria": { tr: "Alt navigasyon", en: "Bottom navigation", es: "Navegación inferior" },
+  "nav.bottom.newOrder": { tr: "Yeni sipariş", en: "New order", es: "Nuevo pedido" },
+  "config.service": { tr: "Hizmet", en: "Service", es: "Servicio" },
+  "config.duration": { tr: "Süre", en: "Duration", es: "Duración" },
+  "config.post": { tr: "Post", en: "Post", es: "Post" },
+  "config.errorGeneric": { tr: "Bir hata oluştu. Lütfen tekrar deneyin.", en: "An error occurred. Please try again.", es: "Se produjo un error. Por favor, inténtelo de nuevo." },
   "nav.viewAllGallery": { tr: "Tüm Prodüksiyon Galerisini Gör", en: "View Full Production Gallery", es: "Ver Galería Completa" },
 
   // Language selector
