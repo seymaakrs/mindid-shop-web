@@ -76,9 +76,9 @@ export const Header = () => {
   const navLinks: { href: string; label: string; icon?: React.ReactNode }[] = [
     { href: "/ai-reklam-filmi", label: t("nav.videoProduction") },
     { href: "/ai-gorsel", label: t("nav.visualStudio") },
-    { href: "/templates", label: "Şablonlar", icon: <Sparkles size={13} /> },
+    { href: "/templates", label: t("nav.templates"), icon: <Sparkles size={13} /> },
     { href: "/portfolio", label: t("nav.portfolio") },
-    { href: "/blog", label: "Blog" },
+    { href: "/blog", label: t("nav.blog") },
     { href: "/about", label: t("nav.about") },
   ];
 
@@ -100,7 +100,7 @@ export const Header = () => {
         <a href="/" className="flex items-center gap-3">
           <Image
             src="/logo.png"
-            alt="MindID Ana Sayfa"
+            alt={t("nav.home")}
             width={56}
             height={56}
             className={`rounded-full transition-all duration-300 ${scrolled ? "h-10 w-10" : "h-14 w-14"}`}
@@ -117,7 +117,7 @@ export const Header = () => {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-5" aria-label="Ana navigasyon">
+        <nav className="hidden lg:flex items-center gap-5" aria-label={t("nav.mainNav")}>
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -144,7 +144,7 @@ export const Header = () => {
               {isCustomer && (
                 <a
                   href="/dashboard/credits"
-                  title="Kredi bakiyesi"
+                  title={t("nav.creditBalance")}
                   className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-md bg-[var(--lime)]/10 text-[var(--dark-blue)] text-sm font-bold border-2 border-[var(--lime)]/30 hover:border-[var(--lime)] transition-colors whitespace-nowrap"
                 >
                   <Coins size={16} className="text-[var(--lime)]" />
@@ -156,7 +156,7 @@ export const Header = () => {
                 className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[var(--lime)] text-[var(--dark-blue)] text-sm font-bold hover:brightness-110 transition-all whitespace-nowrap"
               >
                 <User size={16} />
-                {isAdmin ? "Admin" : "Panelim"}
+                {isAdmin ? t("nav.adminPanel") : t("nav.myPanel")}
               </a>
             </>
           ) : (
@@ -165,7 +165,7 @@ export const Header = () => {
               className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-md border-2 border-[var(--dark-blue)]/20 text-[var(--dark-blue)] text-sm font-bold hover:border-[var(--dark-blue)] transition-colors whitespace-nowrap"
             >
               <LogIn size={16} />
-              Giriş Yap
+              {t("nav.login")}
             </a>
           )}
 
@@ -173,7 +173,7 @@ export const Header = () => {
             ref={toggleRef}
             onClick={() => setMobileOpen(!mobileOpen)}
             className="lg:hidden p-2 text-[var(--dark-blue)] cursor-pointer"
-            aria-label={mobileOpen ? "Menüyü kapat" : "Menüyü aç"}
+            aria-label={mobileOpen ? t("nav.menuClose") : t("nav.menuOpen")}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
           >
@@ -187,7 +187,7 @@ export const Header = () => {
         ref={menuRef}
         id="mobile-menu"
         role="navigation"
-        aria-label="Mobil navigasyon"
+        aria-label={t("nav.mobileNav")}
         className={`lg:hidden border-t border-[var(--dark-blue)]/10 bg-white/90 backdrop-blur-xl overflow-hidden transition-all duration-300 ease-in-out ${
           mobileOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
         }`}
@@ -220,7 +220,7 @@ export const Header = () => {
                 className="flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-md bg-[var(--lime)] text-[var(--dark-blue)] text-sm font-bold"
               >
                 <User size={16} />
-                {isAdmin ? "Admin Panel" : "Panelim"}
+                {isAdmin ? t("nav.adminPanel") : t("nav.myPanel")}
               </a>
             ) : (
               <a
@@ -229,7 +229,7 @@ export const Header = () => {
                 className="flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-md border-2 border-[var(--dark-blue)]/20 text-[var(--dark-blue)] text-sm font-bold"
               >
                 <LogIn size={16} />
-                Giriş Yap
+                {t("nav.login")}
               </a>
             )}
           </div>
