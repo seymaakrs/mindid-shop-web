@@ -29,6 +29,17 @@ const translations: Record<string, Record<string, string>> = {
   "nav.testimonials": { tr: "Yorumlar", en: "Testimonials", es: "Testimonios" },
   "nav.contact": { tr: "İletişim", en: "Contact", es: "Contacto" },
   "nav.start": { tr: "Hemen Başla", en: "Get Started", es: "Comenzar" },
+  "nav.templates": { tr: "Şablonlar", en: "Templates", es: "Plantillas" },
+  "nav.blog": { tr: "Blog", en: "Blog", es: "Blog" },
+  "nav.login": { tr: "Giriş Yap", en: "Sign In", es: "Iniciar Sesión" },
+  "nav.adminPanel": { tr: "Admin Panel", en: "Admin Panel", es: "Panel Admin" },
+  "nav.myPanel": { tr: "Panelim", en: "My Panel", es: "Mi Panel" },
+  "nav.creditBalance": { tr: "Kredi bakiyesi", en: "Credit balance", es: "Saldo de créditos" },
+  "nav.menuOpen": { tr: "Menüyü aç", en: "Open menu", es: "Abrir menú" },
+  "nav.menuClose": { tr: "Menüyü kapat", en: "Close menu", es: "Cerrar menú" },
+  "nav.mainNav": { tr: "Ana navigasyon", en: "Main navigation", es: "Navegación principal" },
+  "nav.mobileNav": { tr: "Mobil navigasyon", en: "Mobile navigation", es: "Navegación móvil" },
+  "nav.home": { tr: "MindID Ana Sayfa", en: "MindID Home", es: "MindID Inicio" },
   "nav.viewAllGallery": { tr: "Tüm Prodüksiyon Galerisini Gör", en: "View Full Production Gallery", es: "Ver Galería Completa" },
 
   // Language selector
