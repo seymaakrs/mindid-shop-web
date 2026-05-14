@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bandırma Çelikspor Kulübü — Kadın Voleybol Takımı</title>
+  <meta name="description" content="Bandırma Çelikspor Kulübü Kadın Voleybol Takımı resmi web sitesi. Yeni sezon, yeni mücadele." />
+
+  <!-- Google Fonts: Montserrat + Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       CSS DEGISKENLERI
+       ========================================================= */
+    :root {
+      --navy:    #0D1B53;
+      --bg:      #0a0f2e;
+      --gold:    #D4AF37;
+      --white:   #FFFFFF;
+      --red:     #CB102E;
+      --gray:    #6B7280;
+
+      --font-display: 'Montserrat', sans-serif;
+      --font-script:  'Caveat', cursive;
+
+      --max-width: 1200px;
+      --radius: 12px;
+      --transition: 0.3s ease;
+    }
+
+    /* =========================================================
+       RESET + TEMEL
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-display);
+      font-weight: 400;
+      color: var(--white);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a   { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section { padding: 96px 0; position: relative; }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-family: var(--font-script);
+      color: var(--gold);
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+    }
+
+    /* =========================================================
+       NAVBAR (Sticky)
+       ========================================================= */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 18px 0;
+      background: transparent;
+      transition: background var(--transition), backdrop-filter var(--transition), padding var(--transition);
+    }
+
+    .navbar.scrolled {
+      background: rgba(13, 27, 83, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.5rem;
+      letter-spacing: 3px;
+      color: var(--white);
+    }
+    .logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      position: relative;
+      padding: 4px 0;
+      transition: color var(--transition);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Mobil menu butonu */
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: 0;
+      color: var(--white);
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      background:
+        radial-gradient(circle at center, rgba(212, 175, 55, 0.18) 0%, transparent 55%),
+        var(--bg);
+      overflow: hidden;
+      padding: 120px 24px 80px;
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 900px; }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      color: var(--white);
+      letter-spacing: 4px;
+      line-height: 1.1;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    .hero .city {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(4rem, 12vw, 8.5rem);
+      color: var(--gold);
+      letter-spacing: 6px;
+      line-height: 1;
+      margin: 8px 0 16px;
+      text-shadow: 0 0 40px rgba(212, 175, 55, 0.35);
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards;
+      animation-delay: 0.45s;
+    }
+
+    .hero .team-line {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(0.95rem, 2vw, 1.2rem);
+      color: var(--white);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards;
+      animation-delay: 0.7s;
+    }
+
+    .hero .slogan {
+      font-family: var(--font-script);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--gold);
+      margin: 28px 0 36px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards;
+      animation-delay: 0.95s;
+    }
+
+    .cta {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      border-radius: 4px;
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards;
+      animation-delay: 1.15s;
+    }
+    .cta:hover {
+      background: var(--gold);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    /* Sag kose dekoratif laurel cerceve (sadece CSS) */
+    .laurel {
+      position: absolute;
+      top: 110px;
+      right: 40px;
+      width: 140px;
+      height: 200px;
+      pointer-events: none;
+      opacity: 0.55;
+    }
+    .laurel::before,
+    .laurel::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 50%;
+      border: 2px solid var(--gold);
+      border-radius: 100% 0 0 100% / 50% 0 0 50%;
+    }
+    .laurel::before { left: 0; border-right: 0; }
+    .laurel::after  { right: 0; border-left: 0; transform: scaleX(-1); }
+
+    @media (max-width: 768px) { .laurel { display: none; } }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================================================
+       SCROLL FADE-IN (Intersection Observer ile tetiklenir)
+       ========================================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       HAKKIMIZDA
+       ========================================================= */
+    .about { background: var(--navy); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-left h2 {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      color: var(--gold);
+      letter-spacing: 2px;
+      line-height: 1.1;
+    }
+    .about-left .accent {
+      font-family: var(--font-script);
+      color: var(--white);
+      font-size: 1.6rem;
+      margin-top: 12px;
+    }
+
+    .about-right p {
+      color: var(--white);
+      font-size: 1rem;
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    /* Degerler */
+    .values {
+      margin-top: 64px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .value-card {
+      background: var(--bg);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: var(--radius);
+      padding: 28px 16px;
+      text-align: center;
+      transition: transform var(--transition), border-color var(--transition);
+    }
+    .value-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+    }
+
+    .value-icon {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .value-name {
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      font-size: 0.95rem;
+    }
+
+    /* =========================================================
+       TAKIM
+       ========================================================= */
+    .team { background: var(--bg); }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .player-card {
+      background: var(--navy);
+      border-top: 3px solid transparent;
+      border-radius: var(--radius);
+      padding: 32px 20px;
+      text-align: center;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .player-card:hover {
+      transform: translateY(-6px);
+      border-top-color: var(--gold);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.67);
+    }
+
+    .player-number {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 4rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .player-name {
+      font-weight: 700;
+      color: var(--white);
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .player-pos {
+      color: var(--gray);
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* =========================================================
+       FIKSTUR
+       ========================================================= */
+    .fixtures { background: var(--bg); }
+
+    .fixtures-table-wrap { overflow-x: auto; }
+
+    table.fixtures-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--navy);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .fixtures-table thead {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .fixtures-table th {
+      text-align: left;
+      padding: 16px 20px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+    .fixtures-table td {
+      padding: 16px 20px;
+      color: var(--white);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.95rem;
+    }
+    .fixtures-table tr:hover td { background: rgba(212, 175, 55, 0.08); }
+
+    .badge-home { color: var(--gold); font-weight: 700; }
+    .badge-away { color: var(--white); font-weight: 700; }
+
+    /* =========================================================
+       HABERLER
+       ========================================================= */
+    .news { background: var(--bg); }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .news-card {
+      background: var(--navy);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .news-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .news-image {
+      width: 100%;
+      height: 200px;
+      background:
+        linear-gradient(135deg, rgba(212, 175, 55, 0.35), rgba(203, 16, 46, 0.35)),
+        linear-gradient(45deg, var(--navy), var(--bg));
+      position: relative;
+    }
+    .news-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 60%);
+    }
+
+    .news-body { padding: 24px; }
+    .news-date {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .news-title {
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+    .news-excerpt {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       ILETISIM
+       ========================================================= */
+    .contact { background: var(--navy); }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+    .form-group label {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: var(--navy);
+      color: var(--white);
+      border: 0;
+      border-bottom: 2px solid var(--gold);
+      padding: 12px 4px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--white); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .submit-btn {
+      align-self: flex-start;
+      background: var(--gold);
+      color: var(--navy);
+      border: 0;
+      padding: 14px 36px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35);
+    }
+
+    .form-success {
+      display: none;
+      color: var(--gold);
+      font-family: var(--font-script);
+      font-size: 1.4rem;
+      margin-top: 10px;
+    }
+    .form-success.is-visible { display: block; }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    .footer {
+      background: var(--bg);
+      padding: 56px 0 32px;
+      text-align: center;
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+    }
+    .footer .logo { font-size: 1.6rem; }
+    .footer .slogan {
+      font-family: var(--font-script);
+      color: var(--gold);
+      font-size: 1.6rem;
+      margin: 12px 0 20px;
+    }
+    .footer .copy {
+      color: var(--white);
+      font-size: 0.8rem;
+      opacity: 0.7;
+      letter-spacing: 1px;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (max-width: 768px) {
+      .section { padding: 72px 0; }
+
+      .nav-toggle { display: block; }
+
+      .nav-links {
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(13, 27, 83, 0.97);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 24px;
+        gap: 18px;
+        transform: translateY(-110%);
+        transition: transform var(--transition);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      }
+      .nav-links.is-open { transform: translateY(0); }
+
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+
+      .values { grid-template-columns: repeat(2, 1fr); }
+
+      .team-grid { grid-template-columns: 1fr; }
+
+      .news-grid { grid-template-columns: 1fr; }
+
+      .fixtures-table th,
+      .fixtures-table td { padding: 12px 14px; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#hero" class="logo">ÇELİK<span>SPOR</span></a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Menüyü aç/kapat">☰</button>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about">Hakkımızda</a></li>
+          <li><a href="#team">Takım</a></li>
+          <li><a href="#fixtures">Fikstür</a></li>
+          <li><a href="#news">Haberler</a></li>
+          <li><a href="#contact">İletişim</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="hero">
+    <div class="laurel" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <h1>ÇELİK SPOR KULÜBÜ</h1>
+      <div class="city">BANDIRMA</div>
+      <div class="team-line">Kadın Voleybol Takımı</div>
+      <p class="slogan">Yeni Sezon, Yeni Mücadele</p>
+      <a href="#team" class="cta">Takımı Tanı</a>
+    </div>
+  </section>
+
+  <!-- ================= HAKKIMIZDA ================= -->
+  <section class="section about reveal" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-left">
+          <h2>1953'TEN<br/>BUGÜNE</h2>
+          <p class="accent">Yarım asrı aşan bir tutku</p>
+        </div>
+        <div class="about-right">
+          <p>
+            Bandırma Çelikspor Kulübü, 1953 yılında bu şehrin spor kültürüne katkı sunmak amacıyla kuruldu.
+            Yıllar içinde pek çok branşta sporcu yetiştiren kulübümüz, bugün Kadın Voleybol Takımı ile
+            Bandırma'yı parkelerde temsil etmeye devam ediyor.
+          </p>
+          <p>
+            Disiplinli antrenmanlar, genç yetenekleri keşfeden alt yapı çalışmaları ve şehrimizin
+            heyecanlı taraftarıyla birlikte; yeni sezonda hedefimiz hem skor hem de karakter olarak
+            zirveye oynamak.
+          </p>
+        </div>
+      </div>
+
+      <!-- Degerler -->
+      <div class="values">
+        <div class="value-card">
+          <span class="value-icon">⚔</span>
+          <div class="value-name">Güçlü</div>
+        </div>
+        <div class="value-card">
+          <span class="value-icon">★</span>
+          <div class="value-name">Güvenilir</div>
+        </div>
+        <div class="value-card">
+          <span class="value-icon">◎</span>
+          <div class="value-name">Odaklı</div>
+        </div>
+        <div class="value-card">
+          <span class="value-icon">✦</span>
+          <div class="value-name">Birlik</div>
+        </div>
+        <div class="value-card">
+          <span class="value-icon">♛</span>
+          <div class="value-name">Başarılı</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TAKIM ================= -->
+  <section class="section team reveal" id="team">
+    <div class="container">
+      <h2 class="section-title">Takım Kadrosu</h2>
+      <p class="section-sub">Parkenin yıldızları</p>
+
+      <div class="team-grid">
+        <article class="player-card">
+          <div class="player-number">1</div>
+          <div class="player-name">Elif Yılmaz</div>
+          <div class="player-pos">Pasör</div>
+        </article>
+        <article class="player-card">
+          <div class="player-number">4</div>
+          <div class="player-name">Zeynep Kara</div>
+          <div class="player-pos">Smaçör</div>
+        </article>
+        <article class="player-card">
+          <div class="player-number">7</div>
+          <div class="player-name">Selin Doğan</div>
+          <div class="player-pos">Orta Oyuncu</div>
+        </article>
+        <article class="player-card">
+          <div class="player-number">9</div>
+          <div class="player-name">Ayşe Demir</div>
+          <div class="player-pos">Libero</div>
+        </article>
+        <article class="player-card">
+          <div class="player-number">11</div>
+          <div class="player-name">Merve Aydın</div>
+          <div class="player-pos">Smaçör</div>
+        </article>
+        <article class="player-card">
+          <div class="player-number">14</div>
+          <div class="player-name">Buse Şahin</div>
+          <div class="player-pos">Orta Oyuncu</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FIKSTUR ================= -->
+  <section class="section fixtures reveal" id="fixtures">
+    <div class="container">
+      <h2 class="section-title">Fikstür</h2>
+      <p class="section-sub">Sezonun maç takvimi</p>
+
+      <div class="fixtures-table-wrap">
+        <table class="fixtures-table">
+          <thead>
+            <tr>
+              <th>Tarih</th>
+              <th>Rakip</th>
+              <th>Konum</th>
+              <th>Saat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>21 Eylül 2026</td>
+              <td>İzmir Gençlik SK</td>
+              <td class="badge-home">İç Saha</td>
+              <td>19:00</td>
+            </tr>
+            <tr>
+              <td>05 Ekim 2026</td>
+              <td>Bursa Yıldız Voleybol</td>
+              <td class="badge-away">Deplasman</td>
+              <td>18:30</td>
+            </tr>
+            <tr>
+              <td>19 Ekim 2026</td>
+              <td>Manisa Spor Kulübü</td>
+              <td class="badge-home">İç Saha</td>
+              <td>20:00</td>
+            </tr>
+            <tr>
+              <td>02 Kasım 2026</td>
+              <td>Antalya Akdeniz SK</td>
+              <td class="badge-away">Deplasman</td>
+              <td>17:00</td>
+            </tr>
+            <tr>
+              <td>16 Kasım 2026</td>
+              <td>Eskişehir Voleybol</td>
+              <td class="badge-home">İç Saha</td>
+              <td>19:00</td>
+            </tr>
+            <tr>
+              <td>30 Kasım 2026</td>
+              <td>Ankara Şampiyon SK</td>
+              <td class="badge-away">Deplasman</td>
+              <td>18:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HABERLER ================= -->
+  <section class="section news reveal" id="news">
+    <div class="container">
+      <h2 class="section-title">Haberler</h2>
+      <p class="section-sub">Takımdan son gelişmeler</p>
+
+      <div class="news-grid">
+        <article class="news-card">
+          <div class="news-image"></div>
+          <div class="news-body">
+            <div class="news-date">12 Mayıs 2026</div>
+            <h3 class="news-title">Yeni Sezon Hazırlık Kampı Bandırma'da Başladı</h3>
+            <p class="news-excerpt">Takımımız, antrenör kadrosu eşliğinde yeni sezon hazırlık kampını şehir spor salonunda sürdürüyor.</p>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <div class="news-image"></div>
+          <div class="news-body">
+            <div class="news-date">28 Nisan 2026</div>
+            <h3 class="news-title">Genç Yeteneklerle Kadromuz Güçleniyor</h3>
+            <p class="news-excerpt">Alt yapımızdan yetişen üç oyuncu A takım kadrosuna dahil edildi. Şehrimizin gururu olmaya hazırlar.</p>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <div class="news-image"></div>
+          <div class="news-body">
+            <div class="news-date">15 Nisan 2026</div>
+            <h3 class="news-title">Çelikspor'dan Anlamlı Sosyal Sorumluluk Projesi</h3>
+            <p class="news-excerpt">Kulübümüz, Bandırma'daki ilkokullarda voleybol tanıtım etkinlikleri düzenledi. Sporu çocuklara sevdirmeye devam.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ILETISIM ================= -->
+  <section class="section contact reveal" id="contact">
+    <div class="container">
+      <h2 class="section-title" style="text-align:center;">İletişim</h2>
+      <p class="section-sub" style="text-align:center;">Bize ulaşın</p>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="name">Ad Soyad</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-posta</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Mesaj</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Gönder</button>
+        <p class="form-success" id="formSuccess">Mesajınız alındı, teşekkürler!</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="logo">ÇELİK<span style="color: var(--gold);">SPOR</span></div>
+      <p class="slogan">Bandırma'nın gururu</p>
+      <p class="copy">© 2026 Bandırma Çelikspor Kulübü — Tüm hakları saklıdır.</p>
+    </div>
+  </footer>
+
+  <script>
+    // =========================================================
+    // NAVBAR scroll efekti
+    // =========================================================
+    const navbar = document.getElementById('navbar');
+    const onScroll = () => {
+      if (window.scrollY > 30) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // =========================================================
+    // Mobil menu toggle
+    // =========================================================
+    const navToggle = document.getElementById('navToggle');
+    const navLinks  = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('is-open');
+    });
+    // Linke tiklayinca mobilde menuyu kapat
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('is-open'));
+    });
+
+    // =========================================================
+    // Scroll reveal (Intersection Observer)
+    // =========================================================
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    // =========================================================
+    // Iletisim form
+    // =========================================================
+    const form    = document.getElementById('contactForm');
+    const success = document.getElementById('formSuccess');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Demo amacli: backend yok, sadece basarili mesaji goster
+      success.classList.add('is-visible');
+      form.reset();
+      setTimeout(() => success.classList.remove('is-visible'), 4000);
+    });
+  </script>
+
+</body>
+</html>
