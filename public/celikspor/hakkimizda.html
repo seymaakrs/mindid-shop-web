@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#060926" />
+  <title>Hakkımızda — Çelik Spor Kulübü Bandırma</title>
+  <meta name="description" content="1953'ten bu yana Bandırma'nın gururu olan Çelik Spor Kulübü'nün tarihi, değerleri ve teknik kadrosu." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/site.css" />
+
+  <style>
+    /* Heritage block */
+    .heritage-content {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .heritage-content .lead-text {
+      font-family: var(--font-script);
+      color: var(--gold);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1.3;
+      margin-bottom: 32px;
+    }
+    .heritage-content p {
+      color: var(--gray-light);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+    .heritage-content p strong { color: var(--white); font-weight: 700; }
+
+    .heritage-visual {
+      position: sticky;
+      top: 120px;
+      aspect-ratio: 4/5;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--navy-soft) 0%, var(--navy-deep) 100%);
+    }
+    .heritage-visual .year-mark {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: 900;
+      font-size: clamp(8rem, 16vw, 14rem);
+      color: rgba(212,175,55, 0.18);
+      letter-spacing: -8px;
+      line-height: 1;
+    }
+    .heritage-visual .emblem-big {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 240px; height: 240px;
+      opacity: 0.95;
+    }
+    .heritage-visual .corner {
+      position: absolute;
+      bottom: 24px; left: 24px; right: 24px;
+      display: flex; justify-content: space-between;
+      font-size: 0.7rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold);
+      font-weight: 700;
+    }
+
+    @media (max-width: 960px) {
+      .heritage-content { grid-template-columns: 1fr; gap: 40px; }
+      .heritage-visual { position: static; max-width: 480px; margin: 0 auto; }
+    }
+
+    /* Staff cards */
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .staff-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      transition: all var(--t);
+    }
+    .staff-card:hover {
+      border-color: var(--gold);
+      background: rgba(212,175,55,0.04);
+      transform: translateY(-6px);
+    }
+    .staff-card .role {
+      font-size: 0.7rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold);
+      font-weight: 700; margin-bottom: 24px;
+    }
+    .staff-card .avatar {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy-soft), var(--navy-deep));
+      border: 2px solid var(--line-strong);
+      display: grid; place-items: center;
+      font-weight: 900; font-size: 1.8rem;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .staff-card h3 {
+      font-weight: 900; font-size: 1.3rem;
+      letter-spacing: 1px; line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .staff-card .position {
+      font-family: var(--font-script);
+      color: var(--gold);
+      font-size: 1.2rem;
+    }
+    .staff-card .bio {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--gray-light);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 760px) {
+      .staff-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Marquee headline */
+    .big-quote {
+      padding: clamp(60px, 10vw, 120px) 0;
+      text-align: center;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .big-quote .script {
+      font-family: var(--font-script);
+      color: var(--gold);
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 1.2;
+      max-width: 1000px; margin: 0 auto;
+    }
+    .big-quote .attr {
+      margin-top: 24px;
+      font-size: 0.78rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gray-light);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body data-screen-label="02 Hakkımızda">
+
+  <div id="chrome-nav"></div>
+
+  <!-- ====================== PAGE HERO ====================== -->
+  <section class="page-hero">
+    <div class="ph-bg" style="background-image: url('assets/photos/team-bench.jpg'); background-position: center;"></div>
+    <div class="ph-overlay"></div>
+    <div class="container">
+      <div class="crumbs">
+        <a href="index.html">Ana Sayfa</a>
+        <span>/</span>
+        <span>Hakkımızda</span>
+      </div>
+      <h1 class="reveal-text">
+        <span class="gold">1953'ten</span> bugüne,
+        Bandırma'nın <span class="gold">gururu.</span>
+      </h1>
+      <p class="lead">Güçlü geçmiş, yeni gelecek.</p>
+
+      <div class="meta reveal">
+        <div>
+          <span class="lbl">Kuruluş</span>
+          <span class="val">1953</span>
+        </div>
+        <div>
+          <span class="lbl">Branş</span>
+          <span class="val">Kadın Voleybol</span>
+        </div>
+        <div>
+          <span class="lbl">Şehir</span>
+          <span class="val">Bandırma · Balıkesir</span>
+        </div>
+        <div>
+          <span class="lbl">Renkler</span>
+          <span class="val" style="display:flex; gap:8px; align-items:center;">
+            <span style="width:18px; height:18px; border-radius:50%; background:#0D1B53; border:1px solid #D4AF37;"></span>
+            <span style="width:18px; height:18px; border-radius:50%; background:#D4AF37;"></span>
+            Lacivert &amp; Altın
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="deco-1953" aria-hidden="true">1953</div>
+  </section>
+
+  <!-- ====================== HERITAGE ====================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="left">
+          <div class="eyebrow">Kulüp Hikayesi</div>
+          <h2 class="reveal-text">Yarım asrı aşan <span class="gold">bir tutku.</span></h2>
+        </div>
+      </div>
+
+      <div class="heritage-content">
+        <div class="reveal">
+          <p class="lead-text">
+            Köklü geçmişimizi temsil eden lacivert ve altın tonlarımız; güç, istikrar ve prestijin simgesidir.
+          </p>
+          <p>
+            Bandırma Çelikspor Kulübü, <strong>1953 yılında</strong> şehrimizin spor kültürüne katkı sunmak amacıyla kuruldu. Marmara'nın bu önemli liman kentinde sporun ve özellikle takım sporlarının gelişimine yön veren kulübümüz, yıllar içinde pek çok branşta sporcu yetiştirdi.
+          </p>
+          <p>
+            Bugün <strong>Kadın Voleybol Takımımız</strong> ile Bandırma'yı parkelerde temsil ediyoruz. Disiplinli antrenmanlar, genç yetenekleri keşfeden alt yapı çalışmalarımız ve şehrimizin coşkulu taraftarıyla birlikte; yeni sezonda hem skor hem de karakter olarak zirveye oynamak istiyoruz.
+          </p>
+          <p>
+            Lacivertin asaleti, altının güçlü birleşimi. Dinamik ışık efektleri, hareketi ve enerjiyi yansıtır. Laurel desenimiz, köklü geçmişimizi ve zaferi geleneğimizi simgeler. Her detayda; güç, birlik ve mücadele ruhu vardır.
+          </p>
+        </div>
+
+        <div class="heritage-visual reveal right">
+          <div class="year-mark" aria-hidden="true">1953</div>
+          <img class="emblem-big" src="assets/brand/logo-3d.png" alt="Çelik Spor Kulübü Bandırma — Resmi Logo" style="width:300px; height:300px; object-fit:contain;" />
+          <div class="corner">
+            <span>Çelik Spor Kulübü</span>
+            <span>Bandırma</span>
+          </div>
+        </div>
+          <div class="corner">
+            <span>Çelik Spor Kulübü</span>
+            <span>Bandırma</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== VALUES ====================== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-head">
+        <div class="left">
+          <div class="eyebrow">Marka Dili & Tonu</div>
+          <h2 class="reveal-text">Beş ilke, <span class="gold">tek karakter.</span></h2>
+        </div>
+        <div class="right">
+          Sahaya çıkarken, kararlarımızı verirken, sporcularımızı yetiştirirken bu beş ilke her zaman rehberimiz olur.
+        </div>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card reveal" data-delay="1">
+          <div class="ico">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 L4 6 v6 c0 5 3.5 9 8 10 4.5-1 8-5 8-10 V6 z"/></svg>
+          </div>
+          <div class="nm">Güçlü</div>
+          <p class="desc">Sahanın her anında bedensel ve zihinsel olarak güçlüyüz.</p>
+        </div>
+        <div class="value-card reveal" data-delay="2">
+          <div class="ico">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11 L8 16 l5-5"/><path d="M11 6 a3 3 0 0 1 6 0 v3 h3 v6 h-3 v3 h-6 v-3"/></svg>
+          </div>
+          <div class="nm">Güvenilir</div>
+          <p class="desc">Sözümüze, takım arkadaşımıza ve sahaya hep güveniriz.</p>
+        </div>
+        <div class="value-card reveal" data-delay="3">
+          <div class="ico">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+          </div>
+          <div class="nm">Odaklı</div>
+          <p class="desc">Hedefe kilitleniriz; dağılmadan, vazgeçmeden çalışırız.</p>
+        </div>
+        <div class="value-card reveal" data-delay="4">
+          <div class="ico">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 20 c0-3 3-5 5-5 s5 2 5 5"/><path d="M12 20 c0-3 3-5 5-5 s5 2 5 5"/></svg>
+          </div>
+          <div class="nm">Birlik</div>
+          <p class="desc">Tek bir yürek, tek bir hedef. Daima takım olarak hareket ederiz.</p>
+        </div>
+        <div class="value-card reveal" data-delay="5">
+          <div class="ico">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 L14.5 9 L22 9 L16 13.5 L18.5 21 L12 16.5 L5.5 21 L8 13.5 L2 9 L9.5 9 Z"/></svg>
+          </div>
+          <div class="nm">Başarılı</div>
+          <p class="desc">Çalışmanın karşılığını her sezon sahada görmeyi biliriz.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== BIG QUOTE ====================== -->
+  <section class="big-quote reveal">
+    <div class="container">
+      <p class="script">"Sahada bir kişi değil, koca bir şehir oynar."</p>
+      <p class="attr">— Bandırma Çelik Spor Kulübü</p>
+    </div>
+  </section>
+
+  <!-- ====================== TIMELINE ====================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="left">
+          <div class="eyebrow">Kulüp Tarihçesi</div>
+          <h2 class="reveal-text">Köklerden <span class="gold">bugüne.</span></h2>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="yr">1953</div>
+          <h4>Kulübün Kuruluşu</h4>
+          <p>Çelik Spor Kulübü, Bandırma'da bir grup sporsever tarafından kurulur. Marmara'nın liman şehrinde sporun gelişimine yön verecek bir kurum doğar.</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="yr">1968</div>
+          <h4>İlk Şampiyonluk</h4>
+          <p>Kulübümüz bölgesel düzeyde ilk önemli kupasını kazanır. Lacivert-altın renkler şehir tarihinde yer eder.</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="yr">1984</div>
+          <h4>Kadın Voleybol Kuruluşu</h4>
+          <p>Kulübümüz, Bandırma'nın ilk kadın voleybol takımını kurar. O günden bu yana parkenin yıldızı olduk.</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="yr">2001</div>
+          <h4>Modern Antrenman Tesisleri</h4>
+          <p>Bandırma Şehir Spor Salonu'nun modernize edilmesiyle takımımız yeni evine kavuşur. Genç yeteneklerimize daha donanımlı imkânlar sunulur.</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="yr">2015</div>
+          <h4>Alt Yapı Yenilenmesi</h4>
+          <p>U14, U16 ve U18 takımlarımız profesyonel kadroyla yeniden yapılandırılır. Bugün A takım kadromuzdaki çoğu sporcu bu alt yapının ürünüdür.</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="yr">2026</div>
+          <h4>Yeni Sezon, Yeni Mücadele</h4>
+          <p>Yenilenen kadromuz ve modernleşen tesisimizle yeni bir sayfa açıyoruz. Geleceğe daha güçlü bakıyoruz.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== STAFF ====================== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-head">
+        <div class="left">
+          <div class="eyebrow">Teknik Kadro</div>
+          <h2 class="reveal-text">Sahaya inanan <span class="gold">isimler.</span></h2>
+        </div>
+      </div>
+
+      <div class="staff-grid">
+        <div class="staff-card reveal" data-delay="1">
+          <div class="role">Başantrenör</div>
+          <div class="avatar">MK</div>
+          <h3>Murat Kaya</h3>
+          <p class="position">15 yıllık voleybol tecrübesi</p>
+          <p class="bio">Profesyonel kariyeri Türkiye 1. Ligi'nde başlayan Kaya, son 6 sezondur Çelik Spor'un başantrenörlüğünü sürdürüyor.</p>
+        </div>
+
+        <div class="staff-card reveal" data-delay="2">
+          <div class="role">Yardımcı Antrenör</div>
+          <div class="avatar">AÇ</div>
+          <h3>Aslı Çelik</h3>
+          <p class="position">Eski milli sporcu</p>
+          <p class="bio">2008-2014 yılları arasında milli takım kadrosunda yer aldı. Saha içindeki tecrübesini bugün kadromuza aktarıyor.</p>
+        </div>
+
+        <div class="staff-card reveal" data-delay="3">
+          <div class="role">Performans Koçu</div>
+          <div class="avatar">EB</div>
+          <h3>Emre Başkaya</h3>
+          <p class="position">Spor bilimleri uzmanı</p>
+          <p class="bio">Sporcu performans takibi ve sakatlık önleme alanında uzmanlaşmış antrenmanlarıyla takımımıza katkı sağlıyor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="chrome-foot"></div>
+
+  <script src="assets/chrome.js"></script>
+  <script src="assets/main.js"></script>
+</body>
+</html>

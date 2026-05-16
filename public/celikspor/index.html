@@ -3,1516 +3,566 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0D1B53" />
-  <title>Bandırma Çelikspor Kulübü — Kadın Voleybol Takımı</title>
-  <meta name="description" content="Bandırma Çelikspor Kulübü Kadın Voleybol Takımı resmi web sitesi. Yeni sezon, yeni mücadele." />
+  <meta name="theme-color" content="#060926" />
+  <title>Çelik Spor Kulübü Bandırma — Kadın Voleybol Takımı</title>
+  <meta name="description" content="Bandırma Çelikspor Kulübü Kadın Voleybol Takımı resmi web sitesi. 1953'ten bu yana güçlü geçmiş, yeni gelecek." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/site.css" />
 
   <style>
-    /* =========================================================
-       CSS DEGISKENLERI
-       ========================================================= */
-    :root {
-      --navy:       #0D1B53;
-      --navy-soft:  #142370;
-      --bg:         #0a0f2e;
-      --bg-deep:    #060926;
-      --gold:       #D4AF37;
-      --gold-soft:  #E8C75B;
-      --white:      #FFFFFF;
-      --red:        #CB102E;
-      --gray:       #6B7280;
-      --gray-light: #A1A8B5;
-
-      --font-display: 'Montserrat', sans-serif;
-      --font-script:  'Caveat', cursive;
-
-      --max-width: 1280px;
-      --radius-sm: 8px;
-      --radius:    16px;
-      --radius-lg: 24px;
-      --transition: 0.35s cubic-bezier(.22,.61,.36,1);
-
-      --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.35);
-      --shadow-gold: 0 12px 40px rgba(212, 175, 55, 0.25);
+    /* ----- Home-only ----- */
+    .home-intro {
+      padding: 100px 0 80px;
     }
-
-    /* =========================================================
-       RESET + TEMEL
-       ========================================================= */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-
-    body {
-      font-family: var(--font-display);
-      font-weight: 400;
-      color: var(--white);
-      background: var(--bg);
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    img { max-width: 100%; display: block; }
-    a   { color: inherit; text-decoration: none; }
-    button, input, textarea { font: inherit; }
-
-    .container {
-      width: 100%;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .section { padding: clamp(64px, 10vw, 120px) 0; position: relative; }
-
-    .section-head { text-align: center; margin-bottom: clamp(40px, 6vw, 64px); }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-weight: 900;
-      font-size: clamp(1.8rem, 4.5vw, 3.25rem);
-      color: var(--white);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      line-height: 1.1;
-    }
-    .section-title .accent { color: var(--gold); }
-
-    .section-sub {
-      font-family: var(--font-script);
-      color: var(--gold);
-      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-      margin-top: 8px;
-    }
-
-    /* Altin alt cizgi */
-    .divider {
-      width: 64px; height: 3px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 16px auto 0;
-      border: 0;
-    }
-
-    /* =========================================================
-       NAVBAR (Sticky)
-       ========================================================= */
-    .navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 18px 0;
-      background: transparent;
-      transition: background var(--transition), backdrop-filter var(--transition), padding var(--transition);
-    }
-
-    .navbar.scrolled {
-      background: rgba(13, 27, 83, 0.78);
-      backdrop-filter: blur(14px) saturate(140%);
-      -webkit-backdrop-filter: blur(14px) saturate(140%);
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.18);
-    }
-
-    .nav-inner {
-      display: flex;
+    .home-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 80px;
       align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      position: relative;
     }
-
-    .logo {
-      font-family: var(--font-display);
-      font-weight: 900;
-      font-size: 1.4rem;
-      letter-spacing: 3px;
-      color: var(--white);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .logo .logo-mark {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-      color: var(--navy);
-      display: grid; place-items: center;
-      font-weight: 900;
-      font-size: 0.95rem;
-      box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
-    }
-    .logo span { color: var(--gold); }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--white);
-      position: relative;
-      padding: 4px 0;
-      transition: color var(--transition);
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: -4px;
-      width: 0; height: 2px;
-      background: var(--gold);
-      transition: width var(--transition);
-    }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-links a:hover::after { width: 100%; }
-
-    .nav-toggle {
-      display: none;
-      background: transparent;
-      border: 0;
-      color: var(--white);
-      font-size: 1.6rem;
-      cursor: pointer;
-      width: 44px; height: 44px;
-      border-radius: 8px;
-    }
-    .nav-toggle:hover { background: rgba(255, 255, 255, 0.08); }
-
-    /* =========================================================
-       HERO
-       ========================================================= */
-    .hero {
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      padding: 120px 24px 80px;
-      isolation: isolate;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      background-color: var(--bg);
-      background-image:
-        linear-gradient(180deg, rgba(10, 15, 46, 0.78) 0%, rgba(10, 15, 46, 0.92) 100%),
-        url('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=1920&auto=format&fit=crop&q=80');
-      background-size: cover;
-      background-position: center;
-      filter: saturate(110%);
-    }
-
-    .hero-bg::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(212, 175, 55, 0.22) 0%, transparent 55%);
-    }
-
-    .hero-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(800px 400px at 10% 10%, rgba(13, 27, 83, 0.5), transparent 60%),
-        radial-gradient(600px 400px at 90% 90%, rgba(203, 16, 46, 0.18), transparent 60%);
-    }
-
-    .hero-content { position: relative; z-index: 2; max-width: 980px; }
-
-    .hero .eyebrow {
-      display: inline-block;
-      padding: 6px 14px;
-      border: 1px solid rgba(212, 175, 55, 0.5);
-      border-radius: 999px;
-      color: var(--gold);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+    .home-intro .tag-row {
+      display: flex; gap: 16px; align-items: center;
       margin-bottom: 28px;
-      backdrop-filter: blur(6px);
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards;
-      animation-delay: 0.1s;
     }
-
-    .hero h1 {
-      font-family: var(--font-display);
-      font-weight: 900;
-      font-size: clamp(1.6rem, 4.5vw, 3.2rem);
-      color: var(--white);
-      letter-spacing: 4px;
-      line-height: 1.1;
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards;
-      animation-delay: 0.25s;
-    }
-
-    .hero .city {
-      font-family: var(--font-display);
-      font-weight: 900;
-      font-size: clamp(3.5rem, 13vw, 9rem);
-      color: var(--gold);
-      letter-spacing: clamp(2px, 1vw, 8px);
-      line-height: 1;
-      margin: 8px 0 16px;
-      background: linear-gradient(180deg, var(--gold-soft), var(--gold));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 60px rgba(212, 175, 55, 0.35);
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards;
-      animation-delay: 0.45s;
-    }
-
-    .hero .team-line {
-      font-family: var(--font-display);
-      font-weight: 500;
-      font-size: clamp(0.85rem, 2vw, 1.15rem);
-      color: var(--white);
-      letter-spacing: clamp(2px, 0.6vw, 5px);
-      text-transform: uppercase;
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards;
-      animation-delay: 0.7s;
-    }
-
-    .hero .slogan {
-      font-family: var(--font-script);
-      font-size: clamp(1.6rem, 4vw, 2.6rem);
-      color: var(--gold);
-      margin: 24px 0 32px;
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards;
-      animation-delay: 0.95s;
-    }
-
-    .cta-row {
-      display: inline-flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      justify-content: center;
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards;
-      animation-delay: 1.15s;
-    }
-
-    .cta {
-      display: inline-block;
-      font-family: var(--font-display);
+    .home-intro .est-tag {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 8px 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      font-size: 0.7rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold);
       font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 14px 32px;
-      border: 2px solid var(--gold);
-      color: var(--gold);
-      border-radius: 999px;
-      transition: background var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition);
     }
-    .cta:hover {
-      background: var(--gold);
-      color: var(--navy);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-gold);
-    }
-    .cta.primary {
-      background: var(--gold);
-      color: var(--navy);
-    }
-    .cta.primary:hover {
-      background: var(--gold-soft);
-      box-shadow: var(--shadow-gold);
-    }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: rgba(255, 255, 255, 0.55);
-      font-size: 0.75rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      animation: bounce 2.5s ease-in-out infinite;
-    }
-    .scroll-hint::after {
-      content: '';
-      display: block;
-      width: 1px; height: 30px;
-      background: linear-gradient(180deg, var(--gold), transparent);
-      margin: 8px auto 0;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translate(-50%, 0); }
-      50%      { transform: translate(-50%, 6px); }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* =========================================================
-       SCROLL FADE-IN
-       ========================================================= */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.is-visible { opacity: 1; transform: translateY(0); }
-
-    /* =========================================================
-       ISTATISTIKLER (Yeni bolum)
-       ========================================================= */
-    .stats {
-      background: linear-gradient(180deg, var(--bg) 0%, var(--navy) 100%);
-      padding: clamp(48px, 8vw, 80px) 0;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      text-align: center;
-    }
-
-    .stat-card {
-      padding: 28px 16px;
-      border-radius: var(--radius);
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(212, 175, 55, 0.15);
-      backdrop-filter: blur(8px);
-      transition: transform var(--transition), border-color var(--transition);
-    }
-    .stat-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--gold);
-    }
-    .stat-number {
+    .home-intro h2 {
       font-weight: 900;
-      font-size: clamp(2rem, 5vw, 3rem);
-      color: var(--gold);
-      line-height: 1;
-    }
-    .stat-label {
-      margin-top: 8px;
-      color: var(--white);
-      font-size: 0.85rem;
-      letter-spacing: 1.5px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      letter-spacing: 1px;
+      line-height: 1.05;
       text-transform: uppercase;
-    }
-
-    /* =========================================================
-       HAKKIMIZDA
-       ========================================================= */
-    .about { background: var(--navy); }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: clamp(32px, 5vw, 80px);
-      align-items: center;
-    }
-
-    .about-image {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-      aspect-ratio: 4 / 5;
-    }
-    .about-image img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.8s ease;
-    }
-    .about-image:hover img { transform: scale(1.04); }
-
-    .about-image::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 50%, rgba(13, 27, 83, 0.85) 100%);
-      pointer-events: none;
-    }
-
-    .about-image .badge {
-      position: absolute;
-      bottom: 20px; left: 20px;
-      z-index: 2;
-      background: var(--gold);
-      color: var(--navy);
-      padding: 10px 18px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      font-size: 0.8rem;
-      border-radius: 999px;
-      text-transform: uppercase;
-    }
-
-    .about-text h2 {
-      font-family: var(--font-display);
-      font-weight: 900;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      color: var(--white);
-      letter-spacing: 2px;
-      line-height: 1.1;
-      margin-bottom: 8px;
-    }
-    .about-text h2 .accent { color: var(--gold); }
-
-    .about-text .label {
-      font-family: var(--font-script);
-      color: var(--gold);
-      font-size: 1.5rem;
       margin-bottom: 24px;
     }
-
-    .about-text p {
+    .home-intro h2 .gold { color: var(--gold); }
+    .home-intro p {
       color: var(--gray-light);
       font-size: 1rem;
       line-height: 1.85;
       margin-bottom: 16px;
     }
-
-    /* Degerler */
-    .values {
-      margin-top: clamp(48px, 7vw, 80px);
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
+    .home-intro .actions {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      margin-top: 36px;
     }
 
-    .value-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(212, 175, 55, 0.18);
-      border-radius: var(--radius);
-      padding: 28px 16px;
-      text-align: center;
-      transition: transform var(--transition), border-color var(--transition), background var(--transition);
-      backdrop-filter: blur(8px);
-    }
-    .value-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--gold);
-      background: rgba(212, 175, 55, 0.08);
-    }
-
-    .value-icon {
-      font-size: 2rem;
-      color: var(--gold);
-      margin-bottom: 12px;
-      display: block;
-    }
-    .value-name {
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--white);
-      font-size: 0.9rem;
-    }
-
-    /* =========================================================
-       TAKIM
-       ========================================================= */
-    .team {
-      background: var(--bg);
+    /* Featured player highlight */
+    .featured-player {
       position: relative;
-    }
-    .team::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(600px 400px at 10% 0%, rgba(212, 175, 55, 0.08), transparent 50%),
-        radial-gradient(600px 400px at 90% 100%, rgba(203, 16, 46, 0.08), transparent 50%);
-      pointer-events: none;
-    }
-
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      position: relative;
-    }
-
-    .player-card {
-      position: relative;
+      aspect-ratio: 4/5;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      background: var(--navy);
-      aspect-ratio: 3 / 4;
-      transition: transform var(--transition), box-shadow var(--transition);
-      cursor: pointer;
+      background: linear-gradient(135deg, var(--navy-soft), var(--navy-deep));
     }
-    .player-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 50px rgba(212, 175, 55, 0.35);
-    }
-
-    .player-card .photo {
-      position: absolute; inset: 0;
-      background-color: var(--navy-soft);
-      background-image: linear-gradient(135deg, var(--navy-soft) 0%, var(--bg) 100%);
-      background-size: cover;
-      background-position: center top;
-      transition: transform 0.8s ease, filter var(--transition);
-    }
-    .player-card:hover .photo {
-      transform: scale(1.07);
-      filter: brightness(1.05);
-    }
-
-    .player-card .overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(10, 15, 46, 0) 35%, rgba(10, 15, 46, 0.95) 100%);
-      pointer-events: none;
-    }
-
-    .player-card .number-tag {
+    .featured-player .big-number {
       position: absolute;
-      top: 16px; right: 16px;
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      background: var(--gold);
-      color: var(--navy);
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      font-size: 1.3rem;
-      box-shadow: 0 6px 18px rgba(212, 175, 55, 0.5);
-    }
-
-    .player-card .info {
-      position: absolute;
-      left: 22px; right: 22px; bottom: 22px;
-      z-index: 2;
-    }
-    .player-card .name {
-      color: var(--white);
-      font-weight: 900;
-      font-size: 1.25rem;
-      letter-spacing: 1px;
-      line-height: 1.2;
-    }
-    .player-card .pos {
-      color: var(--gold);
-      font-family: var(--font-script);
-      font-size: 1.25rem;
-      margin-top: 2px;
-    }
-
-    /* =========================================================
-       FIKSTUR
-       ========================================================= */
-    .fixtures {
-      background: var(--navy);
-      position: relative;
-    }
-
-    .fixtures-table-wrap {
-      overflow-x: auto;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-card);
-      -webkit-overflow-scrolling: touch;
-    }
-
-    table.fixtures-table {
-      width: 100%;
-      min-width: 600px;
-      border-collapse: collapse;
-      background: var(--bg);
-      overflow: hidden;
-    }
-
-    .fixtures-table thead {
-      background: linear-gradient(90deg, var(--gold), var(--gold-soft));
-      color: var(--navy);
-    }
-    .fixtures-table th {
-      text-align: left;
-      padding: 18px 22px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-    }
-    .fixtures-table td {
-      padding: 18px 22px;
-      color: var(--white);
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      font-size: 0.95rem;
-      vertical-align: middle;
-    }
-    .fixtures-table tr { transition: background var(--transition); }
-    .fixtures-table tbody tr:hover { background: rgba(212, 175, 55, 0.06); }
-
-    .date-cell { display: flex; flex-direction: column; }
-    .date-day { font-weight: 900; color: var(--gold); font-size: 1.1rem; line-height: 1; }
-    .date-month { font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-light); margin-top: 2px; }
-
-    .pill {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-    .pill.home { background: rgba(212, 175, 55, 0.15); color: var(--gold); border: 1px solid rgba(212, 175, 55, 0.4); }
-    .pill.away { background: rgba(255, 255, 255, 0.08); color: var(--white); border: 1px solid rgba(255, 255, 255, 0.2); }
-
-    /* =========================================================
-       HABERLER
-       ========================================================= */
-    .news { background: var(--bg); }
-
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    .news-card {
-      background: var(--navy);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      transition: transform var(--transition), box-shadow var(--transition);
-      display: flex;
-      flex-direction: column;
-    }
-    .news-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-    }
-
-    .news-image {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      overflow: hidden;
-      position: relative;
-      background:
-        linear-gradient(135deg, var(--navy-soft) 0%, var(--bg) 100%);
-    }
-    .news-image img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.7s ease;
-    }
-    .news-card:hover .news-image img { transform: scale(1.06); }
-
-    .news-image .tag {
-      position: absolute;
-      top: 14px; left: 14px;
-      background: var(--gold);
-      color: var(--navy);
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 0.65rem;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .news-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
-    .news-date {
-      color: var(--gold);
-      font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .news-title {
-      color: var(--white);
-      font-weight: 700;
-      font-size: 1.15rem;
-      margin-bottom: 12px;
-      line-height: 1.4;
-    }
-    .news-excerpt {
-      color: var(--gray-light);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      flex: 1;
-    }
-    .news-link {
-      margin-top: 16px;
-      color: var(--gold);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: gap var(--transition);
-    }
-    .news-card:hover .news-link { gap: 12px; }
-
-    /* =========================================================
-       ILETISIM
-       ========================================================= */
-    .contact {
-      background: var(--navy);
-      position: relative;
-      overflow: hidden;
-    }
-    .contact::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(circle at center, rgba(212, 175, 55, 0.08), transparent 60%);
-      pointer-events: none;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(32px, 5vw, 64px);
-      align-items: start;
-      position: relative;
-    }
-
-    .contact-info { padding-top: 8px; }
-
-    .contact-info h3 {
+      top: -30px; left: -20px;
       font-family: var(--font-display);
       font-weight: 900;
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      color: var(--white);
-      letter-spacing: 1px;
-      margin-bottom: 16px;
+      font-size: 22rem;
+      line-height: 0.8;
+      color: rgba(212,175,55, 0.12);
+      letter-spacing: -10px;
+      z-index: 1;
     }
-    .contact-info h3 .accent { color: var(--gold); }
-    .contact-info > p {
-      color: var(--gray-light);
-      margin-bottom: 28px;
-      line-height: 1.8;
+    .featured-player .overlay-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 40px 32px;
+      background: linear-gradient(180deg, transparent 0%, rgba(6,9,38,0.95) 70%);
+      z-index: 3;
     }
-
-    .info-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
-    .info-item {
-      display: flex; gap: 14px; align-items: flex-start;
-    }
-    .info-icon {
-      width: 42px; height: 42px;
-      border-radius: 12px;
-      background: rgba(212, 175, 55, 0.12);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      display: grid; place-items: center;
-      color: var(--gold);
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-    .info-text .lbl {
-      font-size: 0.75rem; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--gray-light);
-    }
-    .info-text .val { color: var(--white); font-weight: 500; }
-
-    .contact-form {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(212, 175, 55, 0.18);
-      backdrop-filter: blur(10px);
-      border-radius: var(--radius-lg);
-      padding: clamp(24px, 4vw, 36px);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-
-    .form-group label {
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 700;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      background: rgba(10, 15, 46, 0.7);
-      color: var(--white);
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      border-radius: 10px;
-      padding: 14px 16px;
-      font-size: 1rem;
-      outline: none;
-      transition: border-color var(--transition), background var(--transition);
-    }
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--gold);
-      background: rgba(10, 15, 46, 0.95);
-    }
-    .form-group textarea { resize: vertical; min-height: 130px; }
-
-    .submit-btn {
-      align-self: flex-start;
-      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-      color: var(--navy);
-      border: 0;
-      padding: 14px 32px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-gold);
-    }
-    .submit-btn:active { transform: translateY(0); }
-
-    .form-success {
-      display: none;
-      color: var(--gold);
+    .featured-player .pos-line {
       font-family: var(--font-script);
+      color: var(--gold);
       font-size: 1.4rem;
+      margin-bottom: 4px;
     }
-    .form-success.is-visible { display: block; }
-
-    /* =========================================================
-       FOOTER
-       ========================================================= */
-    .footer {
-      background: var(--bg-deep);
-      padding: 64px 0 32px;
-      text-align: center;
-      border-top: 1px solid rgba(212, 175, 55, 0.15);
-    }
-    .footer .logo { font-size: 1.5rem; justify-content: center; }
-    .footer .slogan {
-      font-family: var(--font-script);
-      color: var(--gold);
-      font-size: 1.6rem;
-      margin: 14px 0 22px;
-    }
-    .social {
-      display: flex; justify-content: center; gap: 14px; margin-bottom: 24px;
-    }
-    .social a {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      color: var(--gold);
-      display: grid; place-items: center;
-      font-size: 0.95rem;
-      transition: background var(--transition), color var(--transition), transform var(--transition);
-    }
-    .social a:hover {
-      background: var(--gold);
-      color: var(--navy);
-      transform: translateY(-3px);
-    }
-    .footer .copy {
-      color: var(--gray-light);
-      font-size: 0.8rem;
+    .featured-player .player-name {
+      font-weight: 900;
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
       letter-spacing: 1px;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .featured-player .player-name .gold { color: var(--gold); display: block; }
+    .featured-player .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.18);
+    }
+    .featured-player .stats > div { font-size: 0.78rem; }
+    .featured-player .stats .v {
+      font-weight: 900; font-size: 1.2rem; color: var(--gold);
+      display: block; line-height: 1;
+    }
+    .featured-player .stats .l {
+      font-size: 0.65rem; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--gray-light);
+      margin-top: 4px; display: block;
+    }
+    .featured-player .photo-shape {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(212,175,55,0.18), transparent 55%),
+        linear-gradient(135deg, var(--navy-soft) 0%, var(--navy-deep) 100%);
+      z-index: 2;
+    }
+    .featured-player .photo-shape::before {
+      content: "";
+      position: absolute;
+      top: 18%; left: 50%;
+      transform: translateX(-50%);
+      width: 65%; aspect-ratio: 3/5;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(212,175,55,0.35) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 60%, rgba(13,27,83,0.5) 0%, transparent 60%);
+      border-radius: 50% 50% 12% 12% / 60% 60% 12% 12%;
+    }
+    .featured-player .jersey-num {
+      position: absolute;
+      top: 35%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: 900;
+      font-size: 9rem;
+      color: var(--white);
+      letter-spacing: -4px;
+      z-index: 2;
+      opacity: 0.92;
     }
 
-    /* =========================================================
-       RESPONSIVE
-       ========================================================= */
-    @media (max-width: 1024px) {
-      .nav-links { gap: 22px; }
-      .team-grid { grid-template-columns: repeat(2, 1fr); }
-      .news-grid { grid-template-columns: repeat(2, 1fr); }
-      .values    { grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    @media (max-width: 960px) {
+      .home-intro-grid { grid-template-columns: 1fr; gap: 48px; }
+      .featured-player { max-width: 480px; margin: 0 auto; }
     }
 
-    @media (max-width: 768px) {
-      .nav-toggle { display: grid; place-items: center; }
+    /* Match strip */
+    .home-fixtures-cta { margin-top: 32px; text-align: center; }
 
-      .nav-links {
-        position: absolute;
-        top: calc(100% + 6px); left: 0; right: 0;
-        background: rgba(13, 27, 83, 0.97);
-        backdrop-filter: blur(16px);
-        flex-direction: column;
-        padding: 22px;
-        gap: 18px;
-        border-radius: 12px;
-        transform: translateY(-12px);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity var(--transition), transform var(--transition);
-        border: 1px solid rgba(212, 175, 55, 0.2);
-        box-shadow: var(--shadow-card);
-      }
-      .nav-links.is-open { opacity: 1; transform: translateY(0); pointer-events: auto; }
-
-      .about-grid { grid-template-columns: 1fr; gap: 36px; }
-      .about-image { aspect-ratio: 4 / 3; max-width: 480px; margin: 0 auto; }
-
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-
-      .values { grid-template-columns: repeat(2, 1fr); }
-
-      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-
-      .news-grid { grid-template-columns: 1fr; }
-
-      .contact-grid { grid-template-columns: 1fr; }
-
-      .fixtures-table th,
-      .fixtures-table td { padding: 14px 16px; font-size: 0.85rem; }
-
-      .scroll-hint { display: none; }
+    /* Values strip on home */
+    .values-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-top: 60px;
     }
-
-    @media (max-width: 480px) {
-      .container { padding: 0 18px; }
-
-      .hero { padding: 110px 18px 70px; }
-      .hero .city { letter-spacing: 1px; }
-
-      .cta { padding: 12px 22px; font-size: 0.78rem; }
-
-      .team-grid { grid-template-columns: 1fr; }
-      .player-card { aspect-ratio: 4 / 5; max-width: 360px; margin: 0 auto; width: 100%; }
-
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .stat-number { font-size: 2rem; }
-
-      .values { grid-template-columns: repeat(2, 1fr); }
-
-      .logo { font-size: 1.15rem; letter-spacing: 2px; }
-      .logo .logo-mark { width: 28px; height: 28px; font-size: 0.85rem; }
+    .values-strip > div {
+      padding: 40px 24px;
+      text-align: center;
+      border-right: 1px solid var(--line);
+      transition: background var(--t);
     }
-
-    /* Erisilebilirlik: hareket azalt */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-      .reveal { opacity: 1; transform: none; }
+    .values-strip > div:last-child { border-right: 0; }
+    .values-strip > div:hover { background: rgba(212,175,55,0.04); }
+    .values-strip .v-num {
+      font-weight: 900; font-size: 0.7rem;
+      letter-spacing: 3px; color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .values-strip .v-name {
+      font-weight: 900; font-size: 1.4rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      line-height: 1.05;
+    }
+    @media (max-width: 760px) {
+      .values-strip { grid-template-columns: repeat(2, 1fr); }
+      .values-strip > div { border-right: 0; border-bottom: 1px solid var(--line); }
     }
   </style>
 </head>
-<body>
+<body data-screen-label="01 Ana Sayfa">
 
-  <!-- ================= NAVBAR ================= -->
-  <header class="navbar" id="navbar">
-    <div class="container nav-inner">
-      <a href="#hero" class="logo">
-        <span class="logo-mark">Ç</span>
-        ÇELİK<span>SPOR</span>
-      </a>
+  <div id="chrome-nav"></div>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Menüyü aç/kapat" aria-expanded="false">☰</button>
-
-      <nav>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#about">Hakkımızda</a></li>
-          <li><a href="#team">Takım</a></li>
-          <li><a href="#fixtures">Fikstür</a></li>
-          <li><a href="#news">Haberler</a></li>
-          <li><a href="#contact">İletişim</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- ================= HERO ================= -->
-  <section class="hero" id="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-
-    <div class="hero-content">
-      <span class="eyebrow">Est. 1953 · Bandırma</span>
-      <h1>ÇELİK SPOR KULÜBÜ</h1>
-      <div class="city">BANDIRMA</div>
-      <div class="team-line">Kadın Voleybol Takımı</div>
-      <p class="slogan">Yeni Sezon, Yeni Mücadele</p>
-
-      <div class="cta-row">
-        <a href="#team" class="cta primary">Takımı Tanı</a>
-        <a href="#fixtures" class="cta">Fikstür</a>
-      </div>
-    </div>
-
-    <div class="scroll-hint">Kaydır</div>
-  </section>
-
-  <!-- ================= ISTATISTIKLER ================= -->
-  <section class="stats reveal">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number" data-target="72">0</div>
-          <div class="stat-label">Yıllık Tutku</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" data-target="14">0</div>
-          <div class="stat-label">Aktif Oyuncu</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" data-target="28">0</div>
-          <div class="stat-label">Sezon Maçı</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" data-target="9">0</div>
-          <div class="stat-label">Kupa & Madalya</div>
+  <!-- ====================== HERO SLIDER ====================== -->
+  <section class="hero-slider" id="heroSlider" aria-label="Tanıtım slider">
+    <!-- Slide 1: heritage / full team -->
+    <article class="slide is-active">
+      <div class="bg" style="background-image: url('assets/photos/team-portrait.jpg');"></div>
+      <div class="bg-blur" style="background-image: url('assets/photos/team-portrait.jpg');"></div>
+      <div class="container slide-content">
+        <div class="copy">
+          <div class="eyebrow">Sezon 2026 — 2027 · Bandırma</div>
+          <h1>
+            <span>Çelik Spor</span>
+            <span class="gold">Kulübü</span>
+          </h1>
+          <p class="sub">Yeni sezon, yeni mücadele.</p>
+          <div class="ctas">
+            <a href="takim.html" class="btn primary">Takımı Tanı <span class="arr">→</span></a>
+            <a href="fikstur.html" class="btn ghost">Fikstürü Gör</a>
+          </div>
         </div>
       </div>
+    </article>
+
+    <!-- Slide 2: heritage / huddle -->
+    <article class="slide">
+      <div class="bg" style="background-image: url('assets/photos/team-huddle.jpg'); background-position: center 30%;"></div>
+      <div class="bg-blur" style="background-image: url('assets/photos/team-huddle.jpg'); background-position: center 30%;"></div>
+      <div class="container slide-content">
+        <div class="copy">
+          <div class="eyebrow">1953'ten beri parkenin yıldızı</div>
+          <h1>
+            <span>Tek Yürek,</span>
+            <span class="gold">Tek Hedef.</span>
+          </h1>
+          <p class="sub">Birlikte daha güçlüyüz.</p>
+          <div class="ctas">
+            <a href="hakkimizda.html" class="btn primary">Kulübü Keşfet <span class="arr">→</span></a>
+            <a href="haberler.html" class="btn ghost">Haberler</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Slide 3: action -->
+    <article class="slide">
+      <div class="bg" style="background-image: url('assets/photos/player-serve.jpg'); background-position: 60% center;"></div>
+      <div class="bg-blur" style="background-image: url('assets/photos/player-serve.jpg'); background-position: 60% center;"></div>
+      <div class="container slide-content">
+        <div class="copy">
+          <div class="eyebrow">Kadın Voleybol Takımı · 14 Sporcu</div>
+          <h1>
+            <span>Güçlü Geçmiş,</span>
+            <span class="gold">Yeni Gelecek.</span>
+          </h1>
+          <p class="sub">Sahada bir kişi değil, koca bir şehir oynar.</p>
+          <div class="ctas">
+            <a href="takim.html" class="btn primary">Kadroya Bak <span class="arr">→</span></a>
+            <a href="iletisim.html" class="btn ghost">Taraftar Ol</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Slider chrome -->
+    <div class="dots">
+      <button aria-label="Slayt 1" class="is-active"></button>
+      <button aria-label="Slayt 2"></button>
+      <button aria-label="Slayt 3"></button>
     </div>
+
+    <div class="controls">
+      <button class="arrow prev" aria-label="Önceki">←</button>
+      <div class="progress">
+        <span class="curr">01</span>
+        <span class="sep">/</span>
+        <span class="total">03</span>
+      </div>
+      <button class="arrow next" aria-label="Sonraki">→</button>
+    </div>
+
+    <div class="scroll-cue">Kaydır</div>
   </section>
 
-  <!-- ================= HAKKIMIZDA ================= -->
-  <section class="section about reveal" id="about">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-image">
-          <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=900&auto=format&fit=crop&q=80"
-               alt="Voleybol antrenmanı"
-               loading="lazy"
-               onerror="this.style.display='none'" />
-          <span class="badge">1953'ten beri</span>
-        </div>
+  <!-- ====================== DIAGONAL TICKER STRIP ====================== -->
+  <div class="ticker-diag" aria-hidden="true">
+    <div class="track" style="display:inline-flex; gap:60px; white-space:nowrap; animation: marquee 30s linear infinite; font-weight:900; font-size:1rem; letter-spacing:5px; text-transform:uppercase;">
+      <span style="display:inline-flex; gap:60px; align-items:center;">
+        <span>★ Yeni Sezon</span><span>Yeni Mücadele ★</span>
+        <span>Bandırma 1953</span><span>★ Çelik Spor</span>
+        <span>Güçlü Geçmiş</span><span>★ Yeni Gelecek</span>
+        <span>★ Yeni Sezon</span><span>Yeni Mücadele ★</span>
+        <span>Bandırma 1953</span><span>★ Çelik Spor</span>
+        <span>Güçlü Geçmiş</span><span>★ Yeni Gelecek</span>
+      </span>
+    </div>
+  </div>
 
-        <div class="about-text">
-          <h2>Yarım Asrı Aşan <span class="accent">Tutku</span></h2>
-          <p class="label">Bandırma'nın gururu, voleybolun yıldızı</p>
+  <!-- ====================== INTRO + FEATURED PLAYER ====================== -->
+  <section class="section home-intro">
+    <div class="container">
+      <div class="home-intro-grid">
+        <div class="reveal">
+          <div class="tag-row">
+            <span class="est-tag">★ Est. 1953</span>
+            <span class="est-tag" style="color: var(--white); border-color: rgba(255,255,255,0.25);">Kadın Voleybol</span>
+          </div>
+          <h2 class="reveal-text">
+            Bandırma'nın <span class="gold">gururu,</span>
+            voleybolun <span class="gold">yıldızı.</span>
+          </h2>
           <p>
-            Bandırma Çelikspor Kulübü, 1953 yılında bu şehrin spor kültürüne katkı sunmak amacıyla kuruldu.
-            Yıllar içinde pek çok branşta sporcu yetiştiren kulübümüz, bugün Kadın Voleybol Takımı ile
-            Bandırma'yı parkelerde temsil etmeye devam ediyor.
+            Bandırma Çelikspor Kulübü, 1953 yılında şehrimizin spor kültürüne katkı sunmak amacıyla kuruldu. Yarım asrı aşan tarihimizde pek çok branşta sporcu yetiştiren kulübümüz, bugün <strong style="color: var(--white)">Kadın Voleybol Takımımız</strong> ile parkelerde Bandırma'yı temsil etmeye devam ediyor.
           </p>
           <p>
-            Disiplinli antrenmanlar, genç yetenekleri keşfeden alt yapı çalışmaları ve şehrimizin
-            heyecanlı taraftarıyla birlikte; yeni sezonda hedefimiz hem skor hem de karakter olarak
-            zirveye oynamak.
+            Disiplinli antrenmanlar, genç yetenekleri keşfeden alt yapımız ve şehrimizin coşkulu taraftarıyla; yeni sezonda hem skor hem de karakter olarak zirveye oynuyoruz.
           </p>
+          <div class="actions">
+            <a href="hakkimizda.html" class="btn primary">Kulübü Keşfet <span class="arr">→</span></a>
+            <a href="takim.html" class="btn">Kadro <span class="arr">→</span></a>
+          </div>
         </div>
-      </div>
 
-      <!-- Degerler -->
-      <div class="values">
-        <div class="value-card">
-          <span class="value-icon">⚔</span>
-          <div class="value-name">Güçlü</div>
-        </div>
-        <div class="value-card">
-          <span class="value-icon">★</span>
-          <div class="value-name">Güvenilir</div>
-        </div>
-        <div class="value-card">
-          <span class="value-icon">◎</span>
-          <div class="value-name">Odaklı</div>
-        </div>
-        <div class="value-card">
-          <span class="value-icon">✦</span>
-          <div class="value-name">Birlik</div>
-        </div>
-        <div class="value-card">
-          <span class="value-icon">♛</span>
-          <div class="value-name">Başarılı</div>
+        <!-- Featured player photo -->
+        <div class="featured-player reveal right">
+          <img src="assets/photos/player-7-portrait.jpg" alt="Pelin Çelik — Takım Kaptanı" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position: center 18%;" />
+          <div class="big-number" aria-hidden="true">7</div>
+          <div class="overlay-bottom">
+            <div class="pos-line">Takım Kaptanı · Orta Oyuncu</div>
+            <div class="player-name">
+              <span>Pelin</span>
+              <span class="gold">Çelik</span>
+            </div>
+            <div class="stats">
+              <div>
+                <span class="v">412</span>
+                <span class="l">Asist</span>
+              </div>
+              <div>
+                <span class="v">86%</span>
+                <span class="l">Servis</span>
+              </div>
+              <div>
+                <span class="v">28</span>
+                <span class="l">Maç</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= TAKIM ================= -->
-  <section class="section team reveal" id="team">
-    <div class="container">
-      <div class="section-head">
-        <h2 class="section-title">Takım <span class="accent">Kadrosu</span></h2>
-        <p class="section-sub">Parkenin yıldızları</p>
-        <hr class="divider" />
+  <!-- ====================== STATS ROW ====================== -->
+  <section class="container reveal">
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stat-num"><span data-count="72">0</span></div>
+        <div class="stat-label">Yıllık Tutku</div>
       </div>
-
-      <div class="team-grid">
-        <article class="player-card">
-          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=600&auto=format&fit=crop&q=80'), linear-gradient(135deg, var(--navy-soft), var(--bg));"></div>
-          <div class="overlay"></div>
-          <div class="number-tag">1</div>
-          <div class="info">
-            <div class="name">Elif Yılmaz</div>
-            <div class="pos">Pasör</div>
-          </div>
-        </article>
-
-        <article class="player-card">
-          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1567861911437-538298e4232c?w=600&auto=format&fit=crop&q=80'), linear-gradient(135deg, var(--navy-soft), var(--bg));"></div>
-          <div class="overlay"></div>
-          <div class="number-tag">4</div>
-          <div class="info">
-            <div class="name">Zeynep Kara</div>
-            <div class="pos">Smaçör</div>
-          </div>
-        </article>
-
-        <article class="player-card">
-          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1576267423048-15c0040fec78?w=600&auto=format&fit=crop&q=80'), linear-gradient(135deg, var(--navy-soft), var(--bg));"></div>
-          <div class="overlay"></div>
-          <div class="number-tag">7</div>
-          <div class="info">
-            <div class="name">Selin Doğan</div>
-            <div class="pos">Orta Oyuncu</div>
-          </div>
-        </article>
-
-        <article class="player-card">
-          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=600&auto=format&fit=crop&q=80'), linear-gradient(135deg, var(--navy-soft), var(--bg));"></div>
-          <div class="overlay"></div>
-          <div class="number-tag">9</div>
-          <div class="info">
-            <div class="name">Ayşe Demir</div>
-            <div class="pos">Libero</div>
-          </div>
-        </article>
-
-        <article class="player-card">
-          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1592656094267-764a45160876?w=600&auto=format&fit=crop&q=80'), linear-gradient(135deg, var(--navy-soft), var(--bg));"></div>
-          <div class="overlay"></div>
-          <div class="number-tag">11</div>
-          <div class="info">
-            <div class="name">Merve Aydın</div>
-            <div class="pos">Smaçör</div>
-          </div>
-        </article>
-
-        <article class="player-card">
-          <div class="photo" style="background-image: url('https://images.unsplash.com/photo-1547347298-4074fc3086f0?w=600&auto=format&fit=crop&q=80'), linear-gradient(135deg, var(--navy-soft), var(--bg));"></div>
-          <div class="overlay"></div>
-          <div class="number-tag">14</div>
-          <div class="info">
-            <div class="name">Buse Şahin</div>
-            <div class="pos">Orta Oyuncu</div>
-          </div>
-        </article>
+      <div class="stat-cell">
+        <div class="stat-num"><span data-count="14">0</span></div>
+        <div class="stat-label">Aktif Sporcu</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num"><span data-count="28">0</span></div>
+        <div class="stat-label">Sezon Maçı</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num"><span data-count="9">0</span><span class="suffix">×</span></div>
+        <div class="stat-label">Kupa & Madalya</div>
       </div>
     </div>
   </section>
 
-  <!-- ================= FIKSTUR ================= -->
-  <section class="section fixtures reveal" id="fixtures">
+  <!-- ====================== MATCH SPOTLIGHT ====================== -->
+  <section class="section">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">Fikstür <span class="accent">Takvimi</span></h2>
-        <p class="section-sub">Sezonun maç programı</p>
-        <hr class="divider" />
+        <div class="left">
+          <div class="eyebrow">Bir Sonraki Maç</div>
+          <h2 class="reveal-text">Parkeye <span class="gold">çıkıyoruz.</span></h2>
+          <p class="script">Tribünde yerini al.</p>
+        </div>
+        <div class="right">
+          Sezonun ilk düdüğü 21 Eylül'de Bandırma Şehir Spor Salonu'nda çalıyor. Tüm fikstürü ve bilet bilgilerini Fikstür sayfasından inceleyebilirsiniz.
+        </div>
       </div>
 
-      <div class="fixtures-table-wrap">
-        <table class="fixtures-table">
-          <thead>
-            <tr>
-              <th>Tarih</th>
-              <th>Rakip</th>
-              <th>Konum</th>
-              <th>Saat</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <div class="date-cell">
-                  <span class="date-day">21</span>
-                  <span class="date-month">Eylül 2026</span>
-                </div>
-              </td>
-              <td>İzmir Gençlik SK</td>
-              <td><span class="pill home">İç Saha</span></td>
-              <td>19:00</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="date-cell">
-                  <span class="date-day">05</span>
-                  <span class="date-month">Ekim 2026</span>
-                </div>
-              </td>
-              <td>Bursa Yıldız Voleybol</td>
-              <td><span class="pill away">Deplasman</span></td>
-              <td>18:30</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="date-cell">
-                  <span class="date-day">19</span>
-                  <span class="date-month">Ekim 2026</span>
-                </div>
-              </td>
-              <td>Manisa Spor Kulübü</td>
-              <td><span class="pill home">İç Saha</span></td>
-              <td>20:00</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="date-cell">
-                  <span class="date-day">02</span>
-                  <span class="date-month">Kasım 2026</span>
-                </div>
-              </td>
-              <td>Antalya Akdeniz SK</td>
-              <td><span class="pill away">Deplasman</span></td>
-              <td>17:00</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="date-cell">
-                  <span class="date-day">16</span>
-                  <span class="date-month">Kasım 2026</span>
-                </div>
-              </td>
-              <td>Eskişehir Voleybol</td>
-              <td><span class="pill home">İç Saha</span></td>
-              <td>19:00</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="date-cell">
-                  <span class="date-day">30</span>
-                  <span class="date-month">Kasım 2026</span>
-                </div>
-              </td>
-              <td>Ankara Şampiyon SK</td>
-              <td><span class="pill away">Deplasman</span></td>
-              <td>18:00</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="match-spotlight reveal">
+        <div class="image" style="background-image: url('assets/photos/team-huddle-2.jpg'); background-size: cover; background-position: center;">
+          <!-- gradient overlay for depth -->
+          <div style="position:absolute; inset:0; background: linear-gradient(135deg, transparent 0%, rgba(6,9,38,0.5) 100%);"></div>
+          <!-- diagonal gold flair -->
+          <div style="position:absolute; inset:0; background: linear-gradient(135deg, transparent 38%, rgba(212,175,55,0.18) 50%, transparent 62%);"></div>
+        </div>
+
+        <div class="panel">
+          <span class="tag"><span class="dot"></span> Sezon Açılışı</span>
+          <div class="matchup">
+            <div class="team">
+              <div class="crest" style="background:#fff; padding:6px; overflow:hidden;"><img src="assets/brand/logo-3d.png" alt="Çelik Spor" style="width:100%;height:100%;object-fit:contain;"/></div>
+              <div class="name">Çelik Spor</div>
+            </div>
+            <div class="vs">vs</div>
+            <div class="team">
+              <div class="crest" style="background:#fff; overflow:hidden; padding:0;"><img src="assets/opponents/ayvalik.jpg" alt="Ayvalık Gelişimspor" style="width:100%;height:100%;object-fit:cover;"/></div>
+              <div class="name">Ayvalık Gelişimspor</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div>
+              <span class="lbl">Tarih</span>
+              <span class="val">21 Eyl 2026</span>
+            </div>
+            <div>
+              <span class="lbl">Saat</span>
+              <span class="val">19:00</span>
+            </div>
+            <div>
+              <span class="lbl">Konum</span>
+              <span class="val">İç Saha</span>
+            </div>
+            <div>
+              <span class="lbl">Salon</span>
+              <span class="val">Bandırma Şehir Spor Salonu</span>
+            </div>
+          </div>
+
+          <div class="home-fixtures-cta" style="margin-top: 32px; display: flex; gap: 12px;">
+            <a href="fikstur.html" class="btn primary">Bilet Al <span class="arr">→</span></a>
+            <a href="fikstur.html" class="btn">Tüm Fikstür</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= HABERLER ================= -->
-  <section class="section news reveal" id="news">
+  <!-- ====================== VALUES STRIP ====================== -->
+  <section class="section" style="padding-top: 0;">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">Son <span class="accent">Haberler</span></h2>
-        <p class="section-sub">Takımdan gelişmeler</p>
-        <hr class="divider" />
+        <div class="left">
+          <div class="eyebrow">Marka Dili & Tonu</div>
+          <h2 class="reveal-text">Sahaya <span class="gold">karakterimizle</span> çıkarız.</h2>
+        </div>
+        <div class="right">
+          Çelik Spor'un beş temel değeri her antrenmanda, her maçta ve şehrimizdeki her etkinlikte rehberimizdir.
+        </div>
+      </div>
+
+      <div class="values-strip reveal">
+        <div>
+          <div class="v-num">01</div>
+          <div class="v-name">Güçlü</div>
+        </div>
+        <div>
+          <div class="v-num">02</div>
+          <div class="v-name">Güvenilir</div>
+        </div>
+        <div>
+          <div class="v-num">03</div>
+          <div class="v-name">Odaklı</div>
+        </div>
+        <div>
+          <div class="v-num">04</div>
+          <div class="v-name">Birlik</div>
+        </div>
+        <div>
+          <div class="v-num">05</div>
+          <div class="v-name">Başarılı</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== LATEST NEWS ====================== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-head">
+        <div class="left">
+          <div class="eyebrow">Son Haberler</div>
+          <h2 class="reveal-text">Takımdan <span class="gold">son gelişmeler.</span></h2>
+        </div>
+        <div class="right" style="display: flex; align-items: flex-end;">
+          <a href="haberler.html" class="btn">Tüm haberler <span class="arr">→</span></a>
+        </div>
       </div>
 
       <div class="news-grid">
-        <article class="news-card">
-          <div class="news-image">
-            <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=800&auto=format&fit=crop&q=80"
-                 alt="Voleybol hazırlık kampı" loading="lazy"
-                 onerror="this.style.display='none'" />
+        <article class="news-card reveal" data-delay="1">
+          <div class="image">
+            <div class="ph-img" style="background-image: url('assets/photos/team-bench.jpg'); background-size: cover; background-position: center 40%; height:100%;"></div>
             <span class="tag">Antrenman</span>
           </div>
-          <div class="news-body">
-            <div class="news-date">12 Mayıs 2026</div>
-            <h3 class="news-title">Yeni Sezon Hazırlık Kampı Bandırma'da Başladı</h3>
-            <p class="news-excerpt">Takımımız, antrenör kadrosu eşliğinde yeni sezon hazırlık kampını şehir spor salonunda sürdürüyor.</p>
-            <a href="#" class="news-link">Devamını oku →</a>
+          <div class="body">
+            <div class="date">12 Mayıs 2026</div>
+            <h3>Yeni Sezon Hazırlık Kampı Bandırma'da Başladı</h3>
+            <p class="excerpt">Takımımız, antrenör kadrosu eşliğinde yeni sezon hazırlık kampını Bandırma Şehir Spor Salonu'nda sürdürüyor. Tüm sporcularımız zinde ve hazır.</p>
+            <span class="more">Devamını oku →</span>
           </div>
         </article>
 
-        <article class="news-card">
-          <div class="news-image">
-            <img src="https://images.unsplash.com/photo-1565992441121-4367c2967103?w=800&auto=format&fit=crop&q=80"
-                 alt="Voleybol kadrosu" loading="lazy"
-                 onerror="this.style.display='none'" />
+        <article class="news-card reveal" data-delay="2">
+          <div class="image">
+            <div class="ph-img" style="background-image: url('assets/photos/team-huddle.jpg'); background-size: cover; background-position: center; height:100%;"></div>
             <span class="tag">Kadro</span>
           </div>
-          <div class="news-body">
-            <div class="news-date">28 Nisan 2026</div>
-            <h3 class="news-title">Genç Yeteneklerle Kadromuz Güçleniyor</h3>
-            <p class="news-excerpt">Alt yapımızdan yetişen üç oyuncu A takım kadrosuna dahil edildi. Şehrimizin gururu olmaya hazırlar.</p>
-            <a href="#" class="news-link">Devamını oku →</a>
+          <div class="body">
+            <div class="date">28 Nisan 2026</div>
+            <h3>Genç Yeteneklerle Kadromuz Güçleniyor</h3>
+            <p class="excerpt">Alt yapımızdan yetişen üç sporcumuz A takım kadrosuna dahil edildi. Şehrimizin gururu olmaya hazırlar — yeni 10 numara aramızda.</p>
+            <span class="more">Devamını oku →</span>
           </div>
         </article>
 
-        <article class="news-card">
-          <div class="news-image">
-            <img src="https://images.unsplash.com/photo-1607627239929-0e3ac1ec3eda?w=800&auto=format&fit=crop&q=80"
-                 alt="Voleybol etkinliği" loading="lazy"
-                 onerror="this.style.display='none'" />
+        <article class="news-card reveal" data-delay="3">
+          <div class="image">
+            <div class="ph-img" style="background-image: url('assets/photos/team-portrait.jpg'); background-size: cover; background-position: center 30%; height:100%;"></div>
             <span class="tag">Kulüp</span>
           </div>
-          <div class="news-body">
-            <div class="news-date">15 Nisan 2026</div>
-            <h3 class="news-title">Çelikspor'dan Anlamlı Sosyal Sorumluluk Projesi</h3>
-            <p class="news-excerpt">Kulübümüz, Bandırma'daki ilkokullarda voleybol tanıtım etkinlikleri düzenledi. Sporu çocuklara sevdirmeye devam.</p>
-            <a href="#" class="news-link">Devamını oku →</a>
+          <div class="body">
+            <div class="date">15 Nisan 2026</div>
+            <h3>Çelik Spor'dan Anlamlı Sosyal Sorumluluk Projesi</h3>
+            <p class="excerpt">Kulübümüz, Bandırma'daki ilkokullarda voleybol tanıtım etkinlikleri düzenledi. Sporu çocuklara sevdirmeye devam ediyoruz.</p>
+            <span class="more">Devamını oku →</span>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ================= ILETISIM ================= -->
-  <section class="section contact reveal" id="contact">
+  <!-- ====================== SPONSORS ====================== -->
+  <section class="section" style="padding-top: 0;">
     <div class="container">
-      <div class="contact-grid">
-        <div class="contact-info">
-          <h3>Bizimle <span class="accent">İletişime Geç</span></h3>
-          <p>Takımımız, sponsorluk, taraftar etkinlikleri veya genel sorularınız için bize ulaşabilirsiniz. En kısa sürede dönüş yapıyoruz.</p>
-
-          <ul class="info-list">
-            <li class="info-item">
-              <span class="info-icon">✉</span>
-              <div class="info-text">
-                <div class="lbl">E-posta</div>
-                <div class="val">info@celikspor.com</div>
-              </div>
-            </li>
-            <li class="info-item">
-              <span class="info-icon">☎</span>
-              <div class="info-text">
-                <div class="lbl">Telefon</div>
-                <div class="val">+90 266 000 00 00</div>
-              </div>
-            </li>
-            <li class="info-item">
-              <span class="info-icon">⌖</span>
-              <div class="info-text">
-                <div class="lbl">Adres</div>
-                <div class="val">Bandırma Şehir Spor Salonu, Balıkesir</div>
-              </div>
-            </li>
-          </ul>
+      <div class="section-head" style="margin-bottom: 32px;">
+        <div class="left">
+          <div class="eyebrow">Bizi Destekleyenler</div>
+          <h2 class="reveal-text" style="font-size: clamp(1.6rem, 3vw, 2.2rem);">Sponsorlar &amp; <span class="gold">Paydaşlar</span></h2>
         </div>
+        <div class="right" style="display:flex; align-items:flex-end;">
+          <a href="sponsorlar.html" class="btn">Tüm sponsorlar <span class="arr">→</span></a>
+        </div>
+      </div>
 
-        <form class="contact-form" id="contactForm" novalidate>
-          <div class="form-group">
-            <label for="name">Ad Soyad</label>
-            <input type="text" id="name" name="name" required autocomplete="name" />
+      <!-- Auto-scrolling sponsor marquee -->
+      <div class="sponsor-marquee reveal">
+        <div class="sm-track">
+          <div class="sm-group">
+            <div class="sm-tile"><img src="assets/sponsors/dms.jpg" alt="DMS — Dental Medikal Sanayi" loading="lazy"/></div>
+            <div class="sm-tile"><img src="assets/sponsors/eken-hotels.jpg" alt="Eken Hotels & Resort" loading="lazy"/></div>
+            <div class="sm-tile"><img src="assets/sponsors/tosunlar.jpg" alt="Bandırma Tosunlar İnşaat" loading="lazy"/></div>
+            <div class="sm-tile"><img src="assets/sponsors/toru-un.jpg" alt="Toru Un" loading="lazy"/></div>
+            <div class="sm-tile"><img src="assets/sponsors/ayhan-sezer.jpg" alt="Ayhan Sezer Yağ ve Gıda" loading="lazy"/></div>
+            <div class="sm-tile"><img src="assets/sponsors/zeytineken.jpg" alt="Zeytineken Farm Products" loading="lazy"/></div>
           </div>
-
-          <div class="form-group">
-            <label for="email">E-posta</label>
-            <input type="email" id="email" name="email" required autocomplete="email" />
+          <!-- Duplicate track for seamless loop -->
+          <div class="sm-group" aria-hidden="true">
+            <div class="sm-tile"><img src="assets/sponsors/dms.jpg" alt="" /></div>
+            <div class="sm-tile"><img src="assets/sponsors/eken-hotels.jpg" alt="" /></div>
+            <div class="sm-tile"><img src="assets/sponsors/tosunlar.jpg" alt="" /></div>
+            <div class="sm-tile"><img src="assets/sponsors/toru-un.jpg" alt="" /></div>
+            <div class="sm-tile"><img src="assets/sponsors/ayhan-sezer.jpg" alt="" /></div>
+            <div class="sm-tile"><img src="assets/sponsors/zeytineken.jpg" alt="" /></div>
           </div>
-
-          <div class="form-group">
-            <label for="message">Mesaj</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-
-          <button type="submit" class="submit-btn">Gönder</button>
-          <p class="form-success" id="formSuccess">Mesajınız alındı, teşekkürler!</p>
-        </form>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-    <div class="container">
-      <div class="logo">
-        <span class="logo-mark">Ç</span>
-        ÇELİK<span>SPOR</span>
-      </div>
-      <p class="slogan">Bandırma'nın gururu</p>
+  <div id="chrome-foot"></div>
 
-      <div class="social" aria-label="Sosyal medya">
-        <a href="#" aria-label="Instagram">IG</a>
-        <a href="#" aria-label="Twitter">TW</a>
-        <a href="#" aria-label="Facebook">FB</a>
-        <a href="#" aria-label="YouTube">YT</a>
-      </div>
-
-      <p class="copy">© 2026 Bandırma Çelikspor Kulübü — Tüm hakları saklıdır.</p>
-    </div>
-  </footer>
-
-  <script>
-    // =========================================================
-    // NAVBAR scroll efekti
-    // =========================================================
-    const navbar = document.getElementById('navbar');
-    const onScroll = () => {
-      if (window.scrollY > 30) navbar.classList.add('scrolled');
-      else navbar.classList.remove('scrolled');
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-
-    // =========================================================
-    // Mobil menu toggle
-    // =========================================================
-    const navToggle = document.getElementById('navToggle');
-    const navLinks  = document.getElementById('navLinks');
-    navToggle.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('is-open');
-      navToggle.setAttribute('aria-expanded', String(open));
-      navToggle.textContent = open ? '✕' : '☰';
-    });
-    navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        navLinks.classList.remove('is-open');
-        navToggle.setAttribute('aria-expanded', 'false');
-        navToggle.textContent = '☰';
-      });
-    });
-
-    // =========================================================
-    // Scroll reveal (Intersection Observer)
-    // =========================================================
-    const revealEls = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el => io.observe(el));
-
-    // =========================================================
-    // Stat sayaç animasyonu
-    // =========================================================
-    const statEls = document.querySelectorAll('.stat-number');
-    const statIO = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const target = parseInt(el.dataset.target, 10) || 0;
-        const duration = 1400;
-        const start = performance.now();
-        const step = (now) => {
-          const p = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.round(target * eased);
-          if (p < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-        statIO.unobserve(el);
-      });
-    }, { threshold: 0.4 });
-    statEls.forEach(el => statIO.observe(el));
-
-    // =========================================================
-    // Iletisim form
-    // =========================================================
-    const form    = document.getElementById('contactForm');
-    const success = document.getElementById('formSuccess');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      success.classList.add('is-visible');
-      form.reset();
-      setTimeout(() => success.classList.remove('is-visible'), 4000);
-    });
-  </script>
-
+  <script src="assets/chrome.js"></script>
+  <script src="assets/main.js"></script>
 </body>
 </html>

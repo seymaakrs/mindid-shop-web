@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#060926" />
+  <title>İletişim — Çelik Spor Kulübü Bandırma</title>
+  <meta name="description" content="Çelik Spor Kulübü Bandırma iletişim bilgileri, sponsorluk ve taraftar etkinlikleri için bize ulaşın." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/site.css" />
+
+  <style>
+    /* Sticky map block */
+    .map-block {
+      position: relative;
+      aspect-ratio: 1/1;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--navy);
+      border: 1px solid var(--line);
+    }
+    .map-block svg {
+      width: 100%; height: 100%;
+      display: block;
+    }
+    .map-block .pin {
+      position: absolute;
+      top: 38%; left: 52%;
+      transform: translate(-50%, -50%);
+    }
+    .map-block .pin::before {
+      content: "";
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: rgba(212,175,55,0.18);
+      animation: pinPulse 2s ease-out infinite;
+    }
+    @keyframes pinPulse {
+      0%   { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+    }
+    .map-block .pin .dot {
+      position: relative; z-index: 2;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 4px solid var(--navy-deep);
+      box-shadow: 0 6px 20px rgba(212,175,55,0.6);
+    }
+    .map-block .pin-label {
+      position: absolute;
+      top: -54px; left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .map-block .pin-label::after {
+      content: "";
+      position: absolute;
+      bottom: -8px; left: 50%; transform: translateX(-50%) rotate(45deg);
+      width: 12px; height: 12px;
+      background: var(--gold);
+    }
+
+    .form-ok {
+      display: none;
+      margin-top: 16px;
+      padding: 16px 20px;
+      background: rgba(107,217,152,0.1);
+      border: 1px solid rgba(107,217,152,0.4);
+      border-radius: 10px;
+      color: #6bd998;
+      font-weight: 600;
+    }
+    .form-ok.show { display: block; }
+
+    /* Contact channels grid */
+    .channels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 80px;
+    }
+    .channel-card {
+      padding: 32px 28px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: all var(--t);
+    }
+    .channel-card:hover {
+      border-color: var(--gold);
+      background: rgba(212,175,55,0.04);
+      transform: translateY(-6px);
+    }
+    .channel-card .ico {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: rgba(212,175,55,0.1);
+      border: 1px solid var(--line-strong);
+      display: grid; place-items: center;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .channel-card h3 {
+      font-weight: 900; font-size: 1.05rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .channel-card p {
+      color: var(--gray-light);
+      font-size: 0.9rem; line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .channel-card a {
+      color: var(--gold);
+      font-size: 0.78rem; letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: gap var(--t);
+    }
+    .channel-card:hover a { gap: 12px; }
+
+    @media (max-width: 800px) {
+      .channels { grid-template-columns: 1fr; }
+    }
+
+    /* Submit button styling */
+    .submit-btn {
+      align-self: flex-start;
+      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+      color: var(--navy);
+      padding: 16px 36px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      border-radius: 999px;
+      transition: all var(--t);
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 12px;
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold);
+    }
+  </style>
+</head>
+<body data-screen-label="06 İletişim">
+
+  <div id="chrome-nav"></div>
+
+  <!-- ====================== PAGE HERO ====================== -->
+  <section class="page-hero">
+    <div class="ph-bg" style="background-image: url('assets/photos/team-bench-2.jpg'); background-position: center;"></div>
+    <div class="ph-overlay"></div>
+    <div class="container">
+      <div class="crumbs">
+        <a href="index.html">Ana Sayfa</a>
+        <span>/</span>
+        <span>İletişim</span>
+      </div>
+      <h1 class="reveal-text">
+        Bize <span class="gold">ulaş.</span>
+      </h1>
+      <p class="lead">Sponsorluk, taraftar, basın, iş birliği — hepsi için buradayız.</p>
+    </div>
+    <div class="deco-1953" aria-hidden="true">@</div>
+  </section>
+
+  <!-- ====================== CHANNELS ====================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="left">
+          <div class="eyebrow">İletişim Kanalları</div>
+          <h2 class="reveal-text">Sana en uygun <span class="gold">kanaldan</span> ulaş.</h2>
+        </div>
+        <div class="right">
+          Konunuza uygun departmanı seçtiğinizde, talebinize en kısa sürede dönüş yapabiliyoruz. Acil durumlarda kulüp ofisini doğrudan arayabilirsiniz.
+        </div>
+      </div>
+
+      <div class="channels">
+        <div class="channel-card reveal" data-delay="1">
+          <div class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 L12 13 L21 7"/></svg>
+          </div>
+          <h3>Genel İletişim</h3>
+          <p>Kulüp ile ilgili tüm sorularınız ve geri bildirimleriniz için.</p>
+          <a href="mailto:info@celikspor.com">info@celikspor.com →</a>
+        </div>
+
+        <div class="channel-card reveal" data-delay="2">
+          <div class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 L4 7 v6 c0 5 3.5 9 8 11 4.5-2 8-6 8-11 V7 z"/><path d="M9 12 L11 14 L15 10"/></svg>
+          </div>
+          <h3>Sponsorluk</h3>
+          <p>Marka iş birliği ve sponsorluk paketleri için ekibimize yazın.</p>
+          <a href="mailto:sponsor@celikspor.com">sponsor@celikspor.com →</a>
+        </div>
+
+        <div class="channel-card reveal" data-delay="3">
+          <div class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M3 12 h18"/><path d="M12 2 c3 3 3 17 0 20"/><path d="M12 2 c-3 3 -3 17 0 20"/></svg>
+          </div>
+          <h3>Basın & Medya</h3>
+          <p>Röportaj talepleri, basın akreditasyonu ve görsel arşivimiz için.</p>
+          <a href="mailto:basin@celikspor.com">basin@celikspor.com →</a>
+        </div>
+      </div>
+
+      <!-- ============== Main contact layout ============== -->
+      <div class="contact-layout">
+        <div class="reveal">
+          <h3 style="font-weight: 900; font-size: clamp(1.6rem, 3vw, 2.4rem); letter-spacing: 1px; line-height: 1.1; margin-bottom: 18px;">
+            Bandırma'da <span class="gold">parkenin yıldızı.</span>
+          </h3>
+          <p style="color: var(--gray-light); line-height: 1.85; margin-bottom: 36px;">
+            Kulüp ofisimiz hafta içi her gün açıktır. Misafirlerimizi tribün ziyaretine de davet ediyoruz — antrenmanlarımızı izleyebilir, sporcularımızla tanışabilirsiniz.
+          </p>
+
+          <div class="info-block">
+            <div class="info-line">
+              <div class="ico">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22 s-7-7-7-13 a7 7 0 0 1 14 0 c0 6-7 13-7 13Z"/><circle cx="12" cy="9" r="3"/></svg>
+              </div>
+              <div>
+                <div class="lbl">Adres</div>
+                <div class="val">Bandırma Şehir Spor Salonu</div>
+                <div class="sub">Cumhuriyet Mah. Spor Cd. No:1<br>Bandırma · Balıkesir · 10200</div>
+              </div>
+            </div>
+
+            <div class="info-line">
+              <div class="ico">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92 v3 a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67 A2 2 0 0 1 4.11 2 h3 a2 2 0 0 1 2 1.72 c.13 1.05.37 2.07.72 3.05a2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6 6 l1.27-1.27a2 2 0 0 1 2.11-.45c.98.35 2 .59 3.05.72a2 2 0 0 1 1.72 2.02Z"/></svg>
+              </div>
+              <div>
+                <div class="lbl">Telefon</div>
+                <div class="val">+90 266 000 00 00</div>
+                <div class="sub">Hafta içi 09:00 — 18:00</div>
+              </div>
+            </div>
+
+            <div class="info-line">
+              <div class="ico">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 L12 13 L21 7"/></svg>
+              </div>
+              <div>
+                <div class="lbl">E-posta</div>
+                <div class="val">info@celikspor.com</div>
+                <div class="sub">Ortalama yanıt süresi: 24 saat</div>
+              </div>
+            </div>
+
+            <div class="info-line">
+              <div class="ico">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 7 v5 l3 3"/></svg>
+              </div>
+              <div>
+                <div class="lbl">Antrenman Saatleri</div>
+                <div class="val">Pzt — Cum · 18:00 — 21:00</div>
+                <div class="sub">Maç günleri kapalı antrenman uygulanır.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form reveal right" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Ad Soyad</label>
+              <input type="text" id="name" name="name" required autocomplete="name" placeholder="Adınız Soyadınız" />
+            </div>
+            <div class="field">
+              <label for="phone">Telefon</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+90 ..." />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">E-posta</label>
+            <input type="email" id="email" name="email" required autocomplete="email" placeholder="ornek@eposta.com" />
+          </div>
+
+          <div class="field">
+            <label for="subject">Konu</label>
+            <select id="subject" name="subject" required>
+              <option>Genel İletişim</option>
+              <option>Sponsorluk</option>
+              <option>Basın & Medya</option>
+              <option>Taraftar / Bilet</option>
+              <option>Alt Yapı Başvurusu</option>
+              <option>Diğer</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Mesaj</label>
+            <textarea id="message" name="message" rows="6" required placeholder="Bize iletmek istediklerinizi yazın..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Mesajı Gönder <span>→</span></button>
+          <p class="form-ok">✓ Mesajınız alındı, teşekkürler! En kısa sürede dönüş yapacağız.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== MAP & LOCATION ====================== -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-head">
+        <div class="left">
+          <div class="eyebrow">Konum</div>
+          <h2 class="reveal-text">Bandırma <span class="gold">Şehir Spor Salonu.</span></h2>
+        </div>
+        <div class="right">
+          Salon, şehir merkezine 5 dakika mesafede, Cumhuriyet Mahallesi'nde yer almaktadır. Ücretsiz otopark ve toplu taşıma ulaşımı mevcuttur.
+        </div>
+      </div>
+
+      <div class="map-block reveal">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+          <!-- Stylized map background -->
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(212,175,55,0.06)" stroke-width="1"/>
+            </pattern>
+            <radialGradient id="mapGlow" cx="52%" cy="38%" r="40%">
+              <stop offset="0%" stop-color="rgba(212,175,55,0.15)"/>
+              <stop offset="100%" stop-color="rgba(212,175,55,0)"/>
+            </radialGradient>
+          </defs>
+          <rect width="800" height="800" fill="#0a0f2e"/>
+          <rect width="800" height="800" fill="url(#grid)"/>
+          <rect width="800" height="800" fill="url(#mapGlow)"/>
+
+          <!-- Marmara Sea (north) -->
+          <path d="M0 0 L800 0 L800 220 Q700 240 600 220 Q500 200 400 230 Q300 250 200 220 Q100 200 0 240 Z"
+                fill="rgba(13,27,83,0.6)" stroke="rgba(212,175,55,0.25)" stroke-width="1"/>
+          <text x="40" y="80" fill="rgba(212,175,55,0.6)" font-family="Montserrat" font-weight="700" font-size="14" letter-spacing="4">MARMARA DENİZİ</text>
+
+          <!-- Streets -->
+          <g stroke="rgba(212,175,55,0.25)" stroke-width="1.5" fill="none">
+            <path d="M0 360 L800 380"/>
+            <path d="M0 500 L800 520"/>
+            <path d="M0 640 L800 660"/>
+            <path d="M180 240 L200 800"/>
+            <path d="M380 240 L420 800"/>
+            <path d="M580 240 L620 800"/>
+          </g>
+
+          <!-- Block hints -->
+          <g fill="rgba(255,255,255,0.02)" stroke="rgba(212,175,55,0.12)">
+            <rect x="220" y="400" width="140" height="80"/>
+            <rect x="440" y="400" width="120" height="80"/>
+            <rect x="640" y="400" width="120" height="80"/>
+            <rect x="220" y="540" width="140" height="80"/>
+            <rect x="440" y="540" width="120" height="80"/>
+            <rect x="640" y="540" width="120" height="80"/>
+          </g>
+
+          <!-- Labels -->
+          <text x="40" y="510" fill="rgba(255,255,255,0.4)" font-family="Montserrat" font-weight="700" font-size="11" letter-spacing="3">BANDIRMA MERKEZ</text>
+          <text x="40" y="780" fill="rgba(255,255,255,0.3)" font-family="Montserrat" font-weight="500" font-size="10" letter-spacing="2">CUMHURİYET MAH. · BALIKESİR</text>
+        </svg>
+
+        <div class="pin">
+          <div class="pin-label">Çelik Spor Salonu</div>
+          <div class="dot"></div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap;">
+        <a href="https://maps.google.com/?q=Bandırma" target="_blank" class="btn primary">Yol Tarifi Al <span class="arr">→</span></a>
+        <a href="tel:+902660000000" class="btn">Salonu Ara</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="chrome-foot"></div>
+
+  <script src="assets/chrome.js"></script>
+  <script src="assets/main.js"></script>
+</body>
+</html>

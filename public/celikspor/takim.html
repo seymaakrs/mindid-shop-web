@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#060926" />
+  <title>Takım Kadrosu — Çelik Spor Kulübü Bandırma</title>
+  <meta name="description" content="Çelik Spor Kulübü Bandırma Kadın Voleybol Takımı 2026-2027 sezonu kadrosu." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/site.css" />
+
+  <style>
+    /* Filter pills */
+    .filter-row {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .filter-pill {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--gray-light);
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: all var(--t);
+    }
+    .filter-pill:hover { color: var(--white); border-color: var(--line-strong); }
+    .filter-pill.is-active {
+      background: var(--gold); color: var(--navy);
+      border-color: var(--gold);
+    }
+
+    /* Roster grid — overrides the shared one for a tighter look here */
+    .roster-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 1100px) { .roster-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 800px)  { .roster-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px)  { .roster-grid { grid-template-columns: 1fr; } }
+
+    .pcard {
+      position: relative;
+      aspect-ratio: 3/4;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: linear-gradient(165deg, var(--navy-soft) 0%, var(--navy-deep) 100%);
+      cursor: pointer;
+      transition: transform var(--t), box-shadow var(--t);
+    }
+    .pcard:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(212,175,55,0.25); }
+
+    /* Real photo on top of bg */
+    .pcard .real-photo {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease);
+      z-index: 1;
+    }
+    .pcard:hover .real-photo { transform: scale(1.06); }
+    .pcard .real-photo + .overlay-grade {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, transparent 35%, rgba(6,9,38,0.85) 75%, rgba(6,9,38,0.96) 100%),
+        linear-gradient(180deg, rgba(6,9,38,0.2) 0%, transparent 40%);
+      z-index: 2;
+    }
+
+    /* Decorative jersey silhouette */
+    .pcard .silhouette {
+      position: absolute;
+      top: 18%; left: 50%;
+      transform: translateX(-50%);
+      width: 70%; aspect-ratio: 3/4;
+      background:
+        radial-gradient(ellipse at 50% 22%, rgba(212,175,55,0.4) 0%, rgba(212,175,55,0.0) 35%),
+        radial-gradient(ellipse at 50% 60%, rgba(13,27,83,0.6) 0%, transparent 60%);
+      border-radius: 50% 50% 12% 12% / 60% 60% 12% 12%;
+      pointer-events: none;
+    }
+    .pcard.alt .silhouette {
+      background:
+        radial-gradient(ellipse at 50% 22%, rgba(212,175,55,0.35) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 65%, rgba(203,16,46,0.18) 0%, transparent 55%);
+    }
+    .pcard .jersey {
+      position: absolute;
+      top: 32%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: 900;
+      font-size: 5.5rem;
+      color: var(--white);
+      letter-spacing: -3px;
+      line-height: 1;
+      z-index: 2;
+      text-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .pcard .big-bg-num {
+      position: absolute;
+      top: -20px; right: -10px;
+      font-weight: 900;
+      font-size: 13rem;
+      color: rgba(212,175,55,0.10);
+      letter-spacing: -8px;
+      line-height: 0.85;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .pcard .overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 26px 22px;
+      background: linear-gradient(180deg, transparent 0%, rgba(6,9,38,0.95) 70%);
+      z-index: 3;
+    }
+    .pcard .pos {
+      font-family: var(--font-script);
+      color: var(--gold);
+      font-size: 1.1rem;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .pcard .name {
+      font-weight: 900; font-size: 1.05rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      line-height: 1.1;
+    }
+    .pcard .name .gold { color: var(--gold); display: block; }
+    .pcard .country {
+      position: absolute;
+      top: 16px; left: 16px;
+      z-index: 4;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(6,9,38,0.6);
+      backdrop-filter: blur(8px);
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      font-weight: 700;
+    }
+    .pcard .height {
+      position: absolute;
+      bottom: 110px; right: 16px;
+      z-index: 4;
+      font-size: 0.72rem; letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      font-weight: 700;
+      background: rgba(6,9,38,0.6);
+      backdrop-filter: blur(8px);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    /* Captain accent */
+    .pcard.captain { box-shadow: 0 0 0 2px var(--gold) inset; }
+    .pcard.captain .overlay::before {
+      content: "C"; position: absolute;
+      top: -16px; left: 22px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--gold); color: var(--navy);
+      display: grid; place-items: center;
+      font-weight: 900; font-size: 0.85rem;
+      box-shadow: 0 4px 12px rgba(212,175,55,0.4);
+    }
+
+    /* Hidden state for filter */
+    .pcard.is-hidden { display: none; }
+
+    /* Position legend */
+    .position-legend {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--line);
+    }
+    .pos-card {
+      padding: 22px 18px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+    }
+    .pos-card .pos-abbr {
+      font-weight: 900; font-size: 1.8rem;
+      color: var(--gold); line-height: 1;
+    }
+    .pos-card .pos-full {
+      margin-top: 8px;
+      font-size: 0.8rem; letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--white); font-weight: 700;
+    }
+    .pos-card .pos-desc {
+      margin-top: 6px;
+      font-size: 0.72rem; color: var(--gray-light);
+      line-height: 1.5;
+    }
+    @media (max-width: 800px) {
+      .position-legend { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body data-screen-label="03 Takım">
+
+  <div id="chrome-nav"></div>
+
+  <!-- ====================== PAGE HERO ====================== -->
+  <section class="page-hero">
+    <div class="ph-bg" style="background-image: url('assets/photos/team-portrait.jpg'); background-position: center 35%;"></div>
+    <div class="ph-overlay"></div>
+    <div class="container">
+      <div class="crumbs">
+        <a href="index.html">Ana Sayfa</a>
+        <span>/</span>
+        <span>Takım</span>
+      </div>
+      <h1 class="reveal-text">
+        Sahanın <span class="gold">yıldızları.</span>
+      </h1>
+      <p class="lead">Tek yürek, tek hedef.</p>
+
+      <div class="meta reveal">
+        <div>
+          <span class="lbl">Yeni Sezon</span>
+          <span class="val">Eylül 2026</span>
+        </div>
+        <div>
+          <span class="lbl">Yaş Ort.</span>
+          <span class="val">23.4</span>
+        </div>
+        <div>
+          <span class="lbl">Boy Ort.</span>
+          <span class="val">182 cm</span>
+        </div>
+      </div>
+    </div>
+    <div class="deco-1953" aria-hidden="true">14</div>
+  </section>
+
+  <!-- ====================== ROSTER ====================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div class="left">
+          <div class="eyebrow">A Takım Kadrosu · 2026-27</div>
+          <h2 class="reveal-text">Parkede <span class="gold">savaşan</span> 14 sporcu.</h2>
+        </div>
+        <div class="right">
+          Filtrelerden bir mevki seçerek o pozisyondaki oyuncularımıza odaklanabilirsin. Çelik Spor kadrosu, Türkiye'nin farklı şehirlerinden ve farklı tecrübelerden bir araya gelmiş, ortak bir hedefe kilitlenmiş bir takımdır.
+        </div>
+      </div>
+
+      <div class="filter-row reveal">
+        <button class="filter-pill is-active" data-filter="all">Tüm Kadro · 14</button>
+        <button class="filter-pill" data-filter="P">Pasör</button>
+        <button class="filter-pill" data-filter="S">Smaçör</button>
+        <button class="filter-pill" data-filter="O">Orta Oyuncu</button>
+        <button class="filter-pill" data-filter="K">Köşe</button>
+        <button class="filter-pill" data-filter="L">Libero</button>
+      </div>
+
+      <div class="roster-grid" id="rosterGrid">
+
+        <article class="pcard reveal" data-pos="P" data-delay="1">
+          <span class="country">TR</span>
+          <span class="height">183 cm</span>
+          <span class="big-bg-num">10</span>
+          <span class="silhouette"></span>
+          <span class="jersey">10</span>
+          <div class="overlay">
+            <div class="pos">Pasör</div>
+            <div class="name">Elif <span class="gold">Yılmaz</span></div>
+          </div>
+        </article>
+
+        <article class="pcard alt reveal" data-pos="S" data-delay="2">
+          <span class="country">TR</span>
+          <span class="height">186 cm</span>
+          <span class="big-bg-num">4</span>
+          <span class="silhouette"></span>
+          <span class="jersey">4</span>
+          <div class="overlay">
+            <div class="pos">Smaçör</div>
+            <div class="name">Zeynep <span class="gold">Kara</span></div>
+          </div>
+        </article>
+
+        <article class="pcard captain reveal" data-pos="O" data-delay="3">
+          <img class="real-photo" src="assets/photos/player-7-portrait.jpg" alt="Pelin Çelik" loading="lazy" style="object-position: center 20%;" />
+          <span class="overlay-grade"></span>
+          <span class="country">★ Kaptan · TR</span>
+          <span class="height">190 cm</span>
+          <span class="big-bg-num" style="z-index:3; opacity:0.7;">7</span>
+          <div class="overlay">
+            <div class="pos">Orta Oyuncu</div>
+            <div class="name">Pelin <span class="gold">Çelik</span></div>
+          </div>
+        </article>
+
+        <article class="pcard alt reveal" data-pos="L" data-delay="4">
+          <span class="country">TR</span>
+          <span class="height">172 cm</span>
+          <span class="big-bg-num">9</span>
+          <span class="silhouette"></span>
+          <span class="jersey">9</span>
+          <div class="overlay">
+            <div class="pos">Libero</div>
+            <div class="name">Ayşe <span class="gold">Demir</span></div>
+          </div>
+        </article>
+
+        <article class="pcard reveal" data-pos="S" data-delay="1">
+          <span class="country">TR</span>
+          <span class="height">184 cm</span>
+          <span class="big-bg-num">11</span>
+          <span class="silhouette"></span>
+          <span class="jersey">11</span>
+          <div class="overlay">
+            <div class="pos">Smaçör</div>
+            <div class="name">Merve <span class="gold">Aydın</span></div>
+          </div>
+        </article>
+
+        <article class="pcard alt reveal" data-pos="O" data-delay="2">
+          <span class="country">TR</span>
+          <span class="height">189 cm</span>
+          <span class="big-bg-num">14</span>
+          <span class="silhouette"></span>
+          <span class="jersey">14</span>
+          <div class="overlay">
+            <div class="pos">Orta Oyuncu</div>
+            <div class="name">Buse <span class="gold">Şahin</span></div>
+          </div>
+        </article>
+
+        <article class="pcard reveal" data-pos="K" data-delay="3">
+          <span class="country">TR</span>
+          <span class="height">185 cm</span>
+          <span class="big-bg-num">3</span>
+          <span class="silhouette"></span>
+          <span class="jersey">3</span>
+          <div class="overlay">
+            <div class="pos">Köşe</div>
+            <div class="name">Defne <span class="gold">Acar</span></div>
+          </div>
+        </article>
+
+        <article class="pcard alt reveal" data-pos="P" data-delay="4">
+          <span class="country">TR</span>
+          <span class="height">180 cm</span>
+          <span class="big-bg-num">5</span>
+          <span class="silhouette"></span>
+          <span class="jersey">5</span>
+          <div class="overlay">
+            <div class="pos">Pasör</div>
+            <div class="name">Ece <span class="gold">Yıldız</span></div>
+          </div>
+        </article>
+
+        <article class="pcard reveal" data-pos="S" data-delay="1">
+          <span class="country">SRB</span>
+          <span class="height">188 cm</span>
+          <span class="big-bg-num">8</span>
+          <span class="silhouette"></span>
+          <span class="jersey">8</span>
+          <div class="overlay">
+            <div class="pos">Smaçör</div>
+            <div class="name">Mila <span class="gold">Petrović</span></div>
+          </div>
+        </article>
+
+        <article class="pcard alt reveal" data-pos="O" data-delay="2">
+          <span class="country">TR</span>
+          <span class="height">191 cm</span>
+          <span class="big-bg-num">12</span>
+          <span class="silhouette"></span>
+          <span class="jersey">12</span>
+          <div class="overlay">
+            <div class="pos">Orta Oyuncu</div>
+            <div class="name">Naz <span class="gold">Çelik</span></div>
+          </div>
+        </article>
+
+        <article class="pcard reveal" data-pos="K" data-delay="3">
+          <span class="country">TR</span>
+          <span class="height">183 cm</span>
+          <span class="big-bg-num">6</span>
+          <span class="silhouette"></span>
+          <span class="jersey">6</span>
+          <div class="overlay">
+            <div class="pos">Köşe</div>
+            <div class="name">İrem <span class="gold">Polat</span></div>
+          </div>
+        </article>
+
+        <article class="pcard alt reveal" data-pos="L" data-delay="4">
+          <span class="country">TR</span>
+          <span class="height">174 cm</span>
+          <span class="big-bg-num">2</span>
+          <span class="silhouette"></span>
+          <span class="jersey">2</span>
+          <div class="overlay">
+            <div class="pos">Libero</div>
+            <div class="name">Sude <span class="gold">Tekin</span></div>
+          </div>
+        </article>
+
+        <article class="pcard reveal" data-pos="S" data-delay="1">
+          <span class="country">TR</span>
+          <span class="height">185 cm</span>
+          <span class="big-bg-num">15</span>
+          <span class="silhouette"></span>
+          <span class="jersey">15</span>
+          <div class="overlay">
+            <div class="pos">Smaçör</div>
+            <div class="name">Lara <span class="gold">Öz</span></div>
+          </div>
+        </article>
+
+        <article class="pcard alt reveal" data-pos="P" data-delay="2">
+          <span class="country">TR</span>
+          <span class="height">178 cm</span>
+          <span class="big-bg-num">17</span>
+          <span class="silhouette"></span>
+          <span class="jersey">17</span>
+          <div class="overlay">
+            <div class="pos">Pasör</div>
+            <div class="name">Cansu <span class="gold">Korkmaz</span></div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Position legend -->
+      <div class="position-legend reveal">
+        <div class="pos-card">
+          <div class="pos-abbr">P</div>
+          <div class="pos-full">Pasör</div>
+          <div class="pos-desc">Hücumun beynidir, topu smaçörlere taşır.</div>
+        </div>
+        <div class="pos-card">
+          <div class="pos-abbr">S</div>
+          <div class="pos-full">Smaçör</div>
+          <div class="pos-desc">Hücumun bel kemiği; sayıların önemli kısmını üretir.</div>
+        </div>
+        <div class="pos-card">
+          <div class="pos-abbr">O</div>
+          <div class="pos-full">Orta Oyuncu</div>
+          <div class="pos-desc">Filede blok atan en uzun sporcular.</div>
+        </div>
+        <div class="pos-card">
+          <div class="pos-abbr">K</div>
+          <div class="pos-full">Köşe</div>
+          <div class="pos-desc">Hem hücum hem savunmada görev üstlenir.</div>
+        </div>
+        <div class="pos-card">
+          <div class="pos-abbr">L</div>
+          <div class="pos-full">Libero</div>
+          <div class="pos-desc">Defansın anahtarı; servis karşılamada uzman.</div>
+        </div>
+        <div class="pos-card">
+          <div class="pos-abbr">C</div>
+          <div class="pos-full">Kaptan</div>
+          <div class="pos-desc">Sahada takımın liderliğini üstlenir.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="chrome-foot"></div>
+
+  <script src="assets/chrome.js"></script>
+  <script src="assets/main.js"></script>
+  <script>
+    // Position filter
+    (function () {
+      const pills = document.querySelectorAll('.filter-pill');
+      const cards = document.querySelectorAll('.pcard');
+      pills.forEach(p => p.addEventListener('click', () => {
+        pills.forEach(x => x.classList.remove('is-active'));
+        p.classList.add('is-active');
+        const f = p.dataset.filter;
+        cards.forEach(c => {
+          const match = f === 'all' || c.dataset.pos === f;
+          c.classList.toggle('is-hidden', !match);
+        });
+      }));
+    })();
+  </script>
+</body>
+</html>

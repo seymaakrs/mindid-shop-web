@@ -1,0 +1,72 @@
+
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Çelik Spor Kulübü Bandırma — Ana Logo">
+  <defs>
+    <radialGradient id="csInner" cx="50%" cy="44%" r="58%">
+      <stop offset="0%" stop-color="#ffffff"></stop>
+      <stop offset="78%" stop-color="#f6efd9"></stop>
+      <stop offset="100%" stop-color="#e6dcb4"></stop>
+    </radialGradient>
+    <linearGradient id="csGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8C75B"></stop>
+      <stop offset="50%" stop-color="#D4AF37"></stop>
+      <stop offset="100%" stop-color="#B0902A"></stop>
+    </linearGradient>
+    <linearGradient id="csGoldRibbon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8C75B"></stop>
+      <stop offset="100%" stop-color="#B0902A"></stop>
+    </linearGradient>
+    <path id="csTopText" d="M 30 100 a 70 70 0 0 1 140 0"></path>
+  </defs>
+
+  
+  <circle cx="100" cy="100" r="96" fill="url(#csGold)"></circle>
+  <circle cx="100" cy="100" r="88" fill="url(#csInner)"></circle>
+  <circle cx="100" cy="100" r="82" fill="none" stroke="#0D1B53" stroke-width="0.8" opacity="0.3"></circle>
+
+  
+  <text font-family="Montserrat, sans-serif" font-weight="900" font-size="9.5" letter-spacing="2" fill="#0D1B53">
+    <textPath href="#csTopText" startOffset="50%" text-anchor="middle">ÇELİK SPOR KULÜBÜ</textPath>
+  </text>
+
+  
+  <g transform="translate(100 36)">
+    <text text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-size="11" fill="#0D1B53">1953</text>
+  </g>
+
+  
+  <text x="100" y="118" text-anchor="middle" font-family="Georgia, &#39;Times New Roman&#39;, serif" font-weight="700" font-size="78" fill="url(#csGold)" stroke="#0D1B53" stroke-width="1.2" paint-order="stroke fill" style="font-style: italic;">S</text>
+
+  
+  <g stroke="url(#csGold)" stroke-width="2" fill="none" stroke-linecap="round" transform="translate(46 92)">
+    <path d="M 0 0 Q -18 -22 -12 -46"></path>
+    
+    <ellipse cx="-3" cy="-6" rx="6" ry="2.6" fill="url(#csGold)" stroke="none" transform="rotate(-30 -3 -6)"></ellipse>
+    <ellipse cx="-7" cy="-16" rx="6" ry="2.6" fill="url(#csGold)" stroke="none" transform="rotate(-20 -7 -16)"></ellipse>
+    <ellipse cx="-10" cy="-26" rx="6" ry="2.6" fill="url(#csGold)" stroke="none" transform="rotate(-10 -10 -26)"></ellipse>
+    <ellipse cx="-12" cy="-36" rx="5.5" ry="2.4" fill="url(#csGold)" stroke="none" transform="rotate(0 -12 -36)"></ellipse>
+    <ellipse cx="-13" cy="-44" rx="5" ry="2.2" fill="url(#csGold)" stroke="none" transform="rotate(10 -13 -44)"></ellipse>
+  </g>
+
+  
+  <g stroke="url(#csGold)" stroke-width="2" fill="none" stroke-linecap="round" transform="translate(154 92)">
+    <path d="M 0 0 Q 18 -22 12 -46"></path>
+    <ellipse cx="3" cy="-6" rx="6" ry="2.6" fill="url(#csGold)" stroke="none" transform="rotate(30 3 -6)"></ellipse>
+    <ellipse cx="7" cy="-16" rx="6" ry="2.6" fill="url(#csGold)" stroke="none" transform="rotate(20 7 -16)"></ellipse>
+    <ellipse cx="10" cy="-26" rx="6" ry="2.6" fill="url(#csGold)" stroke="none" transform="rotate(10 10 -26)"></ellipse>
+    <ellipse cx="12" cy="-36" rx="5.5" ry="2.4" fill="url(#csGold)" stroke="none" transform="rotate(0 12 -36)"></ellipse>
+    <ellipse cx="13" cy="-44" rx="5" ry="2.2" fill="url(#csGold)" stroke="none" transform="rotate(-10 13 -44)"></ellipse>
+  </g>
+
+  
+  <circle cx="100" cy="56" r="3" fill="#D4AF37"></circle>
+
+  
+  <g>
+    
+    <path d="M 18 148 L 30 152 L 28 168 L 12 162 Z" fill="#0D1B53"></path>
+    <path d="M 182 148 L 170 152 L 172 168 L 188 162 Z" fill="#0D1B53"></path>
+    
+    <path d="M 26 144 Q 100 174 174 144 L 174 162 Q 100 188 26 162 Z" fill="url(#csGoldRibbon)" stroke="#0D1B53" stroke-width="1"></path>
+    <text x="100" y="161" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-size="14" letter-spacing="3" fill="#0D1B53">BANDIRMA</text>
+  </g>
+</svg>

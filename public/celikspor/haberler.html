@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#060926" />
+  <title>Haberler — Çelik Spor Kulübü Bandırma</title>
+  <meta name="description" content="Çelik Spor Bandırma Kadın Voleybol Takımı haberleri, antrenman görüntüleri ve kulüp duyuruları." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/site.css" />
+
+  <style>
+    /* Featured article */
+    .feature-article {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+    .feature-article .image {
+      aspect-ratio: 5/4;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--navy-soft) 0%, var(--navy-deep) 100%);
+      position: relative;
+    }
+    .feature-article .image::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(6,9,38,0.45) 100%);
+      pointer-events: none;
+    }
+    .feature-article .tag {
+      display: inline-block;
+      background: var(--gold); color: var(--navy);
+      padding: 6px 12px; border-radius: 4px;
+      font-size: 0.7rem; font-weight: 900;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .feature-article h2 {
+      font-weight: 900;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      letter-spacing: 0.5px;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+    .feature-article .lead {
+      color: var(--gray-light);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+    .feature-article .meta {
+      display: flex; gap: 24px; align-items: center;
+      font-size: 0.78rem;
+      color: var(--gray-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .feature-article .meta .gold { color: var(--gold); font-weight: 700; }
+
+    @media (max-width: 900px) {
+      .feature-article { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    /* Filter row */
+    .filter-row {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .cat-pill {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--gray-light);
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: all var(--t);
+    }
+    .cat-pill:hover { color: var(--white); border-color: var(--line-strong); }
+    .cat-pill.is-active {
+      background: var(--gold); color: var(--navy);
+      border-color: var(--gold);
+    }
+
+    .news-card.is-hidden { display: none; }
+
+    /* Newsletter callout */
+    .newsletter {
+      margin-top: 80px;
+      padding: clamp(40px, 7vw, 80px);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(13,27,83,0.6) 0%, rgba(6,9,38,0.85) 100%),
+        radial-gradient(circle at 30% 50%, rgba(212,175,55,0.18), transparent 50%);
+      border: 1px solid var(--line-strong);
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .newsletter h3 {
+      font-weight: 900;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      letter-spacing: 1px;
+      line-height: 1.1;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .newsletter h3 .gold { color: var(--gold); }
+    .newsletter p {
+      color: var(--gray-light);
+      line-height: 1.75;
+    }
+    .newsletter .form-line {
+      display: flex; gap: 8px;
+    }
+    .newsletter input {
+      flex: 1;
+      background: rgba(6,9,38,0.6);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 16px 22px;
+      color: var(--white);
+      outline: none;
+      transition: all var(--t);
+      font-size: 0.95rem;
+    }
+    .newsletter input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.08);
+    }
+    .newsletter button {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 16px 28px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 0.78rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      transition: all var(--t);
+    }
+    .newsletter button:hover {
+      background: var(--gold-soft);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold);
+    }
+    @media (max-width: 900px) {
+      .newsletter { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-screen-label="05 Haberler">
+
+  <div id="chrome-nav"></div>
+
+  <!-- ====================== PAGE HERO ====================== -->
+  <section class="page-hero">
+    <div class="ph-bg" style="background-image: url('assets/photos/team-huddle-2.jpg'); background-position: center;"></div>
+    <div class="ph-overlay"></div>
+    <div class="container">
+      <div class="crumbs">
+        <a href="index.html">Ana Sayfa</a>
+        <span>/</span>
+        <span>Haberler</span>
+      </div>
+      <h1 class="reveal-text">
+        Takımdan <span class="gold">son gelişmeler.</span>
+      </h1>
+      <p class="lead">Hazırlık kampından sahaya, parkenin her detayı.</p>
+    </div>
+    <div class="deco-1953" aria-hidden="true">NEWS</div>
+  </section>
+
+  <!-- ====================== FEATURE ARTICLE ====================== -->
+  <section class="section">
+    <div class="container">
+      <article class="feature-article reveal">
+        <div class="image" style="background-image: url('assets/photos/team-bench.jpg'); background-size: cover; background-position: center;">
+          <span style="position:absolute; top:20px; left:20px; z-index:2; background: var(--red); color: var(--white); padding: 6px 12px; border-radius: 4px; font-size: 0.7rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;">Manşet</span>
+        </div>
+        <div>
+          <span class="tag">Antrenman</span>
+          <h2>Yeni Sezon Hazırlık Kampı Bandırma'da Resmen Başladı</h2>
+          <p class="lead">
+            Takımımız, başantrenör Murat Kaya ve teknik kadrosu eşliğinde 2026-27 sezonu hazırlık kampını Bandırma Şehir Spor Salonu'nda sürdürüyor. Üç haftalık yoğun program; kondisyon, taktik ve hazırlık maçlarından oluşuyor.
+          </p>
+          <div class="meta">
+            <span class="gold">12 Mayıs 2026</span>
+            <span>·</span>
+            <span>4 dk okuma</span>
+            <span>·</span>
+            <span>Spor Servisi</span>
+          </div>
+          <div style="margin-top: 28px;">
+            <a href="#" class="btn primary">Haberi Oku <span class="arr">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Category filter -->
+      <div class="filter-row reveal">
+        <button class="cat-pill is-active" data-cat="all">Tümü</button>
+        <button class="cat-pill" data-cat="antrenman">Antrenman</button>
+        <button class="cat-pill" data-cat="kadro">Kadro</button>
+        <button class="cat-pill" data-cat="mac">Maç</button>
+        <button class="cat-pill" data-cat="kulup">Kulüp</button>
+        <button class="cat-pill" data-cat="taraftar">Taraftar</button>
+      </div>
+
+      <!-- News grid -->
+      <div class="news-grid" id="newsGrid">
+
+        <article class="news-card reveal" data-cat="kadro" data-delay="1">
+          <div class="image">
+            <div class="ph-img" style="background-image: url('assets/photos/team-portrait.jpg'); background-size: cover; background-position: center; height:100%;"></div>
+            <span class="tag">Kadro</span>
+          </div>
+          <div class="body">
+            <div class="date">28 Nisan 2026</div>
+            <h3>Genç Yeteneklerle Kadromuz Güçleniyor</h3>
+            <p class="excerpt">Alt yapımızdan yetişen üç sporcumuz A takım kadrosuna dahil edildi. Şehrimizin gururu olmaya hazırlar.</p>
+            <span class="more">Devamını oku →</span>
+          </div>
+        </article>
+
+        <article class="news-card reveal" data-cat="kulup" data-delay="2">
+          <div class="image">
+            <div class="ph-img" style="background-image: url('assets/photos/team-bench-2.jpg'); background-size: cover; background-position: center; height:100%;"></div>
+            <span class="tag">Kulüp</span>
+          </div>
+          <div class="body">
+            <div class="date">15 Nisan 2026</div>
+            <h3>Çelik Spor'dan Anlamlı Sosyal Sorumluluk Projesi</h3>
+            <p class="excerpt">Kulübümüz, Bandırma'daki ilkokullarda voleybol tanıtım etkinlikleri düzenledi.</p>
+            <span class="more">Devamını oku →</span>
+          </div>
+        </article>
+
+        <article class="news-card reveal" data-cat="mac" data-delay="3">
+          <div class="image">
+            <div class="ph-img" style="background-image: url('assets/photos/team-huddle.jpg'); background-size: cover; background-position: center; height:100%;"></div>
+            <span class="tag">Maç</span>
+          </div>
+          <div class="body">
+            <div class="date">02 Mayıs 2026</div>
+            <h3>Hazırlık Karşılaşmasında Bursa Üniversite'yi 3-1 Yendik</h3>
+            <p class="excerpt">Sezon öncesi ilk hazırlık maçında parkede istenen tablo ortaya çıktı. Servis varyasyonları öne çıktı.</p>
+            <span class="more">Devamını oku →</span>
+          </div>
+        </article>
+
+        <article class="news-card reveal" data-cat="antrenman" data-delay="1">
+          <div class="image">
+            <div class="ph-img" style="background-image: url('assets/photos/team-bench.jpg'); background-size: cover; background-position: center; height:100%;"></div>
+            <span class="tag">Antrenman</span>
+          </div>
+          <div class="body">
+            <div class="date">05 Mayıs 2026</div>
+            <h3>Performans Koçu Emre Başkaya: "Sezona Zinde Gireceğiz"</h3>
+            <p class="excerpt">Bu sezon sakatlık önleme programlarına ağırlık veriyoruz. Sporcularımızın yıl boyu zinde kalması hedef.</p>
+            <span class="more">Devamını oku →</span>
+          </div>
+        </article>
+
+        <article class="news-card reveal" data-cat="taraftar" data-delay="2">
+          <div class="image">
+            <div class="ph-img" style="background-image: url('assets/photos/team-huddle-2.jpg'); background-size: cover; background-position: center; height:100%;"></div>
+            <span class="tag">Taraftar</span>
+          </div>
+          <div class="body">
+            <div class="date">22 Nisan 2026</div>
+            <h3>Sezonluk Kombine Biletlerimiz Satışa Çıktı</h3>
+            <p class="excerpt">Tüm iç saha maçlarımıza kombine biletle ulaşmak mümkün. Detaylar ve fiyatlar için kulüp ofisi ile iletişime geçin.</p>
+            <span class="more">Devamını oku →</span>
+          </div>
+        </article>
+
+        <article class="news-card reveal" data-cat="kulup" data-delay="3">
+          <div class="image">
+            <div class="ph-img" style="background-image: url('assets/photos/player-serve.jpg'); background-size: cover; background-position: center; height:100%;"></div>
+            <span class="tag">Kulüp</span>
+          </div>
+          <div class="body">
+            <div class="date">18 Nisan 2026</div>
+            <h3>Yeni Sponsorluk Anlaşması: Marmara Lojistik Aramızda</h3>
+            <p class="excerpt">Marmara Lojistik ile imzaladığımız 3 yıllık anlaşma duyuruldu. Yolculuğumuza güçlü bir partnerle devam ediyoruz.</p>
+            <span class="more">Devamını oku →</span>
+          </div>
+        </article>
+
+        <article class="news-card reveal" data-cat="antrenman" data-delay="1">
+          <div class="image">
+            <div class="ph-img" style="background-image: url('assets/photos/team-bench-2.jpg'); background-size: cover; background-position: center; height:100%;"></div>
+            <span class="tag">Antrenman</span>
+          </div>
+          <div class="body">
+            <div class="date">08 Nisan 2026</div>
+            <h3>Çift Antrenman Programına Geçildi</h3>
+            <p class="excerpt">Hazırlık döneminin yoğunlaştığı bu haftalarda günde iki kez salona iniyoruz. Sabah kondisyon, akşam taktik.</p>
+            <span class="more">Devamını oku →</span>
+          </div>
+        </article>
+
+        <article class="news-card reveal" data-cat="mac" data-delay="2">
+          <div class="image">
+            <div class="ph-img" style="background-image: url('assets/photos/team-portrait.jpg'); background-size: cover; background-position: center; height:100%;"></div>
+            <span class="tag">Maç</span>
+          </div>
+          <div class="body">
+            <div class="date">09 Mayıs 2026</div>
+            <h3>İzmit Doğa Deplasmanından 3-2'lik Galibiyetle Döndük</h3>
+            <p class="excerpt">Tay-break'e giden zorlu mücadele galibiyetimizle sonuçlandı. Tribünde de büyük destek vardı.</p>
+            <span class="more">Devamını oku →</span>
+          </div>
+        </article>
+
+        <article class="news-card reveal" data-cat="taraftar" data-delay="3">
+          <div class="image">
+            <div class="ph-img" style="background-image: url('assets/photos/team-huddle.jpg'); background-size: cover; background-position: center; height:100%;"></div>
+            <span class="tag">Taraftar</span>
+          </div>
+          <div class="body">
+            <div class="date">01 Nisan 2026</div>
+            <h3>Genç Taraftar Kulübü Etkinliği Yoğun İlgi Gördü</h3>
+            <p class="excerpt">Şehir spor salonunda düzenlediğimiz tanışma etkinliğine 200'ü aşkın genç taraftarımız katıldı.</p>
+            <span class="more">Devamını oku →</span>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Newsletter -->
+      <div class="newsletter reveal">
+        <div>
+          <h3>Yeni sezondan <span class="gold">haberdar ol.</span></h3>
+          <p>Maç duyuruları, kadro haberleri ve özel taraftar etkinliklerini e-posta ile takip et. Aboneliğin her an iptal edebilirsin.</p>
+        </div>
+        <form class="form-line" onsubmit="event.preventDefault(); this.querySelector('input').value=''; this.querySelector('button').textContent='Teşekkürler!'; setTimeout(()=>this.querySelector('button').textContent='Abone Ol', 2400);">
+          <input type="email" placeholder="e-posta@adresin.com" required />
+          <button type="submit">Abone Ol</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="chrome-foot"></div>
+
+  <script src="assets/chrome.js"></script>
+  <script src="assets/main.js"></script>
+  <script>
+    // Category filter
+    (function () {
+      const pills = document.querySelectorAll('.cat-pill');
+      const cards = document.querySelectorAll('#newsGrid .news-card');
+      pills.forEach(p => p.addEventListener('click', () => {
+        pills.forEach(x => x.classList.remove('is-active'));
+        p.classList.add('is-active');
+        const f = p.dataset.cat;
+        cards.forEach(c => {
+          const match = f === 'all' || c.dataset.cat === f;
+          c.classList.toggle('is-hidden', !match);
+        });
+      }));
+    })();
+  </script>
+</body>
+</html>

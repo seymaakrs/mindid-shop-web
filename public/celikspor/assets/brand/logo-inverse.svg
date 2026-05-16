@@ -1,0 +1,51 @@
+
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Çelik Spor Kulübü Bandırma — Ters Beyaz">
+  <defs>
+    <linearGradient id="wGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8C75B"></stop>
+      <stop offset="50%" stop-color="#D4AF37"></stop>
+      <stop offset="100%" stop-color="#B0902A"></stop>
+    </linearGradient>
+    <path id="wTop" d="M 30 100 a 70 70 0 0 1 140 0"></path>
+  </defs>
+
+  
+  <circle cx="100" cy="100" r="96" fill="#0D1B53"></circle>
+  <circle cx="100" cy="100" r="96" fill="none" stroke="#D4AF37" stroke-width="3"></circle>
+  <circle cx="100" cy="100" r="86" fill="none" stroke="#D4AF37" stroke-width="0.8" opacity="0.5"></circle>
+
+  
+  <text font-family="Montserrat, sans-serif" font-weight="900" font-size="9.5" letter-spacing="2" fill="#FFFFFF">
+    <textPath href="#wTop" startOffset="50%" text-anchor="middle">ÇELİK SPOR KULÜBÜ</textPath>
+  </text>
+
+  
+  <text x="100" y="36" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-size="11" fill="#D4AF37">1953</text>
+
+  
+  <text x="100" y="118" text-anchor="middle" font-family="Georgia, &#39;Times New Roman&#39;, serif" font-weight="700" font-size="78" fill="url(#wGold)" style="font-style: italic;">S</text>
+
+  
+  <g stroke="#D4AF37" stroke-width="2" fill="none" stroke-linecap="round" transform="translate(46 92)">
+    <path d="M 0 0 Q -18 -22 -12 -46"></path>
+    <ellipse cx="-3" cy="-6" rx="6" ry="2.6" fill="#D4AF37" stroke="none" transform="rotate(-30 -3 -6)"></ellipse>
+    <ellipse cx="-7" cy="-16" rx="6" ry="2.6" fill="#D4AF37" stroke="none" transform="rotate(-20 -7 -16)"></ellipse>
+    <ellipse cx="-10" cy="-26" rx="6" ry="2.6" fill="#D4AF37" stroke="none" transform="rotate(-10 -10 -26)"></ellipse>
+    <ellipse cx="-12" cy="-36" rx="5.5" ry="2.4" fill="#D4AF37" stroke="none" transform="rotate(0 -12 -36)"></ellipse>
+    <ellipse cx="-13" cy="-44" rx="5" ry="2.2" fill="#D4AF37" stroke="none" transform="rotate(10 -13 -44)"></ellipse>
+  </g>
+  <g stroke="#D4AF37" stroke-width="2" fill="none" stroke-linecap="round" transform="translate(154 92)">
+    <path d="M 0 0 Q 18 -22 12 -46"></path>
+    <ellipse cx="3" cy="-6" rx="6" ry="2.6" fill="#D4AF37" stroke="none" transform="rotate(30 3 -6)"></ellipse>
+    <ellipse cx="7" cy="-16" rx="6" ry="2.6" fill="#D4AF37" stroke="none" transform="rotate(20 7 -16)"></ellipse>
+    <ellipse cx="10" cy="-26" rx="6" ry="2.6" fill="#D4AF37" stroke="none" transform="rotate(10 10 -26)"></ellipse>
+    <ellipse cx="12" cy="-36" rx="5.5" ry="2.4" fill="#D4AF37" stroke="none" transform="rotate(0 12 -36)"></ellipse>
+    <ellipse cx="13" cy="-44" rx="5" ry="2.2" fill="#D4AF37" stroke="none" transform="rotate(-10 13 -44)"></ellipse>
+  </g>
+
+  
+  <path d="M 18 148 L 30 152 L 28 168 L 12 162 Z" fill="#B0902A"></path>
+  <path d="M 182 148 L 170 152 L 172 168 L 188 162 Z" fill="#B0902A"></path>
+  <path d="M 26 144 Q 100 174 174 144 L 174 162 Q 100 188 26 162 Z" fill="url(#wGold)" stroke="#0D1B53" stroke-width="1"></path>
+  <text x="100" y="161" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-size="14" letter-spacing="3" fill="#0D1B53">BANDIRMA</text>
+</svg>

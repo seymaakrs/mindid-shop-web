@@ -1,0 +1,11 @@
+
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="sMono" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8C75B"></stop>
+      <stop offset="50%" stop-color="#D4AF37"></stop>
+      <stop offset="100%" stop-color="#B0902A"></stop>
+    </linearGradient>
+  </defs>
+  <text x="60" y="92" text-anchor="middle" font-family="Georgia, &#39;Times New Roman&#39;, serif" font-weight="700" font-size="100" fill="url(#sMono)" stroke="#0D1B53" stroke-width="1.5" paint-order="stroke fill" style="font-style: italic;">S</text>
+</svg>
