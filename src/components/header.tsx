@@ -174,7 +174,7 @@ export const Header = () => {
           <button
             ref={toggleRef}
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 text-[var(--dark-blue)] cursor-pointer"
+            className="lg:hidden inline-flex items-center justify-center min-w-[44px] min-h-[44px] -mr-2 text-[var(--dark-blue)] cursor-pointer rounded-md hover:bg-[var(--dark-blue)]/5 active:bg-[var(--dark-blue)]/10 transition-colors"
             aria-label={mobileOpen ? "Menüyü kapat" : "Menüyü aç"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"

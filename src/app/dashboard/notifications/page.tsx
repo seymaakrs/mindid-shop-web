@@ -5,6 +5,7 @@ import { useCustomerNotifications } from "@/lib/hooks/use-customer";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Bell, Check, ShoppingBag, CreditCard, Megaphone, Info } from "lucide-react";
+import { EmptyState } from "@/components/customer/empty-state";
 
 const ICON_MAP: Record<string, typeof Bell> = {
   order_update: ShoppingBag,
@@ -39,10 +40,11 @@ const NotificationsPage = () => {
       </div>
 
       {notifications.length === 0 ? (
-        <div className="text-center py-16">
-          <Bell size={48} className="mx-auto mb-4 text-gray-700" />
-          <p className="text-gray-500">Henüz bildirim yok.</p>
-        </div>
+        <EmptyState
+          icon={Bell}
+          title="Henüz bildirim yok"
+          description="Üretim güncellemeleri, ödeme bilgileri ve duyurular burada görünür."
+        />
       ) : (
         <div className="space-y-2">
           {notifications.map((notif) => {

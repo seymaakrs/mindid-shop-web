@@ -4,6 +4,7 @@ import { useAuth } from "@/lib/auth-context";
 import { usePaymentHistory } from "@/lib/hooks/use-customer";
 import { PLAN_LIMITS, formatPrice } from "@/lib/payment";
 import { CreditCard, Check, ArrowRight, Receipt } from "lucide-react";
+import { EmptyState, SkeletonList } from "@/components/customer/empty-state";
 
 const BillingPage = () => {
   const { customerData } = useAuth();
@@ -66,9 +67,15 @@ const BillingPage = () => {
           </h2>
         </div>
         {loading ? (
-          <div className="p-8 text-center text-gray-500 text-sm">Yükleniyor...</div>
+          <div className="p-4">
+            <SkeletonList rows={3} />
+          </div>
         ) : payments.length === 0 ? (
-          <div className="p-8 text-center text-gray-500 text-sm">Henüz ödeme kaydı yok.</div>
+          <EmptyState
+            icon={Receipt}
+            title="Henüz ödeme kaydı yok"
+            description="İlk plan yükseltmen veya kredi alımın burada görünecek."
+          />
         ) : (
           <div className="divide-y divide-white/5">
             {payments.map((payment) => (

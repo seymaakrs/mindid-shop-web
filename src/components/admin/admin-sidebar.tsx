@@ -39,7 +39,7 @@ export const AdminSidebar = () => {
   const newOrderCount = useRunningGenerationCount();
 
   return (
-    <aside className="w-64 min-h-screen bg-[var(--dark-blue)] border-r-3 border-[var(--electric-blue)]/20 flex flex-col">
+    <aside className="w-64 min-h-screen bg-[var(--dark-blue)] border-r-3 border-[var(--electric-blue)]/20 hidden md:flex flex-col">
       {/* Logo */}
       <div className="p-5 border-b-3 border-[var(--electric-blue)]/20">
         <Link href="/admin" className="flex items-center gap-2">
