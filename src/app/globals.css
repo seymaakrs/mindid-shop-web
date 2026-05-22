@@ -354,6 +354,13 @@ html {
   body {
     padding-bottom: calc(4rem + env(safe-area-inset-bottom));
   }
+  /* iOS Safari zooms into inputs with font-size < 16px on focus.
+     Force 16px on touch viewports to prevent the zoom. */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
 }
 
 /* ── Prefers Reduced Motion ── */

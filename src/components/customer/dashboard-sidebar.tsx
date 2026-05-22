@@ -38,7 +38,7 @@ export const DashboardSidebar = () => {
     <aside
       className={`${
         collapsed ? "w-16" : "w-64"
-      } bg-[#100a2c] border-r border-white/5 flex flex-col transition-all duration-200`}
+      } hidden md:flex bg-[#100a2c] border-r border-white/5 flex-col transition-all duration-200`}
     >
       {/* Header */}
       <div className="p-4 border-b border-white/5">
