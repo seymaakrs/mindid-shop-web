@@ -32,12 +32,30 @@ const FilesPage = () => {
       </h1>
 
       {loading ? (
-        <div className="text-center py-12 text-gray-500">Yükleniyor...</div>
+        <div className="space-y-4">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="bg-white/5 border border-white/5 rounded-2xl p-5 animate-pulse">
+              <div className="flex items-center justify-between mb-3">
+                <div className="h-3 w-32 bg-white/5 rounded" />
+                <div className="h-2 w-20 bg-white/5 rounded" />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="h-10 bg-white/5 rounded-xl" />
+                <div className="h-10 bg-white/5 rounded-xl" />
+              </div>
+            </div>
+          ))}
+        </div>
       ) : completedJobs.length === 0 ? (
         <div className="text-center py-16">
-          <FolderOpen size={48} className="mx-auto mb-4 text-gray-700" />
-          <p className="text-gray-500 mb-2">Henüz tamamlanmış üretim yok.</p>
-          <p className="text-xs text-gray-600">Tamamlanan AI üretimlerinin çıktıları burada görünecek.</p>
+          <div className="relative w-20 h-20 mx-auto mb-5">
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[var(--lime)]/30 to-[var(--electric-blue)]/30 blur-xl" />
+            <div className="relative w-20 h-20 rounded-3xl bg-gradient-to-br from-[var(--lime)]/20 to-[var(--electric-blue)]/10 border border-[var(--lime)]/20 flex items-center justify-center">
+              <FolderOpen size={32} className="text-[var(--lime)]" />
+            </div>
+          </div>
+          <p className="text-white font-bold mb-1">Henüz tamamlanmış üretim yok</p>
+          <p className="text-xs text-gray-500">Tamamlanan AI üretimlerinin çıktıları burada görünecek.</p>
         </div>
       ) : (
         <div className="space-y-4">
