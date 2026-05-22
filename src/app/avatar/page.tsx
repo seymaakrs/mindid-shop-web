@@ -3,7 +3,6 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ParallaxGrid } from "@/components/parallax-grid";
 import { FeaturePage } from "@/components/content-pages/feature-page";
-import { User, Mic, Globe, Building2, Zap, Languages, Wand2 } from "lucide-react";
 import { GENERATION_COSTS } from "@/lib/plans-data";
 
 export const metadata: Metadata = {
@@ -23,28 +22,28 @@ export const metadata: Metadata = {
 
 const useCases = [
   {
-    icon: User,
+    icon: "user" as const,
     titleTr: "Marka Sözcüsü",
     titleEn: "Brand Spokesperson",
     descTr: "Tutarlı marka yüzü ile her video aynı kişiyle.",
     descEn: "A consistent brand face across every video.",
   },
   {
-    icon: Mic,
+    icon: "mic" as const,
     titleTr: "Eğitim Sunucusu",
     titleEn: "Training Presenter",
     descTr: "Online kurs ve eğitim videolarında dijital eğitmen.",
     descEn: "Digital instructor for courses and training videos.",
   },
   {
-    icon: Globe,
+    icon: "globe" as const,
     titleTr: "Çok Dilli İçerik",
     titleEn: "Multilingual Content",
     descTr: "Aynı avatardan onlarca dilde içerik üret.",
     descEn: "Produce content in dozens of languages from one avatar.",
   },
   {
-    icon: Building2,
+    icon: "building" as const,
     titleTr: "Kurumsal Anonslar",
     titleEn: "Corporate Announcements",
     descTr: "İç iletişim, müşteri duyurusu, ürün lansmanı.",
@@ -54,21 +53,21 @@ const useCases = [
 
 const benefits = [
   {
-    icon: Wand2,
+    icon: "wand" as const,
     titleTr: "Kameraya çıkmadan",
     titleEn: "No camera required",
     descTr: "Çekim ekibi ve mekan yok. Tarayıcıdan üret.",
     descEn: "No crew or location. Generate from your browser.",
   },
   {
-    icon: Zap,
+    icon: "zap" as const,
     titleTr: "Saniyeler içinde",
     titleEn: "In seconds",
     descTr: "Brief, kostüm değişimi, çekim günü yok.",
     descEn: "No briefs, wardrobe changes, or shoot days.",
   },
   {
-    icon: Languages,
+    icon: "languages" as const,
     titleTr: "Dudak senkronu",
     titleEn: "Lip-sync ready",
     descTr: "Dudak hareketi, mimik ve göz teması doğal.",

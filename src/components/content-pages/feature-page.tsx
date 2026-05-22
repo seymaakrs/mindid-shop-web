@@ -6,18 +6,62 @@ import {
   CheckCircle2,
   Sparkles,
   Coins,
-  type LucideIcon,
+  Smartphone,
+  Film,
+  Megaphone,
+  Building2,
+  Zap,
+  Clock,
+  Wand2,
+  Camera,
+  Palette,
+  Layers,
+  Image as ImageIcon,
+  ShoppingBag,
+  Package,
+  TrendingUp,
+  User,
+  Mic,
+  Globe,
+  Languages,
 } from "lucide-react";
+import type { ComponentType } from "react";
 import { useI18n, type Lang } from "@/lib/i18n";
 
 const isEn = (lang: Lang) => lang === "en";
+
+export type IconName =
+  | "smartphone" | "film" | "megaphone" | "building" | "zap" | "clock" | "wand"
+  | "camera" | "palette" | "layers" | "image" | "shopping" | "package" | "trending"
+  | "user" | "mic" | "globe" | "languages";
+
+const ICONS: Record<IconName, ComponentType<{ size?: number }>> = {
+  smartphone: Smartphone,
+  film: Film,
+  megaphone: Megaphone,
+  building: Building2,
+  zap: Zap,
+  clock: Clock,
+  wand: Wand2,
+  camera: Camera,
+  palette: Palette,
+  layers: Layers,
+  image: ImageIcon,
+  shopping: ShoppingBag,
+  package: Package,
+  trending: TrendingUp,
+  user: User,
+  mic: Mic,
+  globe: Globe,
+  languages: Languages,
+};
 
 export type FeatureUseCase = {
   titleTr: string;
   titleEn: string;
   descTr: string;
   descEn: string;
-  icon: LucideIcon;
+  icon: IconName;
 };
 
 export type FeatureBenefit = {
@@ -25,7 +69,7 @@ export type FeatureBenefit = {
   titleEn: string;
   descTr: string;
   descEn: string;
-  icon: LucideIcon;
+  icon: IconName;
 };
 
 export type FeaturePageProps = {
@@ -121,7 +165,7 @@ export const FeaturePage = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {useCases.map((uc, i) => {
-              const Icon = uc.icon;
+              const Icon = ICONS[uc.icon];
               return (
                 <div
                   key={i}
@@ -154,7 +198,7 @@ export const FeaturePage = ({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {benefits.map((b, i) => {
-              const Icon = b.icon;
+              const Icon = ICONS[b.icon];
               return (
                 <div key={i} className="p-6 rounded-2xl bg-white">
                   <div className="w-11 h-11 rounded-xl bg-[var(--dark-blue)] text-[var(--lime)] flex items-center justify-center mb-4">

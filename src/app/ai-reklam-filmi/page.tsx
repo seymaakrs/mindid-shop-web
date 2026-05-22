@@ -3,15 +3,6 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ParallaxGrid } from "@/components/parallax-grid";
 import { FeaturePage } from "@/components/content-pages/feature-page";
-import {
-  Smartphone,
-  Film,
-  Megaphone,
-  Building2,
-  Zap,
-  Clock,
-  Wand2,
-} from "lucide-react";
 import { GENERATION_COSTS } from "@/lib/plans-data";
 
 export const metadata: Metadata = {
@@ -38,28 +29,28 @@ export const metadata: Metadata = {
 
 const useCases = [
   {
-    icon: Smartphone,
+    icon: "smartphone" as const,
     titleTr: "Reels & TikTok",
     titleEn: "Reels & TikTok",
     descTr: "Dikey kısa formatta dikkat çekici sosyal videolar.",
     descEn: "Attention-grabbing short-form vertical videos.",
   },
   {
-    icon: Film,
+    icon: "film" as const,
     titleTr: "Ürün Tanıtım",
     titleEn: "Product Promo",
     descTr: "Ürün özelliklerini öne çıkaran tanıtım videoları.",
     descEn: "Product showcase videos that convert.",
   },
   {
-    icon: Megaphone,
+    icon: "megaphone" as const,
     titleTr: "Kampanya Filmi",
     titleEn: "Campaign Film",
     descTr: "Sezonluk kampanya ve lansman için reklam filmleri.",
     descEn: "Ad films for seasonal campaigns and launches.",
   },
   {
-    icon: Building2,
+    icon: "building" as const,
     titleTr: "Kurumsal Tanıtım",
     titleEn: "Corporate Intro",
     descTr: "Marka hikayeni anlatan premium tanıtım filmleri.",
@@ -69,21 +60,21 @@ const useCases = [
 
 const benefits = [
   {
-    icon: Zap,
+    icon: "zap" as const,
     titleTr: "Stüdyo yok",
     titleEn: "No studio",
     descTr: "Ekip, mekan, ekipman maliyeti sıfır. Tarayıcıdan başla.",
     descEn: "Zero crew, location, equipment cost. Start from your browser.",
   },
   {
-    icon: Clock,
+    icon: "clock" as const,
     titleTr: "Saniyeler içinde",
     titleEn: "In seconds",
     descTr: "Brief ve teslimat süresi yok. AI üretir, sen indirir.",
     descEn: "No briefs or wait times. AI runs, you download.",
   },
   {
-    icon: Wand2,
+    icon: "wand" as const,
     titleTr: "Sınırsız varyasyon",
     titleEn: "Unlimited variations",
     descTr: "Aynı kredilerle birden fazla versiyon üret. A/B testini kolaylaştırır.",

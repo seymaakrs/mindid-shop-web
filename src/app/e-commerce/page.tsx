@@ -3,7 +3,6 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ParallaxGrid } from "@/components/parallax-grid";
 import { FeaturePage } from "@/components/content-pages/feature-page";
-import { ShoppingBag, Package, Layers, Image as ImageIcon, Zap, Wand2, TrendingUp } from "lucide-react";
 import { GENERATION_COSTS } from "@/lib/plans-data";
 
 export const metadata: Metadata = {
@@ -23,28 +22,28 @@ export const metadata: Metadata = {
 
 const useCases = [
   {
-    icon: ShoppingBag,
+    icon: "shopping" as const,
     titleTr: "Katalog Görselleri",
     titleEn: "Catalog Images",
     descTr: "Pazaryeri uyumlu boyut ve formatlarda görseller.",
     descEn: "Marketplace-ready sizes and formats.",
   },
   {
-    icon: Package,
+    icon: "package" as const,
     titleTr: "Renk Varyasyonları",
     titleEn: "Color Variations",
     descTr: "Tek üründen onlarca renk seçeneği üret.",
     descEn: "Generate dozens of color options from one product.",
   },
   {
-    icon: Layers,
+    icon: "layers" as const,
     titleTr: "Kampanya Banner",
     titleEn: "Campaign Banners",
     descTr: "Sezonluk indirim ve kampanyalar için banner.",
     descEn: "Banners for seasonal sales and campaigns.",
   },
   {
-    icon: ImageIcon,
+    icon: "image" as const,
     titleTr: "Lifestyle Çekim",
     titleEn: "Lifestyle Shots",
     descTr: "Ürünü kullanım bağlamında gösteren sahneler.",
@@ -54,21 +53,21 @@ const useCases = [
 
 const benefits = [
   {
-    icon: Zap,
+    icon: "zap" as const,
     titleTr: "Saatler içinde katalog",
     titleEn: "Catalog in hours",
     descTr: "Yüzlerce ürünü tek seferde üret, beklemeden.",
     descEn: "Generate hundreds of products at once. No wait.",
   },
   {
-    icon: Wand2,
+    icon: "wand" as const,
     titleTr: "Tek tık varyasyon",
     titleEn: "One-click variants",
     descTr: "Renk, açı, arka plan değişikliği saniyeler içinde.",
     descEn: "Color, angle, background changes in seconds.",
   },
   {
-    icon: TrendingUp,
+    icon: "trending" as const,
     titleTr: "Dönüşüm odaklı",
     titleEn: "Conversion-focused",
     descTr: "A/B test için sınırsız versiyon, kazanan görseli kullan.",

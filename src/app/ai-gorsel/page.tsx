@@ -3,7 +3,6 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ParallaxGrid } from "@/components/parallax-grid";
 import { FeaturePage } from "@/components/content-pages/feature-page";
-import { Camera, Palette, Layers, ShoppingBag, Zap, Wand2, Image as ImageIcon } from "lucide-react";
 import { GENERATION_COSTS } from "@/lib/plans-data";
 
 export const metadata: Metadata = {
@@ -23,28 +22,28 @@ export const metadata: Metadata = {
 
 const useCases = [
   {
-    icon: ShoppingBag,
+    icon: "shopping" as const,
     titleTr: "E-ticaret Ürünü",
     titleEn: "E-commerce Product",
     descTr: "Pazaryeri uyumlu, temiz zeminli ürün görselleri.",
     descEn: "Marketplace-ready product shots on clean backgrounds.",
   },
   {
-    icon: Palette,
+    icon: "palette" as const,
     titleTr: "Lifestyle Sahne",
     titleEn: "Lifestyle Scene",
     descTr: "Ürünü bağlamında gösteren atmosferik görseller.",
     descEn: "Atmospheric scenes showing your product in context.",
   },
   {
-    icon: Layers,
+    icon: "layers" as const,
     titleTr: "Kampanya Banner",
     titleEn: "Campaign Banner",
     descTr: "Reklam ve sosyal medya için yüksek dönüşümlü görseller.",
     descEn: "High-converting visuals for ads and social media.",
   },
   {
-    icon: ImageIcon,
+    icon: "image" as const,
     titleTr: "Varyasyon Setleri",
     titleEn: "Variation Sets",
     descTr: "Tek üründen renk, açı, stil varyasyonları.",
@@ -54,21 +53,21 @@ const useCases = [
 
 const benefits = [
   {
-    icon: Camera,
+    icon: "camera" as const,
     titleTr: "Stüdyo gerekmez",
     titleEn: "No studio needed",
     descTr: "Mekan, ışık, manken sıfır. Tek tıkla üret.",
     descEn: "Zero location, lighting, model cost. Generate with one click.",
   },
   {
-    icon: Zap,
+    icon: "zap" as const,
     titleTr: "Saniyeler içinde",
     titleEn: "In seconds",
     descTr: "Brief, çekim, retouch süreci yok.",
     descEn: "No briefs, shoots or retouching workflow.",
   },
   {
-    icon: Wand2,
+    icon: "wand" as const,
     titleTr: "Sonsuz iterasyon",
     titleEn: "Endless iteration",
     descTr: "Beğenmediğin görseli tek kredi ile yeniden üret.",
