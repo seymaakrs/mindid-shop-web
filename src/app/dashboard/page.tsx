@@ -1,46 +1,56 @@
 "use client";
 
 import { useAuth } from "@/lib/auth-context";
-import { useCustomerOrders } from "@/lib/hooks/use-customer";
+import { useCustomerGenerations } from "@/lib/hooks/use-customer";
 import {
-  ShoppingBag,
+  Sparkles,
   Clock,
   CheckCircle2,
-  CreditCard,
+  Coins,
   ArrowRight,
   Plus,
-  Sparkles,
+  Wand2,
 } from "lucide-react";
 import Link from "next/link";
 
 const STATUS_MAP: Record<string, { label: string; color: string }> = {
-  new: { label: "Yeni", color: "text-blue-400 bg-blue-500/10" },
-  seen: { label: "Görüldü", color: "text-yellow-400 bg-yellow-500/10" },
-  "in-progress": { label: "Üretiliyor", color: "text-purple-400 bg-purple-500/10" },
+  queued: { label: "Kuyrukta", color: "text-blue-400 bg-blue-500/10" },
+  running: { label: "Üretiliyor", color: "text-purple-400 bg-purple-500/10" },
   completed: { label: "Tamamlandı", color: "text-green-400 bg-green-500/10" },
-  cancelled: { label: "İptal", color: "text-red-400 bg-red-500/10" },
+  failed: { label: "Başarısız", color: "text-red-400 bg-red-500/10" },
+};
+
+const KIND_EMOJI: Record<string, string> = {
+  video: "🎬",
+  image: "📸",
+  avatar: "🧑‍🎤",
+  social: "📱",
+};
+
+const KIND_LABEL: Record<string, string> = {
+  video: "AI Video",
+  image: "AI Görsel",
+  avatar: "Avatar",
+  social: "Sosyal İçerik",
 };
 
 const DashboardPage = () => {
   const { customerData } = useAuth();
-  const { orders, loading } = useCustomerOrders(customerData?.email);
+  const { generations, loading } = useCustomerGenerations(customerData?.email);
 
-  const activeOrders = orders.filter((o) => !["completed", "cancelled"].includes(o.status));
-  const completedOrders = orders.filter((o) => o.status === "completed");
-  const totalSpent = orders
-    .filter((o) => o.status !== "cancelled")
-    .reduce((sum, o) => sum + (o.pricing?.totalAI || 0), 0);
+  const running = generations.filter((g) => g.status === "running" || g.status === "queued");
+  const completed = generations.filter((g) => g.status === "completed");
+  const totalCreditsSpent = customerData?.totalCreditsSpent ?? 0;
 
   const stats = [
-    { label: "Aktif Sipariş", value: activeOrders.length, icon: Clock, color: "text-purple-400" },
-    { label: "Tamamlanan", value: completedOrders.length, icon: CheckCircle2, color: "text-green-400" },
-    { label: "Toplam Sipariş", value: orders.length, icon: ShoppingBag, color: "text-blue-400" },
-    { label: "Toplam Harcama", value: `₺${totalSpent.toLocaleString("tr-TR")}`, icon: CreditCard, color: "text-[var(--lime)]" },
+    { label: "Aktif Üretim", value: running.length, icon: Clock, color: "text-purple-400" },
+    { label: "Tamamlanan", value: completed.length, icon: CheckCircle2, color: "text-green-400" },
+    { label: "Toplam Üretim", value: generations.length, icon: Sparkles, color: "text-blue-400" },
+    { label: "Mevcut Kredi", value: customerData?.credits ?? 0, icon: Coins, color: "text-[var(--lime)]" },
   ];
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
-      {/* Welcome */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">
@@ -49,14 +59,13 @@ const DashboardPage = () => {
           <p className="text-sm text-gray-400 mt-1">İşte hesabının özeti</p>
         </div>
         <Link
-          href="/configure/reels"
+          href="/templates"
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--lime)] text-[#100a2c] text-sm font-bold hover:brightness-110 transition-all"
         >
-          <Plus size={16} /> Yeni Sipariş
+          <Plus size={16} /> Yeni Üretim
         </Link>
       </div>
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {stats.map((stat) => {
           const Icon = stat.icon;
@@ -72,12 +81,12 @@ const DashboardPage = () => {
         })}
       </div>
 
-      {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {[
-          { title: "AI Video", desc: "Reels, reklam filmi, tanıtım", href: "/configure/reels", emoji: "🎬" },
-          { title: "Ürün Fotoğrafı", desc: "E-ticaret görselleri", href: "/configure/product-photo", emoji: "📸" },
-          { title: "Sosyal Medya", desc: "İçerik planla ve yönet", href: "/dashboard/social", emoji: "📱" },
+          { title: "AI Video", desc: "Reels, reklam, tanıtım", href: "/ai-reklam-filmi", emoji: "🎬" },
+          { title: "AI Görsel", desc: "Ürün, kampanya, banner", href: "/ai-gorsel", emoji: "📸" },
+          { title: "Dijital Avatar", desc: "Kameraya çıkmadan üret", href: "/avatar", emoji: "🧑‍🎤" },
+          { title: "Şablonlar", desc: "Hazır kalıplarla başla", href: "/templates", emoji: "✨" },
         ].map((action) => (
           <Link
             key={action.href}
@@ -96,44 +105,43 @@ const DashboardPage = () => {
         ))}
       </div>
 
-      {/* Recent Orders */}
       <div className="bg-white/5 border border-white/5 rounded-2xl">
         <div className="flex items-center justify-between p-5 border-b border-white/5">
           <h2 className="text-base font-bold text-white flex items-center gap-2">
-            <Sparkles size={16} className="text-[var(--lime)]" /> Son Siparişler
+            <Wand2 size={16} className="text-[var(--lime)]" /> Son Üretimler
           </h2>
-          <Link href="/dashboard/orders" className="text-xs text-[var(--lime)] hover:underline flex items-center gap-1">
+          <Link href="/dashboard/files" className="text-xs text-[var(--lime)] hover:underline flex items-center gap-1">
             Tümünü Gör <ArrowRight size={12} />
           </Link>
         </div>
 
         {loading ? (
           <div className="p-8 text-center text-gray-500 text-sm">Yükleniyor...</div>
-        ) : orders.length === 0 ? (
+        ) : generations.length === 0 ? (
           <div className="p-8 text-center">
-            <p className="text-gray-500 text-sm mb-4">Henüz siparişin yok</p>
+            <p className="text-gray-500 text-sm mb-4">Henüz üretimin yok</p>
             <Link
-              href="/configure/reels"
+              href="/templates"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--lime)] text-[#100a2c] text-sm font-bold hover:brightness-110 transition-all"
             >
-              <Plus size={14} /> İlk Siparişini Ver
+              <Plus size={14} /> İlk Üretimini Başlat
             </Link>
           </div>
         ) : (
           <div className="divide-y divide-white/5">
-            {orders.slice(0, 5).map((order) => {
-              const status = STATUS_MAP[order.status] || STATUS_MAP["new"];
+            {generations.slice(0, 5).map((job) => {
+              const status = STATUS_MAP[job.status] || STATUS_MAP["queued"];
               return (
-                <div key={order.id} className="flex items-center justify-between px-5 py-4 hover:bg-white/[0.02] transition-colors">
+                <div key={job.id} className="flex items-center justify-between px-5 py-4 hover:bg-white/[0.02] transition-colors">
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-xl bg-[var(--lime)]/10 flex items-center justify-center text-[var(--lime)] text-lg">
-                      {order.serviceId === "product-photo" ? "📸" : "🎬"}
+                      {KIND_EMOJI[job.kind] ?? "✨"}
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-white">{order.serviceName}</p>
+                      <p className="text-sm font-medium text-white">{KIND_LABEL[job.kind] ?? "Üretim"}</p>
                       <p className="text-[10px] text-gray-500">
-                        {order.createdAt && typeof order.createdAt === "object" && "toDate" in order.createdAt
-                          ? (order.createdAt as { toDate: () => Date }).toDate().toLocaleDateString("tr-TR")
+                        {job.createdAt && typeof job.createdAt === "object" && "toDate" in job.createdAt
+                          ? (job.createdAt as { toDate: () => Date }).toDate().toLocaleDateString("tr-TR")
                           : "—"}
                       </p>
                     </div>
@@ -142,8 +150,8 @@ const DashboardPage = () => {
                     <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold ${status.color}`}>
                       {status.label}
                     </span>
-                    <span className="text-sm font-bold text-white">
-                      ₺{(order.pricing?.totalAI || 0).toLocaleString("tr-TR")}
+                    <span className="text-sm font-bold text-[var(--lime)] flex items-center gap-1">
+                      <Coins size={12} /> {job.creditsUsed}
                     </span>
                   </div>
                 </div>

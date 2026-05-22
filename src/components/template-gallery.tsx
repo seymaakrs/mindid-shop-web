@@ -151,20 +151,22 @@ export const TemplateGallery = () => {
 };
 
 export const TemplateCard = ({ template }: { template: Template }) => {
-  const { customerData } = useAuth();
+  const { customerData, user } = useAuth();
   const credits = customerData?.credits ?? 0;
   const needsCredits = !!template.isPro && (template.creditCost ?? 0) > credits;
 
-  const href = needsCredits
-    ? "/dashboard?tab=credits"
-    : `/configure/${template.serviceId}?template=${template.id}`;
+  const href = !user
+    ? `/register?template=${template.id}`
+    : needsCredits
+      ? "/dashboard/credits"
+      : `/templates/${template.id}`;
 
   const onUse = () => {
     if (needsCredits) return;
     trackEvent("use_template", {
       contentId: template.id,
       contentName: template.title,
-      contentCategory: template.serviceId,
+      contentCategory: template.kind,
     });
   };
 

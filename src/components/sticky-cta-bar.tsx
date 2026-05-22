@@ -35,19 +35,19 @@ export const StickyCTABar = () => {
         {/* Sol: mesaj */}
         <div className="flex-1 min-w-0">
           <p className="text-xs font-bold text-white leading-tight truncate">
-            AI ile <span className="text-[var(--lime)]">%70'e varan</span> tasarruf
+            <span className="text-[var(--lime)]">50 kredi hediye</span> · Ücretsiz başla
           </p>
           <p className="text-[10px] text-white/60 leading-tight">
-            Ücretsiz teklif · 24 saat içinde dönüş
+            Kart yok · 30 saniyede aktif
           </p>
         </div>
 
         {/* CTA butonu */}
         <a
-          href="#services"
+          href="/register"
           className="flex-shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-[var(--lime)] border-2 border-[var(--lime)] text-[var(--dark-blue)] text-xs font-black"
         >
-          Paketi Seç
+          Hemen Başla
           <ArrowRight size={12} />
         </a>
 

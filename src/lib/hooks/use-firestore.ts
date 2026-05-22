@@ -1,18 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { collection, getDocs, doc, getDoc, orderBy, query, onSnapshot, where, type QueryConstraint } from "firebase/firestore"; // orderBy kept for useBlogPosts and useOrders
+import { collection, getDocs, doc, getDoc, orderBy, query, onSnapshot, where, type QueryConstraint } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import type {
-  PortfolioItem,
   SiteSettings,
   FAQItem,
   TeamMember,
-  PricingConfig,
   AvatarSample,
   BlogPost,
-  OrderSubmission,
-  OrderStatus,
+  GenerationJob,
+  GenerationStatus,
 } from "@/lib/firestore-types";
 
 function useFirestoreCollection<T>(
@@ -26,8 +24,6 @@ function useFirestoreCollection<T>(
   useEffect(() => {
     const fetch = async () => {
       try {
-        // NOTE: orderBy removed to avoid composite index requirement with where("visible")
-        // Sorting is done in-memory after fetch
         const constraints: QueryConstraint[] = [];
         if (filterVisible) {
           constraints.push(where("visible", "==", true));
@@ -51,10 +47,6 @@ function useFirestoreCollection<T>(
 
   return { data, loading };
 }
-
-export const usePortfolio = () => {
-  return useFirestoreCollection<PortfolioItem>("portfolio");
-};
 
 export const useSettings = () => {
   const [data, setData] = useState<SiteSettings | null>(null);
@@ -86,28 +78,6 @@ export const useTeam = () => {
   return useFirestoreCollection<TeamMember>("team");
 };
 
-export const usePricing = () => {
-  const [data, setData] = useState<PricingConfig | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const snap = await getDoc(doc(db, "mindid_pricing", "config"));
-        if (snap.exists()) {
-          setData(snap.data() as PricingConfig);
-        }
-      } catch {
-        // empty
-      }
-      setLoading(false);
-    };
-    fetch();
-  }, []);
-
-  return { data, loading };
-};
-
 export const useAvatarSamples = () => {
   return useFirestoreCollection<AvatarSample>("avatarSamples");
 };
@@ -119,7 +89,6 @@ export const useBlogPosts = (publishedOnly: boolean = true) => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        // Single-field orderBy avoids composite index requirement
         const q = query(collection(db, "mindid_blog"), orderBy("publishedAt", "desc"));
         const snap = await getDocs(q);
         let posts = snap.docs.map((d) => ({ id: d.id, ...d.data() } as BlogPost));
@@ -128,7 +97,7 @@ export const useBlogPosts = (publishedOnly: boolean = true) => {
         }
         setData(posts);
       } catch {
-        // Sorgu başarısız
+        // ignore
       }
       setLoading(false);
     };
@@ -145,7 +114,6 @@ export const useBlogPost = (slug: string) => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        // Single-field where avoids composite index requirement; published check is client-side
         const q = query(collection(db, "mindid_blog"), where("slug", "==", slug));
         const snap = await getDocs(q);
         const doc = snap.docs.find((d) => d.data().published === true);
@@ -153,7 +121,7 @@ export const useBlogPost = (slug: string) => {
           setData({ id: doc.id, ...doc.data() } as BlogPost);
         }
       } catch {
-        // Sorgu başarısız
+        // ignore
       }
       setLoading(false);
     };
@@ -163,8 +131,9 @@ export const useBlogPost = (slug: string) => {
   return { data, loading };
 };
 
-export const useOrders = (statusFilter?: OrderStatus) => {
-  const [data, setData] = useState<OrderSubmission[]>([]);
+// SaaS: AI generation jobs (admin görünümü)
+export const useGenerationJobs = (statusFilter?: GenerationStatus) => {
+  const [data, setData] = useState<GenerationJob[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -172,17 +141,15 @@ export const useOrders = (statusFilter?: OrderStatus) => {
     if (statusFilter) {
       constraints.unshift(where("status", "==", statusFilter));
     }
-    const q = query(collection(db, "mindid_orders"), ...constraints);
+    const q = query(collection(db, "mindid_generations"), ...constraints);
 
     const unsubscribe = onSnapshot(
       q,
       (snap) => {
-        setData(snap.docs.map((d) => ({ id: d.id, ...d.data() } as OrderSubmission)));
+        setData(snap.docs.map((d) => ({ id: d.id, ...d.data() } as GenerationJob)));
         setLoading(false);
       },
-      () => {
-        setLoading(false);
-      },
+      () => setLoading(false),
     );
 
     return unsubscribe;
@@ -191,13 +158,13 @@ export const useOrders = (statusFilter?: OrderStatus) => {
   return { data, loading };
 };
 
-export const useNewOrderCount = () => {
+export const useRunningGenerationCount = () => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     const q = query(
-      collection(db, "mindid_orders"),
-      where("status", "==", "new"),
+      collection(db, "mindid_generations"),
+      where("status", "==", "running"),
     );
 
     const unsubscribe = onSnapshot(

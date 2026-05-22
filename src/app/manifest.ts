@@ -4,7 +4,7 @@ const manifest = (): MetadataRoute.Manifest => ({
   name: "MindID — AI İçerik Stüdyosu",
   short_name: "MindID",
   description:
-    "AI ile profesyonel reklam, ürün fotoğrafı, sosyal medya içeriği üret. Manken yok, stüdyo yok, %70 daha az maliyet.",
+    "Self-service AI içerik üretim platformu. Reels, görsel ve avatarları kredi bazlı planlarla üret.",
   start_url: "/",
   scope: "/",
   display: "standalone",
@@ -43,10 +43,10 @@ const manifest = (): MetadataRoute.Manifest => ({
       url: "/templates",
     },
     {
-      name: "Yeni Sipariş",
-      short_name: "Yeni",
-      description: "Hızlı sipariş başlat",
-      url: "/#services",
+      name: "Yeni Üretim",
+      short_name: "Üret",
+      description: "AI içerik üretimine başla",
+      url: "/templates",
     },
     {
       name: "Panel",

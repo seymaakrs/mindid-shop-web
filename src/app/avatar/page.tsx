@@ -1,73 +1,102 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/header";
-import { AvatarPage } from "@/components/avatar-page";
 import { Footer } from "@/components/footer";
 import { ParallaxGrid } from "@/components/parallax-grid";
+import { FeaturePage } from "@/components/content-pages/feature-page";
+import { User, Mic, Globe, Building2, Zap, Languages, Wand2 } from "lucide-react";
+import { GENERATION_COSTS } from "@/lib/plans-data";
 
 export const metadata: Metadata = {
-  title: "AI Avatar Oluşturma — Dijital Sunucu & Marka Yüzü",
+  title: "AI Avatar — Marka Yüzü & Dijital Sunucu",
   description:
-    "Yapay zeka ile dijital avatar oluşturun. Marka yüzü, sunucu, influencer avatar — gerçekçi ve profesyonel. 6.900₺'den başlayan fiyatlar.",
-  keywords: ["ai avatar oluşturma", "yapay zeka avatar", "dijital sunucu", "AI avatar creator", "digital presenter"],
+    "MindID AI avatar stüdyosu. Marka yüzünü, sunucunu veya influencer avatarını dakikalar içinde oluştur ve sınırsız sahne üret.",
   alternates: {
     canonical: "https://mindid.shop/avatar",
-    languages: { "tr-TR": "https://mindid.shop/avatar", "en-US": "https://mindid.shop/en/avatar" },
   },
   openGraph: {
-    title: "AI Avatar Creation — Digital Presenter & Brand Face",
-    description:
-      "Create realistic AI avatars for your brand. Digital presenter, spokesperson, influencer avatar. From ₺6,900.",
+    title: "AI Avatar — MindID",
+    description: "Marka avatarını dakikalar içinde oluştur, sınırsız içerik üret.",
     url: "https://mindid.shop/avatar",
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@mindidshop",
-    creator: "@mindidshop",
-    title: "AI Avatar Oluşturma | MindID",
-    description: "Yapay zeka ile dijital avatar — marka yüzü, sunucu, influencer avatar.",
+    images: [{ url: "/og-image.jpeg", width: 1200, height: 630, alt: "MindID AI Avatar" }],
   },
 };
 
-const avatarServiceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "AI Avatar Creation",
-  description: "Create realistic AI digital avatars for brand spokespersons, digital presenters, and influencer avatars. Produce video content in multiple languages without being on camera.",
-  category: "AI Avatar Creation",
-  provider: { "@type": "Organization", name: "MindID", url: "https://mindid.shop" },
-  areaServed: "Worldwide",
-  offers: {
-    "@type": "AggregateOffer",
-    lowPrice: "6900",
-    highPrice: "6900",
-    priceCurrency: "TRY",
-    availability: "https://schema.org/InStock",
+const useCases = [
+  {
+    icon: User,
+    titleTr: "Marka Sözcüsü",
+    titleEn: "Brand Spokesperson",
+    descTr: "Tutarlı marka yüzü ile her video aynı kişiyle.",
+    descEn: "A consistent brand face across every video.",
   },
-  url: "https://mindid.shop/avatar",
-};
+  {
+    icon: Mic,
+    titleTr: "Eğitim Sunucusu",
+    titleEn: "Training Presenter",
+    descTr: "Online kurs ve eğitim videolarında dijital eğitmen.",
+    descEn: "Digital instructor for courses and training videos.",
+  },
+  {
+    icon: Globe,
+    titleTr: "Çok Dilli İçerik",
+    titleEn: "Multilingual Content",
+    descTr: "Aynı avatardan onlarca dilde içerik üret.",
+    descEn: "Produce content in dozens of languages from one avatar.",
+  },
+  {
+    icon: Building2,
+    titleTr: "Kurumsal Anonslar",
+    titleEn: "Corporate Announcements",
+    descTr: "İç iletişim, müşteri duyurusu, ürün lansmanı.",
+    descEn: "Internal comms, customer announcements, launches.",
+  },
+];
 
-const breadcrumb = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
-    { "@type": "ListItem", position: 2, name: "AI Avatar Creation", item: "https://mindid.shop/avatar" },
-  ],
-};
+const benefits = [
+  {
+    icon: Wand2,
+    titleTr: "Kameraya çıkmadan",
+    titleEn: "No camera required",
+    descTr: "Çekim ekibi ve mekan yok. Tarayıcıdan üret.",
+    descEn: "No crew or location. Generate from your browser.",
+  },
+  {
+    icon: Zap,
+    titleTr: "Saniyeler içinde",
+    titleEn: "In seconds",
+    descTr: "Brief, kostüm değişimi, çekim günü yok.",
+    descEn: "No briefs, wardrobe changes, or shoot days.",
+  },
+  {
+    icon: Languages,
+    titleTr: "Dudak senkronu",
+    titleEn: "Lip-sync ready",
+    descTr: "Dudak hareketi, mimik ve göz teması doğal.",
+    descEn: "Natural lip-sync, facial expressions and eye contact.",
+  },
+];
 
-const AvatarRoute = () => {
+const AvatarFeatureRoute = () => {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(avatarServiceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <ParallaxGrid />
       <Header />
       <main id="main-content">
-        <AvatarPage />
+        <FeaturePage
+          badgeTr="AI Avatar Studio"
+          badgeEn="AI Avatar Studio"
+          headlineTr="Marka avatarın. Sonsuz sahne."
+          headlineEn="Your brand avatar. Endless scenes."
+          subTr="Dijital marka yüzünü oluştur, dilediğin senaryoda sınırsız video üret."
+          subEn="Build your digital brand face and produce unlimited videos in any scenario."
+          estimatedCredits={GENERATION_COSTS.avatar}
+          useCases={useCases}
+          benefits={benefits}
+        />
       </main>
       <Footer />
     </>
   );
 };
 
-export default AvatarRoute;
+export default AvatarFeatureRoute;

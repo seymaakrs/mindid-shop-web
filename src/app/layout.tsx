@@ -23,22 +23,21 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "MindID — Yapay Zeka Reklam Filmleri, Avatar & Ürün Görselleri",
+    default: "MindID — AI Content Studio SaaS | Video, Görsel & Avatar",
     template: "%s | MindID",
   },
   description:
-    "AI ile reklam filmi, dijital avatar oluşturma ve e-ticaret ürün görseli üretimi. Manken ve stüdyo masrafı olmadan %70 daha az maliyetle stüdyo kalitesinde sonuçlar. 1.490₺'den başlayan fiyatlar.",
+    "MindID, markalar için self-service AI içerik üretim platformudur. Reels, görsel ve dijital avatarları kredi bazlı planlarla anında üret. Ücretsiz başla, 50 kredi hediye.",
   keywords: [
-    "yapay zeka reklam filmi",
-    "ai reklam videosu",
-    "ai avatar oluşturma",
-    "yapay zeka ürün görseli",
-    "e-ticaret ürün fotoğrafı ai",
-    "AI ad film production",
-    "AI avatar creator",
-    "AI product photography",
-    "dijital avatar",
-    "manken olmadan ürün fotoğrafı",
+    "ai içerik üretim platformu",
+    "ai content saas",
+    "ai video üretim",
+    "ai görsel platformu",
+    "ai avatar saas",
+    "self-service ai studio",
+    "ai content platform",
+    "kredi tabanlı ai",
+    "ai template platform",
   ],
   authors: [{ name: "MindID Lab Technology" }],
   creator: "MindID",
@@ -58,15 +57,15 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US", "es_ES"],
     url: "https://mindid.shop",
     siteName: "MindID",
-    title: "MindID — AI Reklam Filmleri, Avatar & Ürün Görselleri",
+    title: "MindID — AI Content Studio SaaS",
     description:
-      "Yapay zeka ile reklam filmi, avatar oluşturma ve ürün görseli üretimi. %70 maliyet tasarrufu. 1.490₺'den başlayan fiyatlar.",
+      "Self-service AI içerik üretim platformu. Reels, görsel, avatar — kredi bazlı planlarla anında.",
     images: [
       {
         url: "/og-image.jpeg",
         width: 1200,
         height: 630,
-        alt: "MindID — AI Reklam Prodüksiyon Stüdyosu",
+        alt: "MindID — Self-service AI Content Studio",
       },
     ],
   },
@@ -74,9 +73,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@mindidshop",
     creator: "@mindidshop",
-    title: "MindID — AI Reklam Filmleri & Ürün Görselleri",
+    title: "MindID — AI Content Studio SaaS",
     description:
-      "AI ile reklam filmi ve ürün görseli üretimi. Stüdyo kalitesinde, %70 daha az maliyet.",
+      "Self-service AI içerik platformu. Reels, görsel, avatar — kredi bazlı.",
     images: ["/og-image.jpeg"],
   },
   robots: {
@@ -104,96 +103,48 @@ export const metadata: Metadata = {
   },
 };
 
-// Schema.org Structured Data — Site geneli (tüm sayfalarda yüklenir)
+// Schema.org Structured Data — SoftwareApplication
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": "SoftwareApplication",
   name: "MindID",
   url: "https://mindid.shop",
   logo: "https://mindid.shop/logo.png",
+  applicationCategory: "DesignApplication",
+  operatingSystem: "Web",
   description:
-    "AI-powered ad film production, avatar creation, and e-commerce product visual studio. 70% cheaper than traditional production.",
-  priceRange: "$$",
-  areaServed: "Worldwide",
-  serviceType: [
-    "AI Ad Film Production",
-    "AI Avatar Creation",
-    "AI Product Photography",
-    "AI E-commerce Visuals",
+    "Self-service AI content platform for brands. Generate reels, product images and digital avatars with credit-based plans.",
+  offers: [
+    {
+      "@type": "Offer",
+      name: "Free",
+      price: "0",
+      priceCurrency: "TRY",
+      description: "50 credits/month, watermarked output",
+    },
+    {
+      "@type": "Offer",
+      name: "Starter",
+      price: "299",
+      priceCurrency: "TRY",
+      description: "500 credits/month, HD quality, commercial use",
+    },
+    {
+      "@type": "Offer",
+      name: "Growth",
+      price: "799",
+      priceCurrency: "TRY",
+      description: "2000 credits/month, Full HD, priority queue",
+    },
+    {
+      "@type": "Offer",
+      name: "Scale",
+      price: "1999",
+      priceCurrency: "TRY",
+      description: "6000 credits/month, 4K, API access",
+    },
   ],
-  knowsLanguage: ["Turkish", "English", "Spanish"],
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "TR",
-  },
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "AI Production Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "AI Reels (Instagram/TikTok)",
-          description: "AI-generated short-form video ads for social media",
-        },
-        price: "1990",
-        priceCurrency: "TRY",
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "AI Product Photography",
-          description:
-            "Studio-quality product images without mannequins or studios. 70% cheaper than traditional shoots.",
-        },
-        price: "1490",
-        priceCurrency: "TRY",
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "AI Product Ad Film",
-          description: "Professional AI-generated product advertising films",
-        },
-        price: "1990",
-        priceCurrency: "TRY",
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "AI Campaign Film",
-          description: "Full AI campaign film production",
-        },
-        price: "1990",
-        priceCurrency: "TRY",
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "AI Corporate Film",
-          description: "AI corporate brand and promotional films",
-        },
-        price: "1990",
-        priceCurrency: "TRY",
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "AI Digital Avatar",
-          description:
-            "Create realistic AI avatars for brand spokesperson, digital presenter, or influencer",
-        },
-        price: "6900",
-        priceCurrency: "TRY",
-      },
-    ],
-  },
+  inLanguage: ["tr", "en", "es"],
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {

@@ -76,10 +76,10 @@ export const Header = () => {
   const navLinks: { href: string; label: string; icon?: React.ReactNode }[] = [
     { href: "/ai-reklam-filmi", label: t("nav.videoProduction") },
     { href: "/ai-gorsel", label: t("nav.visualStudio") },
-    { href: "/templates", label: "Şablonlar", icon: <Sparkles size={13} /> },
-    { href: "/portfolio", label: t("nav.portfolio") },
+    { href: "/avatar", label: "Avatar" },
+    { href: "/templates", label: t("nav.templates"), icon: <Sparkles size={13} /> },
+    { href: "/#pricing", label: t("nav.pricing") },
     { href: "/blog", label: "Blog" },
-    { href: "/about", label: t("nav.about") },
   ];
 
   return (
@@ -132,12 +132,14 @@ export const Header = () => {
 
         {/* Right side */}
         <div className="flex items-center gap-3">
-          <a
-            href="/sosyal-medya-yonetimi"
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[var(--dark-blue)] text-[var(--lime)] text-sm font-bold border-2 border-[var(--dark-blue)] hover:bg-[var(--electric-blue)] transition-colors whitespace-nowrap"
-          >
-            {t("nav.socialMediaExpert")}
-          </a>
+          {!user && (
+            <a
+              href="/register"
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-md bg-[var(--dark-blue)] text-[var(--lime)] text-sm font-bold border-2 border-[var(--dark-blue)] hover:bg-[var(--electric-blue)] transition-colors whitespace-nowrap"
+            >
+              {t("nav.startFree")}
+            </a>
+          )}
 
           {user ? (
             <>
@@ -206,13 +208,15 @@ export const Header = () => {
           ))}
 
           <div className="pt-3 border-t-2 border-[var(--dark-blue)]/20 space-y-2">
-            <a
-              href="/sosyal-medya-yonetimi"
-              onClick={closeMobile}
-              className="block w-full text-center px-5 py-2.5 rounded-md bg-[var(--dark-blue)] text-[var(--lime)] text-sm font-bold"
-            >
-              {t("nav.socialMediaExpert")}
-            </a>
+            {!user && (
+              <a
+                href="/register"
+                onClick={closeMobile}
+                className="block w-full text-center px-5 py-2.5 rounded-md bg-[var(--dark-blue)] text-[var(--lime)] text-sm font-bold"
+              >
+                {t("nav.startFree")}
+              </a>
+            )}
             {user ? (
               <a
                 href={isAdmin ? "/admin" : "/dashboard"}

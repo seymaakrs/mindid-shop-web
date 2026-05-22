@@ -1,32 +1,32 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { collection, query, where, orderBy, onSnapshot, doc } from "firebase/firestore";
+import { collection, query, where, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
-import type { OrderSubmission, CustomerNotification, PaymentRecord } from "../firestore-types";
+import type { GenerationJob, CustomerNotification, PaymentRecord } from "../firestore-types";
 
-// Müşterinin siparişlerini gerçek zamanlı dinle
-export const useCustomerOrders = (customerEmail: string | undefined) => {
-  const [orders, setOrders] = useState<OrderSubmission[]>([]);
+// Müşterinin AI üretim geçmişini canlı dinle
+export const useCustomerGenerations = (customerEmail: string | undefined) => {
+  const [generations, setGenerations] = useState<GenerationJob[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!customerEmail) {
-      setOrders([]);
+      setGenerations([]);
       setLoading(false);
       return;
     }
 
     const q = query(
-      collection(db, "mindid_orders"),
-      where("customer.email", "==", customerEmail),
+      collection(db, "mindid_generations"),
+      where("customerEmail", "==", customerEmail),
       orderBy("createdAt", "desc")
     );
 
     const unsubscribe = onSnapshot(
       q,
       (snap) => {
-        setOrders(snap.docs.map((d) => ({ id: d.id, ...d.data() } as OrderSubmission)));
+        setGenerations(snap.docs.map((d) => ({ id: d.id, ...d.data() } as GenerationJob)));
         setLoading(false);
       },
       () => setLoading(false)
@@ -35,10 +35,9 @@ export const useCustomerOrders = (customerEmail: string | undefined) => {
     return () => unsubscribe();
   }, [customerEmail]);
 
-  return { orders, loading };
+  return { generations, loading };
 };
 
-// Müşteri bildirimlerini dinle
 export const useCustomerNotifications = (customerId: string | undefined) => {
   const [notifications, setNotifications] = useState<CustomerNotification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -64,7 +63,6 @@ export const useCustomerNotifications = (customerId: string | undefined) => {
   return { notifications, unreadCount };
 };
 
-// Ödeme geçmişi
 export const usePaymentHistory = (customerId: string | undefined) => {
   const [payments, setPayments] = useState<PaymentRecord[]>([]);
   const [loading, setLoading] = useState(true);

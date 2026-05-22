@@ -5,33 +5,6 @@ export type AdminDoc = {
   role: string;
 };
 
-export type PortfolioItem = {
-  id?: string;
-  title: string;
-  titleEn: string;
-  description: string;
-  descriptionEn: string;
-  thumbnailUrl: string;
-  videoUrl: string;
-  category: string;
-  order: number;
-  visible: boolean;
-  createdAt: Timestamp;
-  // SEO & GEO fields
-  slug?: string;
-  seoDescription?: string;
-  seoDescriptionEn?: string;
-  techniques?: string[];
-  clientName?: string;
-  duration?: string; // ISO 8601 e.g. "PT30S"
-  completedAt?: Timestamp;
-  // UI & SEO/GEO/AEO fields (2026)
-  orientation?: "horizontal" | "vertical" | "square"; // 16:9 / 9:16 / 1:1
-  keywords?: string[];   // TR SEO keywords
-  keywordsEn?: string[]; // EN SEO keywords
-  regionTargeted?: string; // GEO: "TR" | "MENA" | "EU"
-};
-
 export type SiteSettings = {
   heroVideoUrl: string;
   contactEmail: string;
@@ -61,71 +34,6 @@ export type TeamMember = {
   visible: boolean;
 };
 
-export type PricingServiceItem = {
-  id: string;
-  nameKey: string;
-  descKey: string;
-  basePrice: number;
-  icon: string;
-  traditionalMultiplier: number;
-};
-
-export type PricingOptionItem = {
-  id: string;
-  label: string;
-  description: string;
-  price: number;
-};
-
-export type PricingDurationItem = {
-  id: string;
-  label: string;
-  seconds: number;
-  description: string;
-  basePrice: number;
-};
-
-export type PricingRevisionItem = {
-  id: string;
-  label: string;
-  count: number;
-  price: number;
-};
-
-export type PricingPackageItem = {
-  id: string;
-  name: string;
-  tagline: string;
-  price: number;
-  badge?: string;
-  highlighted: boolean;
-  features: string[];
-};
-
-export type PricingConfig = {
-  services: PricingServiceItem[];
-  durations: PricingDurationItem[];
-  scenarios: PricingOptionItem[];
-  voices: PricingOptionItem[];
-  music: PricingOptionItem[];
-  visualStyles: PricingOptionItem[];
-  postProduction: PricingOptionItem[];
-  revisions: PricingRevisionItem[];
-  // Product photo fields
-  productCounts?: PricingOptionItem[];
-  colorCountUnitPrice?: number;
-  photoVisualStyles?: PricingOptionItem[];
-  backgrounds?: PricingOptionItem[];
-  photoAngles?: PricingOptionItem[];
-  photoModels?: PricingOptionItem[];
-  colorPackages?: PricingOptionItem[];
-  photoRetouches?: PricingOptionItem[];
-  // Service packages (video / photo / social)
-  videoPackages?: PricingPackageItem[];
-  photoPackages?: PricingPackageItem[];
-  socialPackages?: PricingPackageItem[];
-};
-
 export type AvatarSample = {
   id?: string;
   title: string;
@@ -135,7 +43,7 @@ export type AvatarSample = {
   visible: boolean;
 };
 
-// Blog types
+// Blog
 export type BlogPost = {
   id?: string;
   title: string;
@@ -153,29 +61,6 @@ export type BlogPost = {
   updatedAt: Timestamp;
 };
 
-// ─── Sosyal Medya Yönetimi ───────────────────────────────────────────────────
-
-export type SocialPlatform = "instagram" | "tiktok" | "linkedin" | "facebook";
-export type SocialPostStatus = "idea" | "draft" | "scheduled" | "published";
-export type SocialContentType = "feed" | "reel" | "story" | "carousel" | "video";
-
-export type SocialPost = {
-  id?: string;
-  caption: string;
-  hashtags: string[];
-  platforms: SocialPlatform[];
-  mediaUrl?: string;
-  mediaType?: "image" | "video";
-  status: SocialPostStatus;
-  contentType?: SocialContentType;
-  category?: string;
-  scheduledAt?: Timestamp;
-  publishedAt?: Timestamp;
-  notes?: string;
-  createdAt: Timestamp;
-  updatedAt?: Timestamp;
-};
-
 // Lead capture (exit-intent popup, newsletter)
 export type LeadStatus = "new" | "contacted" | "converted" | "lost";
 
@@ -187,107 +72,18 @@ export type LeadCapture = {
   phone?: string;
   email?: string;
   source: LeadSource;
-  page: string; // hangi sayfadayken yakalandı
+  page: string;
   status: LeadStatus;
   notes: string;
   createdAt: Timestamp;
   updatedAt: Timestamp;
 };
 
-// Order management types
-export type OrderStatus = "new" | "seen" | "in-progress" | "completed" | "cancelled";
+// ─── SaaS Plans & Customers ──────────────────────────────────────────────────
 
-// Payment fields embedded on orders (mirror of payment-session state for fast read).
-// Full payment-provider types live in src/lib/payments/types.ts; we re-declare
-// the union here to avoid a circular import from firestore-types.
-export type OrderPaymentMethod = "bank_transfer" | "iyzico" | "stripe" | "credits";
-export type OrderPaymentStatus =
-  | "pending"
-  | "awaiting_confirmation"
-  | "paid"
-  | "failed"
-  | "refunded";
+export type CustomerPlan = "free" | "starter" | "growth" | "scale";
 
-export type OrderCustomer = {
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  sector: string;
-  targetAudience: string;
-  message: string;
-};
-
-export type OrderConfigOption = {
-  id: string;
-  label: string;
-  price: number;
-};
-
-export type OrderConfig = {
-  // Video fields
-  duration?: { id: string; label: string; seconds: number; basePrice: number };
-  scenario?: OrderConfigOption;
-  voice?: OrderConfigOption;
-  music?: OrderConfigOption;
-  visualStyle?: OrderConfigOption;
-  postProduction?: OrderConfigOption[];
-  revision?: { id: string; label: string; count: number; price: number };
-  // Product photo fields
-  productCount?: OrderConfigOption;
-  photoAngle?: OrderConfigOption & { angleCount: number };
-  photoModel?: OrderConfigOption;
-  colorPackage?: OrderConfigOption & { includedColors: number };
-  photoVisualStyle?: OrderConfigOption;
-  background?: OrderConfigOption;
-  photoRetouch?: OrderConfigOption;
-};
-
-export type OrderPricing = {
-  basePrice: number;
-  totalAI: number;
-  totalTraditional: number;
-  savings: number;
-  currency: string;
-};
-
-export type OrderSubmission = {
-  id?: string;
-  customer: OrderCustomer;
-  serviceId: string;
-  serviceName: string;
-  config: OrderConfig;
-  pricing: OrderPricing;
-  fileUrls: string[];
-  status: OrderStatus;
-  adminNotes: string;
-  customerUid?: string;
-  createdAt: Timestamp;
-  seenAt?: Timestamp;
-  updatedAt: Timestamp;
-  // Payment integration
-  paymentMethod?: OrderPaymentMethod;
-  paymentStatus?: OrderPaymentStatus;
-  paymentSessionId?: string;
-  paymentReference?: string;
-  paidAt?: Timestamp;
-  // Marketing attribution (captured from URL UTM params)
-  attribution?: {
-    utm_source?: string;
-    utm_medium?: string;
-    utm_campaign?: string;
-    utm_term?: string;
-    utm_content?: string;
-    fbclid?: string;
-    gclid?: string;
-    captured_at?: string;
-    landing_page?: string;
-  };
-};
-
-// ─── SaaS Müşteri Sistemi ────────────────────────────────────────────────────
-
-export type CustomerPlan = "free" | "starter" | "growth" | "agency";
+export type SubscriptionStatus = "active" | "cancelled" | "past_due" | "trialing";
 
 export type CustomerDoc = {
   id?: string;
@@ -303,13 +99,13 @@ export type CustomerDoc = {
   totalCreditsSpent: number;
   signupBonusGiven: boolean;
   totalSpent: number;
-  orderCount: number;
+  generationCount: number;
   createdAt: Timestamp;
   updatedAt: Timestamp;
   lastLoginAt?: Timestamp;
   // Subscription
   subscriptionId?: string;
-  subscriptionStatus?: "active" | "cancelled" | "past_due" | "trialing";
+  subscriptionStatus?: SubscriptionStatus;
   subscriptionEndDate?: Timestamp;
   // Payment
   paymentProvider?: "iyzico" | "stripe";
@@ -319,7 +115,7 @@ export type CustomerDoc = {
 export type CustomerNotification = {
   id?: string;
   customerId: string;
-  type: "order_update" | "payment" | "system" | "promo";
+  type: "generation" | "payment" | "system" | "promo";
   title: string;
   message: string;
   read: boolean;
@@ -330,7 +126,7 @@ export type CustomerNotification = {
 export type PaymentRecord = {
   id?: string;
   customerId: string;
-  orderId?: string;
+  subscriptionId?: string;
   amount: number;
   currency: string;
   provider: "iyzico" | "stripe" | "manual";
@@ -338,6 +134,28 @@ export type PaymentRecord = {
   providerPaymentId?: string;
   description: string;
   createdAt: Timestamp;
+};
+
+// ─── AI Generation Jobs (SaaS core) ──────────────────────────────────────────
+
+export type GenerationKind = "video" | "image" | "avatar" | "social";
+
+export type GenerationStatus = "queued" | "running" | "completed" | "failed";
+
+export type GenerationJob = {
+  id?: string;
+  customerId: string;
+  customerEmail: string;
+  kind: GenerationKind;
+  templateId?: string;
+  prompt: string;
+  status: GenerationStatus;
+  creditsUsed: number;
+  outputUrls: string[];
+  errorMessage?: string;
+  createdAt: Timestamp;
+  startedAt?: Timestamp;
+  completedAt?: Timestamp;
 };
 
 // ─── Template Gallery ────────────────────────────────────────────────────────
@@ -355,12 +173,11 @@ export type Template = {
   title: string;
   description: string;
   category: TemplateCategory;
-  serviceId: string; // links to /configure/[serviceId]
-  packageId?: string; // optional preset package
-  previewUrl: string; // image or video preview
+  kind: GenerationKind;
+  previewUrl: string;
   previewType: "image" | "video";
   tags: string[];
-  popularity: number; // for sorting
+  popularity: number;
   isNew?: boolean;
   isPro?: boolean;
   creditCost?: number;

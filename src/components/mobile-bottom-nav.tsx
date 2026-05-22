@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Sparkles, Plus, Package, User } from "lucide-react";
+import { Home, Sparkles, Plus, FolderOpen, User } from "lucide-react";
 
 type NavItem = {
   href: string;
@@ -25,16 +25,16 @@ const items: NavItem[] = [
     match: (p) => p.startsWith("/templates"),
   },
   {
-    href: "/dashboard/orders",
-    label: "Siparişler",
-    icon: Package,
-    match: (p) => p.startsWith("/dashboard/orders"),
+    href: "/dashboard/files",
+    label: "Dosyalar",
+    icon: FolderOpen,
+    match: (p) => p.startsWith("/dashboard/files"),
   },
   {
     href: "/dashboard",
     label: "Profil",
     icon: User,
-    match: (p) => p === "/dashboard" || (p.startsWith("/dashboard") && !p.startsWith("/dashboard/orders")),
+    match: (p) => p === "/dashboard" || (p.startsWith("/dashboard") && !p.startsWith("/dashboard/files")),
   },
 ];
 
@@ -73,8 +73,8 @@ export const MobileBottomNav = () => {
         {/* Center prominent "New" button */}
         <div className="flex items-start justify-center -mt-5">
           <Link
-            href="/#services"
-            aria-label="Yeni sipariş"
+            href="/templates"
+            aria-label="Yeni üretim"
             className="w-14 h-14 rounded-full bg-[var(--lime)] text-[var(--dark-blue)] flex items-center justify-center shadow-[0_6px_18px_rgba(173,233,79,0.45)] border-4 border-[var(--card)] hover:scale-105 active:scale-95 transition-transform"
           >
             <Plus size={26} strokeWidth={3} />

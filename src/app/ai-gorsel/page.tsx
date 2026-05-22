@@ -1,87 +1,102 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/header";
-import { AIGorselPage } from "@/components/content-pages/ai-gorsel-page";
 import { Footer } from "@/components/footer";
 import { ParallaxGrid } from "@/components/parallax-grid";
+import { FeaturePage } from "@/components/content-pages/feature-page";
+import { Camera, Palette, Layers, ShoppingBag, Zap, Wand2, Image as ImageIcon } from "lucide-react";
+import { GENERATION_COSTS } from "@/lib/plans-data";
 
 export const metadata: Metadata = {
-  title: "AI Ürün Görseli — Stüdyo Olmadan E-ticaret Fotoğrafçılığı",
+  title: "AI Görsel Stüdyosu — Ürün, Kampanya & Banner Görselleri",
   description:
-    "Trendyol, Hepsiburada, Amazon için AI ürün görseli. Manken ve stüdyo masrafı olmadan %70 daha ucuz, 3-5 iş günü teslim. 1.490₺'den başlayan fiyatlar.",
-  keywords: [
-    "ai ürün görseli",
-    "yapay zeka ürün fotoğrafı",
-    "e-ticaret ürün fotoğrafı ai",
-    "manken olmadan ürün fotoğrafı",
-    "trendyol ürün görseli",
-    "hepsiburada ai ürün fotoğrafı",
-    "shopify ai product photography",
-    "stüdyo olmadan ürün görseli",
-    "AI product photography Turkey",
-  ],
+    "MindID AI görsel stüdyosu. Ürün fotoğrafı, kampanya görseli, banner ve sosyal post görsellerini anında üret. Ücretsiz başla.",
   alternates: {
     canonical: "https://mindid.shop/ai-gorsel",
-    languages: {
-      "tr-TR": "https://mindid.shop/ai-gorsel",
-      "en-US": "https://mindid.shop/ai-gorsel",
-    },
   },
   openGraph: {
-    title: "AI Ürün Görseli — MindID",
-    description: "Stüdyo olmadan, manken olmadan AI ürün görseli. %70 maliyet tasarrufu, 3-5 gün teslimat.",
+    title: "AI Görsel Stüdyosu — MindID",
+    description: "Self-service AI görsel üretim platformu. Stüdyo kalitesi, anında çıktı.",
     url: "https://mindid.shop/ai-gorsel",
-    images: [{ url: "/og-image.jpeg", width: 1200, height: 630, alt: "MindID AI Ürün Görseli" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@mindidshop",
-    title: "AI Ürün Görseli | MindID",
-    description: "Stüdyo olmadan AI ürün fotoğrafçılığı. %70 tasarruf.",
-    images: ["/og-image.jpeg"],
+    images: [{ url: "/og-image.jpeg", width: 1200, height: 630, alt: "MindID AI Görsel" }],
   },
 };
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
-    { "@type": "ListItem", position: 2, name: "AI Ürün Görseli", item: "https://mindid.shop/ai-gorsel" },
-  ],
-};
-
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "AI Ürün Görseli",
-  description:
-    "Yapay zeka ile e-ticaret ürün görseli üretimi. Manken ve stüdyo masrafı olmadan %70 daha ucuz, platform uyumlu boyutlarda stüdyo kalitesinde görseller.",
-  category: "AI Product Photography",
-  provider: { "@type": "Organization", name: "MindID", url: "https://mindid.shop" },
-  areaServed: "Worldwide",
-  offers: {
-    "@type": "AggregateOffer",
-    lowPrice: "1490",
-    highPrice: "7900",
-    priceCurrency: "TRY",
-    availability: "https://schema.org/InStock",
+const useCases = [
+  {
+    icon: ShoppingBag,
+    titleTr: "E-ticaret Ürünü",
+    titleEn: "E-commerce Product",
+    descTr: "Pazaryeri uyumlu, temiz zeminli ürün görselleri.",
+    descEn: "Marketplace-ready product shots on clean backgrounds.",
   },
-  url: "https://mindid.shop/ai-gorsel",
-};
+  {
+    icon: Palette,
+    titleTr: "Lifestyle Sahne",
+    titleEn: "Lifestyle Scene",
+    descTr: "Ürünü bağlamında gösteren atmosferik görseller.",
+    descEn: "Atmospheric scenes showing your product in context.",
+  },
+  {
+    icon: Layers,
+    titleTr: "Kampanya Banner",
+    titleEn: "Campaign Banner",
+    descTr: "Reklam ve sosyal medya için yüksek dönüşümlü görseller.",
+    descEn: "High-converting visuals for ads and social media.",
+  },
+  {
+    icon: ImageIcon,
+    titleTr: "Varyasyon Setleri",
+    titleEn: "Variation Sets",
+    descTr: "Tek üründen renk, açı, stil varyasyonları.",
+    descEn: "Color, angle and style variations from a single product.",
+  },
+];
 
-const AIGorselRoute = () => {
+const benefits = [
+  {
+    icon: Camera,
+    titleTr: "Stüdyo gerekmez",
+    titleEn: "No studio needed",
+    descTr: "Mekan, ışık, manken sıfır. Tek tıkla üret.",
+    descEn: "Zero location, lighting, model cost. Generate with one click.",
+  },
+  {
+    icon: Zap,
+    titleTr: "Saniyeler içinde",
+    titleEn: "In seconds",
+    descTr: "Brief, çekim, retouch süreci yok.",
+    descEn: "No briefs, shoots or retouching workflow.",
+  },
+  {
+    icon: Wand2,
+    titleTr: "Sonsuz iterasyon",
+    titleEn: "Endless iteration",
+    descTr: "Beğenmediğin görseli tek kredi ile yeniden üret.",
+    descEn: "Don't like the output? Regenerate with one credit.",
+  },
+];
+
+const ImageFeatureRoute = () => {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <ParallaxGrid />
       <Header />
       <main id="main-content">
-        <AIGorselPage />
+        <FeaturePage
+          badgeTr="AI Image Studio"
+          badgeEn="AI Image Studio"
+          headlineTr="Stüdyo kalitesinde görsel. Stüdyosuz."
+          headlineEn="Studio-grade images. Without a studio."
+          subTr="Ürün, kampanya ve sosyal medya görsellerini AI ile üret. Pazaryeri uyumlu, sınırsız varyasyon."
+          subEn="Generate product, campaign and social images with AI. Marketplace-ready, endless variations."
+          estimatedCredits={GENERATION_COSTS.imageHD}
+          useCases={useCases}
+          benefits={benefits}
+        />
       </main>
       <Footer />
     </>
   );
 };
 
-export default AIGorselRoute;
+export default ImageFeatureRoute;

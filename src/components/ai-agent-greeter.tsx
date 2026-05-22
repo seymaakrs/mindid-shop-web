@@ -21,10 +21,10 @@ type QuickAction = {
 };
 
 const QUICK_ACTIONS: QuickAction[] = [
-  { id: "reels", icon: <Video size={18} />, label: "AI Reels", description: "Saniyeler içinde dikey video", href: "/configure/reels", gradient: "from-pink-500/20 to-purple-500/20" },
-  { id: "product-photo", icon: <Camera size={18} />, label: "Ürün Fotoğrafı", description: "Stüdyo kalitesi, manken yok", href: "/configure/product-photo", gradient: "from-blue-500/20 to-cyan-500/20" },
-  { id: "social", icon: <Smartphone size={18} />, label: "Sosyal Medya", description: "Aylık içerik + planlama", href: "/configure/social-media", gradient: "from-green-500/20 to-emerald-500/20" },
-  { id: "avatar", icon: <User size={18} />, label: "AI Avatar", description: "Marka sözcüsü, sınırsız sahne", href: "/configure/avatar", gradient: "from-orange-500/20 to-yellow-500/20" },
+  { id: "video", icon: <Video size={18} />, label: "AI Video", description: "Reels, reklam, tanıtım", href: "/ai-reklam-filmi", gradient: "from-pink-500/20 to-purple-500/20" },
+  { id: "image", icon: <Camera size={18} />, label: "AI Görsel", description: "Ürün ve kampanya görseli", href: "/ai-gorsel", gradient: "from-blue-500/20 to-cyan-500/20" },
+  { id: "templates", icon: <Smartphone size={18} />, label: "Şablonlar", description: "Hazır kalıplarla başla", href: "/templates", gradient: "from-green-500/20 to-emerald-500/20" },
+  { id: "avatar", icon: <User size={18} />, label: "AI Avatar", description: "Kameraya çıkmadan üret", href: "/avatar", gradient: "from-orange-500/20 to-yellow-500/20" },
 ];
 
 const classifyIntent = (text: string): { actionId: string | null; response: string } => {
@@ -32,25 +32,23 @@ const classifyIntent = (text: string): { actionId: string | null; response: stri
   if (!t) return { actionId: null, response: "" };
 
   const patterns: Array<{ id: string; keywords: string[] }> = [
-    { id: "reels", keywords: ["reels", "tiktok", "video", "kısa video", "dikey"] },
-    { id: "product-photo", keywords: ["ürün foto", "fotoğraf", "ürün çekim", "katalog", "trendyol", "amazon"] },
-    { id: "social", keywords: ["sosyal medya", "instagram", "post", "içerik plan"] },
+    { id: "video", keywords: ["reels", "tiktok", "video", "kısa video", "dikey", "reklam"] },
+    { id: "image", keywords: ["ürün foto", "fotoğraf", "ürün çekim", "görsel", "katalog"] },
     { id: "avatar", keywords: ["avatar", "konuşan", "sözcü", "spokesperson"] },
     { id: "templates", keywords: ["şablon", "hazır", "template"] },
-    { id: "pricing", keywords: ["fiyat", "ücret", "kaç para", "ne kadar", "paket"] },
-    { id: "free", keywords: ["bedava", "ücretsiz", "free", "dene"] },
+    { id: "pricing", keywords: ["fiyat", "ücret", "plan", "abonelik", "kaç para", "ne kadar"] },
+    { id: "free", keywords: ["bedava", "ücretsiz", "free", "dene", "kayıt"] },
   ];
 
   for (const p of patterns) {
     if (p.keywords.some((k) => t.includes(k))) {
       const responses: Record<string, string> = {
-        reels: "Harika seçim! AI Reels paketlerine yönlendireyim 🎬",
-        "product-photo": "E-ticaret için en sevilen seçim 📸",
-        social: "Sosyal medyanı tek panelden yönetelim 📱",
-        avatar: "AI sözcün hazır olsun 🎭",
+        video: "Harika seçim! AI Video stüdyosuna yönlendireyim 🎬",
+        image: "Ürün görseli için en hızlı yere yönlendiriyorum 📸",
+        avatar: "Marka avatarını burada üretelim 🎭",
         templates: "Hazır şablonlar tam senin için 🎨",
-        pricing: "Fiyatlarımız çok şeffaf — hemen göstereyim 💰",
-        free: "İlk 50 kredi bizden hediye 🎁",
+        pricing: "Planları hemen göstereyim 💰",
+        free: "Ücretsiz başla, kart yok, 50 kredi hediye 🎁",
       };
       return { actionId: p.id, response: responses[p.id] };
     }
@@ -60,10 +58,9 @@ const classifyIntent = (text: string): { actionId: string | null; response: stri
 };
 
 const DESTINATIONS: Record<string, string> = {
-  reels: "/configure/reels",
-  "product-photo": "/configure/product-photo",
-  social: "/configure/social-media",
-  avatar: "/configure/avatar",
+  video: "/ai-reklam-filmi",
+  image: "/ai-gorsel",
+  avatar: "/avatar",
   templates: "/templates",
   pricing: "/#pricing",
   free: "/register",
@@ -81,7 +78,7 @@ export const AiAgentGreeter = () => {
   const [matchedAction, setMatchedAction] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const shouldHide = pathname.startsWith("/admin") || pathname.startsWith("/dashboard") || pathname.startsWith("/checkout");
+  const shouldHide = pathname.startsWith("/admin") || pathname.startsWith("/dashboard");
 
   useEffect(() => {
     if (typeof window === "undefined" || shouldHide) return;
@@ -188,7 +185,7 @@ export const AiAgentGreeter = () => {
               <div className="pt-2 border-t border-white/5">
                 <p className="text-[10px] text-gray-500 mb-2 uppercase tracking-wider font-bold">veya bana sor</p>
                 <div className="flex gap-2">
-                  <input ref={inputRef} type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="örn: Trendyol için ürün fotoğrafı..." className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder:text-gray-500 focus:border-[var(--lime)] focus:outline-none" />
+                  <input ref={inputRef} type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="örn: instagram için ürün görseli..." className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder:text-gray-500 focus:border-[var(--lime)] focus:outline-none" />
                   <button onClick={handleSend} disabled={!input.trim()} className="bg-[var(--lime)] text-[var(--dark-blue)] disabled:opacity-30 rounded-xl px-3 hover:bg-[var(--lime)]/90 transition-colors" aria-label="Gönder">
                     <Send size={14} />
                   </button>
