@@ -94,7 +94,7 @@ const AdminCustomersPage = () => {
                   </div>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className="text-sm font-bold text-white">{customer.orderCount || 0} sipariş</p>
+                  <p className="text-sm font-bold text-white">{customer.generationCount || 0} üretim</p>
                   <p className="text-xs text-gray-500">₺{(customer.totalSpent || 0).toLocaleString("tr-TR")}</p>
                   <p className="text-[10px] text-gray-600">{customer.credits || 0} kredi</p>
                 </div>

@@ -5,50 +5,49 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/lib/auth-context";
 import {
-  Film,
-  DollarSign,
   HelpCircle,
   Users,
   Bot,
-  ClipboardList,
+  Wand2,
   ArrowRight,
   UserPlus,
   Search,
   BarChart3,
   Globe,
   TrendingUp,
+  UserCog,
+  FileText,
 } from "lucide-react";
 import Link from "next/link";
 
 type CollectionCount = {
-  portfolio: number;
   faq: number;
   team: number;
   avatarSamples: number;
-  ordersTotal: number;
-  ordersNew: number;
+  generationsTotal: number;
+  generationsRunning: number;
+  customers: number;
   leadsNew: number;
 };
 
 const quickLinks = [
-  { href: "/admin/orders", label: "Siparişler", icon: ClipboardList, color: "var(--lime)" },
-  { href: "/admin/leads", label: "Potansiyel Müşteriler", icon: UserPlus, color: "var(--lime)" },
-  { href: "/admin/portfolio", label: "Portfolio Yönet", icon: Film, color: "var(--electric-blue)" },
-  { href: "/admin/pricing", label: "Fiyatları Düzenle", icon: DollarSign, color: "var(--lime)" },
+  { href: "/admin/generations", label: "AI Üretim Geçmişi", icon: Wand2, color: "var(--lime)" },
+  { href: "/admin/customers", label: "Müşteriler", icon: UserCog, color: "var(--electric-blue)" },
+  { href: "/admin/leads", label: "Lead'ler", icon: UserPlus, color: "var(--lime)" },
   { href: "/admin/faq", label: "SSS Düzenle", icon: HelpCircle, color: "var(--electric-blue)" },
-  { href: "/admin/about", label: "Takım Düzenle", icon: Users, color: "var(--lime)" },
+  { href: "/admin/about", label: "Hakkımızda", icon: Users, color: "var(--lime)" },
   { href: "/admin/avatar", label: "Avatar Örnekleri", icon: Bot, color: "var(--electric-blue)" },
+  { href: "/admin/blog", label: "Blog Yazıları", icon: FileText, color: "var(--lime)" },
 ];
 
-/* ─── SEO Durum Kartı ─── */
 const SEOCard = () => {
   const pages = [
-    { name: "Ana Sayfa", path: "/", status: "ok" },
-    { name: "Blog", path: "/blog", status: "ok" },
-    { name: "Portfolyo", path: "/portfolio", status: "ok" },
-    { name: "Hakkımızda", path: "/about", status: "ok" },
-    { name: "Avatar", path: "/avatar", status: "ok" },
-    { name: "E-ticaret", path: "/e-commerce", status: "ok" },
+    { name: "Ana Sayfa", path: "/" },
+    { name: "Şablonlar", path: "/templates" },
+    { name: "AI Video", path: "/ai-reklam-filmi" },
+    { name: "AI Görsel", path: "/ai-gorsel" },
+    { name: "Avatar", path: "/avatar" },
+    { name: "Blog", path: "/blog" },
   ];
 
   return (
@@ -73,13 +72,12 @@ const SEOCard = () => {
         ))}
       </div>
       <p className="text-[10px] text-[var(--gray)] mt-3">
-        Schema.org: FAQPage, LocalBusiness, Service, ProfessionalService aktif
+        Schema.org: FAQPage, Service, Organization aktif
       </p>
     </div>
   );
 };
 
-/* ─── Analytics Özet Kartı ─── */
 const AnalyticsCard = () => {
   return (
     <div className="rounded-xl border border-[var(--electric-blue)]/20 bg-[var(--card)] p-5">
@@ -101,7 +99,7 @@ const AnalyticsCard = () => {
         <div className="rounded-lg bg-[var(--dark-blue)] p-3 border border-[var(--electric-blue)]/15">
           <TrendingUp size={14} className="text-[var(--lime)] mb-1.5" />
           <p className="text-lg font-black text-[var(--cream)]">—</p>
-          <p className="text-[10px] text-[var(--gray)]">Dönüşüm Oranı</p>
+          <p className="text-[10px] text-[var(--gray)]">Kayıt → Ödeme Oranı</p>
         </div>
       </div>
       <p className="text-[10px] text-[var(--gray)] mt-3">
@@ -114,35 +112,35 @@ const AnalyticsCard = () => {
 const AdminDashboard = () => {
   const { user } = useAuth();
   const [counts, setCounts] = useState<CollectionCount>({
-    portfolio: 0,
     faq: 0,
     team: 0,
     avatarSamples: 0,
-    ordersTotal: 0,
-    ordersNew: 0,
+    generationsTotal: 0,
+    generationsRunning: 0,
+    customers: 0,
     leadsNew: 0,
   });
 
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        const [portfolio, faq, team, avatarSamples, orders, leads] = await Promise.all([
-          getDocs(collection(db, "mindid_portfolio")),
+        const [faq, team, avatarSamples, generations, customers, leads] = await Promise.all([
           getDocs(collection(db, "mindid_faq")),
           getDocs(collection(db, "mindid_team")),
           getDocs(collection(db, "mindid_avatarSamples")),
-          getDocs(collection(db, "mindid_orders")),
+          getDocs(collection(db, "mindid_generations")),
+          getDocs(collection(db, "mindid_customers")),
           getDocs(collection(db, "mindid_leads")),
         ]);
-        const ordersNew = orders.docs.filter((d) => d.data().status === "new").length;
+        const generationsRunning = generations.docs.filter((d) => d.data().status === "running" || d.data().status === "queued").length;
         const leadsNew = leads.docs.filter((d) => d.data().status === "new").length;
         setCounts({
-          portfolio: portfolio.size,
           faq: faq.size,
           team: team.size,
           avatarSamples: avatarSamples.size,
-          ordersTotal: orders.size,
-          ordersNew,
+          generationsTotal: generations.size,
+          generationsRunning,
+          customers: customers.size,
           leadsNew,
         });
       } catch {
@@ -153,10 +151,10 @@ const AdminDashboard = () => {
   }, []);
 
   const stats = [
-    { label: "Yeni Siparişler", count: counts.ordersNew, icon: ClipboardList, highlight: true },
+    { label: "Aktif Üretim", count: counts.generationsRunning, icon: Wand2, highlight: true },
     { label: "Yeni Lead'ler", count: counts.leadsNew, icon: UserPlus, highlight: true },
-    { label: "Toplam Sipariş", count: counts.ordersTotal, icon: ClipboardList, highlight: false },
-    { label: "Portfolio", count: counts.portfolio, icon: Film, highlight: false },
+    { label: "Toplam Müşteri", count: counts.customers, icon: UserCog, highlight: false },
+    { label: "Toplam Üretim", count: counts.generationsTotal, icon: Wand2, highlight: false },
     { label: "SSS", count: counts.faq, icon: HelpCircle, highlight: false },
     { label: "Takım", count: counts.team, icon: Users, highlight: false },
     { label: "Avatar Örnekleri", count: counts.avatarSamples, icon: Bot, highlight: false },
@@ -164,7 +162,6 @@ const AdminDashboard = () => {
 
   return (
     <div className="space-y-8">
-      {/* Karşılama */}
       <div>
         <h1 className="text-2xl font-black text-[var(--cream)]">Dashboard</h1>
         <p className="text-sm text-[var(--gray)] mt-1">
@@ -172,7 +169,6 @@ const AdminDashboard = () => {
         </p>
       </div>
 
-      {/* İstatistik Kartları */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {stats.map((stat) => (
           <div
@@ -197,13 +193,11 @@ const AdminDashboard = () => {
         ))}
       </div>
 
-      {/* SEO + Analytics Yan Yana */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         <SEOCard />
         <AnalyticsCard />
       </div>
 
-      {/* Hızlı Erişim */}
       <div>
         <h2 className="text-lg font-bold text-[var(--cream)] mb-4">Hızlı Erişim</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">

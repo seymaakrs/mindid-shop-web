@@ -124,3 +124,39 @@ public/           → Statik dosyalar (logo, favicon, og-image)
 
 ## Seyma icin Hafiza Notu
 Seyma, Claude'a soyledigin onemli bilgileri (musteri kararlari, fiyat degisiklikleri, strateji degisiklikleri) bu dosyaya kaydetmeni sagla. Claude'a "Bu bilgiyi CLAUDE.md'ye ekle" de, Claude ekleyecektir. Boylece bir sonraki oturumda Claude her seyi hatirlar.
+
+---
+
+## Proje Durumu / Karar Gecmisi
+
+### Mayis 2026 — SaaS Donusumu (PR #3, branch `claude/saas-conversion-ZYut0`)
+Site, ajans hibrit yapisindan tam self-service AI icerik SaaS platformuna donusturuldu. Detaylar PR #3'te.
+
+**Plan yapisi:** Free (50 kredi/ay) / Starter / Growth (populer) / Scale. Kredi tabanli odeme. Detaylar `src/lib/plans-data.ts`.
+
+**Karar:** Gorsel tasarim (kaplan yesili, Bebas Neue, neo-border stili) korundu. Sadece mesajlasma, akis ve SaaS'a uygun bilesenler eklendi. og-image, kaplan-yatay vs. korundu.
+
+### UI Polish & Mobil Duzeltmeleri (Mayis 23)
+
+**Yapilan polish:**
+- Anasayfa AI Studio Showcase ajans dilinden temizlendi ("PROMPT'TAN PIKSELE")
+- Pricing'e ikon, mobile reorder, yillik tasarruf gostergesi
+- Dashboard'a gradient karsilama, canli kredi gauge, paylasilan EmptyState/SkeletonList bileseni
+
+**Mobil duzeltmeleri (kritik):**
+- iOS Safari otomatik input zoom hatasi globals.css ile cozuldu (form font-size mobilde 16px zorunlu)
+- Dashboard sidebar mobilde gizlendi (`hidden md:flex`), yerine `DashboardMobileNav` (yatay pill nav)
+- Admin sidebar mobilde gizlendi, yerine `AdminMobileNav`
+- Header hamburger button 44x44 touch hedefi
+- Dashboard/admin layout padding p-4 md:p-6
+
+### Paylasilan UI Bilesenleri (yine yine kod yazmak yerine)
+- `src/components/customer/empty-state.tsx` → `EmptyState`, `SkeletonList`. Tum dashboard sayfalarinda kullaniliyor.
+- `src/components/customer/dashboard-mobile-nav.tsx` → Mobilde dashboard navigasyonu.
+- `src/components/admin/admin-mobile-nav.tsx` → Mobilde admin navigasyonu.
+
+### Dokunulmamasi Gereken Yeni Kararlar
+- Dashboard sidebar mobilde gizli olacak (`hidden md:flex`) — MobileBottomNav ve DashboardMobileNav birlikte kullaniliyor.
+- Tum form input'lari mobilde min 16px font-size (iOS zoom hatasini onlemek icin globals.css'te zorlandi).
+- EmptyState ve SkeletonList paylasilan bilesenler — yeni empty/loading state'lerde bunlari kullan.
+

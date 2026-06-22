@@ -33,7 +33,7 @@ export const FinalCTA = () => {
         {/* CTA Butonları */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="#services"
+            href="/register"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-md bg-[var(--lime)] border-3 border-[var(--dark-blue)] shadow-[5px_5px_0px_var(--dark-blue)] text-[var(--dark-blue)] text-base font-black hover:shadow-[3px_3px_0px_var(--dark-blue)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
           >
             {t("cta.primary")}
@@ -41,7 +41,7 @@ export const FinalCTA = () => {
           </a>
 
           <a
-            href="mailto:info@mindid.shop"
+            href="/templates"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-md bg-transparent border-3 border-[var(--dark-blue)] text-[var(--dark-blue)] text-base font-bold hover:bg-[var(--lime)]/10 hover:border-[var(--lime)] transition-all"
           >
             {t("cta.secondary")}

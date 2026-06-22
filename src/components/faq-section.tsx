@@ -8,27 +8,14 @@ import { useState } from "react";
 
 // Fallback i18n keys when Firestore has no data
 const FAQ_KEYS = [
-  { q: "faq.q1", a: "faq.a1" },
-  { q: "faq.q2", a: "faq.a2" },
-  { q: "faq.q3", a: "faq.a3" },
-  { q: "faq.q4", a: "faq.a4" },
-  { q: "faq.q5", a: "faq.a5" },
-  { q: "faq.q6", a: "faq.a6" },
-  { q: "faq.q7", a: "faq.a7" },
-  { q: "faq.q8", a: "faq.a8" },
-  { q: "faq.q9", a: "faq.a9" },
-  { q: "faq.q10", a: "faq.a10" },
-  { q: "faq.q11", a: "faq.a11" },
-  { q: "faq.q12", a: "faq.a12" },
-  { q: "faq.q13", a: "faq.a13" },
-  { q: "faq.q14", a: "faq.a14" },
-  { q: "faq.q15", a: "faq.a15" },
-  { q: "faq.q16", a: "faq.a16" },
-  { q: "faq.q17", a: "faq.a17" },
-  { q: "faq.q18", a: "faq.a18" },
-  { q: "faq.q19", a: "faq.a19" },
-  { q: "faq.q20", a: "faq.a20" },
-  { q: "faq.q21", a: "faq.a21" },
+  { q: "saas.faq.q1", a: "saas.faq.a1" },
+  { q: "saas.faq.q2", a: "saas.faq.a2" },
+  { q: "saas.faq.q3", a: "saas.faq.a3" },
+  { q: "saas.faq.q4", a: "saas.faq.a4" },
+  { q: "saas.faq.q5", a: "saas.faq.a5" },
+  { q: "saas.faq.q6", a: "saas.faq.a6" },
+  { q: "saas.faq.q7", a: "saas.faq.a7" },
+  { q: "saas.faq.q8", a: "saas.faq.a8" },
 ];
 
 const INITIAL_SHOW = 6;

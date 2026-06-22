@@ -1,29 +1,9 @@
 import type { MetadataRoute } from "next";
 import { getBlogPosts } from "@/lib/blog-server";
-import { getPortfolioItems } from "@/lib/portfolio-server";
 
 const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const baseUrl = "https://mindid.shop";
 
-  // Fetch portfolio items for dynamic URLs
-  let portfolioEntries: MetadataRoute.Sitemap = [];
-  try {
-    const items = await getPortfolioItems();
-    portfolioEntries = items
-      .filter((item) => item.slug)
-      .map((item) => ({
-        url: `${baseUrl}/portfolio/${item.slug}`,
-        lastModified: item.completedAt
-          ? new Date(item.completedAt as unknown as string)
-          : new Date(),
-        changeFrequency: "monthly" as const,
-        priority: 0.7,
-      }));
-  } catch {
-    // Portfolio fetch failed — continue with static entries
-  }
-
-  // Fetch blog posts for dynamic URLs
   let blogEntries: MetadataRoute.Sitemap = [];
   try {
     const posts = await getBlogPosts();
@@ -35,60 +15,43 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
           ? new Date(post.publishedAt as unknown as string)
           : new Date(),
         changeFrequency: "monthly" as const,
-        priority: 0.7,
+        priority: 0.6,
       }));
   } catch {
     // Blog fetch failed — continue with static entries
   }
 
   return [
-    // Ana sayfalar
+    // Ana sayfa
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
-    { url: `${baseUrl}/portfolio`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${baseUrl}/avatar`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
 
-    // Hizmet konfigüratörleri — yüksek SEO değeri
-    { url: `${baseUrl}/configure/reels`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/configure/product-photo`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/configure/product`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/configure/campaign`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/configure/corporate`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-
-    // Blog
-    { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
-
-    // Hizmet landing sayfaları — SEO/GEO için yüksek değer
-    { url: `${baseUrl}/ai-gorsel`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/ai-reklam-filmi`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/sosyal-medya-yonetimi`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-
-    // İçerik sayfaları — GEO ve SEO için yüksek değer
-    { url: `${baseUrl}/ai-vs-traditional`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/how-it-works`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/e-commerce`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-
-    // SaaS sayfaları
-    { url: `${baseUrl}/login`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${baseUrl}/register`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    // SaaS akışı
+    { url: `${baseUrl}/register`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/login`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/templates`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${baseUrl}/dashboard`, lastModified: new Date(), changeFrequency: "daily", priority: 0.5 },
 
-    // Yasal sayfalar
+    // Özellik / use-case sayfaları
+    { url: `${baseUrl}/ai-reklam-filmi`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/ai-gorsel`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/avatar`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/e-commerce`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+
+    // Kurumsal
+    { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
+    { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "daily", priority: 0.7 },
+
+    // Yasal
     { url: `${baseUrl}/kvkk`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/gizlilik`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/kullanim-kosullari`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
 
-    // Dinamik portfolyo proje sayfaları
-    ...portfolioEntries,
-
     // Dinamik blog yazıları
     ...blogEntries,
 
-    // EN alternatifleri (çok dilli SEO)
-    { url: `${baseUrl}/en/portfolio`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
-    ...portfolioEntries.map((e) => ({ ...e, url: e.url.replace(baseUrl, `${baseUrl}/en`), priority: 0.6 })),
-    { url: `${baseUrl}/en/blog`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.7 },
-    ...blogEntries.map((e) => ({ ...e, url: e.url.replace(baseUrl, `${baseUrl}/en`), priority: 0.6 })),
+    // EN
+    { url: `${baseUrl}/en/blog`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.5 },
+    ...blogEntries.map((e) => ({ ...e, url: e.url.replace(baseUrl, `${baseUrl}/en`), priority: 0.5 })),
   ];
 };
 

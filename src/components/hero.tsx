@@ -138,12 +138,12 @@ export const Hero = () => {
   const cards: ServiceCard[] = [
     {
       label: lang === "en" ? "VIDEO" : "VİDEO",
-      title: lang === "en" ? "AI Ad Film" : "AI Reklam Filmi",
+      title: lang === "en" ? "AI Video" : "AI Video",
       description:
         lang === "en"
-          ? "Brand films in days, not months."
-          : "Marka filmin günlerde hazır.",
-      stat: lang === "en" ? "5-day delivery" : "5 günde teslim",
+          ? "Reels and ads in seconds."
+          : "Reels & reklamlar saniyeler içinde.",
+      stat: lang === "en" ? "From 15 credits" : "15 kredi'den",
       icon: <Video size={18} />,
       color: "bg-[var(--cream)]",
       labelBg: "bg-[var(--lime)] text-[var(--dark-blue)]",
@@ -152,13 +152,13 @@ export const Hero = () => {
       rotation: "-3deg",
     },
     {
-      label: lang === "en" ? "E-COMMERCE" : "E-TİCARET",
-      title: lang === "en" ? "AI Product Visuals" : "AI Ürün Görseli",
+      label: lang === "en" ? "IMAGES" : "GÖRSEL",
+      title: lang === "en" ? "AI Images" : "AI Görsel",
       description:
         lang === "en"
-          ? "Studio-quality product photos."
-          : "Stüdyo kalitesinde ürün foto.",
-      stat: lang === "en" ? "70% cheaper" : "%70 daha ucuz",
+          ? "Studio-grade visuals on demand."
+          : "Stüdyo kalitesi, talep üzerine.",
+      stat: lang === "en" ? "From 5 credits" : "5 kredi'den",
       icon: <ShoppingBag size={18} />,
       color: "bg-[var(--lime)]/15",
       labelBg: "bg-[var(--dark-blue)] text-[var(--lime)]",
@@ -182,12 +182,12 @@ export const Hero = () => {
     },
     {
       label: lang === "en" ? "SOCIAL" : "SOSYAL",
-      title: lang === "en" ? "Social Media" : "Sosyal Medya",
+      title: lang === "en" ? "Social Content" : "Sosyal İçerik",
       description:
         lang === "en"
-          ? "One video, every platform."
-          : "Bir video, tüm platformlar.",
-      stat: lang === "en" ? "80+ projects" : "80+ proje",
+          ? "Post, story, banner — auto-sized."
+          : "Post, story, banner — otomatik boyutlama.",
+      stat: lang === "en" ? "Self-service" : "Self-service",
       icon: <Share2 size={18} />,
       color: "bg-[var(--lime)]/10",
       labelBg: "bg-[var(--lime)]/80 text-[var(--dark-blue)]",
@@ -207,14 +207,14 @@ export const Hero = () => {
   /* ─── How it works steps ─── */
   const steps = lang === "en"
     ? [
-        { icon: <Target size={18} />, title: "Pick a pack", emoji: "🎯" },
-        { icon: <Zap size={18} />, title: "AI creates", emoji: "⚡" },
-        { icon: <Download size={18} />, title: "Share & sell", emoji: "📥" },
+        { icon: <Target size={18} />, title: "Sign up free", emoji: "🎯" },
+        { icon: <Zap size={18} />, title: "Pick a template", emoji: "⚡" },
+        { icon: <Download size={18} />, title: "Generate & ship", emoji: "📥" },
       ]
     : [
-        { icon: <Target size={18} />, title: "Paket seç", emoji: "🎯" },
-        { icon: <Zap size={18} />, title: "AI üretsin", emoji: "⚡" },
-        { icon: <Download size={18} />, title: "Paylaş, kazan", emoji: "📥" },
+        { icon: <Target size={18} />, title: "Ücretsiz kayıt", emoji: "🎯" },
+        { icon: <Zap size={18} />, title: "Şablon seç", emoji: "⚡" },
+        { icon: <Download size={18} />, title: "Üret & indir", emoji: "📥" },
       ];
 
   return (
@@ -292,8 +292,8 @@ export const Hero = () => {
             <Sparkles size={14} className="text-[var(--dark-blue)]" />
             <span className="text-[11px] md:text-xs font-bold tracking-wider uppercase text-[var(--dark-blue)]">
               {lang === "en"
-                ? "Türkiye's AI content studio"
-                : "Türkiye'nin AI içerik stüdyosu"}
+                ? "AI content studio for brands"
+                : "Markalar için AI içerik stüdyosu"}
             </span>
           </div>
 
@@ -343,8 +343,8 @@ export const Hero = () => {
             }}
           >
             {lang === "en"
-              ? "Reels, product photos and social content in seconds. 70% lower cost."
-              : "Reels, ürün fotoğrafı ve sosyal medya içeriklerini saniyeler içinde üret. %70 daha az maliyet."}
+              ? "Self-service AI content studio. Generate reels, images and avatars in seconds — pay with credits."
+              : "Self-service AI içerik stüdyosu. Reels, görsel ve avatarları saniyeler içinde üret — kredi ile öde."}
           </p>
 
           {/* CTAs */}
@@ -383,8 +383,8 @@ export const Hero = () => {
             }}
           >
             <span className="inline-flex items-center gap-1.5">
-              <span className="text-base">🐯</span>
-              {lang === "en" ? "80+ projects" : "80+ proje"}
+              <span className="text-base">🎁</span>
+              {lang === "en" ? "50 free credits" : "50 kredi hediye"}
             </span>
             <span className="text-[var(--dark-blue)]/20">|</span>
             <span className="inline-flex items-center gap-1.5">
@@ -393,8 +393,8 @@ export const Hero = () => {
             </span>
             <span className="text-[var(--dark-blue)]/20">|</span>
             <span className="inline-flex items-center gap-1.5">
-              <span className="text-base">⭐</span>
-              {lang === "en" ? "98% satisfaction" : "%98 memnuniyet"}
+              <span className="text-base">💳</span>
+              {lang === "en" ? "No credit card" : "Kart gerekmez"}
             </span>
           </div>
         </div>

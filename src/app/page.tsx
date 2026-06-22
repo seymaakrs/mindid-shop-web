@@ -5,28 +5,26 @@ import { Hero } from "@/components/hero";
 import { ServiceCards } from "@/components/service-cards";
 import { SocialProof } from "@/components/social-proof";
 import { ParallaxGrid } from "@/components/parallax-grid";
-import { HowItWorks } from "@/components/how-it-works";
 import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "MindID — Yapay Zeka Reklam Filmleri, Avatar & Ürün Görselleri",
+  title: "MindID — AI Content Studio | Reels, Görsel & Avatar SaaS",
   description:
-    "AI ile reklam filmi, dijital avatar oluşturma ve e-ticaret ürün görseli üretimi. Manken ve stüdyo masrafı olmadan %70 daha az maliyetle stüdyo kalitesinde sonuçlar. 1.490₺'den başlayan fiyatlar.",
+    "MindID, markaların self-service AI içerik üretim platformudur. Reels, ürün görseli ve dijital avatarları kredi bazlı planlarla anında üret. Ücretsiz başla, 50 kredi hediye.",
   alternates: {
     canonical: "https://mindid.shop",
   },
   openGraph: {
-    title: "MindID — AI Reklam Filmleri, Avatar & Ürün Görselleri",
+    title: "MindID — AI Content Studio SaaS",
     description:
-      "Yapay zeka ile reklam filmi, avatar oluşturma ve ürün görseli üretimi. %70 maliyet tasarrufu. 1.490₺'den başlayan fiyatlar.",
+      "Self-service AI içerik üretim platformu. Reels, görsel, avatar — kredi bazlı, ücretsiz başla.",
     url: "https://mindid.shop",
   },
 };
 
-// Below-the-fold: lazy loaded for faster initial page load
 const AIStudioShowcase = dynamic(() => import("@/components/ai-studio-showcase").then((m) => ({ default: m.AIStudioShowcase })));
 const FeaturedTemplates = dynamic(() => import("@/components/featured-templates").then((m) => ({ default: m.FeaturedTemplates })));
-// BudgetSlider kaldırıldı — ServiceCards aynı işlevi görüyor
+const PricingSection = dynamic(() => import("@/components/pricing-section").then((m) => ({ default: m.PricingSection })));
 const TestimonialsSection = dynamic(() => import("@/components/testimonials-section").then((m) => ({ default: m.TestimonialsSection })));
 const FAQSection = dynamic(() => import("@/components/faq-section").then((m) => ({ default: m.FAQSection })));
 const FinalCTA = dynamic(() => import("@/components/final-cta").then((m) => ({ default: m.FinalCTA })));
@@ -42,164 +40,51 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "What is AI video production and how does it work?",
+      name: "What is MindID?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "AI video production is an innovative method where professional video content is created using artificial intelligence technologies. Instead of traditional production's filming crew, camera equipment, studio rental, and location costs, advanced AI models (image generation, voice synthesis, video composition) are used. The process reduces weeks-long traditional production timelines to days and significantly lowers costs.",
+        text: "MindID is a self-service AI content studio that lets brands generate reels, product images and digital avatars directly in the browser. You sign up, get free credits, pick a template and AI produces studio-quality output in seconds.",
       },
     },
     {
       "@type": "Question",
-      name: "How much do I save compared to traditional production?",
+      name: "How does the credit system work?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "With MindID AI, the same professional quality is produced at 60-70% less than traditional costs. A traditional 30-second video requires $2,200 to $5,600 minimum. Corporate intro films can cost $8,400 to $21,000 traditionally. With MindID AI, these are done at 60-70% less cost. This is a strategic competitive advantage for your business.",
+        text: "Every plan comes with monthly credits. Each AI generation costs a small number of credits depending on output type — images from 2 credits, short videos from 15 credits, avatars from 25 credits. New accounts get 50 free credits.",
       },
     },
     {
       "@type": "Question",
-      name: "Can AI replace mannequins for e-commerce product photos?",
+      name: "Do I need creative or technical skills?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. MindID produces studio-quality e-commerce product images without mannequins or studios at 70% less cost. We serve Shopify, Amazon, Trendyol, and Hepsiburada sellers with AI-generated product photography starting from ₺1,490.",
+        text: "No. MindID is template-first. Pick a template, drop in your brand details (logo, product photo, copy) and AI handles the rest. Pro users can write custom prompts.",
       },
     },
     {
       "@type": "Question",
-      name: "How to create AI avatars for marketing?",
+      name: "Can I use the outputs commercially?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "MindID creates realistic AI digital avatars for brand spokespersons, digital presenters, and influencer avatars. You can use your AI avatar to produce content in multiple languages without ever being on camera. AI avatar creation starts from ₺6,900.",
+        text: "Yes. Paid plans (Starter and above) include full commercial usage rights with no watermark. The Free plan adds a watermark and is intended for testing.",
       },
     },
     {
       "@type": "Question",
-      name: "What is the delivery time for AI ad films?",
+      name: "Is there an API?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Short format content (8-16 seconds) is delivered within 3 to 5 business days. Medium format (24-60 seconds) takes 5 to 10 business days. Long format content like brand films and corporate introductions takes 20 to 30 business days. Expedited delivery options are available for urgent projects.",
+        text: "Yes — the Scale plan includes API access and webhooks so you can integrate MindID into your existing workflow or product.",
       },
     },
     {
       "@type": "Question",
-      name: "Which platforms do you produce content for?",
+      name: "Can I cancel anytime?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We produce content for all platforms: Instagram Reels and Stories, TikTok, YouTube, LinkedIn, Facebook, X (Twitter), websites, e-commerce platforms, digital signage, TV commercials, and corporate presentations. Delivery includes optimized aspect ratios (9:16, 16:9, 1:1, 4:5) and resolutions (HD, Full HD, 4K).",
+        text: "Yes. You can cancel your subscription anytime from your dashboard. You keep access until the end of your billing period, and any unused credit packs do not expire.",
       },
-    },
-    {
-      "@type": "Question",
-      name: "What's needed to start a project?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Simply use the configurator on mindid.shop to define your needs and fill out the form. Within 24 hours, we'll call you for a detailed brief meeting. After brief approval, the project officially starts with production beginning immediately.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do AI avatars look realistic?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. MindID's AI avatar technology produces highly realistic results. Facial expressions, lip-sync, eye contact, and natural body language are precisely generated. Your avatar can speak in multiple languages with automatic lip synchronization. Many viewers cannot distinguish between an AI avatar and a real person.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Which e-commerce platforms are AI product images compatible with?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "MindID prepares AI product images for all major platforms: Trendyol, Hepsiburada, Shopify, Amazon, N11, Etsy, eBay, AliExpress, and WooCommerce. Each platform's specific size, format, and background requirements are met. Starting from ₺1,490 per product.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Is there a bulk order discount for AI product photography?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. Up to 15% discount for 50+ product images, up to 25% for 200+ products. Special catalog shooting packages available — even a 350-product catalog shoot can be completed in days. Color variations are produced at minimal additional cost.",
-      },
-    },
-  ],
-};
-
-// Schema.org AggregateRating + Review — müşteri yorumları için
-const reviewSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "MindID",
-  url: "https://mindid.shop",
-  image: "https://mindid.shop/og-image.jpeg",
-  priceRange: "$$",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Istanbul",
-    addressCountry: "TR",
-  },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    bestRating: "5",
-    worstRating: "1",
-    ratingCount: "8",
-    reviewCount: "8",
-  },
-  review: [
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Mehmet Yılmaz" },
-      datePublished: "2025-12-15",
-      reviewBody: "AI video prodüksiyon ile kampanya filmimizi geleneksel yöntemin yarı maliyetine çıkardık. Kalite beklentimizin çok üzerindeydi.",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Ayşe Kaya" },
-      datePublished: "2025-11-20",
-      reviewBody: "350 ürünlük katalog çekimimizi AI ile 1 haftada tamamladık. Stüdyo çekimine göre %70 tasarruf ettik.",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Burak Demir" },
-      datePublished: "2025-11-05",
-      reviewBody: "Kurumsal tanıtım filmimizi 3 günde aldık. Eskiden bunun için haftalarca bekliyorduk. MindID ile çalışmak büyük avantaj.",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Elif Çelik" },
-      datePublished: "2025-10-18",
-      reviewBody: "Ürün görsellerimizi farklı arka planlarda ve renklerde AI ile oluşturduk. E-ticaret dönüşüm oranımız %40 arttı.",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Ahmet Özkan" },
-      datePublished: "2025-10-02",
-      reviewBody: "Instagram Reels içeriklerimizi AI ile üretmeye başladık. Takipçi etkileşimimiz 3 katına çıktı, bütçemiz ise aynı kaldı.",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Zeynep Aras" },
-      datePublished: "2025-09-14",
-      reviewBody: "Yeni ürün serimizin 120 çeşit görseli 5 farklı arka planla hazırlandı. Geleneksel çekimle aylar sürecek iş günler içinde bitti.",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Emre Şahin" },
-      datePublished: "2025-08-22",
-      reviewBody: "Kampanya reklam filmimiz için 5 farklı versiyon ürettik. A/B test yapıp en iyi performans gösteren videoyu belirledik.",
-      reviewRating: { "@type": "Rating", ratingValue: "4", bestRating: "5" },
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Selin Toprak" },
-      datePublished: "2025-08-05",
-      reviewBody: "Takı koleksiyonumuzun 360° görsellerini AI ile oluşturduk. Müşterilerimiz ürünleri döndürerek inceleyebiliyor, satışlarımız arttı.",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
     },
   ],
 };
@@ -209,7 +94,7 @@ const HomePage = () => {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([faqSchema, reviewSchema]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <ParallaxGrid />
       <Header />
@@ -218,7 +103,7 @@ const HomePage = () => {
         <ServiceCards />
         <FeaturedTemplates />
         <AIStudioShowcase />
-        <HowItWorks />
+        <PricingSection />
         <TestimonialsSection />
         <FAQSection />
         <FinalCTA />

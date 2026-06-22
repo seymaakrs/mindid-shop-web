@@ -11,8 +11,10 @@ export type CustomerProfile = {
   name: string;
   company: string;
   phone: string;
-  plan: "free" | "starter" | "growth" | "agency";
+  plan: "free" | "starter" | "growth" | "scale";
   credits: number;
+  totalCreditsSpent: number;
+  generationCount: number;
   createdAt: Date;
 };
 
@@ -77,6 +79,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               phone: data.phone || "",
               plan: data.plan || "free",
               credits: data.credits ?? 0,
+              totalCreditsSpent: data.totalCreditsSpent ?? 0,
+              generationCount: data.generationCount ?? 0,
               createdAt: data.createdAt?.toDate?.() || new Date(),
             });
           }

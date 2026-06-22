@@ -5,14 +5,14 @@ import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 import {
   LayoutDashboard,
-  ShoppingBag,
+  Wand2,
+  Coins,
   CreditCard,
   Settings,
   LogOut,
   Bell,
   FolderOpen,
   BarChart3,
-  Share2,
   ChevronLeft,
   User,
 } from "lucide-react";
@@ -20,11 +20,11 @@ import { useState } from "react";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Genel Bakış", icon: LayoutDashboard },
-  { href: "/dashboard/orders", label: "Siparişlerim", icon: ShoppingBag },
+  { href: "/templates", label: "Yeni Üretim", icon: Wand2 },
   { href: "/dashboard/files", label: "Dosyalarım", icon: FolderOpen },
-  { href: "/dashboard/social", label: "Sosyal Medya", icon: Share2 },
+  { href: "/dashboard/credits", label: "Kredilerim", icon: Coins },
   { href: "/dashboard/analytics", label: "Analitik", icon: BarChart3 },
-  { href: "/dashboard/billing", label: "Fatura & Ödeme", icon: CreditCard },
+  { href: "/dashboard/billing", label: "Fatura & Plan", icon: CreditCard },
   { href: "/dashboard/notifications", label: "Bildirimler", icon: Bell },
   { href: "/dashboard/settings", label: "Ayarlar", icon: Settings },
 ];
@@ -38,7 +38,7 @@ export const DashboardSidebar = () => {
     <aside
       className={`${
         collapsed ? "w-16" : "w-64"
-      } bg-[#100a2c] border-r border-white/5 flex flex-col transition-all duration-200`}
+      } hidden md:flex bg-[#100a2c] border-r border-white/5 flex-col transition-all duration-200`}
     >
       {/* Header */}
       <div className="p-4 border-b border-white/5">

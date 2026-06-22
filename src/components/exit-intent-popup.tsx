@@ -110,7 +110,7 @@ export const ExitIntentPopup = () => {
       className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
-      aria-label="Ücretsiz Demo Görüşmesi"
+      aria-label="50 Kredi Hediye"
     >
       {/* Arka plan overlay */}
       <div
@@ -126,7 +126,7 @@ export const ExitIntentPopup = () => {
           <div className="flex items-center gap-2">
             <Gift size={18} className="text-[var(--lime)]" />
             <span className="text-xs font-bold text-[var(--lime)] uppercase tracking-wider">
-              Ücretsiz Demo Görüşmesi
+              50 Kredi Hediye
             </span>
           </div>
           <button
@@ -144,11 +144,10 @@ export const ExitIntentPopup = () => {
             <div className="text-center py-4">
               <CheckCircle size={48} className="text-[var(--lime)] mx-auto mb-4" />
               <h3 className="text-xl font-black text-[var(--dark-blue)] mb-2">
-                Harika! Sizi arayacağız.
+                Harika! Hesabını oluşturalım.
               </h3>
               <p className="text-sm text-[var(--gray)] mb-4">
-                24 saat içinde ekibimiz size ulaşacak. Ücretsiz demo görüşmesinde
-                projeniz için en uygun paketi birlikte belirleyelim.
+                Kayıt linkini birazdan SMS ile göndereceğiz. 50 kredi hesabına anında tanımlanacak.
               </p>
               <button
                 onClick={handleClose}
@@ -164,16 +163,16 @@ export const ExitIntentPopup = () => {
                 Ayrılmadan önce...
               </h2>
               <p className="text-sm text-[var(--gray)] mb-5">
-                Ücretsiz 15 dakikalık demo görüşmesi ayarlayalım. Size markanız
-                için en iyi AI çözümünü gösterelim — <strong>tamamen ücretsiz.</strong>
+                Hesabını şimdi aç, 50 kredi hediye senin. Tek tıkla AI içerik üret —
+                <strong> kart gerekmez.</strong>
               </p>
 
               {/* Faydalar */}
               <ul className="space-y-1.5 mb-5">
                 {[
-                  "Projenize özel fiyat teklifi",
-                  "AI ile üretilmiş örnek görseller",
-                  "Geleneksele göre ne kadar tasarruf edersiniz?",
+                  "50 kredi anında hesabına tanımlanır",
+                  "Tüm şablonlara sınırsız erişim",
+                  "İstediğin zaman iptal et, kart gerekmez",
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-[var(--dark-blue)]">
                     <span className="w-4 h-4 rounded-sm bg-[var(--lime)] flex items-center justify-center flex-shrink-0">
@@ -212,7 +211,7 @@ export const ExitIntentPopup = () => {
                   disabled={loading}
                   className="w-full py-3 rounded-md bg-[var(--lime)] border-2 border-[var(--dark-blue)] shadow-[4px_4px_0px_var(--dark-blue)] text-[var(--dark-blue)] text-sm font-black hover:shadow-[2px_2px_0px_var(--dark-blue)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all disabled:opacity-60 cursor-pointer"
                 >
-                  {loading ? "Kaydediliyor..." : "Ücretsiz Demo Talep Et →"}
+                  {loading ? "Kaydediliyor..." : "50 Krediyi Al →"}
                 </button>
 
                 <p className="text-[10px] text-center text-[var(--gray)]/50 uppercase tracking-wider">

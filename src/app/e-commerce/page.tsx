@@ -1,84 +1,101 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/header";
-import { EcommercePage } from "@/components/content-pages/e-commerce-page";
 import { Footer } from "@/components/footer";
 import { ParallaxGrid } from "@/components/parallax-grid";
+import { FeaturePage } from "@/components/content-pages/feature-page";
+import { GENERATION_COSTS } from "@/lib/plans-data";
 
 export const metadata: Metadata = {
-  title: "E-ticaret İçin AI Ürün Görseli — Manken ve Stüdyo Masrafına Son",
+  title: "E-ticaret için AI Görsel — Kataloğunu Saatler İçinde Üret",
   description:
-    "Trendyol, Hepsiburada, Shopify, Amazon satıcıları için AI ürün fotoğrafçılığı. Manken ve stüdyo masrafı olmadan %70 daha ucuz, stüdyo kalitesinde ürün görselleri. 1.490₺'den.",
-  keywords: [
-    "e-ticaret ürün fotoğrafı ai",
-    "ai ürün görseli",
-    "manken olmadan ürün fotoğrafı",
-    "trendyol ürün görseli yapay zeka",
-    "hepsiburada ürün fotoğrafı ai",
-    "shopify ai product photography",
-    "AI product images e-commerce",
-    "stüdyo olmadan ürün görseli",
-    "ucuz ürün fotoğrafçılığı",
-  ],
+    "MindID ile e-ticaret kataloğunu AI ile üret. Ürün görseli, kampanya banneri, varyasyon setleri — anında, ücretsiz başla.",
   alternates: {
     canonical: "https://mindid.shop/e-commerce",
-    languages: { "tr-TR": "https://mindid.shop/e-commerce", "en-US": "https://mindid.shop/en/e-commerce" },
   },
   openGraph: {
-    title: "AI Product Photography for E-commerce — No Mannequin, No Studio",
-    description:
-      "Studio-quality product images for Shopify, Amazon, Trendyol, Hepsiburada. 70% cheaper without mannequins or studios. From ₺1,490.",
+    title: "E-ticaret için AI Görsel — MindID",
+    description: "Kataloğunu AI ile dakikalar içinde üret. Self-service, kredi tabanlı.",
     url: "https://mindid.shop/e-commerce",
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@mindidshop",
-    creator: "@mindidshop",
-    title: "E-ticaret AI Ürün Görseli | MindID",
-    description: "AI ürün fotoğrafçılığı — manken ve stüdyo masrafı olmadan %70 tasarruf.",
+    images: [{ url: "/og-image.jpeg", width: 1200, height: 630, alt: "MindID E-ticaret AI" }],
   },
 };
 
-const breadcrumb = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "MindID", item: "https://mindid.shop" },
-    { "@type": "ListItem", position: 2, name: "E-commerce AI", item: "https://mindid.shop/e-commerce" },
-  ],
-};
-
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "AI Product Photography for E-commerce",
-  description:
-    "Studio-quality AI-generated product images without mannequins or studio costs. 70% cheaper than traditional product photography. Perfect for Shopify, Amazon, Trendyol, Hepsiburada sellers.",
-  category: "AI Product Photography",
-  provider: { "@type": "Organization", name: "MindID", url: "https://mindid.shop" },
-  areaServed: "Worldwide",
-  offers: {
-    "@type": "AggregateOffer",
-    lowPrice: "1490",
-    highPrice: "7900",
-    priceCurrency: "TRY",
-    availability: "https://schema.org/InStock",
+const useCases = [
+  {
+    icon: "shopping" as const,
+    titleTr: "Katalog Görselleri",
+    titleEn: "Catalog Images",
+    descTr: "Pazaryeri uyumlu boyut ve formatlarda görseller.",
+    descEn: "Marketplace-ready sizes and formats.",
   },
-  url: "https://mindid.shop/e-commerce",
-};
+  {
+    icon: "package" as const,
+    titleTr: "Renk Varyasyonları",
+    titleEn: "Color Variations",
+    descTr: "Tek üründen onlarca renk seçeneği üret.",
+    descEn: "Generate dozens of color options from one product.",
+  },
+  {
+    icon: "layers" as const,
+    titleTr: "Kampanya Banner",
+    titleEn: "Campaign Banners",
+    descTr: "Sezonluk indirim ve kampanyalar için banner.",
+    descEn: "Banners for seasonal sales and campaigns.",
+  },
+  {
+    icon: "image" as const,
+    titleTr: "Lifestyle Çekim",
+    titleEn: "Lifestyle Shots",
+    descTr: "Ürünü kullanım bağlamında gösteren sahneler.",
+    descEn: "Scenes showing your product in use.",
+  },
+];
 
-const EcommerceRoute = () => {
+const benefits = [
+  {
+    icon: "zap" as const,
+    titleTr: "Saatler içinde katalog",
+    titleEn: "Catalog in hours",
+    descTr: "Yüzlerce ürünü tek seferde üret, beklemeden.",
+    descEn: "Generate hundreds of products at once. No wait.",
+  },
+  {
+    icon: "wand" as const,
+    titleTr: "Tek tık varyasyon",
+    titleEn: "One-click variants",
+    descTr: "Renk, açı, arka plan değişikliği saniyeler içinde.",
+    descEn: "Color, angle, background changes in seconds.",
+  },
+  {
+    icon: "trending" as const,
+    titleTr: "Dönüşüm odaklı",
+    titleEn: "Conversion-focused",
+    descTr: "A/B test için sınırsız versiyon, kazanan görseli kullan.",
+    descEn: "Unlimited versions for A/B testing — ship the winner.",
+  },
+];
+
+const EcommerceFeatureRoute = () => {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <ParallaxGrid />
       <Header />
       <main id="main-content">
-        <EcommercePage />
+        <FeaturePage
+          badgeTr="E-ticaret"
+          badgeEn="E-commerce"
+          headlineTr="E-ticaret kataloğun. AI hızında."
+          headlineEn="Your e-commerce catalog. At AI speed."
+          subTr="Yüzlerce ürün görseli, renk varyasyonu ve kampanya banner'ı — tek panelden, kredi başına."
+          subEn="Hundreds of product images, color variants and campaign banners — one panel, pay-as-you-generate."
+          estimatedCredits={GENERATION_COSTS.imageHD}
+          useCases={useCases}
+          benefits={benefits}
+        />
       </main>
       <Footer />
     </>
   );
 };
 
-export default EcommerceRoute;
+export default EcommerceFeatureRoute;

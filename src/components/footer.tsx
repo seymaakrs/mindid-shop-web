@@ -12,10 +12,10 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Link Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
-          {/* Hizmetler */}
+          {/* Ürün */}
           <div>
             <h3 className="text-sm font-black text-[var(--lime)] mb-4">
-              {t("footer.services")}
+              {t("footer.product")}
             </h3>
             <ul className="space-y-2">
               <li>
@@ -29,28 +29,18 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/configure/product" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
-                  {t("footer.aiProductAd")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/configure/campaign" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
-                  {t("footer.aiCampaign")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/configure/corporate" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
-                  {t("footer.aiCorporate")}
-                </Link>
-              </li>
-              <li>
                 <Link href="/avatar" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
                   {t("footer.aiAvatar")}
                 </Link>
               </li>
               <li>
-                <Link href="/sosyal-medya-yonetimi" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
-                  Sosyal Medya Yönetimi
+                <Link href="/templates" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
+                  {t("footer.templates")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/#pricing" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
+                  {t("footer.pricing")}
                 </Link>
               </li>
             </ul>
@@ -63,16 +53,6 @@ export const Footer = () => {
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/ai-vs-traditional" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
-                  {t("footer.aiVsTraditional")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/how-it-works" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
-                  {t("footer.howItWorks")}
-                </Link>
-              </li>
-              <li>
                 <Link href="/e-commerce" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
                   {t("footer.ecommerce")}
                 </Link>
@@ -83,8 +63,13 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
-                  {t("footer.portfolio")}
+                <Link href="/register" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
+                  {t("footer.startFree")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/login" className="text-xs text-[var(--cream)]/60 hover:text-[var(--lime)] transition-colors">
+                  {t("footer.login")}
                 </Link>
               </li>
             </ul>

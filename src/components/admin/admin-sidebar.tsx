@@ -3,12 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
-import { useNewOrderCount } from "@/lib/hooks/use-firestore";
+import { useRunningGenerationCount } from "@/lib/hooks/use-firestore";
 import {
   LayoutDashboard,
-  ClipboardList,
-  Film,
-  DollarSign,
+  Wand2,
   HelpCircle,
   MonitorPlay,
   Users,
@@ -18,21 +16,19 @@ import {
   LogOut,
   Clapperboard,
   BarChart3,
-  Share2,
+  UserCog,
 } from "lucide-react";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/analytics", label: "Ziyaretçi Analizi", icon: BarChart3 },
-  { href: "/admin/orders", label: "Siparişler", icon: ClipboardList, badge: true },
-  { href: "/admin/customers", label: "Müşteriler", icon: Users },
-  { href: "/admin/portfolio", label: "Portfolio", icon: Film },
-  { href: "/admin/pricing", label: "Fiyatlandırma", icon: DollarSign },
+  { href: "/admin/analytics", label: "Analitik", icon: BarChart3 },
+  { href: "/admin/leads", label: "Lead'ler", icon: Users },
+  { href: "/admin/customers", label: "Müşteriler", icon: UserCog },
+  { href: "/admin/generations", label: "AI Üretimler", icon: Wand2, badge: true },
   { href: "/admin/faq", label: "SSS", icon: HelpCircle },
   { href: "/admin/hero", label: "Hero / Video", icon: MonitorPlay },
   { href: "/admin/about", label: "Hakkımızda", icon: Users },
   { href: "/admin/avatar", label: "Avatar Örnekleri", icon: Bot },
-  { href: "/admin/sosyal-medya", label: "Sosyal Medya", icon: Share2 },
   { href: "/admin/blog", label: "Blog", icon: FileText },
   { href: "/admin/settings", label: "Ayarlar", icon: Settings },
 ];
@@ -40,10 +36,10 @@ const navItems = [
 export const AdminSidebar = () => {
   const pathname = usePathname();
   const { logout } = useAuth();
-  const newOrderCount = useNewOrderCount();
+  const newOrderCount = useRunningGenerationCount();
 
   return (
-    <aside className="w-64 min-h-screen bg-[var(--dark-blue)] border-r-3 border-[var(--electric-blue)]/20 flex flex-col">
+    <aside className="w-64 min-h-screen bg-[var(--dark-blue)] border-r-3 border-[var(--electric-blue)]/20 hidden md:flex flex-col">
       {/* Logo */}
       <div className="p-5 border-b-3 border-[var(--electric-blue)]/20">
         <Link href="/admin" className="flex items-center gap-2">

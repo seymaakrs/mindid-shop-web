@@ -18,7 +18,7 @@ const AnalyticsPage = () => {
           İçerik performansı, sosyal medya metrikleri ve ROI takibi tek panelden.
         </p>
         <div className="flex items-center justify-center gap-2 text-xs text-[var(--lime)]">
-          <Clock size={14} /> Growth ve Agency planlarında kullanılabilir
+          <Clock size={14} /> Growth ve Scale planlarında kullanılabilir
         </div>
       </div>
     </div>

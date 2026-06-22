@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Coins, TrendingUp, TrendingDown, Sparkles, Plus, ArrowRight } from "lucide-react";
+import { EmptyState, SkeletonList } from "@/components/customer/empty-state";
 import {
   collection,
   onSnapshot,
@@ -146,17 +147,23 @@ const CreditsPage = () => {
         </div>
 
         {loading ? (
-          <div className="p-8 text-center text-gray-500 text-sm">Yükleniyor...</div>
-        ) : txs.length === 0 ? (
-          <div className="p-8 text-center">
-            <p className="text-gray-500 text-sm mb-4">Henüz işlem yok</p>
-            <Link
-              href="/dashboard/credits/buy"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--lime)] text-[#100a2c] text-sm font-bold hover:brightness-110 transition-all"
-            >
-              <Plus size={14} /> Kredi Satın Al
-            </Link>
+          <div className="p-4">
+            <SkeletonList rows={4} />
           </div>
+        ) : txs.length === 0 ? (
+          <EmptyState
+            icon={Coins}
+            title="Henüz işlem yok"
+            description="Kredi alımların, üretim harcamaların ve hoşgeldin bonusu burada listelenir."
+            action={
+              <Link
+                href="/dashboard/credits/buy"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--lime)] text-[#100a2c] text-sm font-bold hover:brightness-110 hover:scale-[1.02] transition-all"
+              >
+                <Plus size={14} /> Kredi Satın Al
+              </Link>
+            }
+          />
         ) : (
           <div className="divide-y divide-white/5">
             {txs.map((t) => {

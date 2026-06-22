@@ -2,14 +2,15 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useI18n } from "@/lib/i18n";
-import { Bot, X, Video, Camera, Megaphone, BadgeDollarSign, ArrowRight, HelpCircle } from "lucide-react";
+import { Bot, X, Video, Camera, User, Sparkles, BadgeDollarSign, ArrowRight, HelpCircle } from "lucide-react";
 import Link from "next/link";
 
 const SERVICES = [
-  { icon: Video, labelTr: "AI Video", labelEn: "AI Video", descTr: "Kısa video, reklam filmi ve sosyal medya reels paketlerimizi inceleyin.", descEn: "Explore our short video, ad film and social media reels packages.", href: "/configure/reels" },
-  { icon: Camera, labelTr: "Ürün Görseli", labelEn: "Product Photos", descTr: "E-ticaret ve katalog için profesyonel AI ürün görselleri.", descEn: "Professional AI product visuals for e-commerce and catalogs.", href: "/configure/product-photo" },
-  { icon: Megaphone, labelTr: "Sosyal Medya", labelEn: "Social Media", descTr: "Sosyal medya hesaplarınızı AI destekli uzman ekibimizle yönetelim.", descEn: "Let our AI-powered expert team manage your social media accounts.", href: "/sosyal-medya-yonetimi" },
-  { icon: BadgeDollarSign, labelTr: "Fiyatları Gör", labelEn: "See Prices", descTr: "", descEn: "", href: "/#services" },
+  { icon: Video, labelTr: "AI Video", labelEn: "AI Video", descTr: "Reels, reklam filmi ve sosyal medya videolarını saniyeler içinde üret.", descEn: "Create reels, ad films and social videos in seconds.", href: "/ai-reklam-filmi" },
+  { icon: Camera, labelTr: "AI Görsel", labelEn: "AI Images", descTr: "E-ticaret ve marka için profesyonel ürün görselleri üret.", descEn: "Generate professional product visuals for e-commerce and brands.", href: "/ai-gorsel" },
+  { icon: User, labelTr: "Dijital Avatar", labelEn: "Digital Avatar", descTr: "Kameraya çıkmadan kendi marka sözcü avatarını üret.", descEn: "Create your brand spokesperson avatar without a camera.", href: "/avatar" },
+  { icon: Sparkles, labelTr: "Şablonlar", labelEn: "Templates", descTr: "Hazır şablonlarla hemen başla, krediyle ödeme yap.", descEn: "Start instantly with ready-made templates, pay with credits.", href: "/templates" },
+  { icon: BadgeDollarSign, labelTr: "Planları Gör", labelEn: "See Plans", descTr: "", descEn: "", href: "/#pricing" },
 ] as const;
 
 export const AIManager = () => {
@@ -41,9 +42,11 @@ export const AIManager = () => {
   }, []);
 
   const handleSelect = (i: number) => {
-    if (SERVICES[i].href.startsWith("/#")) {
+    const href = SERVICES[i].href;
+    if (href.startsWith("/#")) {
       setOpen(false);
-      document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" });
+      const id = href.slice(2);
+      document.querySelector(`#${id}`)?.scrollIntoView({ behavior: "smooth" });
     } else {
       setSelected(i);
     }

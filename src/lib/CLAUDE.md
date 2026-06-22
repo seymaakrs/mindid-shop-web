@@ -1,22 +1,25 @@
 # Yardimci Dosyalar Klasoru (src/lib)
 
-Bu klasor sitenin "arka mutfagi" — sayfalar buradaki aracları kullanarak calisir.
+Bu klasor sitenin "arka mutfagi" — sayfalar buradaki araclari kullanarak calisir.
 
 ## Dosya Rehberi (Ne nerede?)
 - `firebase.ts` → Firebase baglantisi. Tum veritabani islemleri buradan baslar.
-- `i18n.tsx` → Ceviri sistemi. Sitedeki Turkce/Ingilizce metinler burada.
-- `types.ts` → Konfigurator seceneklerinin tanimlari (sure, senaryo, ses vs.)
-- `firestore-types.ts` → Veritabanindaki veri yapilari (portfolyo, blog, siparis vs.)
-- `pricing-data.ts` → Fiyat tablosu. Tum hizmet fiyatlari ve secenekleri burada.
-- `portfolio-server.ts` → Portfolyo verilerini ceken sistem.
-- `order-service.ts` → Musteri siparis gonderme sistemi.
-- `cn.ts` → Goruntuyu birlestirme araci (teknik, dokunma).
-- `auth-context.tsx` → Kullanici giris kontrolu.
+- `i18n.tsx` → Ceviri sistemi. Sitedeki Turkce/Ingilizce/Ispanyolca metinler burada.
+- `firestore-types.ts` → Veritabanindaki veri yapilari (musteri, uretim, blog vs.)
+- `plans-data.ts` → SaaS planlari (Free/Starter/Growth/Scale), kredi paketleri, jenerasyon maliyetleri.
+- `credits.ts` → Kredi tahsis, harcama, geri ode islemleri.
+- `payment.ts` ve `payments/` → Provider-agnostik odeme altyapisi (Iyzico/Stripe).
+- `template-data.ts` → Hazir AI uretim sablonlari.
+- `auth-context.tsx` → Kullanici giris kontrolu (Firebase Auth).
+- `cn.ts` → Tailwind class birlestirme araci (teknik, dokunma).
+- `tracking.ts`, `analytics-service.ts` → Olcumleme.
+- `blog-server.ts` → Blog yazilarini ceken sistem.
 
 ## Onemli Kural
-Fiyat degisikligi yapacaksan: `pricing-data.ts` dosyasini duzenle.
-Yeni ceviri ekleyeceksen: `i18n.tsx` dosyasina ekle.
-Veritabanina yeni alan ekleyeceksen: `firestore-types.ts` dosyasini guncelle.
+- Plan/fiyat degisikligi: `plans-data.ts` dosyasini duzenle.
+- Yeni ceviri: `i18n.tsx` dosyasina ekle.
+- Veritabanina yeni alan: `firestore-types.ts` dosyasini guncelle.
 
 ## hooks/ Alt Klasoru
-- `use-firestore.ts` → Veritabanindan veri cekme araci. Sayfalar bunu kullanir.
+- `use-firestore.ts` → Public veri (faq, team, blog, generations) cekme araclari.
+- `use-customer.ts` → Giris yapan kullanicinin uretimleri, bildirimleri, odemeleri.
