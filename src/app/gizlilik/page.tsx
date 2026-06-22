@@ -19,7 +19,7 @@ const GizlilikPage = () => {
           <h1 className="text-3xl md:text-4xl font-black text-[var(--cream)] mb-2">
             Gizlilik Politikası
           </h1>
-          <p className="text-sm text-[var(--gray)] mb-8">Son güncelleme: Mart 2026</p>
+          <p className="text-sm text-[var(--gray)] mb-8">Son güncelleme: Haziran 2026</p>
 
           <div className="space-y-6 text-sm text-[var(--cream)]/80 leading-relaxed">
             <section>
@@ -34,26 +34,35 @@ const GizlilikPage = () => {
             <section>
               <h2 className="text-lg font-bold text-[var(--lime)] mb-3">2. Toplanan Bilgiler</h2>
               <p>
-                <strong>Sizin sağladığınız bilgiler:</strong> Sipariş formu aracılığıyla ad, e-posta,
-                telefon, şirket adı, sektör ve proje detayları.
+                <strong>Hesap bilgileri:</strong> Kayıt sırasında verdiğiniz ad-soyad, e-posta,
+                şifre (hash&apos;lenmiş) ve isteğe bağlı telefon/şirket bilgisi.
               </p>
               <p>
-                <strong>Otomatik toplanan bilgiler:</strong> Google Analytics (GA4) aracılığıyla sayfa
-                görüntüleme, oturum süresi, cihaz bilgisi ve genel konum verisi. IP adresiniz anonimleştirilir.
+                <strong>Üretim verileri:</strong> AI üretimlerine yüklediğiniz dosyalar (logo, ürün
+                fotoğrafı, referans), prompt&apos;lar ve üretilen çıktılar. Bu veriler yalnızca
+                hesabınızla ilişkilendirilir ve AI modellerinin eğitiminde kullanılmaz.
               </p>
               <p>
-                <strong>Çerezler:</strong> Dil tercihinizi (lang) saklamak için birinci taraf çerez,
-                analiz için Google Analytics çerezleri kullanılmaktadır.
+                <strong>Ödeme bilgileri:</strong> Kart bilgileriniz MindID sunucularında saklanmaz;
+                ödeme sağlayıcımız (Iyzico) tarafından PCI-DSS uyumlu şekilde işlenir. Bizim
+                kayıtlarımızda yalnızca işlem ID&apos;si, plan, tutar ve fatura geçmişi tutulur.
+              </p>
+              <p>
+                <strong>Otomatik toplanan bilgiler:</strong> Google Analytics (GA4) ile sayfa
+                görüntüleme, oturum, cihaz ve genel konum verisi. IP adresiniz anonimleştirilir.
+              </p>
+              <p>
+                <strong>Çerezler:</strong> Oturum (auth), dil tercihi (lang) ve analiz çerezleri.
               </p>
             </section>
 
             <section>
               <h2 className="text-lg font-bold text-[var(--lime)] mb-3">3. Bilgilerin Kullanımı</h2>
               <p>
-                Topladığımız bilgiler; hizmet taleplerinizi işlemek, sizinle iletişime geçmek,
-                teklif hazırlamak, web sitesini iyileştirmek ve yasal yükümlülüklerimizi yerine
-                getirmek amacıyla kullanılır. Bilgileriniz hiçbir koşulda üçüncü taraflara
-                pazarlama amacıyla satılmaz veya kiralanmaz.
+                Topladığımız bilgiler; hesabınızı yönetmek, AI üretimlerini sunmak, kredi ve
+                ödeme akışını işlemek, sizinle iletişime geçmek, hizmeti iyileştirmek ve yasal
+                yükümlülüklerimizi yerine getirmek amacıyla kullanılır. Bilgileriniz hiçbir koşulda
+                üçüncü taraflara pazarlama amacıyla satılmaz veya kiralanmaz.
               </p>
             </section>
 

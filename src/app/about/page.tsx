@@ -5,25 +5,25 @@ import { Footer } from "@/components/footer";
 import { ParallaxGrid } from "@/components/parallax-grid";
 
 export const metadata: Metadata = {
-  title: "MindID Hakkında — AI Reklam Filmi & Görsel Üretim Ajansı",
+  title: "MindID Hakkında — Self-Service AI İçerik Platformu",
   description:
-    "MindID, yapay zeka ile reklam filmi, dijital avatar ve e-ticaret ürün görseli üreten bir prodüksiyon ajansıdır. Geleneksel prodüksiyona göre %70 maliyet tasarrufu.",
+    "MindID; markaların AI video, görsel ve dijital avatarlarını kredi bazlı planlarla saniyeler içinde üretebildiği self-service SaaS platformudur. Stüdyo, brief ve bekleme yok.",
   alternates: {
     canonical: "https://mindid.shop/about",
     languages: { "tr-TR": "https://mindid.shop/about", "en-US": "https://mindid.shop/en/about" },
   },
   openGraph: {
-    title: "About MindID — AI Ad Film & Visual Production Agency",
+    title: "About MindID — Self-Service AI Content Platform",
     description:
-      "AI-powered ad film production, avatar creation, and e-commerce product visuals. 70% cheaper than traditional production.",
+      "MindID is a self-service AI content SaaS for brands. Generate reels, product images and digital avatars in seconds with credit-based plans.",
     url: "https://mindid.shop/about",
   },
   twitter: {
     card: "summary_large_image",
     site: "@mindidshop",
     creator: "@mindidshop",
-    title: "MindID Hakkında — AI Reklam Ajansı",
-    description: "Yapay zeka ile reklam filmi ve ürün görseli üreten prodüksiyon ajansı.",
+    title: "MindID Hakkında — AI İçerik SaaS",
+    description: "Markalar için self-service AI içerik üretim platformu. Tarayıcıdan üret, kredi ile öde.",
   },
 };
 
@@ -45,7 +45,7 @@ const organizationSchema = {
   url: "https://mindid.shop",
   logo: "https://mindid.shop/leopard-icon.png",
   description:
-    "Türkiye merkezli yapay zeka reklam prodüksiyon ajansı. AI ile reklam filmi, dijital avatar ve e-ticaret ürün görseli üretimi.",
+    "Türkiye merkezli self-service AI içerik üretim SaaS platformu. Markalar tarayıcıdan reels, ürün görseli ve dijital avatar üretir.",
   foundingDate: "2024",
   areaServed: {
     "@type": "GeoCircle",
